@@ -1,6 +1,7 @@
-"use client";
-
 import { ArrowDown, ArrowRight, BookOpenCheck, Brain, Building2, Compass, GraduationCap, Lightbulb, MessageCircle, ScanEye, Sparkles } from "lucide-react";
+import { getCommercialSettings } from "@/lib/commercial";
+
+export const dynamic = "force-dynamic";
 
 const methodSteps = [
   { label: "Situação", description: "Uma tensão da obra", icon: ScanEye },
@@ -31,7 +32,8 @@ const audienceCards = [
   },
 ];
 
-export default function Home() {
+export default async function Home() {
+  const { freeWork } = await getCommercialSettings();
   return (
     <main className="home-shell">
       <header className="home-header">
@@ -47,13 +49,13 @@ export default function Home() {
       </header>
       <section className="method-intro" aria-labelledby="method-title">
         <div className="method-intro-heading">
-          <span className="method-kicker">LEITURA QUE VIRA DESCOBERTA</span>
-          <h1 id="method-title">Entre na história.<br /><em>Volte ao livro.</em></h1>
-          <p>No Coonto, uma cena vira uma pergunta. Você toma uma posição, descobre pistas e procura respostas no texto original.</p>
-          <a className="method-down" href="#escolha-seu-caminho">Entendi. Quero começar <ArrowDown size={18} aria-hidden="true" /></a>
+          <span className="method-kicker">UMA OUTRA FORMA DE ENTRAR NO LIVRO</span>
+          <h1 id="method-title">Já se perdeu em um livro?<br /><em>Vamos entrar juntos.</em></h1>
+          <p>Às vezes os personagens se confundem, uma palavra trava a leitura ou você não sabe o que procurar. No Coonto, você conhece uma situação da obra, faz uma escolha e descobre pistas. Depois volta ao livro para conferir sua ideia no texto. Assim, a leitura ganha perguntas que são suas.</p>
+          <a className="method-down" href="#escolha-seu-caminho">Quero experimentar <ArrowDown size={18} aria-hidden="true" /></a>
         </div>
         <div className="method-visual" aria-label="O ciclo de leitura do Coonto, do encontro com a cena à memória">
-          <div className="method-book" aria-hidden="true"><span>UMA OBRA</span><strong>O<br />Alienista</strong><small>MACHADO DE ASSIS</small></div>
+          <div className="method-book" aria-hidden="true"><span>COONTO</span><strong>Uma<br />obra</strong><small>MUITAS DESCOBERTAS</small></div>
           <div className="method-steps">
             {methodSteps.map((step, index) => {
               const Icon = step.icon;
@@ -67,8 +69,8 @@ export default function Home() {
         </div>
         <div className="method-example">
           <div className="method-example-label"><span className="method-example-dot" />UM EXEMPLO NA PRÁTICA</div>
-          <p><strong>Em O Alienista:</strong> quem ganha autoridade quando as personagens mudam de lado?</p>
-          <span>Sua interpretação é o começo. As passagens da obra ajudam você a sustentá-la ou revê-la.</span>
+          <p><strong>Em O Alienista:</strong> quem decide quem é considerado louco em Itaguaí?</p>
+          <span>Escolha uma hipótese. A experiência mostra pistas e leva você às passagens de Machado para conferir ou mudar de ideia.</span>
           <a href="/obra/o-alienista">Conheça a experiência <ArrowRight size={18} aria-hidden="true" /></a>
         </div>
       </section>
@@ -96,8 +98,8 @@ export default function Home() {
       </section>
       <section className="proof-strip">
         <a href="/obra/o-alienista" className="proof-link"><strong>Viva a obra para compreendê-la.</strong><span>Veja como a experiência funciona →</span></a>
-        <a href="/obra/o-alienista" className="proof-link"><strong>O Alienista</strong><span>Conheça a primeira experiência →</span></a>
-        <a href="/obra/o-alienista#oferta" className="proof-link"><strong>O Alienista sempre grátis</strong><span>Conheça a obra gratuita →</span></a>
+        <a href="/catalogo" className="proof-link"><strong>Um catálogo em construção</strong><span>Conheça as próximas obras →</span></a>
+        <a href={freeWork.href} className="proof-link"><strong>Obra gratuita agora: {freeWork.title}</strong><span>Comece pela experiência disponível →</span></a>
       </section>
       <section className="home-next" id="feedback">
         <div>

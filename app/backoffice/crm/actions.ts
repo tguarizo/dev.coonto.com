@@ -17,7 +17,7 @@ async function admin() {
 function field(form: FormData, key: string, limit = 200) {
   return String(form.get(key) || "").trim().slice(0, limit);
 }
-function done(path = "/backoffice/crm") { revalidatePath(path); redirect(`${path}?salvo=1`); }
+function done(path = "/backoffice/crm", area?: string) { revalidatePath(path); redirect(`${path}?${area ? `area=${area}&` : ""}salvo=1`); }
 
 export async function updateLead(form: FormData) {
   await admin();
@@ -25,7 +25,7 @@ export async function updateLead(form: FormData) {
   if (!id || !["new", "contacted", "qualified", "closed"].includes(status)) throw new Error("Dados inválidos");
   await query("UPDATE partner_leads SET status=$1 WHERE id=$2", [status, id]);
   await recordCrmEvent({ type: "lead_stage_changed", relatedType: "partner_lead", relatedId: id, metadata: { stage: status } });
-  done();
+  done("/backoffice/crm", "relacionamentos");
 }
 
 export async function createOrganization(form: FormData) {
@@ -35,7 +35,7 @@ export async function createOrganization(form: FormData) {
   const id = crypto.randomUUID();
   await query("INSERT INTO organizations(id,name,kind) VALUES($1,$2,$3)", [id, name, kind]);
   await recordCrmEvent({ type: "organization_created", organizationId: id, metadata: { kind } });
-  done();
+  done("/backoffice/crm", "organizacoes");
 }
 
 export async function addMember(form: FormData) {
@@ -56,7 +56,7 @@ export async function addMember(form: FormData) {
     await client.query(`INSERT INTO organization_memberships(organization_id,user_id,role) VALUES($1,$2,$3)
       ON CONFLICT (organization_id,user_id) DO UPDATE SET role=EXCLUDED.role`, [organizationId, found.rows[0].id, role]);
   });
-  done();
+  done("/backoffice/crm", "organizacoes");
 }
 
 export async function createClassroom(form: FormData) {
@@ -64,7 +64,7 @@ export async function createClassroom(form: FormData) {
   const organizationId = field(form, "organization_id"), name = field(form, "name");
   if (!organizationId || !name) throw new Error("Turma inválida");
   await query("INSERT INTO classrooms(id,organization_id,name) VALUES($1,$2,$3)", [crypto.randomUUID(), organizationId, name]);
-  done();
+  done("/backoffice/crm", "organizacoes");
 }
 
 export async function enrollStudent(form: FormData) {
@@ -75,7 +75,7 @@ export async function enrollStudent(form: FormData) {
   await query(`INSERT INTO classroom_enrollments(organization_id,classroom_id,user_id) VALUES($1,$2,$3)
     ON CONFLICT (classroom_id,user_id) DO NOTHING`, [organizationId, classroomId, userId]);
   await recordCrmEvent({ type: "student_enrolled", organizationId, userId, relatedType: "classroom", relatedId: classroomId });
-  done();
+  done("/backoffice/crm", "organizacoes");
 }
 
 export async function assignTeacher(form: FormData) {
@@ -86,7 +86,7 @@ export async function assignTeacher(form: FormData) {
   await query(`INSERT INTO classroom_teachers(organization_id,classroom_id,user_id) VALUES($1,$2,$3)
     ON CONFLICT (classroom_id,user_id) DO NOTHING`, [organizationId, classroomId, userId]);
   await recordCrmEvent({ type: "teacher_assigned", organizationId, userId, relatedType: "classroom", relatedId: classroomId });
-  done();
+  done("/backoffice/crm", "organizacoes");
 }
 
 export async function removeFromClassroom(form: FormData) {
@@ -96,7 +96,7 @@ export async function removeFromClassroom(form: FormData) {
   const table = role === "student" ? "classroom_enrollments" : "classroom_teachers";
   await query(`DELETE FROM ${table} WHERE organization_id=$1 AND classroom_id=$2 AND user_id=$3`, [organizationId, classroomId, userId]);
   await recordCrmEvent({ type: "classroom_member_removed", organizationId, userId, relatedType: "classroom", relatedId: classroomId, metadata: { role } });
-  done();
+  done("/backoffice/crm", "organizacoes");
 }
 
 export async function setSeats(form: FormData) {
@@ -111,7 +111,7 @@ export async function setSeats(form: FormData) {
     if (seats < Number(used.rows[0].total)) throw new Error("Há mais licenças ativas do que o novo limite");
     await client.query("UPDATE license_pools SET seats=$1 WHERE organization_id=$2 AND work_slug=$3", [seats, organizationId, ALIENISTA_SLUG]);
   });
-  done();
+  done("/backoffice/crm", "organizacoes");
 }
 
 export async function assignLicense(form: FormData) {
@@ -134,7 +134,7 @@ export async function assignLicense(form: FormData) {
       WHERE entitlements.status <> 'active'`, [crypto.randomUUID(), userId, ALIENISTA_SLUG, `school:${organizationId}`]);
   });
   await recordCrmEvent({ type: "license_assigned", organizationId, userId, relatedType: "work", relatedId: ALIENISTA_SLUG });
-  done();
+  done("/backoffice/crm", "organizacoes");
 }
 
 export async function revokeLicense(form: FormData) {
@@ -148,7 +148,7 @@ export async function revokeLicense(form: FormData) {
     await client.query("UPDATE entitlements SET status=$1,source=$2 WHERE user_id=$3 AND work_slug=$4 AND source=$5", [alternate.rows[0] ? "active" : "revoked", alternate.rows[0] ? `school:${alternate.rows[0].organization_id}` : `school:${organizationId}`, userId, ALIENISTA_SLUG, `school:${organizationId}`]);
   });
   await recordCrmEvent({ type: "license_revoked", organizationId, userId, relatedType: "work", relatedId: ALIENISTA_SLUG });
-  done();
+  done("/backoffice/crm", "organizacoes");
 }
 
 export async function createReferral(form: FormData) {

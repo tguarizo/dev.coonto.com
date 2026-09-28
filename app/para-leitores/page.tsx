@@ -9,5 +9,5 @@ export default function Leitores() {
     { icon:<Search />, title:"Li, mas não entendi", text:"Terminei ou comecei a obra, mas personagens, contexto e ideias ainda parecem distantes." },
     { icon:<BookHeart />, title:"Quero viver uma grande história", text:"Quero entrar no universo da obra, decidir, descobrir consequências e encontrar o caminho do autor." },
   ];
-  return <main className="page"><SiteHeader /><div className="content"><section className="page-hero"><span className="section-kicker">NÃO É SOBRE LER MAIS RÁPIDO</span><h1>O que você precisa compreender agora?</h1><p>Viva a obra para compreendê-la. O Coonto começa pela sua pergunta e volta ao texto depois de cada descoberta.</p></section><PathChoice choices={choices} /></div><SiteFooter /></main>;
+  return <main className="page"><SiteHeader /><div className="content"><section className="page-hero"><span className="section-kicker">LEIA COM MAIS CLAREZA</span><h1>Perdeu o fio da história?</h1><p>Entre numa cena, faça uma escolha e descubra pistas sobre os personagens e seus conflitos. Depois procure no livro o que sustenta sua ideia. Você pode usar o Coonto antes, durante ou depois da leitura.</p></section><PathChoice choices={choices} /></div><SiteFooter /></main>;
 }

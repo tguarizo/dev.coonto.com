@@ -7,7 +7,7 @@ export async function SiteHeader() {
   const user = await getCurrentUser();
   if (crm) return <header className="site-header admin-site-header">
     <Link href="/backoffice" aria-label="Início do CRM Coonto"><img src="/images/coonto-logo.png" alt="Coonto" className="brand-logo" /></Link>
-    <nav aria-label="Administração"><span>CRM · ADMINISTRAÇÃO</span>{user?.role === "admin" ? <><a href="/backoffice">Painel</a><a href="/backoffice/crm">Contas</a><a href="/backoffice/atividade">Atividade</a><a href="/backoffice/parcerias">Parcerias</a><a href="/backoffice/pesquisa">Pesquisa</a><a href={logoutPath("/login")}>Sair</a></> : user ? <a href={logoutPath("/login")}>Sair</a> : <a href="/login?return_to=%2Fbackoffice">Entrar</a>}</nav>
+    <nav aria-label="Sessão administrativa"><span>CRM · ADMINISTRAÇÃO</span>{user ? <a href={logoutPath("/login")}>Sair</a> : <a href="/login?return_to=%2Fbackoffice">Entrar</a>}</nav>
   </header>;
   return (
     <header className="site-header">

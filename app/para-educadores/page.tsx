@@ -11,7 +11,7 @@ const paths = [
 export default function Educadores() {
   return <main className="page"><SiteHeader/><div className="content">
     <section className="page-hero"><span className="section-kicker">COONTO PARA EDUCADORES</span><h1>Escolha como quer usar a experiência.</h1>
-      <p>Viva a obra para compreendê-la. O livro original continua sendo a referência; escolha seu objetivo para ver um percurso concreto.</p></section>
+      <p>Quando um aluno diz que não está entendendo o livro, comece por uma situação da história. Ele escolhe, levanta uma hipótese e volta ao texto para procurar pistas. Escolha seu objetivo para ver como usar isso com sua turma.</p></section>
     <section className="educator-guides" id="guias"><span className="section-kicker">MATERIAL DE APOIO</span><h2>Entenda o método antes de aplicar</h2><p>Três respostas diretas para compreender o Coonto e levá-lo à aula. Abra o PDF para aprofundar.</p>
       <div className="guide-list"><a href="/guias/Coonto_Para_Educadores_01_Como_Funciona.pdf" target="_blank" rel="noopener">01 · Como funciona? A decisão leva o aluno de volta à obra. Abrir guia →</a>
         <a href="/guias/Coonto_Para_Educadores_02_Quando_Usar.pdf" target="_blank" rel="noopener">02 · Quando usar? Antes, durante ou depois da leitura. Abrir guia →</a>

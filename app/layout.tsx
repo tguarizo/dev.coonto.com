@@ -5,7 +5,7 @@ import { PwaRegistrar } from "@/components/pwa-registrar";
 
 export const metadata: Metadata = {
   title: "Coonto — Entre na obra. Saia compreendendo.",
-  description: "Experiências de aprendizagem por narrativas, decisões e consequências. Comece gratuitamente por O Alienista.",
+  description: "Perdeu o fio de um livro? Entre na história, faça escolhas, descubra pistas e volte ao texto para conferir suas ideias.",
   icons: { icon: "/favicon.png", shortcut: "/favicon.png" },
   manifest: "/manifest.webmanifest",
 };

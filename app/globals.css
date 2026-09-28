@@ -74,6 +74,16 @@ button,input,textarea,select { font:inherit; }
 .book-cover { border-radius:32px; min-height:490px; display:flex; flex-direction:column; justify-content:space-between; padding:38px; background:radial-gradient(circle at 70% 18%,#365dda 0,transparent 30%),linear-gradient(145deg,#101d3a,#311b52); box-shadow:0 34px 80px rgba(0,0,0,.32); transform:rotate(2deg); }
 .book-cover strong { font-size:3.6rem; line-height:.95; letter-spacing:-.05em; }.book-cover small { font-weight:800; color:#becdf0; letter-spacing:.1em; }
 .offer-section { padding:70px 0; }.offer-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:22px; }
+.offer-grid-three { grid-template-columns:repeat(3,minmax(0,1fr)); }
+.offer-grid-three .price-card { display:flex; flex-direction:column; align-items:flex-start; }
+.offer-grid-three .price-card .button { margin-top:auto; }
+.offer-grid-three .price-card p { min-height:0; }
+.offer-label { color:var(--blue); font-size:.74rem; font-weight:900; letter-spacing:.12em; }
+.offer-price { display:block; margin:14px 0 0; font-size:clamp(2.3rem,3vw,3.25rem); line-height:1.05; letter-spacing:-.05em; font-weight:950; }
+.offer-price small { font-size:.45em; letter-spacing:0; }
+.offer-status { display:block; min-height:42px; margin:9px 0 18px; color:#147345; font-size:.9rem; font-weight:800; }
+.offer-status.muted { color:var(--muted); }
+.free-offer { border-color:#74d6c6; box-shadow:0 12px 38px rgba(31,150,127,.1); }
 .price-card { position:relative; overflow:hidden; border-radius:28px; padding:34px; background:white; border:1px solid var(--line); }.price-card.club { background:#eef1ff; border-color:#c8d1ff; }
 .price-card h2 { font-size:1.6rem; margin:0 0 10px; }.price-card p { color:var(--muted); line-height:1.5; }
 .access-note { font-size:.88rem; margin:18px 0 0; }
@@ -130,6 +140,7 @@ button,input,textarea,select { font:inherit; }
 .login-card { padding:32px; border-radius:28px; color:var(--ink); background:white; box-shadow:0 30px 90px rgba(0,0,0,.3); }
 .login-card form { display:grid; gap:18px; }.login-card form>svg { color:var(--blue); }.login-card h2 { font-size:2rem; margin:0; letter-spacing:-.035em; }.login-card p { margin:0; color:var(--muted); line-height:1.5; }.login-card .field { margin:4px 0 0; }.login-card .button { width:100%; }.link-button { border:0; background:transparent; color:var(--blue); font-weight:800; cursor:pointer; }
 @media (max-width:900px) { .home-header nav { display:none; }.split-hero { height:auto; min-height:0; grid-template-columns:1fr; padding-top:84px; }.audience-card { min-height:71vh; }.audience-copy { padding:80px 26px 38px; }.audience-copy strong { font-size:clamp(2.4rem,11vw,4.4rem); }.hero-center-mark { top:50%; }.proof-strip,.route-grid,.catalog-grid,.offer-grid,.flow-row,.partner-types,.metrics { grid-template-columns:1fr; }.proof-strip>div { min-height:96px; }.home-next,.catalog-hero,.route-footer,.site-footer { align-items:flex-start; flex-direction:column; }.home-next-actions { width:100%; }.work-hero-grid,.feedback-layout,.partners-form-wrap,.dashboard-grid,.member-grid,.login-layout { grid-template-columns:1fr; }.catalog-grid { gap:15px; }.book-card { min-height:410px; }.site-header nav>a { display:none; }.site-header nav>.button,.site-header nav>.member-nav { display:inline-flex; }.book-cover { min-height:380px; transform:none; }.experience-frame { height:calc(100vh - 252px); min-height:560px; }.login-layout { gap:35px; align-items:start; } }
+@media (max-width:900px) { .offer-grid-three { grid-template-columns:1fr; } }
 @media (max-width:900px) { .suggestion-section,.catalog-pipeline ol { grid-template-columns:1fr; } }
 @media (max-width:520px) { .home-header,.site-header { height:68px; padding-inline:18px; }.brand-logo,.site-header .brand-logo { width:122px; }.split-hero { padding-top:68px; }.audience-card { min-height:76vh; }.audience-copy { gap:13px; }.audience-description { font-size:.98rem; }.home-next { padding:58px 22px; }.page-hero { padding-top:52px; }.content { width:min(100% - 28px,1180px); }.page-hero h1 { font-size:3.1rem; }.route-card { min-height:220px; }.site-header nav { gap:10px; }.site-header nav a:last-child { font-size:.83rem; padding:10px 13px; } }
 @media (max-width:900px) { .home-header nav { display:flex; gap:14px; }.home-header nav a:last-child { display:none; } }
@@ -145,6 +156,7 @@ button,input,textarea,select { font:inherit; }
 .educator-guides h2,.guide-page h2 { font-size:clamp(1.7rem,3vw,2.5rem); letter-spacing:-.035em; }
 .educator-guides>p { color:var(--muted); }
 .guide-list { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; margin-top:24px; }
+#guias { scroll-margin-top:100px; }
 .guide-list a { display:flex; align-items:center; min-height:105px; padding:22px; border-radius:20px; background:white; border:1px solid var(--line); color:var(--blue); font-weight:800; }
 .guide-page { padding-bottom:90px; max-width:900px; }
 .guide-page section:not(.page-hero) { padding:18px 0; border-top:1px solid var(--line); line-height:1.7; }

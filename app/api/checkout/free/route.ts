@@ -2,6 +2,7 @@ import { getCurrentUser } from "@/lib/auth";
 import { query } from "@/lib/db";
 import { ALIENISTA_SLUG } from "@/lib/member";
 import { recordCrmEvent } from "@/lib/crm-events";
+import { getCommercialSettings } from "@/lib/commercial";
 
 export async function POST(request: Request) {
   const user = await getCurrentUser();
@@ -13,6 +14,9 @@ export async function POST(request: Request) {
   if (request.headers.get("origin") && request.headers.get("origin") !== publicOrigin)
     return Response.json({ error: "Origem inválida." }, { status: 403 });
   try {
+    const settings = await getCommercialSettings();
+    if (settings.freeWork.slug !== ALIENISTA_SLUG)
+      return Response.json({ error: "Esta obra não está na oferta gratuita atual. Consulte o catálogo." }, { status: 409 });
     // O pedido e o acesso nascem na mesma instrução: não há cobrança nem provedor de pagamento.
     const result = await query<{ id:string }>(`
       WITH purchased AS (
