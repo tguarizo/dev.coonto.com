@@ -1,7 +1,6 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 import { requireCrmHost } from "@/lib/admin-host";
 import { requireUser } from "@/lib/auth";
 import { recordCrmEvent } from "@/lib/crm-events";
@@ -9,6 +8,7 @@ import { transaction } from "@/lib/transaction";
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const serverAdmins = () => String(process.env.ADMIN_EMAILS || "").split(",").map(value => value.trim().toLowerCase()).filter(Boolean);
+export type AccessResult = { ok: boolean; message: string };
 
 async function administrator() {
   await requireCrmHost();
@@ -17,10 +17,10 @@ async function administrator() {
   return user;
 }
 
-export async function grantAdministrator(form: FormData) {
+export async function grantAdministrator(_previous: AccessResult, form: FormData): Promise<AccessResult> {
   const actor = await administrator();
   const email = String(form.get("email") || "").trim().toLowerCase();
-  if (email.length > 320 || !emailPattern.test(email)) redirect("/backoffice/administradores?erro=email");
+  if (email.length > 320 || !emailPattern.test(email)) return { ok: false, message: "Informe um e-mail válido." };
   const id = await transaction(async client => {
     await client.query("SELECT pg_advisory_xact_lock(170017)");
     const current = await client.query<{ role: string }>("SELECT role FROM users WHERE id=$1", [actor.userId]);
@@ -31,13 +31,13 @@ export async function grantAdministrator(form: FormData) {
   });
   await recordCrmEvent({ type: "admin_granted", userId: actor.userId, relatedType: "user", relatedId: id });
   revalidatePath("/backoffice/administradores");
-  redirect("/backoffice/administradores?salvo=1");
+  return { ok: true, message: `Acesso concedido a ${email}. A pessoa já pode entrar no CRM.` };
 }
 
-export async function revokeAdministrator(form: FormData) {
+export async function revokeAdministrator(_previous: AccessResult, form: FormData): Promise<AccessResult> {
   const actor = await administrator();
   const id = String(form.get("id") || "");
-  if (!/^[0-9a-f-]{36}$/i.test(id) || id === actor.userId) throw new Error("Não é possível retirar seu próprio acesso");
+  if (!/^[0-9a-f-]{36}$/i.test(id) || id === actor.userId) return { ok: false, message: "Não é possível retirar seu próprio acesso." };
   await transaction(async client => {
     await client.query("SELECT pg_advisory_xact_lock(170017)");
     const current = await client.query<{ role: string }>("SELECT role FROM users WHERE id=$1", [actor.userId]);
@@ -50,5 +50,5 @@ export async function revokeAdministrator(form: FormData) {
   });
   await recordCrmEvent({ type: "admin_revoked", userId: actor.userId, relatedType: "user", relatedId: id });
   revalidatePath("/backoffice/administradores");
-  redirect("/backoffice/administradores?retirado=1");
+  return { ok: true, message: "Acesso retirado." };
 }
