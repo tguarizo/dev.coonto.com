@@ -3,7 +3,7 @@ __DOMAIN__ {
 	reverse_proxy __APP_HOST__:__APP_PORT__
 }
 
-__CRM_DOMAIN__, crm.dev.coonto.com {
+__CRM_DOMAIN__ {
 	encode zstd gzip
 	@admin path /backoffice* /login /api/auth/* /_next/* /images/coonto-logo.png /favicon*
 	handle @admin {

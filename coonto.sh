@@ -12,7 +12,7 @@ warn(){ printf '\n[Coonto][ATENÇÃO] %s\n' "$*" >&2; }
 fail(){ printf '\n[Coonto][ERRO] %s\n' "$*" >&2; printf 'Execute: sudo ./coonto.sh report\n' >&2; exit 1; }
 need(){ command -v "$1" >/dev/null 2>&1 || fail "Comando obrigatório ausente: $1"; }
 as_root(){ if [[ ${EUID:-$(id -u)} -ne 0 ]]; then exec sudo -E bash "$0" "${ORIGINAL_ARGS[@]}"; fi; }
-load_env(){ [[ -f .env ]] || fail "Arquivo .env ausente. Execute sudo ./coonto.sh configure"; sed -i 's/\r$//' .env; set -a; source .env; set +a; export CRM_DOMAIN="${CRM_DOMAIN:-crm.${DOMAIN}}"; }
+load_env(){ [[ -f .env ]] || fail "Arquivo .env ausente. Execute sudo ./coonto.sh configure"; sed -i 's/\r$//' .env; set -a; source .env; set +a; export CRM_DOMAIN="${CRM_DOMAIN:-crm.${DOMAIN%.br}}"; }
 
 install_prerequisites(){
   as_root "$@"
