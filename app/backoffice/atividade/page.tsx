@@ -16,6 +16,7 @@ const labels: Record<string, string> = {
   classroom_member_removed: "Vínculo com turma removido",
   referral_created: "Link de indicação", opportunity_created: "Oportunidade criada",
   opportunity_stage_changed: "Etapa da oportunidade",
+  admin_granted: "Acesso administrativo concedido", admin_revoked: "Acesso administrativo retirado",
 };
 type Event = { id: string; event_type: string; name: string | null; organization: string | null; related_type: string | null; related_id: string | null; created_at: Date };
 

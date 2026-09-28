@@ -15,7 +15,10 @@ const sections = [
     { href: "/backoffice/crm?area=organizacoes", label: "Escolas e turmas" },
     { href: "/backoffice/parcerias", label: "Indicações e oportunidades" },
   ] },
-  { heading: "Configurar", links: [{ href: "/backoffice#ofertas", label: "Ofertas" }] },
+  { heading: "Configurar", links: [
+    { href: "/backoffice#ofertas", label: "Ofertas" },
+    { href: "/backoffice/administradores", label: "Administradores" },
+  ] },
 ];
 
 export function CrmSidebar() {
