@@ -50,8 +50,8 @@ export default async function Home() {
       <section className="method-intro" aria-labelledby="method-title">
         <div className="method-intro-heading">
           <span className="method-kicker">UMA OUTRA FORMA DE ENTRAR NO LIVRO</span>
-          <h1 id="method-title">Já se perdeu em um livro?<br /><em>Vamos entrar juntos.</em></h1>
-          <p>Às vezes os personagens se confundem, uma palavra trava a leitura ou você não sabe o que procurar. No Coonto, você conhece uma situação da obra, faz uma escolha e descobre pistas. Depois volta ao livro para conferir sua ideia no texto. Assim, a leitura ganha perguntas que são suas.</p>
+          <h1 id="method-title">Entre na história.<br /><em>Volte ao livro.</em></h1>
+          <p>O Coonto não substitui o livro. Cria motivos para voltar a ele. Uma cena vira uma pergunta: você faz uma escolha, descobre pistas e procura evidências no texto original. Assim, a leitura ganha perguntas que são suas.</p>
           <a className="method-down" href="#escolha-seu-caminho">Quero experimentar <ArrowDown size={18} aria-hidden="true" /></a>
         </div>
         <div className="method-visual" aria-label="O ciclo de leitura do Coonto, do encontro com a cena à memória">
