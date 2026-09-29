@@ -6,5 +6,19 @@
   "display": "standalone",
   "background_color": "#09162f",
   "theme_color": "#09162f",
-  "icons": [{ "src": "/favicon.png", "sizes": "420x420", "type": "image/png" }]
+  "icons": [
+    {
+      "src": "/icons/coonto-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/coonto-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "id": "/",
+  "scope": "/"
 }

@@ -18,6 +18,7 @@ const sections = [
   { heading: "Configurar", links: [
     { href: "/backoffice#ofertas", label: "Ofertas" },
     { href: "/backoffice/administradores", label: "Administradores" },
+    { href: "/backoffice/ajuda", label: "Ajuda Coonto · respostas" },
   ] },
 ];
 

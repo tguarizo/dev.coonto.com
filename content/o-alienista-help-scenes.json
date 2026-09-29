@@ -1,0 +1,338 @@
+[
+  {
+    "id": "s0",
+    "title": "O Alienista",
+    "body": "Não apenas leia. Descubra a obra.\n\nEntre em Itaguaí. Observe o que muda, interprete as pistas, identifique evidências e construa seu mapa de compreensão da história.",
+    "question": "",
+    "chapter": ""
+  },
+  {
+    "id": "s1",
+    "title": "O experimento",
+    "body": "Nesta fase, o Coonto apresenta Simão Bacamarte, sua lógica científica e o nascimento da Casa Verde. O foco não é julgar cedo demais, mas entender como uma proposta aparentemente racional começa a reorganizar toda a vida de Itaguaí.",
+    "question": "",
+    "chapter": "Capítulos I–III"
+  },
+  {
+    "id": "s2",
+    "title": "Quem é Simão Bacamarte?",
+    "body": "Bacamarte volta da Europa com prestígio e afirma que a ciência é sua ocupação, e Itaguaí, o seu universo. O texto apresenta um homem de saber, mas também alguém inteiramente entregue ao próprio método.",
+    "question": "O que a apresentação inicial de Bacamarte destaca primeiro?",
+    "chapter": "Capítulo I"
+  },
+  {
+    "id": "s3",
+    "title": "O casamento calculado",
+    "body": "Bacamarte escolhe D. Evarista por critérios fisiológicos que considera adequados à geração de filhos. A decisão mostra que ele submete até a vida privada à lógica da observação e do cálculo.",
+    "question": "O que essa escolha revela sobre o modo como Bacamarte vê as pessoas?",
+    "chapter": "Capítulo I"
+  },
+  {
+    "id": "s4",
+    "title": "Nasce a Casa Verde",
+    "body": "Ao perceber a ausência de uma instituição dedicada aos alienados, Bacamarte propõe reunir e estudar os loucos em um único espaço. A Câmara aprova. A população enxerga utilidade e caridade no projeto.",
+    "question": "O que torna a Casa Verde inicialmente defensável?",
+    "chapter": "Capítulo I"
+  },
+  {
+    "id": "s5",
+    "title": "Caridade ou experimento?",
+    "body": "Bacamarte admite que a caridade participa da obra, mas deixa claro que deseja observar, classificar e compreender a loucura em profundidade. A Casa Verde passa a funcionar como campo de estudo contínuo.",
+    "question": "Qual leitura é mais defensável aqui?",
+    "chapter": "Capítulo II"
+  },
+  {
+    "id": "s6",
+    "title": "D. Evarista entra no campo de observação",
+    "body": "A própria esposa de Bacamarte sofre com sua frieza. Quando ele a vê angustiada, reage oferecendo uma viagem — mas também transforma a reação dela em dado observável.",
+    "question": "Que conexão essa cena fortalece?",
+    "chapter": "Capítulo III"
+  },
+  {
+    "id": "s7",
+    "title": "O que mudou até aqui?",
+    "body": "Bacamarte começou tentando responder a um problema específico: como tratar os alienados de Itaguaí. Ao fim da primeira fase, porém, a Casa Verde já funciona como instrumento de observação e classificação. A ciência saiu do discurso e virou instituição.",
+    "question": "",
+    "chapter": "Checkpoint"
+  },
+  {
+    "id": "s8",
+    "title": "Quem é louco?",
+    "body": "A segunda fase mostra a mudança decisiva da obra: a realidade não se transforma de repente; o que muda é o critério de classificação. E, quando o critério muda, muda também o alcance do poder.",
+    "question": "",
+    "chapter": "Capítulos IV–V"
+  },
+  {
+    "id": "s9",
+    "title": "Da ilha ao continente",
+    "body": "Bacamarte anuncia sua nova teoria: a loucura, antes vista como exceção, talvez seja muito mais ampla. A partir daí, sanidade passa a significar equilíbrio perfeito das faculdades.",
+    "question": "Qual é a mudança mais importante nesse momento?",
+    "chapter": "Capítulo IV"
+  },
+  {
+    "id": "s10",
+    "title": "Quem controla o limite?",
+    "body": "Quando o critério de normalidade se torna mais rígido e mais amplo ao mesmo tempo, o poder de nomear o desvio cresce. Padre Lopes pressente o problema e questiona a nova fronteira.",
+    "question": "Que evidência sustenta melhor esta interpretação?",
+    "chapter": "Capítulo IV"
+  },
+  {
+    "id": "s11",
+    "title": "O caso de Costa",
+    "body": "Costa, conhecido por distribuir dinheiro e arruinar-se em liberalidades, é recolhido à Casa Verde. O caso importa menos pelo indivíduo em si e mais pelo que ele revela sobre o novo alcance do sistema.",
+    "question": "Por que o caso de Costa é um ponto de virada?",
+    "chapter": "Capítulo V"
+  },
+  {
+    "id": "s12",
+    "title": "A prima que tenta ajudar",
+    "body": "A prima de Costa procura Bacamarte para defender o parente. Sua intervenção, porém, não a protege; ao contrário, ela mesma passa a ser enquadrada pelo sistema.",
+    "question": "Por que essa cena aumenta o medo da população?",
+    "chapter": "Capítulo V"
+  },
+  {
+    "id": "s13",
+    "title": "Mateus diante da própria casa",
+    "body": "Mateus contempla a própria prosperidade e gosta de ser admirado. O gesto tem algo de cômico, mas o olhar de Bacamarte transforma essa vaidade em pista clínica.",
+    "question": "O que essa cena revela sobre a expansão da Casa Verde?",
+    "chapter": "Capítulo V"
+  },
+  {
+    "id": "s14",
+    "title": "Ninguém sabe mais quem está são",
+    "body": "Depois de vários recolhimentos, Itaguaí passa a viver sob um novo regime de incerteza. Ninguém sabe ao certo qual traço, hábito ou excesso poderá ser usado contra si.",
+    "question": "Qual conexão melhor resume essa mudança?",
+    "chapter": "Capítulo V"
+  },
+  {
+    "id": "s15",
+    "title": "Porfírio entra em cena",
+    "body": "Porfírio, o barbeiro Canjica, organiza a oposição à Casa Verde. Sua causa parece legítima, mas o texto deixa entrever que causa pública e desejo pessoal não são sempre a mesma coisa.",
+    "question": "Qual leitura é mais prudente nesse momento?",
+    "chapter": "Capítulo V"
+  },
+  {
+    "id": "s16",
+    "title": "Da Casa Verde à vida da cidade",
+    "body": "Até aqui, a obra mostrou algo essencial: quando a definição do desvio se amplia, a Casa Verde deixa de atingir só os internados. Ela começa a reorganizar o comportamento de toda Itaguaí.",
+    "question": "",
+    "chapter": "Checkpoint"
+  },
+  {
+    "id": "s17",
+    "title": "A revolta",
+    "body": "A revolta torna visível o que vinha se formando desde o início. A questão já não é apenas médica. Ciência, autoridade e poder passam a colidir em praça pública.",
+    "question": "",
+    "chapter": "Capítulos VI–VIII"
+  },
+  {
+    "id": "s18",
+    "title": "A Câmara recusa",
+    "body": "Os revoltosos pressionam a Câmara. A resposta é que questões científicas não se resolvem por votação. A fala parece técnica, mas também protege a autonomia de Bacamarte.",
+    "question": "O que está em jogo nessa resposta?",
+    "chapter": "Capítulo VI"
+  },
+  {
+    "id": "s19",
+    "title": "A Revolta dos Canjicas",
+    "body": "A oposição cresce, ganha corpo nas ruas e dá à Casa Verde um novo significado público: o de uma instituição temida. A linguagem da revolta transforma o edifício em símbolo político.",
+    "question": "",
+    "chapter": "Capítulo VI"
+  },
+  {
+    "id": "s20",
+    "title": "A cidade chega à Casa Verde",
+    "body": "A multidão se reúne diante da instituição. O episódio já não se passa apenas entre médicos, pacientes e famílias. A cidade inteira entra em cena.",
+    "question": "Qual mudança de escala esta cena evidencia?",
+    "chapter": "Capítulo VI"
+  },
+  {
+    "id": "s21",
+    "title": "Bacamarte vai à varanda",
+    "body": "Diante da multidão, Bacamarte mantém serenidade quase desconcertante. Ele sustenta sua posição não como quem negocia, mas como quem fala de um lugar acima da contestação popular.",
+    "question": "Qual conexão esta cena torna mais nítida?",
+    "chapter": "Capítulo VI"
+  },
+  {
+    "id": "s22",
+    "title": "O objetivo da revolta muda",
+    "body": "À medida que percebe sua força, Porfírio deixa de ser apenas líder de protesto e passa a enxergar a possibilidade de governar. A pauta original começa a dividir espaço com a ambição política.",
+    "question": "Quando a revolta deixa de ser apenas sobre a Casa Verde?",
+    "chapter": "Capítulo VI"
+  },
+  {
+    "id": "s23",
+    "title": "Os soldados mudam de lado",
+    "body": "Parte dos dragões passa para a rebelião; o restante cede. O poder da força pública acompanha a mudança do ambiente político.",
+    "question": "O que essa virada torna visível?",
+    "chapter": "Capítulo VII"
+  },
+  {
+    "id": "s24",
+    "title": "A Casa Verde some do discurso",
+    "body": "Depois da vitória, a proclamação do novo governo praticamente esvazia a pauta inicial. A instituição que mobilizou a revolta deixa de ocupar o centro do discurso político.",
+    "question": "Que evidência sustenta melhor a ideia de mudança de prioridade?",
+    "chapter": "Capítulo VII"
+  },
+  {
+    "id": "s25",
+    "title": "Crispim escolhe o vencedor",
+    "body": "Crispim busca aderir ao lado que parece triunfante, mesmo quando sua própria casa interpreta seus movimentos de forma equivocada. A cena explora conveniência, imagem pública e autopreservação.",
+    "question": "O que esta cena revela melhor?",
+    "chapter": "Capítulo VIII"
+  },
+  {
+    "id": "s26",
+    "title": "O que a revolta revelou?",
+    "body": "A revolta não é um episódio isolado. Ela expõe publicamente o que já vinha sendo preparado em silêncio: a transformação da ciência em autoridade, e da autoridade em poder efetivo sobre a cidade.",
+    "question": "",
+    "chapter": "Checkpoint"
+  },
+  {
+    "id": "s27",
+    "title": "Ciência, política e poder",
+    "body": "Aqui a obra mostra que a troca de governantes não resolve automaticamente a lógica do problema. Pessoas mudam. Sistemas podem permanecer.",
+    "question": "",
+    "chapter": "Capítulos IX–X"
+  },
+  {
+    "id": "s28",
+    "title": "Porfírio procura Bacamarte",
+    "body": "Ao chegar ao poder, Porfírio não destrói a Casa Verde. Pelo contrário: admite a natureza científica da questão e busca apenas um arranjo político que acalme os ânimos.",
+    "question": "O que mudou de fato?",
+    "chapter": "Capítulo IX"
+  },
+  {
+    "id": "s29",
+    "title": "Dois lindos casos",
+    "body": "Bacamarte observa Porfírio e o comportamento coletivo como novos objetos de estudo. A política, em vez de limitar o seu campo, acaba fornecendo mais material ao diagnóstico.",
+    "question": "Que cadeia esta cena reforça?",
+    "chapter": "Capítulo IX"
+  },
+  {
+    "id": "s30",
+    "title": "Revolução da revolução",
+    "body": "João Pina derruba Porfírio; depois chegam as forças do vice-rei. O jogo político se recicla com rapidez, mas a Casa Verde e a autoridade de Bacamarte atravessam as mudanças.",
+    "question": "O que permanece apesar das trocas de governo?",
+    "chapter": "Capítulo X"
+  },
+  {
+    "id": "s31",
+    "title": "Agora todos cabem",
+    "body": "Com a restauração da ordem e o prestígio intacto, Bacamarte amplia ainda mais o alcance das internações. Vereadores, partidários, opositores, convenientes: o sistema parece capaz de absorver quase tudo.",
+    "question": "Existe agora algum comportamento que garanta segurança?",
+    "chapter": "Capítulo X"
+  },
+  {
+    "id": "s32",
+    "title": "D. Evarista é internada",
+    "body": "A esposa de Bacamarte torna-se alvo de seu próprio método. A cena dificulta leituras simplistas que tentem explicar tudo apenas por interesse econômico ou perseguição pessoal.",
+    "question": "Qual interpretação esse episódio enfraquece melhor?",
+    "chapter": "Capítulo X"
+  },
+  {
+    "id": "s33",
+    "title": "Pessoas mudam. Sistemas permanecem.",
+    "body": "A quarta fase consolida uma leitura central do Coonto: a disputa política muda de mãos, mas a Casa Verde continua operando. O problema já não está apenas em personagens individuais, e sim na força de uma lógica institucional.",
+    "question": "",
+    "chapter": "Checkpoint"
+  },
+  {
+    "id": "s34",
+    "title": "A inversão",
+    "body": "A última fase entrega o maior payoff intelectual da obra. Em vez de abandonar o sistema quando ele parece falhar, Bacamarte o inverte — e o torna ainda mais perturbador.",
+    "question": "",
+    "chapter": "Capítulos XI–XIII"
+  },
+  {
+    "id": "s35",
+    "title": "Quatro quintos da população",
+    "body": "Ao constatar que cerca de quatro quintos de Itaguaí passaram pela Casa Verde, Bacamarte enfrenta um dado desconcertante. Tudo parece indicar que há algo errado no próprio sistema de classificação.",
+    "question": "Qual seria a conclusão mais simples diante desse dado?",
+    "chapter": "Capítulo XI"
+  },
+  {
+    "id": "s36",
+    "title": "A teoria vira do avesso",
+    "body": "Em vez de abandonar o método, Bacamarte conclui que estava observando o problema pelo lado errado: o desequilíbrio passa a ser visto como normal, e o equilíbrio perfeito, como patológico.",
+    "question": "Bacamarte abandonou seu método?",
+    "chapter": "Capítulo XI"
+  },
+  {
+    "id": "s37",
+    "title": "A frase que a população não leu",
+    "body": "Ao celebrar a libertação dos antigos internos, a população quase não percebe a parte do documento que anuncia uma nova etapa: agora, os perfeitamente equilibrados passarão a ser recolhidos.",
+    "question": "Que evidência sustenta a ideia de leitura apressada do povo?",
+    "chapter": "Capítulo XI"
+  },
+  {
+    "id": "s38",
+    "title": "Os virtuosos entram",
+    "body": "Com o critério invertido, pessoas vistas como equilibradas, moderadas ou virtuosas passam a ser internadas. A teoria agora captura o oposto do que capturava antes.",
+    "question": "Qual contraste melhor resume a virada?",
+    "chapter": "Capítulo XII"
+  },
+  {
+    "id": "s39",
+    "title": "Preso por ter cão, preso por não ter",
+    "body": "O novo critério passa a explicar também comportamentos opostos aos anteriores. A obra sugere um problema sério: quando uma teoria parece capaz de confirmar qualquer coisa, sua força explicativa se torna suspeita.",
+    "question": "O que essa situação demonstra melhor?",
+    "chapter": "Capítulo XII"
+  },
+  {
+    "id": "s40",
+    "title": "Curar a virtude",
+    "body": "Bacamarte passa a tratar os novos internados estimulando neles traços contrários às suas virtudes. O resultado é um mundo em que vício pode parecer cura, e virtude, doença.",
+    "question": "Que conexão esta cena explicita?",
+    "chapter": "Capítulo XIII"
+  },
+  {
+    "id": "s41",
+    "title": "O examinador é examinado",
+    "body": "Ao perceber que a teoria chegou a um limite, Bacamarte olha para si mesmo. Pede a amigos que avaliem suas qualidades e conclui que talvez ele próprio seja o maior caso da Casa Verde.",
+    "question": "Por que o elogio dos amigos não resolve o problema?",
+    "chapter": "Capítulo XIII"
+  },
+  {
+    "id": "s42",
+    "title": "A porta se fecha",
+    "body": "Bacamarte se interna na própria Casa Verde. Dezessete meses depois, morre sem alcançar a cura. O narrador encerra a história preservando a ambiguidade: talvez ele fosse o único louco de Itaguaí. Talvez não. A obra termina deixando aberta a pergunta que mais importa: quem julga o julgador?",
+    "question": "",
+    "chapter": "Capítulo XIII"
+  },
+  {
+    "id": "c1",
+    "title": "O que realmente mudou em Itaguaí?",
+    "body": "Agora a pergunta não depende de um único capítulo. Ela exige que você use a obra inteira.",
+    "question": "Qual formulação melhor explica por que a Casa Verde passa de solução respeitada a fonte de medo?",
+    "chapter": "Obra completa"
+  },
+  {
+    "id": "c2",
+    "title": "A revolta resolveu o problema?",
+    "body": "A Revolta dos Canjicas parece, por um momento, capaz de encerrar a Casa Verde. Mas a obra segue em outra direção.",
+    "question": "Qual evidência da obra mais enfraquece a ideia de que a revolta solucionou o problema?",
+    "chapter": "Obra completa"
+  },
+  {
+    "id": "c3",
+    "title": "Por que a inversão é tão importante?",
+    "body": "Quando quase toda Itaguaí passa pela Casa Verde, Bacamarte não abandona sua lógica. Ele muda a definição.",
+    "question": "O que a inversão demonstra sobre o sistema de Bacamarte?",
+    "chapter": "Obra completa"
+  },
+  {
+    "id": "c4",
+    "title": "Quem julga o julgador?",
+    "body": "No fim, Bacamarte aplica a própria teoria a si mesmo. A porta da Casa Verde se fecha também sobre aquele que sempre observou os outros.",
+    "question": "Por que o final é mais forte se preservarmos a ambiguidade?",
+    "chapter": "Obra completa"
+  },
+  {
+    "id": "final",
+    "title": "Você não apenas terminou O Alienista. Você construiu uma leitura da obra.",
+    "body": "Agora o Coonto reúne o que você observou, interpretou, provou e conectou ao longo da experiência.",
+    "question": "",
+    "chapter": ""
+  }
+]

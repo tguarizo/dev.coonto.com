@@ -1,4 +1,5 @@
 import { ArrowDown, ArrowRight, BookOpenCheck, Brain, Building2, Compass, GraduationCap, Lightbulb, MessageCircle, ScanEye, Sparkles } from "lucide-react";
+import { MobileSiteMenu } from "@/components/mobile-site-menu";
 import { getCommercialSettings } from "@/lib/commercial";
 
 export const dynamic = "force-dynamic";
@@ -40,18 +41,18 @@ export default async function Home() {
         <img src="/images/coonto-logo.png" alt="Coonto" className="brand-logo" />
         <nav aria-label="Navegação principal">
           <a href="/catalogo">Catálogo</a>
-          <a className="home-nav-secondary" href="/para-educadores#guias">Entenda o método</a>
+          <a href="/como-funciona">O que é o Coonto?</a><a className="home-nav-secondary" href="/professor">Espaço do professor</a>
           <a className="survey-nav-link" href="/pesquisa">Pesquisa</a>
           <a className="home-nav-secondary" href="/parceiros">Seja parceiro</a>
           <a className="home-nav-secondary" href="#feedback">Feedback</a>
           <a href="/login?return_to=%2Fminha-biblioteca">Entrar</a>
-        </nav>
+        </nav><MobileSiteMenu/>
       </header>
       <section className="method-intro" aria-labelledby="method-title">
         <div className="method-intro-heading">
           <span className="method-kicker">UMA OUTRA FORMA DE ENTRAR NO LIVRO</span>
           <h1 id="method-title">Entre na história.<br /><em>Volte ao livro.</em></h1>
-          <p>O Coonto não substitui o livro. Cria motivos para voltar a ele. Uma cena vira uma pergunta: você faz uma escolha, descobre pistas e procura evidências no texto original. Assim, a leitura ganha perguntas que são suas.</p>
+          <p>O Coonto é uma plataforma de leitura e aprendizagem, acessível no computador, tablet e celular. Não substitui o livro. Cria motivos para voltar a ele. Uma cena vira uma pergunta: você faz uma escolha, descobre pistas e procura evidências no texto original. Assim, a leitura ganha perguntas que são suas.</p>
           <a className="method-down" href="#escolha-seu-caminho">Quero experimentar <ArrowDown size={18} aria-hidden="true" /></a>
         </div>
         <div className="method-visual" aria-label="O ciclo de leitura do Coonto, do encontro com a cena à memória">

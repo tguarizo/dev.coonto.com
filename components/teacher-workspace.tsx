@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import scenes from "@/content/o-alienista-scenes.json";
+import { CoontoHelp } from "@/components/coonto-help";
 import { ALIENISTA_SCENES } from "@/lib/works";
 
 type Bookmark = { id:string; scene_id:string; title:string };
@@ -69,7 +70,7 @@ export function TeacherWorkspace() {
       {status&&<p role="status">{status}</p>}
       <p><a href="/minha-biblioteca">Ir para minha leitura pessoal</a></p>
     </aside>
-    <div className="teacher-reader"><p><strong>Prévia para aula.</strong> Responda às perguntas da experiência, avance entre elas ou salte pelo roteiro. Suas escolhas aqui não mudam o progresso da leitura pessoal.</p>
+    <div className="teacher-reader"><details className="teacher-help"><summary>Apoio ao professor · preparar uma atividade</summary><CoontoHelp initialMode="teacher" sceneId={selected}/></details><p><strong>Prévia para aula.</strong> Responda às perguntas da experiência, avance entre elas ou salte pelo roteiro. Suas escolhas aqui não mudam o progresso da leitura pessoal.</p>
       <iframe ref={iframe} onLoad={()=>{setReady(true);iframe.current?.contentWindow?.postMessage({type:"coonto:teacher-jump",sceneId:selected},location.origin);}} title="O Alienista — prévia do professor" src="/api/works/o-alienista?mode=teacher" className="experience-frame" allow="autoplay"/>
     </div>
   </div>;

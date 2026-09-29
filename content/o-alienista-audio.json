@@ -1,0 +1,434 @@
+[
+  {
+    "id": "s0",
+    "segments": [
+      {
+        "speaker": "narrator",
+        "text": "O Alienista. Não apenas leia. Descubra a obra.\n\nEntre em Itaguaí. Observe o que muda, interprete as pistas, identifique evidências e construa seu mapa de compreensão da história."
+      }
+    ]
+  },
+  {
+    "id": "s1",
+    "segments": [
+      {
+        "speaker": "narrator",
+        "text": "O experimento. Nesta fase, o Coonto apresenta Simão Bacamarte, sua lógica científica e o nascimento da Casa Verde. O foco não é julgar cedo demais, mas entender como uma proposta aparentemente racional começa a reorganizar toda a vida de Itaguaí."
+      }
+    ]
+  },
+  {
+    "id": "s2",
+    "segments": [
+      {
+        "speaker": "narrator",
+        "text": "Quem é Simão Bacamarte?. Bacamarte volta da Europa com prestígio e afirma que a ciência é sua ocupação, e Itaguaí, o seu universo. O texto apresenta um homem de saber, mas também alguém inteiramente entregue ao próprio método."
+      }
+    ]
+  },
+  {
+    "id": "s3",
+    "segments": [
+      {
+        "speaker": "narrator",
+        "text": "O casamento calculado. Bacamarte escolhe D. Evarista por critérios fisiológicos que considera adequados à geração de filhos. A decisão mostra que ele submete até a vida privada à lógica da observação e do cálculo."
+      }
+    ]
+  },
+  {
+    "id": "s4",
+    "segments": [
+      {
+        "speaker": "narrator",
+        "text": "Nasce a Casa Verde. Ao perceber a ausência de uma instituição dedicada aos alienados, Bacamarte propõe reunir e estudar os loucos em um único espaço. A Câmara aprova. A população enxerga utilidade e caridade no projeto."
+      }
+    ]
+  },
+  {
+    "id": "s5",
+    "segments": [
+      {
+        "speaker": "narrator",
+        "text": "Caridade ou experimento?. Bacamarte admite que a caridade participa da obra, mas deixa claro que deseja observar, classificar e compreender a loucura em profundidade. A Casa Verde passa a funcionar como campo de estudo contínuo."
+      }
+    ]
+  },
+  {
+    "id": "s6",
+    "segments": [
+      {
+        "speaker": "narrator",
+        "text": "D. Evarista entra no campo de observação. A própria esposa de Bacamarte sofre com sua frieza. Quando ele a vê angustiada, reage oferecendo uma viagem — mas também transforma a reação dela em dado observável."
+      }
+    ]
+  },
+  {
+    "id": "s7",
+    "segments": [
+      {
+        "speaker": "narrator",
+        "text": "O que mudou até aqui?. Bacamarte começou tentando responder a um problema específico: como tratar os alienados de Itaguaí. Ao fim da primeira fase, porém, a Casa Verde já funciona como instrumento de observação e classificação. A ciência saiu do discurso e virou instituição."
+      }
+    ]
+  },
+  {
+    "id": "s8",
+    "segments": [
+      {
+        "speaker": "narrator",
+        "text": "Quem é louco?. A segunda fase mostra a mudança decisiva da obra: a realidade não se transforma de repente; o que muda é o critério de classificação. E, quando o critério muda, muda também o alcance do poder."
+      }
+    ]
+  },
+  {
+    "id": "s9",
+    "segments": [
+      {
+        "speaker": "narrator",
+        "text": "Da ilha ao continente. Bacamarte anuncia sua nova teoria: a loucura, antes vista como exceção, talvez seja muito mais ampla. A partir daí, sanidade passa a significar equilíbrio perfeito das faculdades."
+      }
+    ]
+  },
+  {
+    "id": "s10",
+    "segments": [
+      {
+        "speaker": "narrator",
+        "text": "Quem controla o limite?. Quando o critério de normalidade se torna mais rígido e mais amplo ao mesmo tempo, o poder de nomear o desvio cresce. Padre Lopes pressente o problema e questiona a nova fronteira."
+      }
+    ]
+  },
+  {
+    "id": "s11",
+    "segments": [
+      {
+        "speaker": "narrator",
+        "text": "O caso de Costa. Costa, conhecido por distribuir dinheiro e arruinar-se em liberalidades, é recolhido à Casa Verde. O caso importa menos pelo indivíduo em si e mais pelo que ele revela sobre o novo alcance do sistema."
+      }
+    ]
+  },
+  {
+    "id": "s12",
+    "segments": [
+      {
+        "speaker": "narrator",
+        "text": "A prima que tenta ajudar. A prima de Costa procura Bacamarte para defender o parente. Sua intervenção, porém, não a protege; ao contrário, ela mesma passa a ser enquadrada pelo sistema."
+      }
+    ]
+  },
+  {
+    "id": "s13",
+    "segments": [
+      {
+        "speaker": "narrator",
+        "text": "Mateus diante da própria casa. Mateus contempla a própria prosperidade e gosta de ser admirado. O gesto tem algo de cômico, mas o olhar de Bacamarte transforma essa vaidade em pista clínica."
+      }
+    ]
+  },
+  {
+    "id": "s14",
+    "segments": [
+      {
+        "speaker": "narrator",
+        "text": "Ninguém sabe mais quem está são. Depois de vários recolhimentos, Itaguaí passa a viver sob um novo regime de incerteza. Ninguém sabe ao certo qual traço, hábito ou excesso poderá ser usado contra si."
+      }
+    ]
+  },
+  {
+    "id": "s15",
+    "segments": [
+      {
+        "speaker": "narrator",
+        "text": "Porfírio entra em cena. Porfírio, o barbeiro Canjica, organiza a oposição à Casa Verde. Sua causa parece legítima, mas o texto deixa entrever que causa pública e desejo pessoal não são sempre a mesma coisa."
+      }
+    ]
+  },
+  {
+    "id": "s16",
+    "segments": [
+      {
+        "speaker": "narrator",
+        "text": "Da Casa Verde à vida da cidade. Até aqui, a obra mostrou algo essencial: quando a definição do desvio se amplia, a Casa Verde deixa de atingir só os internados. Ela começa a reorganizar o comportamento de toda Itaguaí."
+      }
+    ]
+  },
+  {
+    "id": "s17",
+    "segments": [
+      {
+        "speaker": "narrator",
+        "text": "A revolta. A revolta torna visível o que vinha se formando desde o início. A questão já não é apenas médica. Ciência, autoridade e poder passam a colidir em praça pública."
+      }
+    ]
+  },
+  {
+    "id": "s18",
+    "segments": [
+      {
+        "speaker": "narrator",
+        "text": "A Câmara recusa. Os revoltosos pressionam a Câmara. A resposta é que questões científicas não se resolvem por votação. A fala parece técnica, mas também protege a autonomia de Bacamarte."
+      }
+    ]
+  },
+  {
+    "id": "s19",
+    "segments": [
+      {
+        "speaker": "narrator",
+        "text": "A Revolta dos Canjicas. A oposição cresce, ganha corpo nas ruas e dá à Casa Verde um novo significado público: o de uma instituição temida. A linguagem da revolta transforma o edifício em símbolo político."
+      }
+    ]
+  },
+  {
+    "id": "s20",
+    "segments": [
+      {
+        "speaker": "narrator",
+        "text": "A cidade chega à Casa Verde. A multidão se reúne diante da instituição. O episódio já não se passa apenas entre médicos, pacientes e famílias. A cidade inteira entra em cena."
+      }
+    ]
+  },
+  {
+    "id": "s21",
+    "segments": [
+      {
+        "speaker": "narrator",
+        "text": "Bacamarte vai à varanda. Diante da multidão, Bacamarte mantém serenidade quase desconcertante. Ele sustenta sua posição não como quem negocia, mas como quem fala de um lugar acima da contestação popular."
+      }
+    ]
+  },
+  {
+    "id": "s22",
+    "segments": [
+      {
+        "speaker": "narrator",
+        "text": "O objetivo da revolta muda. À medida que percebe sua força, Porfírio deixa de ser apenas líder de protesto e passa a enxergar a possibilidade de governar. A pauta original começa a dividir espaço com a ambição política."
+      }
+    ]
+  },
+  {
+    "id": "s23",
+    "segments": [
+      {
+        "speaker": "narrator",
+        "text": "Os soldados mudam de lado. Parte dos dragões passa para a rebelião; o restante cede. O poder da força pública acompanha a mudança do ambiente político."
+      }
+    ]
+  },
+  {
+    "id": "s24",
+    "segments": [
+      {
+        "speaker": "narrator",
+        "text": "A Casa Verde some do discurso. Depois da vitória, a proclamação do novo governo praticamente esvazia a pauta inicial. A instituição que mobilizou a revolta deixa de ocupar o centro do discurso político."
+      }
+    ]
+  },
+  {
+    "id": "s25",
+    "segments": [
+      {
+        "speaker": "narrator",
+        "text": "Crispim escolhe o vencedor. Crispim busca aderir ao lado que parece triunfante, mesmo quando sua própria casa interpreta seus movimentos de forma equivocada. A cena explora conveniência, imagem pública e autopreservação."
+      }
+    ]
+  },
+  {
+    "id": "s26",
+    "segments": [
+      {
+        "speaker": "narrator",
+        "text": "O que a revolta revelou?. A revolta não é um episódio isolado. Ela expõe publicamente o que já vinha sendo preparado em silêncio: a transformação da ciência em autoridade, e da autoridade em poder efetivo sobre a cidade."
+      }
+    ]
+  },
+  {
+    "id": "s27",
+    "segments": [
+      {
+        "speaker": "narrator",
+        "text": "Ciência, política e poder. Aqui a obra mostra que a troca de governantes não resolve automaticamente a lógica do problema. Pessoas mudam. Sistemas podem permanecer."
+      }
+    ]
+  },
+  {
+    "id": "s28",
+    "segments": [
+      {
+        "speaker": "narrator",
+        "text": "Porfírio procura Bacamarte. Ao chegar ao poder, Porfírio não destrói a Casa Verde. Pelo contrário: admite a natureza científica da questão e busca apenas um arranjo político que acalme os ânimos."
+      }
+    ]
+  },
+  {
+    "id": "s29",
+    "segments": [
+      {
+        "speaker": "narrator",
+        "text": "Dois lindos casos. Bacamarte observa Porfírio e o comportamento coletivo como novos objetos de estudo. A política, em vez de limitar o seu campo, acaba fornecendo mais material ao diagnóstico."
+      }
+    ]
+  },
+  {
+    "id": "s30",
+    "segments": [
+      {
+        "speaker": "narrator",
+        "text": "Revolução da revolução. João Pina derruba Porfírio; depois chegam as forças do vice-rei. O jogo político se recicla com rapidez, mas a Casa Verde e a autoridade de Bacamarte atravessam as mudanças."
+      }
+    ]
+  },
+  {
+    "id": "s31",
+    "segments": [
+      {
+        "speaker": "narrator",
+        "text": "Agora todos cabem. Com a restauração da ordem e o prestígio intacto, Bacamarte amplia ainda mais o alcance das internações. Vereadores, partidários, opositores, convenientes: o sistema parece capaz de absorver quase tudo."
+      }
+    ]
+  },
+  {
+    "id": "s32",
+    "segments": [
+      {
+        "speaker": "narrator",
+        "text": "D. Evarista é internada. A esposa de Bacamarte torna-se alvo de seu próprio método. A cena dificulta leituras simplistas que tentem explicar tudo apenas por interesse econômico ou perseguição pessoal."
+      }
+    ]
+  },
+  {
+    "id": "s33",
+    "segments": [
+      {
+        "speaker": "narrator",
+        "text": "Pessoas mudam. Sistemas permanecem.. A quarta fase consolida uma leitura central do Coonto: a disputa política muda de mãos, mas a Casa Verde continua operando. O problema já não está apenas em personagens individuais, e sim na força de uma lógica institucional."
+      }
+    ]
+  },
+  {
+    "id": "s34",
+    "segments": [
+      {
+        "speaker": "narrator",
+        "text": "A inversão. A última fase entrega o maior payoff intelectual da obra. Em vez de abandonar o sistema quando ele parece falhar, Bacamarte o inverte — e o torna ainda mais perturbador."
+      }
+    ]
+  },
+  {
+    "id": "s35",
+    "segments": [
+      {
+        "speaker": "narrator",
+        "text": "Quatro quintos da população. Ao constatar que cerca de quatro quintos de Itaguaí passaram pela Casa Verde, Bacamarte enfrenta um dado desconcertante. Tudo parece indicar que há algo errado no próprio sistema de classificação."
+      }
+    ]
+  },
+  {
+    "id": "s36",
+    "segments": [
+      {
+        "speaker": "narrator",
+        "text": "A teoria vira do avesso. Em vez de abandonar o método, Bacamarte conclui que estava observando o problema pelo lado errado: o desequilíbrio passa a ser visto como normal, e o equilíbrio perfeito, como patológico."
+      }
+    ]
+  },
+  {
+    "id": "s37",
+    "segments": [
+      {
+        "speaker": "narrator",
+        "text": "A frase que a população não leu. Ao celebrar a libertação dos antigos internos, a população quase não percebe a parte do documento que anuncia uma nova etapa: agora, os perfeitamente equilibrados passarão a ser recolhidos."
+      }
+    ]
+  },
+  {
+    "id": "s38",
+    "segments": [
+      {
+        "speaker": "narrator",
+        "text": "Os virtuosos entram. Com o critério invertido, pessoas vistas como equilibradas, moderadas ou virtuosas passam a ser internadas. A teoria agora captura o oposto do que capturava antes."
+      }
+    ]
+  },
+  {
+    "id": "s39",
+    "segments": [
+      {
+        "speaker": "narrator",
+        "text": "Preso por ter cão, preso por não ter. O novo critério passa a explicar também comportamentos opostos aos anteriores. A obra sugere um problema sério: quando uma teoria parece capaz de confirmar qualquer coisa, sua força explicativa se torna suspeita."
+      }
+    ]
+  },
+  {
+    "id": "s40",
+    "segments": [
+      {
+        "speaker": "narrator",
+        "text": "Curar a virtude. Bacamarte passa a tratar os novos internados estimulando neles traços contrários às suas virtudes. O resultado é um mundo em que vício pode parecer cura, e virtude, doença."
+      }
+    ]
+  },
+  {
+    "id": "s41",
+    "segments": [
+      {
+        "speaker": "narrator",
+        "text": "O examinador é examinado. Ao perceber que a teoria chegou a um limite, Bacamarte olha para si mesmo. Pede a amigos que avaliem suas qualidades e conclui que talvez ele próprio seja o maior caso da Casa Verde."
+      }
+    ]
+  },
+  {
+    "id": "s42",
+    "segments": [
+      {
+        "speaker": "narrator",
+        "text": "A porta se fecha. Bacamarte se interna na própria Casa Verde. Dezessete meses depois, morre sem alcançar a cura. O narrador encerra a história preservando a ambiguidade: talvez ele fosse o único louco de Itaguaí. Talvez não. A obra termina deixando aberta a pergunta que mais importa: quem julga o julgador?"
+      }
+    ]
+  },
+  {
+    "id": "c1",
+    "segments": [
+      {
+        "speaker": "narrator",
+        "text": "O que realmente mudou em Itaguaí?. Agora a pergunta não depende de um único capítulo. Ela exige que você use a obra inteira."
+      }
+    ]
+  },
+  {
+    "id": "c2",
+    "segments": [
+      {
+        "speaker": "narrator",
+        "text": "A revolta resolveu o problema?. A Revolta dos Canjicas parece, por um momento, capaz de encerrar a Casa Verde. Mas a obra segue em outra direção."
+      }
+    ]
+  },
+  {
+    "id": "c3",
+    "segments": [
+      {
+        "speaker": "narrator",
+        "text": "Por que a inversão é tão importante?. Quando quase toda Itaguaí passa pela Casa Verde, Bacamarte não abandona sua lógica. Ele muda a definição."
+      }
+    ]
+  },
+  {
+    "id": "c4",
+    "segments": [
+      {
+        "speaker": "narrator",
+        "text": "Quem julga o julgador?. No fim, Bacamarte aplica a própria teoria a si mesmo. A porta da Casa Verde se fecha também sobre aquele que sempre observou os outros."
+      }
+    ]
+  },
+  {
+    "id": "final",
+    "segments": [
+      {
+        "speaker": "narrator",
+        "text": "Você não apenas terminou O Alienista. Você construiu uma leitura da obra.. Agora o Coonto reúne o que você observou, interpretou, provou e conectou ao longo da experiência."
+      }
+    ]
+  }
+]

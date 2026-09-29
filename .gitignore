@@ -8,3 +8,5 @@ support/
 *.exe
 Melhorias tony/
 *.tsbuildinfo
+
+/audio/

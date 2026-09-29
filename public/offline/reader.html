@@ -1,0 +1,8 @@
+<!doctype html><html lang="pt-BR"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Coonto · leitura offline</title><style>body{margin:0;background:#f5f6fa;font-family:system-ui;color:#172033}header{padding:16px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}iframe{width:100%;height:calc(100dvh - 115px);border:0}a{color:#172033}#status{padding:0 16px;font-size:14px}</style><header><strong>Coonto · O Alienista</strong><a href="/minha-biblioteca">Minha biblioteca</a></header><p id="status">Cópia salva neste aparelho. As notas e escolhas serão sincronizadas quando você reabrir a leitura com internet.</p><iframe id="reader" title="O Alienista — leitura offline" src="/offline/o-alienista.html"></iframe><script>
+window.addEventListener('message',event=>{
+ if(event.origin!==location.origin||event.source!==document.getElementById('reader').contentWindow)return;
+ if(event.data?.type==='coonto:help'){document.getElementById('status').textContent='A Ajuda Coonto precisa de internet nesta versão. Seu caderno e a obra continuam disponíveis.';return;}
+ if(event.data?.type==='coonto:progress'){const user=localStorage.getItem('coonto-offline-user');if(user)localStorage.setItem('coonto-pending-'+user,JSON.stringify({state:event.data.state,percent:event.data.percent}));}
+});
+window.addEventListener('online',()=>document.getElementById('status').innerHTML='A conexão voltou. <a href="/leitura/o-alienista">Abra a leitura conectada para sincronizar suas anotações.</a>');
+</script></html>

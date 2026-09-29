@@ -13,7 +13,8 @@ export function DeviceManager({ initialDevices }: { initialDevices: Device[] }) 
       setDevices(current => current.filter(device => device.id !== id));
       localStorage.removeItem("coonto-alienista-offline");
       localStorage.removeItem("coonto-alienista-license-expires");
-      void caches.delete("coonto-protected-v1");
+      if ("caches" in window) void Promise.all([caches.delete("coonto-protected-v1"), caches.delete("coonto-protected-v2")]);
+      localStorage.removeItem("coonto-offline-user");
     }
   };
   return <div className="device-list">

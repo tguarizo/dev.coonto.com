@@ -1,116 +1,68 @@
 "use client";
-
-import { Download, RefreshCw, ShieldCheck, WifiOff } from "lucide-react";
-import { useCallback, useEffect, useRef, useState } from "react";
-
-type SavedProgress = { stateJson?: string } | null;
-
-function getDeviceId() {
-  const key = "coonto-device-id";
-  let value = localStorage.getItem(key);
-  if (!value) {
-    value = crypto.randomUUID();
-    localStorage.setItem(key, value);
-  }
-  return value;
-}
-
-function deviceLabel() {
-  const mobile = /Android|iPhone|iPad/i.test(navigator.userAgent);
-  return mobile ? "Celular ou tablet" : "Computador";
-}
-
-export function ExperienceFrame() {
+import { Download, RefreshCw } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { CoontoHelp } from "@/components/coonto-help";
+export function ExperienceFrame({ userId }: { userId: string }) {
   const iframeRef = useRef<HTMLIFrameElement>(null);
-  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const restoredRef = useRef<Record<string, unknown> | null>(null);
-  const [online, setOnline] = useState(true);
-  const [offlineReady, setOfflineReady] = useState(false);
+  const pendingRef = useRef<{ state: unknown; percent: number } | null>(null);
   const [status, setStatus] = useState("Seu progresso é salvo automaticamente.");
   const [preparing, setPreparing] = useState(false);
-
+  const [offlineReady, setOfflineReady] = useState(false);
+  const [helpOpen, setHelpOpen] = useState(false);
+  const [sceneId, setSceneId] = useState("s0");
+  const pendingKey = `coonto-pending-${userId}`;
   useEffect(() => {
-    setOnline(navigator.onLine);
-    const expiry = Date.parse(localStorage.getItem("coonto-alienista-license-expires") || "");
-    const validOffline = localStorage.getItem("coonto-alienista-offline") === "ready" && Number.isFinite(expiry) && expiry > Date.now();
-    setOfflineReady(validOffline);
-    if (!validOffline) {
-      localStorage.removeItem("coonto-alienista-offline");
-      void caches.open("coonto-protected-v1").then(cache => Promise.all([cache.delete("/offline/o-alienista.html"), cache.delete("/leitura/o-alienista")])).catch(() => undefined);
-    }
-    const update = () => setOnline(navigator.onLine);
-    window.addEventListener("online", update);
-    window.addEventListener("offline", update);
-    void fetch("/api/progress").then(async response => {
-      if (!response.ok) return;
-      const data = await response.json() as { progress?: SavedProgress };
-      if (data.progress?.stateJson) restoredRef.current = JSON.parse(data.progress.stateJson) as Record<string, unknown>;
-    }).catch(() => undefined);
-    return () => { window.removeEventListener("online", update); window.removeEventListener("offline", update); };
-  }, []);
-
-  const restore = useCallback(() => {
-    if (restoredRef.current) iframeRef.current?.contentWindow?.postMessage({ type: "coonto:restore", state: restoredRef.current }, location.origin);
-  }, []);
-
-  useEffect(() => {
-    const receive = (event: MessageEvent) => {
-      if (event.origin !== location.origin || event.data?.type !== "coonto:progress") return;
-      localStorage.setItem("coonto-latest-progress", JSON.stringify(event.data));
-      if (timerRef.current) clearTimeout(timerRef.current);
-      timerRef.current = setTimeout(() => {
-        if (!navigator.onLine) { setStatus("Progresso guardado neste aparelho. Será sincronizado quando houver internet."); return; }
-        void fetch("/api/progress", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ state: event.data.state, percent: event.data.percent }) })
-          .then(response => { if (response.ok) setStatus("Progresso sincronizado com sua conta."); })
-          .catch(() => setStatus("Progresso guardado neste aparelho."));
-      }, 900);
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    let syncing = false; let alive = true;
+    try { pendingRef.current = JSON.parse(localStorage.getItem(pendingKey) || "null"); } catch {}
+    const synchronize = async () => {
+      const pending = pendingRef.current;
+      if (!pending || syncing || !navigator.onLine) return;
+      syncing = true;
+      try {
+        const response = await fetch("/api/progress", { method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(pending) });
+        if (!response.ok) throw new Error();
+        if (pendingRef.current === pending) { pendingRef.current = null; localStorage.removeItem(pendingKey); }
+        if (alive) setStatus("Progresso sincronizado com sua conta.");
+      } catch { if (alive) setStatus("Progresso guardado neste aparelho. Tentaremos sincronizar novamente."); }
+      finally { syncing = false; }
+      if (pendingRef.current && pendingRef.current !== pending) void synchronize();
     };
-    window.addEventListener("message", receive);
-    const pending = localStorage.getItem("coonto-latest-progress");
-    if (pending && navigator.onLine) {
-      const data = JSON.parse(pending) as { state?: unknown; percent?: number };
-      void fetch("/api/progress", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) });
-    }
-    return () => { window.removeEventListener("message", receive); if (timerRef.current) clearTimeout(timerRef.current); };
-  }, []);
-
-  const prepareOffline = async () => {
-    setPreparing(true);
-    setStatus("Preparando O Alienista neste aparelho…");
-    try {
-      const license = await fetch("/api/offline-license", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ deviceId: getDeviceId(), label: deviceLabel() }) });
-      const result = await license.json() as { error?: string; expiresAt?: string };
-      if (!license.ok) throw new Error(result.error || "Não foi possível autorizar este aparelho.");
-      const registration = await navigator.serviceWorker.ready;
-      if (!registration.active) throw new Error("O modo offline ainda não está disponível.");
-      const response = await fetch("/api/works/o-alienista", { credentials: "include" });
-      if (!response.ok) throw new Error("Não foi possível preparar a obra.");
-      const cache = await caches.open("coonto-protected-v1");
-      await cache.put("/offline/o-alienista.html", response.clone());
-      const readerPage = await fetch("/leitura/o-alienista", { credentials: "include" });
-      if (readerPage.ok) await cache.put("/leitura/o-alienista", readerPage.clone());
-      localStorage.setItem("coonto-alienista-offline", "ready");
-      localStorage.setItem("coonto-alienista-license-expires", result.expiresAt || "");
-      setOfflineReady(true);
-      setStatus("Obra preparada neste aparelho por 30 dias.");
-    } catch (error) {
-      setStatus(error instanceof Error ? error.message : "Não foi possível preparar o modo offline.");
-    } finally { setPreparing(false); }
-  };
-
-  const source = offlineReady ? "/offline/o-alienista.html" : "/api/works/o-alienista";
-  return (
-    <section className="reader-shell">
-      <div className="reader-toolbar">
-        <div>
-          <span className={`connection-pill ${online ? "online" : "offline"}`}>{online ? <ShieldCheck size={16}/> : <WifiOff size={16}/>} {online ? "Conta conectada" : "Modo offline"}</span>
-          <p>{status}</p>
-        </div>
-        <button className="button button-outline" onClick={prepareOffline} disabled={preparing || offlineReady}>
-          {preparing ? <RefreshCw className="spin" size={17}/> : <Download size={17}/>} {offlineReady ? "Disponível offline" : "Salvar neste aparelho"}
-        </button>
-      </div>
-      <iframe ref={iframeRef} onLoad={restore} className="experience-frame" title="Experiência Coonto — O Alienista" src={source} allow="autoplay" />
-    </section>
-  );
+    const receive = (event: MessageEvent) => {
+      if (event.origin !== location.origin || event.source !== iframeRef.current?.contentWindow) return;
+      if (event.data?.type === "coonto:help") { setHelpOpen(true); return; }
+      if (event.data?.type !== "coonto:progress") return;
+      const state = event.data.state;
+      setSceneId(`s${state.idx}`);
+      pendingRef.current = {state,percent:event.data.percent};
+      try { localStorage.setItem(pendingKey,JSON.stringify(pendingRef.current)); } catch { setStatus("O armazenamento deste aparelho está cheio. Mantenha a conexão para salvar."); }
+      clearTimeout(timer);
+      timer=setTimeout(()=>{if(!navigator.onLine)setStatus("Progresso guardado neste aparelho. Será sincronizado quando houver internet.");void synchronize();},500);
+    };
+    const flush=()=>{if(pendingRef.current&&navigator.onLine)navigator.sendBeacon("/api/progress",new Blob([JSON.stringify(pendingRef.current)],{type:"application/json"}));};
+    window.addEventListener("message",receive);window.addEventListener("online",synchronize);window.addEventListener("pagehide",flush);void synchronize();
+    if("caches" in window)void caches.open("coonto-protected-v2").then(cache=>cache.match("/offline/o-alienista.html")).then(response=>{if(alive)setOfflineReady(Boolean(response&&response.headers.get("X-Coonto-User")===userId&&Date.parse(response.headers.get("X-Coonto-Expires")||"")>Date.now()));if(response&&response.headers.get("X-Coonto-User")!==userId)void caches.delete("coonto-protected-v2");});
+    return()=>{alive=false;clearTimeout(timer);flush();window.removeEventListener("message",receive);window.removeEventListener("online",synchronize);window.removeEventListener("pagehide",flush);};
+  },[pendingKey,userId]);
+  async function prepareOffline(){
+    setPreparing(true);setStatus("Preparando a obra e o texto original neste aparelho…");
+    try{
+      if(!("serviceWorker" in navigator)||!("caches" in window))throw new Error("Este navegador não oferece armazenamento offline. Use uma versão atual do Chrome, Edge ou Safari.");
+      let deviceId=localStorage.getItem("coonto-device-id");if(!deviceId){deviceId=crypto.randomUUID();localStorage.setItem("coonto-device-id",deviceId);}
+      const response=await fetch("/api/offline-license",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({deviceId,label:/Android|iPhone|iPad/i.test(navigator.userAgent)?"Celular ou tablet":"Computador"})});
+      const license=await response.json();if(!response.ok||!license.expiresAt)throw new Error(license.error||"Não foi possível autorizar o aparelho.");
+      await navigator.serviceWorker.register("/sw.js");
+      await Promise.race([navigator.serviceWorker.ready,new Promise((_,reject)=>setTimeout(()=>reject(new Error("A preparação demorou. Recarregue e tente novamente.")),15000))]);
+      const work=await fetch("/api/works/o-alienista");if(!work.ok)throw new Error("Não foi possível baixar a obra.");
+      const cache=await caches.open("coonto-protected-v2");
+      const shell=await fetch("/offline/reader.html");const text=await fetch("/offline/texto-o-alienista.html");
+      if(!shell.ok||!text.ok)throw new Error("Não foi possível preparar todos os arquivos. Tente novamente.");
+      await cache.put("/offline/reader.html",shell);await cache.put("/offline/texto-o-alienista.html",text);
+      const audioList=await fetch("/api/audio/o-alienista");if(audioList.ok){const available=await audioList.json() as {scenes:string[]};for(const id of available.scenes){const audio=await fetch(`/api/audio/o-alienista/${id}`);if(!audio.ok)throw new Error("Não foi possível salvar todos os áudios. Tente novamente.");await cache.put(`/api/audio/o-alienista/${id}`,audio);}}
+      await cache.put("/offline/o-alienista.html",new Response(await work.text(),{headers:{"Content-Type":"text/html; charset=utf-8","X-Coonto-User":userId,"X-Coonto-Expires":license.expiresAt}}));
+      localStorage.setItem("coonto-offline-user",userId);localStorage.setItem("coonto-alienista-offline","ready");localStorage.setItem("coonto-alienista-license-expires",license.expiresAt);
+      setOfflineReady(true);setStatus(`Obra e texto original salvos até ${new Date(license.expiresAt).toLocaleDateString("pt-BR")}. Reabra Minha biblioteca neste aparelho para continuar sem internet.`);
+    }catch(error){setStatus(error instanceof Error?error.message:"Não foi possível preparar o modo offline.");}finally{setPreparing(false);}
+  }
+  return <section className="reader-shell"><div className="reader-toolbar"><p role="status">{status}</p><div style={{display:"flex",gap:8,flexWrap:"wrap"}}><button className="button button-outline" onClick={prepareOffline} disabled={preparing}>{preparing?<RefreshCw size={17}/>:<Download size={17}/>} {preparing?"Preparando…":offlineReady?"Atualizar cópia offline":"Salvar neste aparelho"}</button><button className="button button-outline" onClick={()=>setHelpOpen(value=>!value)}>Ajuda Coonto</button></div></div>{helpOpen&&<CoontoHelp initialMode="student" sceneId={sceneId}/>}<iframe ref={iframeRef} className="experience-frame" title="Experiência Coonto — O Alienista" src="/api/works/o-alienista" allow="autoplay"/></section>;
 }
