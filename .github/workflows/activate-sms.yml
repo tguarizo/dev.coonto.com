@@ -1,0 +1,52 @@
+name: Activate Coonto SMS
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: coonto-sms-configuration
+  cancel-in-progress: false
+jobs:
+  activate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check private configuration
+        env:
+          SMS_API_TOKEN: ${{ secrets.SMS_API_TOKEN }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
+          test -n "$SMS_API_TOKEN" || { echo 'Add repository secret SMS_API_TOKEN before running this workflow.'; exit 1; }
+          test -n "$SSH_PRIVATE_KEY"
+      - name: Prepare deployment connection
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SERVER_HOST: ${{ secrets.SERVER_HOST }}
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H "$SERVER_HOST" >> ~/.ssh/known_hosts
+      - name: Configure and activate SMS in the existing application
+        env:
+          SERVER_USER: ${{ secrets.SERVER_USER }}
+          SERVER_HOST: ${{ secrets.SERVER_HOST }}
+          DEPLOY_PATH: ${{ secrets.DEV_DEPLOY_PATH || '/opt/coonto/dev' }}
+          SMS_API_TOKEN: ${{ secrets.SMS_API_TOKEN }}
+        run: |
+          case "$DEPLOY_PATH" in *[!a-zA-Z0-9_./-]*) echo 'Invalid deployment path'; exit 1;; esac
+          PROJECT_NAME="coonto-$(basename "$DEPLOY_PATH")"
+          scp scripts/configure-sms.py "${SERVER_USER}@${SERVER_HOST}:/tmp/coonto-configure-sms.py"
+          python3 -c 'import os,json; print(json.dumps({"token":os.environ["SMS_API_TOKEN"],"costCentre":"20275"}))' | ssh "${SERVER_USER}@${SERVER_HOST}" "cd '$DEPLOY_PATH' && sudo python3 /tmp/coonto-configure-sms.py"
+          ssh "${SERVER_USER}@${SERVER_HOST}" "cd '$DEPLOY_PATH' && if sudo docker compose -p '$PROJECT_NAME' up -d --no-deps --force-recreate --wait --wait-timeout 120 app; then rm -f /tmp/coonto-configure-sms.py; else sudo cp .env.before-sms .env && sudo docker compose -p '$PROJECT_NAME' up -d --no-deps --force-recreate app; exit 1; fi"
+      - name: Confirm public SMS availability
+        run: |
+          python3 - <<'PY'
+          import urllib.request
+          with urllib.request.urlopen('https://dev.coonto.com/login', timeout=30) as response:
+              page = response.read().decode()
+          if 'SMS em breve' in page:
+              raise SystemExit('SMS is still unavailable. Check private server configuration.')
+          print('SMS channel is available. Verify actual delivery with the authorized recipient.')
+          PY

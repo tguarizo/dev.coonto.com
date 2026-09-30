@@ -49,4 +49,10 @@ Envia somente uma mensagem de teste, sem criar conta ou código. `submitted_to_s
 5. Testar contato existente, Guest novo, nome, códigos inválidos/expirados/usados, limites, logout e CRM. Repetir por SMS depois do teste real.
 6. Conferir Guest sem acesso ao CRM ou ao espaço docente. Aprovações e convites precisam conceder permissões separadamente.
 
-Verificação local: `node --test tests/*.test.cjs`, `npm run typecheck`, `npm run build`. Provedores testados com respostas simuladas; verificar o fluxo transacional no PostgreSQL do ambiente de validação. Nenhum teste real de entrega foi concluído neste ambiente, que não resolve os hosts SMTP/SMS.
+Verificação local: `node --test tests/*.test.cjs`, `npm run typecheck`, `npm run build`. Provedores testados com respostas simuladas; verificar o fluxo transacional no PostgreSQL do ambiente de validação. Em 30/09/2026, o teste independente via HTTP foi aceito pela MKM (lote 33324015) e Tony confirmou o recebimento no celular autorizado. O envio real de e-mail ainda não teve recebimento confirmado.
+
+## Ativação privada do SMS
+
+O SMS real foi confirmado por Tony em 30/09/2026. Para ativar na aplicação publicada, adicionar o token já fornecido como GitHub Actions Secret `SMS_API_TOKEN` no repositório. Executar **Activate Coonto SMS** selecionando a branch `develop`. O fluxo utiliza a conexão SSH existente, preserva as outras configurações, salva backup privado de `.env`, configura centro de custo 20275 e `SMS_ENABLED=true`, recria somente o serviço app e confere a disponibilidade do canal. Se o app não ficar saudável, restaura a configuração anterior. Nenhuma credencial é escrita no repositório ou impressa nos logs.
+
+O conjunto de login passou de 1.080 para 648 pixels de largura máxima (redução de 40%), com espaçamento e tipografia ajustados. No celular, permanece uma coluna com formulário primeiro.
