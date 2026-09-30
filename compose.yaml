@@ -37,7 +37,7 @@ services:
     depends_on:
       db: { condition: service_healthy }
     volumes:
-      - ./audio:/app/audio:ro
+      - ./audio:/app/audio
     env_file: [.env]
     environment:
       DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}

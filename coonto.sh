@@ -195,6 +195,8 @@ deploy(){
   log "Aplicando migrações"
   docker compose --profile tools run --rm migrate
   log "Construindo e iniciando a aplicação"
+  mkdir -p audio/drafts audio/o-alienista
+  chown -R 1001:1001 audio
   docker compose build --pull app
   docker compose up -d app
   wait_health
