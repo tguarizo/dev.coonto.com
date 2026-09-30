@@ -26,11 +26,13 @@ node --env-file=.env scripts/test-delivery.cjs email tguarizo@amriz.com.br
 
 ## MKM Service e teste de SMS
 
-Adaptador baseado no curl enviado por Tony. Preencher `SMS_API_TOKEN` e `SMS_COST_CENTRE_ID=20275` somente no `.env` privado. Não copiar o cookie de sessão do exemplo.
+Adaptador validado contra a coleção "Documentação de APIs - MKOM" enviada por Tony. Preencher `SMS_API_TOKEN` e `SMS_COST_CENTRE_ID=20275` somente no `.env` privado. Não copiar o cookie de sessão do exemplo.
 
-Manter `SMS_ENABLED=false` até receber a documentação e confirmar os campos de sucesso/erro da resposta. O adaptador rejeita erros HTTP, corpo vazio, JSON inválido e rejeições explícitas, mas ainda depende da validação da semântica completa do provedor. HTTP 2xx não significa entrega.
+A coleção confirma `schedule:null` para envio imediato. O adaptador desativa rastreamento de links e exige `mailing.id`, uma mensagem com `success:true` e a mesma `reference` da solicitação. Rejeita erros HTTP, corpo vazio, JSON inválido e falhas individuais mesmo com HTTP 200. Registra o lote no evento do CRM sem registrar o código. Manter `SMS_ENABLED=false` até o teste real. HTTP 2xx e `success:true` confirmam submissão, não entrega.
 
-Depois dessa validação, usar configuração de teste com `SMS_ENABLED=true` e executar:
+A coleção fornece exemplo de callback de entrega (`status:5`, `status_description:Entregue`, `reference_id`), mas não documenta autenticação/assinatura desse callback nem endpoint de consulta. Receptor de callback não implementado nesta entrega; confirmar recebimento com Tony no teste.
+
+Para o teste real, usar configuração de teste com `SMS_ENABLED=true` e executar:
 
 ```bash
 node --env-file=.env scripts/test-delivery.cjs sms <celular-de-teste-autorizado>
@@ -44,7 +46,7 @@ Envia somente uma mensagem de teste, sem criar conta ou código. `submitted_to_s
 2. Aplicar migração idempotente `011_guest_contacts.sql` antes de iniciar a nova aplicação. Acrescenta celular e classificação Guest, permite e-mail nulo e preserva roles existentes.
 3. Configurar `AUTH_MODE=email` para envio real; não usar código compartilhado de validação.
 4. Atualizar pelo processo existente, sem alterar Caddy ou domínios.
-5. Testar contato existente, Guest novo, nome, códigos inválidos/expirados/usados, limites, logout e CRM. Repetir por SMS depois da documentação e teste real.
+5. Testar contato existente, Guest novo, nome, códigos inválidos/expirados/usados, limites, logout e CRM. Repetir por SMS depois do teste real.
 6. Conferir Guest sem acesso ao CRM ou ao espaço docente. Aprovações e convites precisam conceder permissões separadamente.
 
 Verificação local: `node --test tests/*.test.cjs`, `npm run typecheck`, `npm run build`. Provedores testados com respostas simuladas; verificar o fluxo transacional no PostgreSQL do ambiente de validação. Nenhum teste real de entrega foi concluído neste ambiente, que não resolve os hosts SMTP/SMS.

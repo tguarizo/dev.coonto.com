@@ -22,8 +22,11 @@ export async function POST(request:Request) {
   if(!validationMode)try {
     const text=`Seu código Coonto é ${code}. Ele expira em 10 minutos. Não compartilhe.`;
     if(contact.channel==='email')await sendEmail(contact.value,'Seu código de acesso ao Coonto',text);
-    else await sendSms(contact.value,text,id);
-    await recordCrmEvent({type:contact.channel==='email'?'login_email_accepted':'login_sms_submitted',relatedType:'login_code',relatedId:id,channel:contact.channel});
+    else {
+      const submitted=await sendSms(contact.value,text,id);
+      await recordCrmEvent({type:'login_sms_submitted',relatedType:'login_code',relatedId:id,channel:'sms',metadata:{mailingId:submitted.mailingId}});
+    }
+    if(contact.channel==='email')await recordCrmEvent({type:contact.channel==='email'?'login_email_accepted':'login_sms_submitted',relatedType:'login_code',relatedId:id,channel:contact.channel});
   }catch(error) {
     await query('UPDATE login_codes SET used_at=NOW() WHERE id=$1',[id]);
     const failure=error as {code?:string;responseCode?:number;status?:number};

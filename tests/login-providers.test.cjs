@@ -24,10 +24,21 @@ test('MKM recebe JSON do exemplo, Bearer, referência, sem cookie',async()=>{
   assert.equal(url,'https://sms.mkmservice.com/sms/api/transmission/v1');
   assert.equal(options.headers.Authorization,'Bearer test-private');assert.equal(options.headers.Cookie,undefined);
   assert.equal(options.redirect,'error');
-  assert.deepEqual(JSON.parse(options.body),{mailing:{identifier:'Coonto - acesso',cost_centre_id:20275},messages:[{msisdn:'5511999999999',message:'test',reference:'ref'}]});
-  return {ok:true,text:async()=>JSON.stringify({success:true})};
+  assert.deepEqual(JSON.parse(options.body),{mailing:{identifier:'Coonto - acesso',cost_centre_id:20275,trackable_link:false},messages:[{msisdn:'5511999999999',message:'test',schedule:null,reference:'ref'}]});
+  return {ok:true,text:async()=>JSON.stringify({mailing:{id:'33197619'},messages:[{success:true,reference:'ref'}]})};
  });
 });
 test('erro HTTP, rejeição explícita ou resposta vazia não são sucesso',async()=>{
  for(const response of [{ok:false,status:401},{ok:true,text:async()=>''},{ok:true,text:async()=>'bad'},{ok:true,text:async()=>'{"success":false}'}])await assert.rejects(sendSms('5511999999999','test','ref',sms,async()=>response));
+});
+
+test('recusa falha individual mesmo que o HTTP seja 200',async()=>{
+ await assert.rejects(sendSms('5511999999999','test','ref',sms,async()=>({ok:true,text:async()=>JSON.stringify({mailing:{id:'33197619'},messages:[{success:false,reference:'ref'}]})})));
+});
+test('recusa resposta sem id do lote ou com referência diferente',async()=>{
+ for(const result of [{messages:[{success:true,reference:'ref'}]},{mailing:{id:'33197619'},messages:[{success:true,reference:'other'}]},{mailing:{id:'33197619'},messages:[]}])await assert.rejects(sendSms('5511999999999','test','ref',sms,async()=>({ok:true,text:async()=>JSON.stringify(result)})));
+});
+test('retorna id do lote para rastrear a submissão sem afirmar entrega',async()=>{
+ const result=await sendSms('5511999999999','test','ref',sms,async()=>({ok:true,text:async()=>JSON.stringify({mailing:{id:'33197619'},messages:[{success:true,reference:'ref'}]})}));
+ assert.deepEqual(result,{submitted:true,mailingId:'33197619',reference:'ref'});
 });
