@@ -3,7 +3,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { query } from "@/lib/db";
 
-export type CoontoUser = { userId: string; email: string; displayName: string; role: "member" | "admin" };
+export type CoontoUser = { userId: string; email: string; displayName: string; accountKind:string; role: "member" | "admin" };
 const COOKIE_NAME = "coonto_session";
 
 export function hashToken(token: string) { return createHash("sha256").update(token).digest("hex"); }
@@ -11,11 +11,11 @@ export function hashToken(token: string) { return createHash("sha256").update(to
 export async function getCurrentUser(): Promise<CoontoUser | null> {
   const token = (await cookies()).get(COOKIE_NAME)?.value;
   if (!token) return null;
-  const result = await query<{ id: string; email: string; name: string; role: "member" | "admin" }>(
-    `SELECT u.id, u.email, u.name, u.role FROM sessions s JOIN users u ON u.id = s.user_id
+  const result = await query<{ id: string; email: string; name: string; account_kind:string; role: "member" | "admin" }>(
+    `SELECT u.id, COALESCE(u.email,'') AS email, u.name, u.role, u.account_kind FROM sessions s JOIN users u ON u.id = s.user_id
       WHERE s.token_hash = $1 AND s.expires_at > NOW() LIMIT 1`, [hashToken(token)]);
   const user = result.rows[0];
-  return user ? { userId: user.id, email: user.email, displayName: user.name, role: user.role } : null;
+  return user ? { userId: user.id, email: user.email, displayName: user.name, accountKind:user.account_kind, role: user.role } : null;
 }
 
 export async function requireUser(returnTo: string) {

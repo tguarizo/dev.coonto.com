@@ -313,3 +313,5 @@ button,input,textarea,select { font:inherit; }
 .audio-review{border-top:1px solid #dbe2ef;padding:20px 0}
 .audio-review audio,.answer-editor audio{width:100%;max-width:600px;display:block;margin:16px 0}
 .audio-review details p{white-space:pre-wrap}
+
+.coonto-version { padding:12px 20px 20px; text-align:center; font-size:.8rem; line-height:1.4; color:#b9c7df; background:#10192d; }
