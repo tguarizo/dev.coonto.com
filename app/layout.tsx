@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { COONTO_VERSION } from "@/lib/version";
 import { WebMcpTools } from "@/components/webmcp-tools";
 import { PwaRegistrar } from "@/components/pwa-registrar";
 
@@ -11,5 +12,5 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="pt-BR"><body><WebMcpTools /><PwaRegistrar />{children}</body></html>;
+  return <html lang="pt-BR"><body><WebMcpTools /><PwaRegistrar />{children}<div className="coonto-version" aria-label={`Versão do Coonto: ${COONTO_VERSION}`}>Coonto v{COONTO_VERSION}</div></body></html>;
 }
