@@ -9,6 +9,7 @@ import { redirect } from "next/navigation";
 export const dynamic = "force-dynamic";
 export default async function Professor() {
   const user = await requireUser("/professor");
+  if(user.accountKind==='guest'&&user.role!=='admin')return <main className="page"><SiteHeader/><div className="content member-page"><h1>Seu acesso Guest está pronto.</h1><p>O espaço do professor precisa de um vínculo de educador aprovado. Enquanto isso, explore a experiência gratuita.</p><a href="/minha-biblioteca">Ir para minha biblioteca</a></div><SiteFooter/></main>;
   if (!await ensureAlienistaEntitlement(user.userId)) redirect("/checkout/o-alienista?return_to=%2Fprofessor");
   // A área docente é autodeclarada; futuramente escolas podem verificar seus docentes.
   await query("INSERT INTO teacher_profiles (user_id) VALUES ($1) ON CONFLICT DO NOTHING", [user.userId]);

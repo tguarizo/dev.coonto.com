@@ -1,38 +1,49 @@
-import { createHmac, randomBytes } from "node:crypto";
-import { cookies } from "next/headers";
-import { hashToken, sessionCookie } from "@/lib/auth";
-import { query } from "@/lib/db";
-import { recordCrmEvent } from "@/lib/crm-events";
-import {consumeLoginCode} from '@/lib/login-code';
+import { randomBytes } from 'node:crypto';
+import { cookies } from 'next/headers';
+import { hashToken,sessionCookie } from '@/lib/auth';
+import { query } from '@/lib/db';
+import { recordCrmEvent } from '@/lib/crm-events';
+import { consumeLoginCode } from '@/lib/login-code';
+import { loginContact,hashLoginCode,safeReturnTo } from '@/lib/login-contact';
+import { smsConfigured } from '@/lib/message-provider.cjs';
 
-const normalize = (value: unknown) => String(value || "").trim().toLowerCase().slice(0, 320);
-const hashCode = (email: string, code: string) => createHmac("sha256", process.env.AUTH_SECRET || "").update(`${email}:${code}`).digest("hex");
-
-export async function POST(request: Request) {
-  const body = await request.json() as { email?: string; code?: string; returnTo?: string };
-  const email = normalize(body.email);
-  const code = String(body.code || "").trim();
-  if (!/^\d{6}$/.test(code)) return Response.json({ error: "Informe o código de seis números." }, { status: 400 });
-  const suppliedHash = hashCode(email, code);
-  const checked=await consumeLoginCode(email,suppliedHash);
+export async function POST(request:Request) {
+  let body;try {body=await request.json();}catch{return Response.json({error:'Dados inválidos.'},{status:400});}
+  if(!body||typeof body!=='object')return Response.json({error:'Dados inválidos.'},{status:400});
+  const contact=loginContact(body),code=String(body.code||'').trim();
+  if(!contact||!/^\d{6}$/.test(code))return Response.json({error:'Confira o contato e o código de seis números.'},{status:400});
+  if(!process.env.AUTH_SECRET||process.env.AUTH_SECRET.length<32)return Response.json({error:'Autenticação ainda não configurada.'},{status:503});
+  if(contact.channel==='sms'&&!smsConfigured())return Response.json({error:'SMS ainda não disponível. Use o e-mail.'},{status:503});
+  const name=String(body.name||'').trim().replace(/\s+/g,' ');
+  if(name.length>100)return Response.json({error:'Use um nome de até 100 caracteres.'},{status:400});
+  let userId='';
+  const token=randomBytes(32).toString('base64url');
+  const jar=await cookies();
+  const admins=String(process.env.ADMIN_EMAILS||'').split(',').map(v=>v.trim().toLowerCase()).filter(Boolean);
+  const checked=await consumeLoginCode(contact.key,hashLoginCode(contact.key,code),async client=>{
+    // Same transaction and contact lock as code consumption: no orphan accounts
+    // and no consumed code when the first-access name still needs to be supplied.
+    const existing=await client.query<{id:string}>(contact.channel==='email'?'SELECT id FROM users WHERE email=$1':'SELECT id FROM users WHERE phone=$1',[contact.value]);
+    if(existing.rows[0]){
+      userId=existing.rows[0].id;
+      await client.query('UPDATE users SET last_seen_at=NOW() WHERE id=$1',[userId]);
+    }else{
+      if(name.length<2)return false;
+      userId=crypto.randomUUID();
+      await client.query("INSERT INTO users(id,email,phone,name,account_kind,plan) VALUES($1,$2,$3,$4,'guest','guest')",[userId,contact.channel==='email'?contact.value:null,contact.channel==='sms'?contact.value:null,name]);
+    }
+    // SMS alone cannot claim an account authorized through somebody else's email.
+    if(contact.channel==='email'&&admins.includes(contact.value))await client.query("UPDATE users SET role='admin' WHERE id=$1",[userId]);
+    await client.query("INSERT INTO sessions(token_hash,user_id,expires_at) VALUES($1,$2,NOW()+INTERVAL '30 days')",[hashToken(token),userId]);
+    return true;
+  });
+  if('needsName' in checked&&checked.needsName)return Response.json({needsName:true,message:'Como podemos chamar você?'});
   if(!checked.ok)return Response.json({error:checked.error},{status:401});
-  const name = email.split("@")[0];
-  const userResult = await query<{ id: string }>(`INSERT INTO users (id,email,name) VALUES ($1,$2,$3) ON CONFLICT (email) DO UPDATE SET last_seen_at=NOW() RETURNING id`, [crypto.randomUUID(), email, name]);
-  const userId = userResult.rows[0].id;
-  const referralCode = (await cookies()).get("coonto_ref")?.value;
-  if (referralCode && /^[A-Z0-9]{12}$/.test(referralCode)) {
-    try {
-      await query(`INSERT INTO referral_attributions(user_id,referral_id)
-        SELECT $1,id FROM partner_referrals WHERE code=$2 AND active=TRUE
-        ON CONFLICT (user_id) DO NOTHING`, [userId, referralCode]);
-    } catch (error) { console.error("referral_attribution_failed", error); }
-  }
-  const admins = String(process.env.ADMIN_EMAILS || "").split(",").map(item => item.trim().toLowerCase()).filter(Boolean);
-  if (admins.includes(email)) await query("UPDATE users SET role='admin' WHERE id=$1", [userId]);
-  const token = randomBytes(32).toString("base64url");
-  await query("INSERT INTO sessions (token_hash,user_id,expires_at) VALUES ($1,$2,NOW() + INTERVAL '30 days')", [hashToken(token), userId]);
-  (await cookies()).set(sessionCookie.name, token, sessionCookie.options);
-  await recordCrmEvent({ type: "login_succeeded", userId, channel: "email" });
-  const returnTo = body.returnTo?.startsWith("/") && !body.returnTo.startsWith("//") ? body.returnTo : "/minha-biblioteca";
-  return Response.json({ ok: true, returnTo });
+  jar.set(sessionCookie.name,token,sessionCookie.options);
+  const referralCode=jar.get('coonto_ref')?.value;
+  if(referralCode&&/^[A-Z0-9]{12}$/.test(referralCode))try{
+    await query('INSERT INTO referral_attributions(user_id,referral_id) SELECT $1,id FROM partner_referrals WHERE code=$2 AND active=TRUE ON CONFLICT(user_id) DO NOTHING',[userId,referralCode]);
+  }catch {console.error('referral_attribution_failed');}
+  await recordCrmEvent({type:'login_succeeded',userId,channel:contact.channel});
+  return Response.json({ok:true,returnTo:safeReturnTo(body.returnTo)});
 }

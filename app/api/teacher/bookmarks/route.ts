@@ -5,7 +5,7 @@ import scenes from "@/content/o-alienista-scenes.json";
 
 async function teacher() {
   const user = await getCurrentUser();
-  if (!user) return null;
+  if (!user || (user.accountKind==='guest'&&user.role!=='admin')) return null;
   const result = await query<{user_id:string}>("SELECT user_id FROM teacher_profiles WHERE user_id=$1", [user.userId]);
   return result.rows[0] ? user : null;
 }
