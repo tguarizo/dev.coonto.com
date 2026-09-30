@@ -29,4 +29,5 @@ jobs:
           DEPLOY_PATH: ${{ secrets.DEV_DEPLOY_PATH || '/opt/coonto/dev' }}
         run: |
           case "$DEPLOY_PATH" in *[!a-zA-Z0-9_./-]*) echo 'Invalid deployment path'; exit 1;; esac
-          cat scripts/check-mail.cjs | ssh "${SERVER_USER}@${SERVER_HOST}" "cd '$DEPLOY_PATH' && sudo docker compose exec -T app node"
+          PROJECT_NAME="coonto-$(basename "$DEPLOY_PATH")"
+          cat scripts/check-mail.cjs | ssh "${SERVER_USER}@${SERVER_HOST}" "cd '$DEPLOY_PATH' && sudo docker compose -p '$PROJECT_NAME' exec -T app node"
