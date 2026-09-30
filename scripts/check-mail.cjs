@@ -1,5 +1,5 @@
 // Diagnóstico somente de leitura. Nunca imprime chaves, códigos, corpos ou destinatários.
-const nodemailer=require('nodemailer');
+let nodemailer;try{nodemailer=require('nodemailer');}catch{}
 const {Pool}=require('pg');
 const emit=(kind,data)=>console.log(JSON.stringify({kind,...data}));
 (async()=>{
@@ -8,8 +8,9 @@ const emit=(kind,data)=>console.log(JSON.stringify({kind,...data}));
  if(env.DATABASE_URL){const pool=new Pool({connectionString:env.DATABASE_URL,connectionTimeoutMillis:5000});try{const counts=await pool.query("SELECT COUNT(*)::int AS requests,COUNT(*) FILTER(WHERE used_at IS NOT NULL)::int AS used,MAX(created_at) AS latest FROM login_codes WHERE created_at>NOW()-INTERVAL '3 hours'");emit('recent_requests',counts.rows[0]);}catch{emit('recent_requests',{available:false});}finally{await pool.end();}}
  if(env.AUTH_MODE==='validation'){emit('result',{status:'validation_mode_no_email'});return;}
  if(!host||!env.SMTP_USER||!env.SMTP_PASSWORD||!env.SMTP_FROM){emit('result',{status:'smtp_configuration_missing'});return;}
- const transporter=nodemailer.createTransport({host,port,secure:port===465,auth:{user:env.SMTP_USER,pass:env.SMTP_PASSWORD},connectionTimeout:10000,greetingTimeout:10000,socketTimeout:15000});
- try{await transporter.verify();emit('smtp',{status:'connection_and_authentication_ok'});}catch(error){emit('smtp',{status:'failed',code:error.code||'unknown',responseCode:error.responseCode||null,command:error.command||null});}finally{transporter.close();}
+ if(!nodemailer)emit('smtp',{status:'cli_library_unavailable'});
+ const transporter=nodemailer?.createTransport({host,port,secure:port===465,auth:{user:env.SMTP_USER,pass:env.SMTP_PASSWORD},connectionTimeout:10000,greetingTimeout:10000,socketTimeout:15000});
+ if(transporter)try{await transporter.verify();emit('smtp',{status:'connection_and_authentication_ok'});}catch(error){emit('smtp',{status:'failed',code:error.code||'unknown',responseCode:error.responseCode||null,command:error.command||null});}finally{transporter.close();}
  if(host.toLowerCase()==='smtp.resend.com'){
   const response=await fetch('https://api.resend.com/emails?limit=100',{headers:{Authorization:'Bearer '+env.SMTP_PASSWORD},signal:AbortSignal.timeout(15000)});
   if(!response.ok){emit('delivery_history',{available:false,httpStatus:response.status});return;}
