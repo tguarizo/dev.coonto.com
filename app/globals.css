@@ -407,3 +407,24 @@ button,input,textarea,select { font:inherit; }
 .after-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
 @media(max-width:900px){.literary-screen-content{grid-template-columns:1fr;padding-top:112px;gap:24px}.literary-heading h2{font-size:clamp(3rem,10vw,5.5rem)}.after-grid{grid-template-columns:1fr}.after-method{align-items:flex-start;flex-direction:column}}
 @media(max-width:620px){.journey-intro{padding:125px 20px 52px}.journey-intro h1{font-size:clamp(3rem,15vw,5rem)}.journey-category{margin-bottom:20px}.literary-screen-content{padding:105px 20px 45px}.literary-play{padding:20px;border-radius:22px}.literary-options button{grid-template-columns:34px 1fr;padding:10px}.literary-comment{grid-template-columns:22px 1fr}.coonto-after-journey{padding:70px 20px}.after-method{padding:20px}}
+
+
+/* V1.8.5b: três experiências sempre visíveis lado a lado */
+@media(min-width:1100px){
+  .home-journey{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+  .journey-intro,.coonto-after-journey{grid-column:1/-1}
+  .literary-screen{min-height:820px}
+  .literary-screen-content{min-height:820px;padding:112px 28px 42px;grid-template-columns:1fr;grid-template-rows:auto 1fr auto;gap:22px}
+  .literary-heading h2{font-size:clamp(2.5rem,3.8vw,4.8rem)}
+  .literary-play{padding:22px}
+  .literary-play h3{font-size:clamp(1.25rem,1.6vw,1.7rem)}
+  .literary-options button{grid-template-columns:34px 1fr;padding:10px 11px}
+  .literary-progress{margin-top:auto}
+}
+.literary-screen.is-locked .literary-screen-content{filter:saturate(.55) brightness(.72)}
+.literary-screen.is-locked .literary-play{opacity:.28;pointer-events:none}
+.literary-lock{position:absolute;z-index:5;left:50%;top:50%;transform:translate(-50%,-50%);width:min(82%,360px);padding:22px;border:1px solid rgba(255,255,255,.22);border-radius:20px;background:rgba(5,12,28,.80);backdrop-filter:blur(16px);text-align:center;box-shadow:0 18px 55px rgba(0,0,0,.35)}
+.literary-lock span{display:block;color:#8ee7ea;font-size:.68rem;font-weight:900;letter-spacing:.12em}
+.literary-lock strong{display:block;margin:8px 0 6px;font-family:Georgia,serif;font-size:1.7rem}
+.literary-lock p{margin:0;color:#cbd5e7;font-size:.86rem;line-height:1.45}
+.literary-options button:disabled{cursor:not-allowed}
