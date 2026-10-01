@@ -15,9 +15,9 @@ const works: Array<{
     key:"alienista", eyebrow:"EXPERIÊNCIA 01 · O ALIENISTA", title:"O Alienista", author:"Machado de Assis", image:0,
     prompt:"Itaguaí começa a reagir à Casa Verde. Se você estivesse no lugar de Bacamarte, o que faria?",
     choices:[
-      {id:"A",label:"Recuaria e reveria as internações",consequence:"Você reduz a pressão sobre a cidade, mas enfraquece a autoridade do método que criou."},
-      {id:"B",label:"Manteria os critérios",consequence:"Você preserva a lógica do método. A tensão cresce porque a cidade continua submetida a uma regra difícil de contestar."},
-      {id:"C",label:"Ampliaria as internações",consequence:"A decisão radicaliza o conflito: quanto mais gente é considerada fora da norma, mais frágil fica a ideia de normalidade."},
+      {id:"1",label:"Recuaria e reveria as internações",consequence:"Você reduz a pressão sobre a cidade, mas enfraquece a autoridade do método que criou."},
+      {id:"2",label:"Manteria os critérios",consequence:"Você preserva a lógica do método. A tensão cresce porque a cidade continua submetida a uma regra difícil de contestar."},
+      {id:"3",label:"Ampliaria as internações",consequence:"A decisão radicaliza o conflito: quanto mais gente é considerada fora da norma, mais frágil fica a ideia de normalidade."},
     ],
     authorPath:"Machado leva Bacamarte a desconfiar do próprio critério e a inverter a lógica da Casa Verde.",
     comment:"Ao decidir antes de Bacamarte, você percebe com mais força o conflito entre ciência, poder e loucura. É a comparação entre a sua escolha e a de Machado que transforma interpretação em experiência.",
@@ -27,9 +27,9 @@ const works: Array<{
     key:"dom-casmurro", eyebrow:"EXPERIÊNCIA 02 · DOM CASMURRO", title:"Dom Casmurro", author:"Machado de Assis", image:1,
     prompt:"Você começa a desconfiar de alguém que ama, mas não tem uma prova definitiva. O que faz?",
     choices:[
-      {id:"A",label:"Confia e segue em frente",consequence:"Você preserva a relação, mas aceita conviver com a incerteza."},
-      {id:"B",label:"Observa em silêncio",consequence:"A dúvida cresce por dentro. Cada gesto passa a parecer uma possível pista."},
-      {id:"C",label:"Confronta imediatamente",consequence:"Você força uma resposta, mas corre o risco de transformar suspeita em certeza antes de ter evidências."},
+      {id:"1",label:"Confia e segue em frente",consequence:"Você preserva a relação, mas aceita conviver com a incerteza."},
+      {id:"2",label:"Observa em silêncio",consequence:"A dúvida cresce por dentro. Cada gesto passa a parecer uma possível pista."},
+      {id:"3",label:"Confronta imediatamente",consequence:"Você força uma resposta, mas corre o risco de transformar suspeita em certeza antes de ter evidências."},
     ],
     authorPath:"Machado não oferece uma prova conclusiva. Ele nos prende à memória e ao ponto de vista de Bentinho.",
     comment:"Quando você precisa agir sem certeza, sente na prática o mecanismo central do romance: a ambiguidade. O Coonto não resolve a dúvida por você; faz você experimentar por que ela importa.",
@@ -39,9 +39,9 @@ const works: Array<{
     key:"divina-comedia", eyebrow:"EXPERIÊNCIA 03 · A DIVINA COMÉDIA", title:"A Divina Comédia", author:"Dante Alighieri", image:15,
     prompt:"Você se vê perdido diante de um caminho escuro e desconhecido. Como decide avançar?",
     choices:[
-      {id:"A",label:"Recua e procura outro caminho",consequence:"Você evita o risco imediato, mas continua sem atravessar aquilo que precisa compreender."},
-      {id:"B",label:"Segue sozinho",consequence:"Você preserva sua autonomia, mas entra em um território cujo sentido ainda não consegue ler."},
-      {id:"C",label:"Aceita a orientação de um guia",consequence:"Você abre mão de parte do controle para atravessar um mundo que exige interpretação e aprendizagem."},
+      {id:"1",label:"Recua e procura outro caminho",consequence:"Você evita o risco imediato, mas continua sem atravessar aquilo que precisa compreender."},
+      {id:"2",label:"Segue sozinho",consequence:"Você preserva sua autonomia, mas entra em um território cujo sentido ainda não consegue ler."},
+      {id:"3",label:"Aceita a orientação de um guia",consequence:"Você abre mão de parte do controle para atravessar um mundo que exige interpretação e aprendizagem."},
     ],
     authorPath:"Dante aceita Virgílio como guia e inicia uma travessia em que cada encontro revela uma consequência moral e humana.",
     comment:"Ao escolher como atravessar o desconhecido, uma obra distante deixa de ser apenas um monumento literário. Ela vira uma jornada que você consegue relacionar com uma decisão concreta.",
@@ -66,23 +66,24 @@ export function HomeLiteraryJourney(){
 
     {works.map((work,index)=>{
       const unlocked=index===0 || Boolean(answers[works[index-1].key]);
-      if(!unlocked)return null;
       const answerId=answers[work.key];
       const answer=work.choices.find(c=>c.id===answerId);
-      return <section key={work.key} id={work.key} className={`literary-screen literary-${work.key} ${active===work.key?"is-active":""}`}>
+      return <section key={work.key} id={work.key} className={`literary-screen literary-${work.key} ${active===work.key?"is-active":""} ${!unlocked?"is-locked":""}`}>
         <CatalogArt index={work.image} className="literary-screen-art"/>
         <div className="literary-screen-shade"/>
+        {!unlocked&&<div className="literary-lock"><span>EXPERIÊNCIA {index+1} DE 3</span><strong>{work.title}</strong><p>Complete a experiência anterior para liberar esta obra.</p></div>}
         <div className="literary-screen-content">
           <div className="literary-heading">
             <span>{work.eyebrow}</span>
             <h2>{work.title}</h2>
             <p>{work.author}</p>
           </div>
-          <div className="literary-play">
+          <div className="literary-play" aria-hidden={!unlocked}>
             <span className="literary-step">ENTRE NA SITUAÇÃO</span>
             <h3>{work.prompt}</h3>
             {!answer ? <div className="literary-options" role="group" aria-label={`Escolhas em ${work.title}`}>
-              {work.choices.map(choice=><button key={choice.id} type="button" onClick={()=>choose(work.key,choice.id)}><b>{choice.id}</b><span>{choice.label}</span></button>)}
+
+              {work.choices.map(choice=><button key={choice.id} type="button" disabled={!unlocked} onClick={()=>choose(work.key,choice.id)}><b>{choice.id}</b><span>{choice.label}</span></button>)}
             </div>:
             <div className="literary-reveal" aria-live="polite">
               <span className="literary-step">SUA ESCOLHA</span>
