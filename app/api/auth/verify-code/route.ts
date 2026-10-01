@@ -18,7 +18,8 @@ export async function POST(request:Request) {
   if(name.length>100)return Response.json({error:'Use um nome de até 100 caracteres.'},{status:400});
   let userId='';
   const token=randomBytes(32).toString('base64url');
-  const deviceToken=randomBytes(32).toString('base64url');
+  const existingDeviceToken=(await cookies()).get(deviceCookie.name)?.value||'';
+  const deviceToken=existingDeviceToken||randomBytes(32).toString('base64url');
   const userAgent=request.headers.get('user-agent')||'';
   const deviceLabel=/iPhone|Android/i.test(userAgent)?'Celular':/iPad|Tablet/i.test(userAgent)?'Tablet':'Computador';
   const jar=await cookies();
@@ -38,7 +39,14 @@ export async function POST(request:Request) {
     // SMS alone cannot claim an account authorized through somebody else's email.
     if(contact.channel==='email'&&admins.includes(contact.value))await client.query("UPDATE users SET role='admin' WHERE id=$1",[userId]);
     await client.query("INSERT INTO sessions(token_hash,user_id,expires_at) VALUES($1,$2,NOW()+INTERVAL '30 days')",[hashToken(token),userId]);
-    await client.query("INSERT INTO auth_devices(id,user_id,token_hash,label,trusted_until) VALUES($1,$2,$3,$4,NOW()+INTERVAL '90 days')",[crypto.randomUUID(),userId,hashToken(deviceToken),deviceLabel]);
+    const deviceHash=hashToken(deviceToken);
+    const knownDevice=await client.query("SELECT id FROM auth_devices WHERE user_id=$1 AND token_hash=$2 AND revoked_at IS NULL LIMIT 1",[userId,deviceHash]);
+    if(knownDevice.rows[0]){
+      await client.query("UPDATE auth_devices SET label=$1,trusted_until=NOW()+INTERVAL '90 days',last_seen_at=NOW() WHERE id=$2",[deviceLabel,knownDevice.rows[0].id]);
+    }else{
+      await client.query("INSERT INTO auth_devices(id,user_id,token_hash,label,trusted_until) VALUES($1,$2,$3,$4,NOW()+INTERVAL '90 days')",[crypto.randomUUID(),userId,deviceHash,deviceLabel]);
+      await client.query("UPDATE auth_devices SET revoked_at=NOW() WHERE id IN (SELECT id FROM auth_devices WHERE user_id=$1 AND revoked_at IS NULL ORDER BY last_seen_at DESC,created_at DESC OFFSET 3)",[userId]);
+    }
     return true;
   });
   if('needsName' in checked&&checked.needsName)return Response.json({needsName:true,message:'Como podemos chamar você?'});
