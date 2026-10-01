@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowDown, ArrowRight, BookOpenCheck, Brain, Compass, RotateCcw, Sparkles } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { CatalogArt } from "@/components/catalog-art";
 
 type WorkKey = "alienista" | "dom-casmurro" | "divina-comedia";
@@ -51,7 +51,6 @@ const works: Array<{
 export function HomeLiteraryJourney(){
   const [answers,setAnswers]=useState<Record<WorkKey,string|undefined>>({});
   const [active,setActive]=useState<WorkKey>("alienista");
-  const selectedWork=useMemo(()=>works.find(w=>w.key===active)!,[active]);
 
   function choose(work:WorkKey,id:string){setAnswers(prev=>({...prev,[work]:id}));}
   function goNext(index:number){const next=works[index+1];if(!next)return;setActive(next.key);requestAnimationFrame(()=>document.getElementById(next.key)?.scrollIntoView({behavior:"smooth",block:"start"}));}
@@ -66,6 +65,8 @@ export function HomeLiteraryJourney(){
     </section>
 
     {works.map((work,index)=>{
+      const unlocked=index===0 || Boolean(answers[works[index-1].key]);
+      if(!unlocked)return null;
       const answerId=answers[work.key];
       const answer=work.choices.find(c=>c.id===answerId);
       return <section key={work.key} id={work.key} className={`literary-screen literary-${work.key} ${active===work.key?"is-active":""}`}>
@@ -109,7 +110,7 @@ export function HomeLiteraryJourney(){
       </section>
     })}
 
-    <section id="entenda-o-coonto" className="coonto-after-journey">
+    {answers["divina-comedia"]&&<section id="entenda-o-coonto" className="coonto-after-journey">
       <span className="section-kicker">AGORA VOCÊ JÁ EXPERIMENTOU</span>
       <h2>Isso é o Coonto.</h2>
       <p className="after-lead">Uma plataforma de aprendizagem interativa que transforma obras literárias em experiências de decisão para ajudar o leitor a compreender, conectar e lembrar melhor o que leu.</p>
@@ -120,6 +121,6 @@ export function HomeLiteraryJourney(){
       </div>
       <div className="after-method"><strong>Decidir → Descobrir → Entender → Lembrar</strong><span>Encontre o caminho do autor.</span></div>
       <div className="after-actions"><a className="button button-primary" href="/obra/o-alienista">Entrar em O Alienista</a><a className="button button-outline" href="/catalogo">Ver catálogo</a><a className="button button-outline" href="/como-funciona">Como funciona</a></div>
-    </section>
+    </section>}
   </div>
 }
