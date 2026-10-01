@@ -29,9 +29,13 @@ export async function POST(request:Request) {
     if(contact.channel==='email')await recordCrmEvent({type:contact.channel==='email'?'login_email_accepted':'login_sms_submitted',relatedType:'login_code',relatedId:id,channel:contact.channel});
   }catch(error) {
     await query('UPDATE login_codes SET used_at=NOW() WHERE id=$1',[id]);
-    const failure=error as {code?:string;responseCode?:number;status?:number};
-    console.error('login_delivery_failed',{channel:contact.channel,code:failure.code||'delivery_failed',status:failure.responseCode||failure.status||null});
-    return Response.json({error:'Não foi possível enviar o código. Tente novamente em alguns minutos.'},{status:503});
+    const failure=error as {code?:string;responseCode?:number;status?:number;message?:string};
+    const known=new Set(['sms_configuration_missing','invalid_phone','sms_submission_failed','sms_empty_response','sms_invalid_response','sms_submission_rejected','smtp_configuration_missing','recipient_not_accepted']);
+    const diagnostic=known.has(String(failure.message))?String(failure.message):'delivery_failed';
+    const providerStatus=failure.responseCode||failure.status||null;
+    console.error('login_delivery_failed',{channel:contact.channel,code:diagnostic,status:providerStatus});
+    const devDiagnostic=(process.env.DOMAIN||'').startsWith('dev.')?{diagnostic,providerStatus}:{};
+    return Response.json({error:'Não foi possível enviar o código. Tente novamente em alguns minutos.',...devDiagnostic},{status:503});
   }
   return Response.json({ok:true,mode:validationMode?'validation':contact.channel});
 }
