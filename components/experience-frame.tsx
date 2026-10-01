@@ -1,5 +1,5 @@
 "use client";
-import { Download, RefreshCw } from "lucide-react";
+import { BookOpen, CircleHelp, Download, Library, RefreshCw, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { CoontoHelp } from "@/components/coonto-help";
 export function ExperienceFrame({ userId }: { userId: string }) {
@@ -64,5 +64,25 @@ export function ExperienceFrame({ userId }: { userId: string }) {
       setOfflineReady(true);setStatus(`Obra e texto original salvos até ${new Date(license.expiresAt).toLocaleDateString("pt-BR")}. Reabra Minha biblioteca neste aparelho para continuar sem internet.`);
     }catch(error){setStatus(error instanceof Error?error.message:"Não foi possível preparar o modo offline.");}finally{setPreparing(false);}
   }
-  return <section className="reader-shell"><div className="reader-toolbar"><p role="status">{status}</p><div style={{display:"flex",gap:8,flexWrap:"wrap"}}><button className="button button-outline" onClick={prepareOffline} disabled={preparing}>{preparing?<RefreshCw size={17}/>:<Download size={17}/>} {preparing?"Preparando…":offlineReady?"Atualizar cópia offline":"Salvar neste aparelho"}</button><button className="button button-outline" onClick={()=>setHelpOpen(value=>!value)}>Ajuda Coonto</button></div></div>{helpOpen&&<CoontoHelp initialMode="student" sceneId={sceneId}/>}<iframe ref={iframeRef} className="experience-frame" title="Experiência Coonto — O Alienista" src="/api/works/o-alienista" allow="autoplay"/></section>;
+  return <section className="reader-workspace">
+    <aside className="reader-rail">
+      <div className="reader-rail-title"><span>SUA EXPERIÊNCIA</span><strong>O Alienista</strong></div>
+      <nav className="reader-rail-actions" aria-label="Ações da leitura">
+        <a href="/minha-biblioteca"><Library size={18}/><span>Minha biblioteca</span></a>
+        <button onClick={prepareOffline} disabled={preparing}>{preparing?<RefreshCw size={18}/>:<Download size={18}/>}<span>{preparing?"Preparando…":offlineReady?"Atualizar offline":"Salvar neste aparelho"}</span></button>
+        <button onClick={()=>setHelpOpen(true)}><CircleHelp size={18}/><span>Ajuda Coonto</span></button>
+        <a href="/texto/o-alienista"><BookOpen size={18}/><span>Texto de Machado</span></a>
+      </nav>
+      <p className="reader-rail-status" role="status">{status}</p>
+    </aside>
+
+    <div className="reader-canvas">
+      <iframe ref={iframeRef} className="experience-frame" title="Experiência Coonto — O Alienista" src="/api/works/o-alienista" allow="autoplay"/>
+    </div>
+
+    {helpOpen&&<div className="reader-help-overlay" role="dialog" aria-modal="true" aria-label="Ajuda Coonto">
+      <button className="reader-help-close" onClick={()=>setHelpOpen(false)} aria-label="Fechar ajuda"><X size={20}/></button>
+      <div className="reader-help-panel"><CoontoHelp initialMode="student" sceneId={sceneId}/></div>
+    </div>}
+  </section>;
 }
