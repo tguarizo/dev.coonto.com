@@ -9,11 +9,12 @@ type Choice = { id:string; label:string; consequence:string };
 
 const works: Array<{
   key:WorkKey; eyebrow:string; title:string; author:string; image:number; prompt:string;
-  choices:Choice[]; authorPath:string; comment:string; next?:string;
+  opening:{about:string;where:string;observe:string}; choices:Choice[]; authorPath:string; comment:string; next?:string;
 }> = [
   {
     key:"alienista", eyebrow:"EXPERIÊNCIA 01 · O ALIENISTA", title:"O Alienista", author:"Machado de Assis", image:0,
     prompt:"Itaguaí começa a reagir à Casa Verde. Se você estivesse no lugar de Bacamarte, o que faria?",
+    opening:{about:"Uma novela de Machado de Assis sobre ciência, normalidade e poder.",where:"Itaguaí. Simão Bacamarte criou a Casa Verde e seus critérios começam a alcançar cada vez mais pessoas.",observe:"Quem decide o que é normal — e o que acontece quando essa definição ganha poder."},
     choices:[
       {id:"1",label:"Recuaria e reveria as internações",consequence:"Você reduz a pressão sobre a cidade, mas enfraquece a autoridade do método que criou."},
       {id:"2",label:"Manteria os critérios",consequence:"Você preserva a lógica do método. A tensão cresce porque a cidade continua submetida a uma regra difícil de contestar."},
@@ -26,6 +27,7 @@ const works: Array<{
   {
     key:"dom-casmurro", eyebrow:"EXPERIÊNCIA 02 · DOM CASMURRO", title:"Dom Casmurro", author:"Machado de Assis", image:1,
     prompt:"Você começa a desconfiar de alguém que ama, mas não tem uma prova definitiva. O que faz?",
+    opening:{about:"Um romance de Machado de Assis construído pela memória de Bentinho e pela dúvida.",where:"Você entra no ponto central da tensão: existe suspeita, mas não existe prova conclusiva.",observe:"Como memória, ciúme e ponto de vista podem transformar dúvida em certeza."},
     choices:[
       {id:"1",label:"Confia e segue em frente",consequence:"Você preserva a relação, mas aceita conviver com a incerteza."},
       {id:"2",label:"Observa em silêncio",consequence:"A dúvida cresce por dentro. Cada gesto passa a parecer uma possível pista."},
@@ -38,6 +40,7 @@ const works: Array<{
   {
     key:"divina-comedia", eyebrow:"EXPERIÊNCIA 03 · A DIVINA COMÉDIA", title:"A Divina Comédia", author:"Dante Alighieri", image:15,
     prompt:"Você se vê perdido diante de um caminho escuro e desconhecido. Como decide avançar?",
+    opening:{about:"A jornada de Dante por Inferno, Purgatório e Paraíso, guiada por encontros e consequências.",where:"Dante começa perdido em uma selva escura e precisa decidir como atravessar um mundo que ainda não compreende.",observe:"Como a orientação, as escolhas e as consequências dão sentido à travessia."},
     choices:[
       {id:"1",label:"Recua e procura outro caminho",consequence:"Você evita o risco imediato, mas continua sem atravessar aquilo que precisa compreender."},
       {id:"2",label:"Segue sozinho",consequence:"Você preserva sua autonomia, mas entra em um território cujo sentido ainda não consegue ler."},
@@ -87,6 +90,7 @@ export function HomeLiteraryJourney(){
             <p>{work.author}</p>
           </div>
           <div className="literary-play">
+            <div className="literary-opening"><span>ANTES DE DECIDIR</span><p><strong>O que é:</strong> {work.opening.about}</p><p><strong>Onde você está:</strong> {work.opening.where}</p><p><strong>Observe:</strong> {work.opening.observe}</p></div>
             <span className="literary-step">ENTRE NA SITUAÇÃO</span>
             <div className="literary-prompt-row"><h3>{work.prompt}</h3><button type="button" className="literary-audio" onClick={()=>toggleAudio(work.key)} aria-label={playing===work.key?"Pausar narração":"Ouvir narração"}>{playing===work.key?<Pause size={17}/>:<Play size={17}/>}<span>{playing===work.key?"Pausar":"Ouvir"}</span></button></div>
             {!answer ? <div className="literary-options" role="group" aria-label={`Escolhas em ${work.title}`}>
