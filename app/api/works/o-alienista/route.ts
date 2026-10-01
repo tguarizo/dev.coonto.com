@@ -2,13 +2,14 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { ensureAlienistaEntitlement, getMember } from "@/lib/member";
 import { query } from "@/lib/db";
+import { getAccessProfile } from "@/lib/access-control";
 export const dynamic = "force-dynamic";
 export async function GET(request: Request) {
   const member = await getMember();
   if (!member) return new Response("Entre na sua conta Coonto.", { status: 401 });
-  if (!await ensureAlienistaEntitlement(member.userId)) return new Response("Acesso indisponível.", { status: 403 });
   const teacherMode = new URL(request.url).searchParams.get("mode") === "teacher";
-  if (teacherMode && !(await query("SELECT user_id FROM teacher_profiles WHERE user_id=$1", [member.userId])).rows.length) return new Response("Entre pelo espaço do professor.", { status: 403 });
+  if(teacherMode){const access=await getAccessProfile(member);if(!access.globalOperation&&!access.personas.includes("educator"))return new Response("Entre pelo espaço do professor.",{status:403});await query("INSERT INTO teacher_profiles(user_id) VALUES($1) ON CONFLICT DO NOTHING",[member.userId]);}
+  else if (!await ensureAlienistaEntitlement(member.userId)) return new Response("Acesso indisponível.", { status: 403 });
   let html = await readFile(path.join(process.cwd(), "content", "Coonto_O_Alienista.html"), "utf8");
   html = html.replace("const KEY='coonto-alienista-v1-state';", `const KEY=${JSON.stringify(`coonto-alienista-${member.userId}`)};`);
   const init = "window.addEventListener('beforeunload',save);load();render();maybePlaySplash();";
