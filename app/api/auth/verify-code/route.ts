@@ -1,6 +1,6 @@
 import { randomBytes } from 'node:crypto';
 import { cookies } from 'next/headers';
-import { hashToken,sessionCookie } from '@/lib/auth';
+import { deviceCookie,hashToken,sessionCookie } from '@/lib/auth';
 import { query } from '@/lib/db';
 import { recordCrmEvent } from '@/lib/crm-events';
 import { consumeLoginCode } from '@/lib/login-code';
@@ -18,6 +18,9 @@ export async function POST(request:Request) {
   if(name.length>100)return Response.json({error:'Use um nome de até 100 caracteres.'},{status:400});
   let userId='';
   const token=randomBytes(32).toString('base64url');
+  const deviceToken=randomBytes(32).toString('base64url');
+  const userAgent=request.headers.get('user-agent')||'';
+  const deviceLabel=/iPhone|Android/i.test(userAgent)?'Celular':/iPad|Tablet/i.test(userAgent)?'Tablet':'Computador';
   const jar=await cookies();
   const admins=String(process.env.ADMIN_EMAILS||'').split(',').map(v=>v.trim().toLowerCase()).filter(Boolean);
   const checked=await consumeLoginCode(contact.key,hashLoginCode(contact.key,code),async client=>{
@@ -35,15 +38,17 @@ export async function POST(request:Request) {
     // SMS alone cannot claim an account authorized through somebody else's email.
     if(contact.channel==='email'&&admins.includes(contact.value))await client.query("UPDATE users SET role='admin' WHERE id=$1",[userId]);
     await client.query("INSERT INTO sessions(token_hash,user_id,expires_at) VALUES($1,$2,NOW()+INTERVAL '30 days')",[hashToken(token),userId]);
+    await client.query("INSERT INTO auth_devices(id,user_id,token_hash,label,trusted_until) VALUES($1,$2,$3,$4,NOW()+INTERVAL '90 days')",[crypto.randomUUID(),userId,hashToken(deviceToken),deviceLabel]);
     return true;
   });
   if('needsName' in checked&&checked.needsName)return Response.json({needsName:true,message:'Como podemos chamar você?'});
   if(!checked.ok)return Response.json({error:checked.error},{status:401});
   jar.set(sessionCookie.name,token,sessionCookie.options);
+  jar.set(deviceCookie.name,deviceToken,deviceCookie.options);
   const referralCode=jar.get('coonto_ref')?.value;
   if(referralCode&&/^[A-Z0-9]{12}$/.test(referralCode))try{
     await query('INSERT INTO referral_attributions(user_id,referral_id) SELECT $1,id FROM partner_referrals WHERE code=$2 AND active=TRUE ON CONFLICT(user_id) DO NOTHING',[userId,referralCode]);
   }catch {console.error('referral_attribution_failed');}
-  await recordCrmEvent({type:'login_succeeded',userId,channel:contact.channel});
+  await recordCrmEvent({type:'login_succeeded',userId,channel:contact.channel,metadata:{device:deviceLabel}});
   return Response.json({ok:true,returnTo:safeReturnTo(body.returnTo)});
 }
