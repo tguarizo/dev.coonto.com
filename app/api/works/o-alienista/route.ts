@@ -3,6 +3,7 @@ import path from "node:path";
 import { ensureAlienistaEntitlement, getMember } from "@/lib/member";
 import { query } from "@/lib/db";
 import { getAccessProfile } from "@/lib/access-control";
+import { getAccessProfile } from "@/lib/access-control";
 export const dynamic = "force-dynamic";
 export async function GET(request: Request) {
   const member = await getMember();
