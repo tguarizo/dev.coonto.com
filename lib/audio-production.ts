@@ -6,7 +6,7 @@ import {getPool,query} from '@/lib/db';
 import {audioDirectory} from '@/lib/work-audio';
 import {recordCrmEvent} from '@/lib/crm-events';
 
-export const audioInput=z.object({sceneId:z.string().regex(/^s(?:[0-9]|[1-3][0-9]|4[0-7])$/),segments:z.array(z.object({speaker:z.enum(['narrator','bacamarte']),text:z.string().trim().min(1).max(5000)})).min(1).max(2)}).refine(x=>x.segments.reduce((n,s)=>n+s.text.length,0)<=5000);
+export const audioInput=z.object({sceneId:z.string().regex(/^(?:s(?:[0-9]|[1-3][0-9]|4[0-2])|c[1-4]|final)$/),segments:z.array(z.object({speaker:z.enum(['narrator','bacamarte']),text:z.string().trim().min(1).max(5000)})).min(1).max(2)}).refine(x=>x.segments.reduce((n,s)=>n+s.text.length,0)<=5000);
 export type AudioInput=z.infer<typeof audioInput>;
 export type AudioJob={id:string;scene_id:string;segments:AudioInput['segments'];model:string;characters:number;requested_characters:number;status:string;error_message:string;created_at:string;updated_at:string};
 export class AudioError extends Error {}
