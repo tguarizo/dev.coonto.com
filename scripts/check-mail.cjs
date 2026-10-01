@@ -1,3 +1,4 @@
+// P0 diagnostic 2026-10-01
 // Diagnóstico somente de leitura. Nunca imprime chaves, códigos, corpos ou destinatários.
 let nodemailer;try{nodemailer=require('nodemailer');}catch{}
 const {Pool}=require('pg');
