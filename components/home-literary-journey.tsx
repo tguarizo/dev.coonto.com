@@ -49,7 +49,7 @@ const works: Array<{
 ];
 
 export function HomeLiteraryJourney(){
-  const [answers,setAnswers]=useState<Record<WorkKey,string|undefined>>({});
+  const [answers,setAnswers]=useState<Partial<Record<WorkKey,string>>>({});
   const [active,setActive]=useState<WorkKey>("alienista");
 
   function choose(work:WorkKey,id:string){setAnswers(prev=>({...prev,[work]:id}));}
