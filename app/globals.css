@@ -462,3 +462,22 @@ button,input,textarea,select { font:inherit; }
 .coonto-install-action{margin-top:22px;padding-top:18px;border-top:1px solid #dfe4ef;display:flex;justify-content:flex-end;align-items:center;gap:12px}
 .coonto-install-action>span{color:#667089;font-size:.9rem}
 @media(max-width:620px){.literary-prompt-row{grid-template-columns:1fr}.literary-audio{margin-top:-10px;margin-bottom:12px;width:max-content}.coonto-install-action{justify-content:flex-start}}
+
+
+/* V1.9.4: reader workspace sem rolagem dupla */
+.reader-page{min-height:100vh;background:#061022;color:white;overflow:hidden}
+.reader-workspace{height:calc(100vh - 74px);display:grid;grid-template-columns:220px minmax(0,1fr);background:#061022;position:relative}
+.reader-rail{display:flex;flex-direction:column;gap:22px;padding:26px 18px 18px;border-right:1px solid rgba(255,255,255,.10);background:#0a1730;min-width:0}
+.reader-rail-title{display:grid;gap:5px}.reader-rail-title span{font-size:.66rem;font-weight:800;letter-spacing:.12em;color:#5f7cff}.reader-rail-title strong{font-size:1.45rem;font-weight:550;letter-spacing:-.03em}
+.reader-rail-actions{display:grid;gap:6px}
+.reader-rail-actions a,.reader-rail-actions button{width:100%;min-height:42px;display:flex;align-items:center;gap:10px;padding:0 11px;border:1px solid transparent;border-radius:11px;background:transparent;color:#d8e2f3;text-align:left;font-size:.82rem;font-weight:600;cursor:pointer}
+.reader-rail-actions a:hover,.reader-rail-actions button:hover,.reader-rail-actions a:focus-visible,.reader-rail-actions button:focus-visible{background:#132444;border-color:#29405f;color:white}
+.reader-rail-actions button:disabled{opacity:.55;cursor:wait}
+.reader-rail-status{margin:auto 0 0;color:#8290a9;font-size:.72rem;line-height:1.45}
+.reader-canvas{min-width:0;min-height:0;background:#021511}
+.reader-canvas .experience-frame{display:block;width:100%;height:100%;min-height:0;border:0;border-radius:0;background:#031815}
+.reader-help-overlay{position:fixed;z-index:90;inset:74px 0 0 0;background:rgba(3,10,24,.58);backdrop-filter:blur(4px);display:flex;justify-content:flex-end}
+.reader-help-panel{width:min(520px,94vw);height:100%;overflow:auto;background:#f7f8fc;color:#10192d;padding:22px;box-shadow:-18px 0 60px rgba(0,0,0,.28)}
+.reader-help-close{position:fixed;z-index:91;top:90px;right:min(538px,calc(94vw + 18px));width:38px;height:38px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.24);border-radius:50%;background:#0a1730;color:white;cursor:pointer}
+@media(max-width:900px){.reader-workspace{grid-template-columns:76px minmax(0,1fr)}.reader-rail{padding:18px 10px}.reader-rail-title strong,.reader-rail-title span,.reader-rail-actions span,.reader-rail-status{display:none}.reader-rail-actions a,.reader-rail-actions button{justify-content:center;padding:0}.reader-help-close{right:14px;top:88px}}
+@media(max-width:620px){.reader-workspace{height:calc(100vh - 74px);grid-template-columns:1fr;grid-template-rows:auto minmax(0,1fr)}.reader-rail{flex-direction:row;align-items:center;gap:8px;padding:8px 10px;border-right:0;border-bottom:1px solid rgba(255,255,255,.10)}.reader-rail-title{display:none}.reader-rail-actions{display:flex;gap:4px}.reader-rail-actions a,.reader-rail-actions button{width:40px;height:40px;min-height:40px;padding:0;justify-content:center}.reader-rail-status{display:none}.reader-help-overlay{inset:74px 0 0}.reader-help-panel{width:100%;padding:18px}.reader-help-close{top:82px;right:10px}}
