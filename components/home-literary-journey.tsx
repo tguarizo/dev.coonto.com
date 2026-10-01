@@ -57,10 +57,8 @@ export function HomeLiteraryJourney(){
 
   return <div className="home-journey">
     <section className="journey-intro">
-      <img src="/images/coonto-logo.png" alt="Coonto" className="journey-logo"/>
-      <span className="journey-category">plataforma de aprendizagem interativa</span>
       <h1>Entre na história.<br/><em>Decida.</em><br/>Descubra o caminho do autor.</h1>
-      <p><strong>O Coonto transforma grandes obras em experiências de decisão.</strong> Você entra em uma situação da história, escolhe o que faria, vê as consequências e compara sua escolha com o caminho seguido pelo autor.</p>
+      <p><strong>O Coonto é uma plataforma de aprendizagem interativa que transforma grandes obras em experiências de decisão.</strong> Você entra em uma situação da história, escolhe o que faria, vê as consequências e compara sua escolha com o caminho seguido pelo autor.</p>
       <a href="#alienista" className="journey-start">Experimente em três obras <ArrowDown size={18}/></a>
     </section>
 
@@ -116,7 +114,7 @@ export function HomeLiteraryJourney(){
       <h2>Isso é o Coonto.</h2>
       <p className="after-lead">Uma plataforma de aprendizagem interativa que transforma obras literárias em experiências de decisão para ajudar o leitor a compreender, conectar e lembrar melhor o que leu.</p>
       <div className="after-grid">
-        <article><Compass size={28}/><h3>O que é</h3><p>Uma plataforma digital de aprendizagem interativa. Não é resumo, curso ou plataforma de debate.</p></article>
+        <article><Compass size={28}/><h3>O que é</h3><p>Uma plataforma digital de aprendizagem interativa que transforma obras em experiências de decisão, consequência e descoberta do caminho do autor.</p></article>
         <article><BookOpenCheck size={28}/><h3>Como funciona</h3><p>Você entra na situação, decide, vê uma consequência e descobre o caminho seguido pelo autor.</p></article>
         <article><Brain size={28}/><h3>O que acontece depois</h3><p>A diferença entre sua escolha e a obra cria curiosidade, contexto e memória. O professor pode aprofundar depois — mas não é requisito.</p></article>
       </div>
