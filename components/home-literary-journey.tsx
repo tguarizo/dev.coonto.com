@@ -74,22 +74,21 @@ export function HomeLiteraryJourney(){
     </section>
 
     {works.map((work,index)=>{
-      const unlocked=index===0 || Boolean(answers[works[index-1].key]);
+      const unlocked=true;
       const answerId=answers[work.key];
       const answer=work.choices.find(c=>c.id===answerId);
-      return <section key={work.key} id={work.key} className={`literary-screen literary-${work.key} ${active===work.key?"is-active":""} ${!unlocked?"is-locked":""}`}>
+      return <section key={work.key} id={work.key} className={`literary-screen literary-${work.key} ${active===work.key?"is-active":""}`}>
         <CatalogArt index={work.image} className="literary-screen-art"/>
         <div className="literary-screen-shade"/>
-        {!unlocked&&<div className="literary-lock"><span>EXPERIÊNCIA {index+1} DE 3</span><strong>{work.title}</strong><p>Complete a experiência anterior para liberar esta obra.</p></div>}
         <div className="literary-screen-content">
           <div className="literary-heading">
             <span>{work.eyebrow}</span>
             <h2>{work.title}</h2>
             <p>{work.author}</p>
           </div>
-          <div className="literary-play" aria-hidden={!unlocked}>
+          <div className="literary-play">
             <span className="literary-step">ENTRE NA SITUAÇÃO</span>
-            <div className="literary-prompt-row"><h3>{work.prompt}</h3><button type="button" className="literary-audio" disabled={!unlocked} onClick={()=>toggleAudio(work.key)} aria-label={playing===work.key?"Pausar narração":"Ouvir narração"}>{playing===work.key?<Pause size={17}/>:<Play size={17}/>}<span>{playing===work.key?"Pausar":"Ouvir"}</span></button></div>
+            <div className="literary-prompt-row"><h3>{work.prompt}</h3><button type="button" className="literary-audio" onClick={()=>toggleAudio(work.key)} aria-label={playing===work.key?"Pausar narração":"Ouvir narração"}>{playing===work.key?<Pause size={17}/>:<Play size={17}/>}<span>{playing===work.key?"Pausar":"Ouvir"}</span></button></div>
             {!answer ? <div className="literary-options" role="group" aria-label={`Escolhas em ${work.title}`}>
 
               {work.choices.map(choice=><button key={choice.id} type="button" disabled={!unlocked} onClick={()=>choose(work.key,choice.id)}><b>{choice.id}</b><span>{choice.label}</span></button>)}
@@ -120,7 +119,7 @@ export function HomeLiteraryJourney(){
       </section>
     })}
 
-    {answers["divina-comedia"]&&<section id="entenda-o-coonto" className="coonto-after-journey">
+    <section id="entenda-o-coonto" className="coonto-after-journey">
       <span className="section-kicker">AGORA VOCÊ JÁ EXPERIMENTOU</span>
       <h2>Você acabou de aprender do jeito Coonto.</h2>
       <p className="after-lead">Enquanto você decidia, também estava se situando, observando, comparando consequências, procurando evidências e conectando acontecimentos. É assim que o Coonto transforma leitura em compreensão ativa.</p>
@@ -131,6 +130,6 @@ export function HomeLiteraryJourney(){
       </div>
       <div className="after-method"><strong>Decidir → Descobrir → Entender → Lembrar</strong><span>Encontre o caminho do autor.</span></div>
       <div className="after-actions"><a className="button button-primary" href="/obra/o-alienista">Entrar em O Alienista</a><a className="button button-outline" href="/catalogo">Ver catálogo</a><a className="button button-outline" href="/como-funciona">Como funciona</a></div>
-    </section>}
+    </section>
   </div>
 }
