@@ -428,3 +428,11 @@ button,input,textarea,select { font:inherit; }
 .literary-lock strong{display:block;margin:8px 0 6px;font-family:Georgia,serif;font-size:1.7rem}
 .literary-lock p{margin:0;color:#cbd5e7;font-size:.86rem;line-height:1.45}
 .literary-options button:disabled{cursor:not-allowed}
+
+/* V1.9.1: marca única no header e versão pública */
+.home-brand{display:flex;flex-direction:column;align-items:flex-start;gap:2px}
+.home-brand .brand-logo{width:158px}
+.home-brand>span{font-size:.68rem;letter-spacing:.035em;color:#7ee4e8;white-space:nowrap}
+.home-version-footer{padding:14px 24px;text-align:center;background:#09162f;color:#8290aa;font-size:.72rem;letter-spacing:.04em;border-top:1px solid rgba(255,255,255,.08)}
+.journey-intro{padding-top:118px}
+@media(max-width:620px){.home-brand .brand-logo{width:128px}.home-brand>span{font-size:.55rem}.journey-intro{padding-top:104px}}
