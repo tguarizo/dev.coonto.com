@@ -69,7 +69,7 @@ export function HomeLiteraryJourney(){
   return <div className="home-journey">
     <section className="journey-intro">
       <h1>Entre na história.<br/><em>Decida.</em><br/>Descubra o caminho do autor.</h1>
-      <p><strong>O Coonto é uma plataforma de aprendizagem interativa que transforma grandes obras em experiências de decisão.</strong> Você entra em uma situação da história, escolhe o que faria, vê as consequências e compara sua escolha com o caminho seguido pelo autor.</p>
+      <p><strong>Entre na história. Decida. Descubra o caminho do autor.</strong> O Coonto ajuda o leitor a compreender, conectar e lembrar melhor o que leu.</p>
       <a href="#alienista" className="journey-start">Experimente em três obras <ArrowDown size={18}/></a>
     </section>
 
@@ -122,12 +122,12 @@ export function HomeLiteraryJourney(){
 
     {answers["divina-comedia"]&&<section id="entenda-o-coonto" className="coonto-after-journey">
       <span className="section-kicker">AGORA VOCÊ JÁ EXPERIMENTOU</span>
-      <h2>Isso é o Coonto.</h2>
-      <p className="after-lead">Uma plataforma de aprendizagem interativa que transforma obras literárias em experiências de decisão para ajudar o leitor a compreender, conectar e lembrar melhor o que leu.</p>
+      <h2>Você acabou de aprender do jeito Coonto.</h2>
+      <p className="after-lead">Enquanto você decidia, também estava se situando, observando, comparando consequências, procurando evidências e conectando acontecimentos. É assim que o Coonto transforma leitura em compreensão ativa.</p>
       <div className="after-grid">
-        <article><Compass size={28}/><h3>O que é</h3><p>Uma plataforma digital de aprendizagem interativa que transforma obras em experiências de decisão, consequência e descoberta do caminho do autor.</p></article>
-        <article><BookOpenCheck size={28}/><h3>Como funciona</h3><p>Você entra na situação, decide, vê uma consequência e descobre o caminho seguido pelo autor.</p></article>
-        <article><Brain size={28}/><h3>O que acontece depois</h3><p>A diferença entre sua escolha e a obra cria curiosidade, contexto e memória. O professor pode aprofundar depois — mas não é requisito.</p></article>
+        <article><Compass size={28}/><h3>Situar e observar</h3><p>Primeiro você entende onde está na história, quem participa daquele momento e o que merece atenção.</p></article>
+        <article><BookOpenCheck size={28}/><h3>Decidir e comprovar</h3><p>Você toma posição, vê consequências e volta ao texto para encontrar o caminho construído pelo autor.</p></article>
+        <article><Brain size={28}/><h3>Conectar e lembrar</h3><p>Depois você liga esse momento ao restante da obra e tenta recuperar o que entendeu sem depender de releitura imediata.</p></article>
       </div>
       <div className="after-method"><strong>Decidir → Descobrir → Entender → Lembrar</strong><span>Encontre o caminho do autor.</span></div>
       <div className="after-actions"><a className="button button-primary" href="/obra/o-alienista">Entrar em O Alienista</a><a className="button button-outline" href="/catalogo">Ver catálogo</a><a className="button button-outline" href="/como-funciona">Como funciona</a></div>
