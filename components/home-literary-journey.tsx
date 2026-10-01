@@ -1,7 +1,7 @@
 "use client";
 
-import { ArrowDown, ArrowRight, BookOpenCheck, Brain, Compass, RotateCcw, Sparkles } from "lucide-react";
-import { useState } from "react";
+import { ArrowDown, ArrowRight, BookOpenCheck, Brain, Compass, Pause, Play, RotateCcw, Sparkles } from "lucide-react";
+import { useRef, useState } from "react";
 import { CatalogArt } from "@/components/catalog-art";
 
 type WorkKey = "alienista" | "dom-casmurro" | "divina-comedia";
@@ -51,9 +51,20 @@ const works: Array<{
 export function HomeLiteraryJourney(){
   const [answers,setAnswers]=useState<Partial<Record<WorkKey,string>>>({});
   const [active,setActive]=useState<WorkKey>("alienista");
+  const [playing,setPlaying]=useState<WorkKey|null>(null);
+  const audioRef=useRef<HTMLAudioElement|null>(null);
 
   function choose(work:WorkKey,id:string){setAnswers(prev=>({...prev,[work]:id}));}
   function goNext(index:number){const next=works[index+1];if(!next)return;setActive(next.key);requestAnimationFrame(()=>document.getElementById(next.key)?.scrollIntoView({behavior:"smooth",block:"start"}));}
+  function toggleAudio(key:WorkKey){
+    if(playing===key){audioRef.current?.pause();audioRef.current=null;setPlaying(null);return;}
+    audioRef.current?.pause();
+    const audio=new Audio("/api/audio/home/"+key);
+    audioRef.current=audio;setPlaying(key);
+    const done=()=>{if(audioRef.current===audio)audioRef.current=null;setPlaying(current=>current===key?null:current);};
+    audio.onended=done;audio.onerror=done;
+    void audio.play().catch(done);
+  }
 
   return <div className="home-journey">
     <section className="journey-intro">
@@ -78,7 +89,7 @@ export function HomeLiteraryJourney(){
           </div>
           <div className="literary-play" aria-hidden={!unlocked}>
             <span className="literary-step">ENTRE NA SITUAÇÃO</span>
-            <h3>{work.prompt}</h3>
+            <div className="literary-prompt-row"><h3>{work.prompt}</h3><button type="button" className="literary-audio" disabled={!unlocked} onClick={()=>toggleAudio(work.key)} aria-label={playing===work.key?"Pausar narração":"Ouvir narração"}>{playing===work.key?<Pause size={17}/>:<Play size={17}/>}<span>{playing===work.key?"Pausar":"Ouvir"}</span></button></div>
             {!answer ? <div className="literary-options" role="group" aria-label={`Escolhas em ${work.title}`}>
 
               {work.choices.map(choice=><button key={choice.id} type="button" disabled={!unlocked} onClick={()=>choose(work.key,choice.id)}><b>{choice.id}</b><span>{choice.label}</span></button>)}
