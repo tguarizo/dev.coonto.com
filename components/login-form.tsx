@@ -17,7 +17,7 @@ export function LoginForm({returnTo,smsEnabled=false}:{returnTo:string;smsEnable
   setBusy(true);setStatus('');
   try{
    const response=await fetch('/api/auth/request-code',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload())});
-   const data=await response.json();if(!response.ok){setStatus(data.error||'Não foi possível enviar o código.');return;}
+   const data=await response.json();if(!response.ok){const detail=data.diagnostic? ` Código técnico: ${data.diagnostic}${data.providerStatus? ` (${data.providerStatus})`:''}.` : '';setStatus((data.error||'Não foi possível enviar o código.')+detail);return;}
    setStep('code');setCode('');const sent=Date.now();setNow(sent);setRetryAt(sent+60000);
    setStatus(data.mode==='validation'?'Use o código fornecido para a validação.':channel==='email'?'Código enviado. Confira também Spam e Lixo eletrônico. Validade: 10 minutos.':'Solicitação de SMS enviada. O código vale por 10 minutos.');
   }catch{setStatus('A conexão falhou. Tente novamente.');}finally{setBusy(false);}
