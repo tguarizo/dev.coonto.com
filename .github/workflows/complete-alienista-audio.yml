@@ -37,7 +37,7 @@ jobs:
         run: |
           case "$DEPLOY_PATH" in *[!a-zA-Z0-9_./-]*) echo 'Invalid deployment path'; exit 1;; esac
           PROJECT_NAME="coonto-$(basename "$DEPLOY_PATH")"
-          ssh "${SERVER_USER}@${SERVER_HOST}" "cd '$DEPLOY_PATH' && sudo docker compose -p '$PROJECT_NAME' exec -T app node scripts/generate-work-audio.mjs --generate"
+          ssh "${SERVER_USER}@${SERVER_HOST}" "cd '$DEPLOY_PATH' && sudo docker compose -p '$PROJECT_NAME' exec -T app node scripts/generate-work-audio.mjs --generate --force"
       - name: Confirm 48 Alienista audio files
         env:
           SERVER_USER: ${{ secrets.SERVER_USER }}
