@@ -44,6 +44,11 @@ export function ExperienceFrame({ userId }: { userId: string }) {
     if("caches" in window)void caches.open("coonto-protected-v2").then(cache=>cache.match("/offline/o-alienista.html")).then(response=>{if(alive)setOfflineReady(Boolean(response&&response.headers.get("X-Coonto-User")===userId&&Date.parse(response.headers.get("X-Coonto-Expires")||"")>Date.now()));if(response&&response.headers.get("X-Coonto-User")!==userId)void caches.delete("coonto-protected-v2");});
     return()=>{alive=false;clearTimeout(timer);flush();window.removeEventListener("message",receive);window.removeEventListener("online",synchronize);window.removeEventListener("pagehide",flush);};
   },[pendingKey,userId]);
+  function jumpChapter(value:string){
+    const chapter=value.toUpperCase();
+    if(!/^(?:I|II|III|IV|V|VI|VII|VIII|IX|X|XI|XII|XIII)$/.test(chapter))return;
+    iframeRef.current?.contentWindow?.postMessage({type:"coonto:chapter-jump",chapter},location.origin);
+  }
   async function prepareOffline(){
     setPreparing(true);setStatus("Preparando a obra e o texto original neste aparelho…");
     try{
@@ -68,6 +73,7 @@ export function ExperienceFrame({ userId }: { userId: string }) {
     <aside className="reader-rail">
       <div className="reader-rail-title"><span>SUA EXPERIÊNCIA</span><strong>O Alienista</strong></div>
       <nav className="reader-rail-actions" aria-label="Ações da leitura">
+        <label className="reader-chapter-jump"><span>Ir para capítulo</span><select defaultValue="" onChange={e=>{if(e.target.value)jumpChapter(e.target.value);e.target.value="";}}><option value="" disabled>Selecionar…</option>{["I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII","XIII"].map(n=><option key={n} value={n}>Capítulo {n}</option>)}</select></label>
         <a href="/minha-biblioteca"><Library size={18}/><span>Minha biblioteca</span></a>
         <button onClick={prepareOffline} disabled={preparing}>{preparing?<RefreshCw size={18}/>:<Download size={18}/>}<span>{preparing?"Preparando…":offlineReady?"Atualizar offline":"Salvar neste aparelho"}</span></button>
         <button onClick={()=>setHelpOpen(true)}><CircleHelp size={18}/><span>Ajuda Coonto</span></button>
