@@ -5,24 +5,22 @@ import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { query } from "@/lib/db";
 import { ALIENISTA_SLUG, ensureAlienistaEntitlement } from "@/lib/member";
+import { getAccessProfile } from "@/lib/access-control";
 
 export const dynamic="force-dynamic";
 export default async function MinhaBiblioteca() {
-  const user=await requireUser("/minha-biblioteca");
-  const access=await ensureAlienistaEntitlement(user.userId);
+  const user=await requireUser("/minha-biblioteca");const profile=await getAccessProfile(user);const access=await ensureAlienistaEntitlement(user.userId);
   const [progressResult,deviceResult]=await Promise.all([
     query<{percent:number;completed:boolean}>("SELECT percent,completed FROM learning_progress WHERE user_id=$1 AND work_slug=$2 LIMIT 1",[user.userId,ALIENISTA_SLUG]),
     query<{id:string;label:string;last_seen_at:string}>("SELECT id,label,last_seen_at FROM member_devices WHERE user_id=$1 AND revoked=FALSE ORDER BY last_seen_at DESC",[user.userId]),
-  ]);
-  const progress=progressResult.rows[0];
+  ]);const progress=progressResult.rows[0];
   return <main className="page"><SiteHeader/><div className="content member-page">
-    <section className="member-welcome"><span className="section-kicker">MINHA CONTA COONTO</span><h1>Olá, {user.displayName.split(" ")[0]||user.email.split("@")[0]}.</h1><p>Sua leitura pessoal, seu progresso e os aparelhos autorizados ficam juntos aqui.</p><p>Prepara aulas? <a href="/professor">Acesse o espaço do professor</a>. Suas marcações de aula não alteram a leitura pessoal.</p></section>
+    <section className="member-welcome"><span className="section-kicker">MINHA CONTA COONTO</span><h1>Olá, {user.displayName.split(" ")[0]||user.email.split("@")[0]}.</h1><p>Sua leitura pessoal, seu progresso e os aparelhos autorizados ficam juntos aqui.</p>
+    {(profile.canUseEducationalCrm||profile.canUseCommercialCrm||profile.canUseCulturalCrm)&&<div className="after-actions">{profile.personas.includes("educator")&&<a className="button button-outline" href="/professor">Espaço do professor</a>}{profile.canUseEducationalCrm&&<a className="button button-outline" href="/gestao-escolar">Gestão educacional</a>}{profile.canUseCommercialCrm&&<a className="button button-outline" href="/parceiro-comercial">Parceiro comercial</a>}{profile.canUseCulturalCrm&&<a className="button button-outline" href="/curadoria">Curadoria</a>}</div>}</section>
     <section className="member-grid"><article className="library-work"><div className="library-cover"><span>MACHADO DE ASSIS</span><strong>O Alienista</strong><small>Primeira experiência Coonto</small></div><div className="library-copy">
-      <span className="status-pill">{access?"ACESSO ATIVO":"PEDIDO GRATUITO DISPONÍVEL"}</span>
-      <h2>{access?(progress?(progress.completed?"Experiência concluída":"Continue de onde parou"):"Sua primeira experiência está pronta"):"Adicione O Alienista à biblioteca"}</h2>
-      <p>{access?(progress?`${progress.percent}% da jornada percorrida. Seu histórico está sincronizado entre os aparelhos autorizados.`:"Entre em Itaguaí, decida, descubra e compreenda a obra por dentro."):"Faça um pedido de R$ 0,00, sem cartão e sem assinatura. Depois, a experiência ficará disponível nesta conta."}</p>
-      {access&&<div className="member-progress"><span style={{width:`${progress?.percent??0}%`}}/></div>}
-      <a className="button button-primary" href={access?"/leitura/o-alienista":"/checkout/o-alienista"}><BookOpen size={18}/>{access?(progress?"Continuar experiência":"Começar agora"):"Concluir pedido gratuito"}</a>
+      <span className="status-pill">{access?"ACESSO ATIVO":"PEDIDO GRATUITO DISPONÍVEL"}</span><h2>{access?(progress?(progress.completed?"Experiência concluída":"Continue de onde parou"):"Sua primeira experiência está pronta"):"Adicione O Alienista à biblioteca"}</h2>
+      <p>{access?(progress?(String(progress.percent)+"% da jornada percorrida. Seu histórico está sincronizado entre os aparelhos autorizados."):"Entre em Itaguaí, decida, descubra e compreenda a obra por dentro."):"Faça um pedido de R$ 0,00, sem cartão e sem assinatura. Depois, a experiência ficará disponível nesta conta."}</p>
+      {access&&<div className="member-progress"><span style={{width:String(progress?.percent??0)+"%"}}/></div>}<a className="button button-primary" href={access?"/leitura/o-alienista":"/checkout/o-alienista"}><BookOpen size={18}/>{access?(progress?"Continuar experiência":"Começar agora"):"Concluir pedido gratuito"}</a>
     </div></article><aside className="account-side"><section><h2><Cloud size={20}/> Histórico sincronizado</h2><p>Suas decisões e seu ponto de leitura acompanham sua conta.</p></section><section><h2><ShieldCheck size={20}/> Uso offline protegido</h2><p>Após adicionar a obra, autorize até dois aparelhos. A licença fica disponível por 30 dias antes de renovar o acesso.</p>{access&&<DeviceManager initialDevices={deviceResult.rows.map(device=>({id:device.id,label:device.label,lastSeenAt:String(device.last_seen_at)}))}/>}</section></aside></section>
   </div><SiteFooter/></main>;
 }
