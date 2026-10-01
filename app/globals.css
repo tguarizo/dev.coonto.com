@@ -481,3 +481,15 @@ button,input,textarea,select { font:inherit; }
 .reader-help-close{position:fixed;z-index:91;top:90px;right:min(538px,calc(94vw + 18px));width:38px;height:38px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.24);border-radius:50%;background:#0a1730;color:white;cursor:pointer}
 @media(max-width:900px){.reader-workspace{grid-template-columns:76px minmax(0,1fr)}.reader-rail{padding:18px 10px}.reader-rail-title strong,.reader-rail-title span,.reader-rail-actions span,.reader-rail-status{display:none}.reader-rail-actions a,.reader-rail-actions button{justify-content:center;padding:0}.reader-help-close{right:14px;top:88px}}
 @media(max-width:620px){.reader-workspace{height:calc(100vh - 74px);grid-template-columns:1fr;grid-template-rows:auto minmax(0,1fr)}.reader-rail{flex-direction:row;align-items:center;gap:8px;padding:8px 10px;border-right:0;border-bottom:1px solid rgba(255,255,255,.10)}.reader-rail-title{display:none}.reader-rail-actions{display:flex;gap:4px}.reader-rail-actions a,.reader-rail-actions button{width:40px;height:40px;min-height:40px;padding:0;justify-content:center}.reader-rail-status{display:none}.reader-help-overlay{inset:74px 0 0}.reader-help-panel{width:100%;padding:18px}.reader-help-close{top:82px;right:10px}}
+
+
+/* V1.9.5: contextual openings and chapter jump */
+.literary-opening{margin-bottom:18px;padding:14px 15px;border:1px solid rgba(255,255,255,.14);border-radius:14px;background:rgba(255,255,255,.055)}
+.literary-opening>span{display:block;margin-bottom:8px;color:#83e5e5;font-size:.66rem;font-weight:750;letter-spacing:.11em}
+.literary-opening p{margin:5px 0;color:#cbd5e7;font-size:.82rem;line-height:1.42}
+.literary-opening strong{color:white;font-weight:650}
+.reader-chapter-jump{display:grid;gap:6px;margin-bottom:8px}
+.reader-chapter-jump>span{font-size:.68rem;color:#8290a9;font-weight:650;letter-spacing:.04em}
+.reader-chapter-jump select{width:100%;min-height:40px;border:1px solid #29405f;border-radius:10px;background:#0f203d;color:#e8eef8;padding:0 9px;font-size:.78rem;cursor:pointer}
+@media(max-width:900px){.reader-chapter-jump>span{display:none}.reader-chapter-jump select{width:56px;padding:0 5px;font-size:.68rem}}
+@media(max-width:620px){.reader-chapter-jump{margin:0}.reader-chapter-jump select{width:94px;height:40px;min-height:40px}}
