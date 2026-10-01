@@ -27,7 +27,8 @@ export function LoginForm({returnTo,smsEnabled=false}:{returnTo:string;smsEnable
   try{
    const response=await fetch('/api/auth/verify-code',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...payload(),code,name,returnTo})});
    const data=await response.json();if(!response.ok){setStatus(data.error||'Não foi possível entrar.');return;}
-   if(data.needsName){setStep('name');setStatus('Seu contato foi confirmado. Falta só seu nome para começar.');return;}
+   setRetryAt(0);setNow(0);
+   if(data.needsName){setStep('name');setStatus('');return;}
    if(data.ok)window.location.assign(data.returnTo||'/minha-biblioteca');
   }catch{setStatus('A conexão falhou. Tente novamente.');}finally{setBusy(false);}
  }
@@ -38,8 +39,8 @@ export function LoginForm({returnTo,smsEnabled=false}:{returnTo:string;smsEnable
  <label className="field"><span>{channel==='email'?'E-mail':'Celular com DDD'}</span><input type={channel==='email'?'email':'tel'} autoComplete={channel==='email'?'email':'tel'} required maxLength={320} value={contact} onChange={e=>setContact(e.target.value)} placeholder={channel==='email'?'voce@exemplo.com':'(11) 99999-9999'} disabled={busy}/></label>
  <button className="button button-primary" disabled={busy}>{busy?'Enviando…':<>Enviar código <ArrowRight size={18}/></>}</button><p className="guest-hint">Primeira vez? Confirme seu contato e informe seu nome para explorar como Guest.</p></form>
  :<form onSubmit={verifyCode}><KeyRound size={28}/><h1>{step==='name'?'Como podemos chamar você?':'Digite o código'}</h1>
- {step==='name'?<><p>Seu Guest terá progresso salvo e acesso à experiência gratuita.</p><label className="field"><span>Nome</span><input autoFocus autoComplete="given-name" required minLength={2} maxLength={100} value={name} onChange={e=>setName(e.target.value)} disabled={busy}/></label></>:<><p>Enviado para <strong>{contact}</strong>.</p><label className="field"><span>Código de seis números</span><input autoFocus inputMode="numeric" pattern="[0-9]{6}" maxLength={6} required value={code} onChange={e=>setCode(e.target.value.replace(/\D/g,''))} placeholder="000000" autoComplete="one-time-code" disabled={busy}/></label></>}
+ {step==='name'?<><label className="field"><span>Nome</span><input autoFocus autoComplete="given-name" required minLength={2} maxLength={100} value={name} onChange={e=>setName(e.target.value)} disabled={busy}/></label><p className="name-helper">Seu contato já foi confirmado. Com seu nome, criamos seu acesso Guest com progresso salvo e acesso à experiência gratuita.</p></>:<><p>Enviado para <strong>{contact}</strong>.</p><label className="field"><span>Código de seis números</span><input autoFocus inputMode="numeric" pattern="[0-9]{6}" maxLength={6} required value={code} onChange={e=>setCode(e.target.value.replace(/\D/g,''))} placeholder="000000" autoComplete="one-time-code" disabled={busy}/></label></>}
  <button className="button button-primary" disabled={busy}>{busy?'Verificando…':step==='name'?'Começar como Guest':'Entrar no Coonto'}</button>
- <button type="button" className="link-button" disabled={busy||remaining>0} onClick={()=>void requestCode()}>{remaining>0?`Reenviar em ${remaining}s`:'Reenviar código'}</button><button type="button" className="link-button" disabled={busy} onClick={reset}>Corrigir e-mail ou celular</button></form>}
+ {step==='code'&&<button type="button" className="link-button" disabled={busy||remaining>0} onClick={()=>void requestCode()}>{remaining>0?`Reenviar em ${remaining}s`:'Reenviar código'}</button>}<button type="button" className="link-button" disabled={busy} onClick={reset}>{step==='name'?'Usar outro e-mail ou celular':'Corrigir e-mail ou celular'}</button></form>}
  {status&&<p className="form-status" role="status" aria-live="polite">{status}</p>}</div>;
 }
