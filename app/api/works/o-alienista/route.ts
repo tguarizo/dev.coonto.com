@@ -2,6 +2,7 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { ensureAlienistaEntitlement, getMember } from "@/lib/member";
 import { getAccessProfile } from "@/lib/access-control";
+import { query } from "@/lib/db";
 export const dynamic = "force-dynamic";
 export async function GET(request: Request) {
   const member = await getMember();
