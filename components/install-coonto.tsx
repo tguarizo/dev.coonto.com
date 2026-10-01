@@ -4,5 +4,13 @@ type InstallEvent=Event&{prompt:()=>Promise<void>;userChoice:Promise<{outcome:st
 export function InstallCoonto(){
  const[event,setEvent]=useState<InstallEvent|null>(null);const[installed,setInstalled]=useState(false);
  useEffect(()=>{setInstalled(window.matchMedia('(display-mode: standalone)').matches);const receive=(e:Event)=>{e.preventDefault();setEvent(e as InstallEvent);};const done=()=>{setInstalled(true);setEvent(null);};window.addEventListener('beforeinstallprompt',receive);window.addEventListener('appinstalled',done);return()=>{window.removeEventListener('beforeinstallprompt',receive);window.removeEventListener('appinstalled',done);};},[]);
- return <section className="coonto-install"><h2>Leve o Coonto com você</h2><p>Use pelo navegador no computador, tablet ou celular. Você também pode adicionar o Coonto à tela inicial.</p>{installed?<p>O Coonto já está aberto como aplicativo neste aparelho.</p>:event?<button className="button button-primary" onClick={async()=>{await event.prompt();const choice=await event.userChoice;if(choice.outcome==='accepted')setEvent(null);}}>Instalar Coonto</button>:<><p><strong>Android ou computador:</strong> abra o menu do Chrome ou Edge e procure “Instalar aplicativo” ou “Adicionar à tela inicial”.</p><p><strong>iPhone ou iPad:</strong> no Safari, toque em Compartilhar e em “Adicionar à Tela de Início”.</p></>}<p>Para ler sem internet, entre na obra e toque em <strong>Salvar neste aparelho</strong>. Aguarde a confirmação. O acesso à conta e a Ajuda Coonto precisam de internet.</p></section>;
+ return <section className="coonto-install">
+   <h2>Leve o Coonto com você</h2>
+   <p>Use pelo navegador no computador, tablet ou celular. Você também pode adicionar o Coonto à tela inicial.</p>
+   <p>Para continuar sem internet, autorize a obra neste aparelho. Seu progresso e o direito de acesso continuam vinculados à sua conta Coonto.</p>
+   {!event&&!installed&&<><p>Android ou computador: use o menu do Chrome ou Edge e escolha instalar o aplicativo.</p><p>iPhone ou iPad: no Safari, use Compartilhar → Adicionar à Tela de Início.</p></>}
+   <div className="coonto-install-action">
+     {installed?<span>Coonto já instalado neste aparelho.</span>:event?<button className="button button-primary" onClick={async()=>{await event.prompt();const choice=await event.userChoice;if(choice.outcome==='accepted')setEvent(null);}}>Instalar Coonto</button>:<span>Você pode instalar quando quiser pelo menu do navegador.</span>}
+   </div>
+ </section>;
 }
