@@ -436,3 +436,29 @@ button,input,textarea,select { font:inherit; }
 .home-version-footer{padding:14px 24px;text-align:center;background:#09162f;color:#8290aa;font-size:.72rem;letter-spacing:.04em;border-top:1px solid rgba(255,255,255,.08)}
 .journey-intro{padding-top:118px}
 @media(max-width:620px){.home-brand .brand-logo{width:128px}.home-brand>span{font-size:.55rem}.journey-intro{padding-top:104px}}
+
+
+/* V1.9.2: homepage mais leve, três painéis alinhados e áudio */
+@media(min-width:1100px){
+  .literary-screen{min-height:820px;display:flex}
+  .literary-screen-content{width:100%;align-self:stretch}
+  .literary-heading{min-height:150px}
+  .literary-play{align-self:start}
+}
+.literary-heading h2{font-size:clamp(2.7rem,5.1vw,5.95rem);font-weight:500;letter-spacing:-.04em}
+.literary-heading p{font-weight:400}
+.literary-play h3{font-size:clamp(1.28rem,2.1vw,1.98rem);font-weight:500;line-height:1.2}
+.literary-reveal>strong,.literary-author strong{font-weight:650}
+.literary-options button{font-weight:500}
+.literary-options b{font-weight:700}
+.literary-prompt-row{display:grid;grid-template-columns:1fr auto;gap:14px;align-items:start}
+.literary-prompt-row h3{margin:10px 0 22px}
+.literary-audio{display:inline-flex;align-items:center;gap:7px;margin-top:10px;padding:8px 11px;border:1px solid rgba(255,255,255,.22);border-radius:999px;background:rgba(255,255,255,.08);color:white;font-size:.78rem;font-weight:600;cursor:pointer}
+.literary-audio:hover,.literary-audio:focus-visible{border-color:#83e5e5;background:rgba(131,229,229,.14)}
+.literary-audio:disabled{opacity:.35;cursor:not-allowed}
+.coonto-install{display:flex;flex-direction:column}
+.coonto-install h2{font-weight:600}
+.coonto-install p{font-weight:400}
+.coonto-install-action{margin-top:22px;padding-top:18px;border-top:1px solid #dfe4ef;display:flex;justify-content:flex-end;align-items:center;gap:12px}
+.coonto-install-action>span{color:#667089;font-size:.9rem}
+@media(max-width:620px){.literary-prompt-row{grid-template-columns:1fr}.literary-audio{margin-top:-10px;margin-bottom:12px;width:max-content}.coonto-install-action{justify-content:flex-start}}
