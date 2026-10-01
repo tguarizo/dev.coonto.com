@@ -8,7 +8,7 @@ import tempfile
 
 def configure(path, settings):
     token = settings.get('token', '')
-    centre = str(settings.get('costCentre', '20275'))
+    centre = str(settings.get('costCentre', '20708'))
     if not isinstance(token, str) or not re.fullmatch(r'[A-Za-z0-9._~+/=-]+', token):
         raise ValueError('Invalid SMS token')
     if not re.fullmatch(r'[1-9][0-9]*', centre):
