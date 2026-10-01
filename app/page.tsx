@@ -1,5 +1,6 @@
 import { ArrowDown, ArrowRight, BookOpenCheck, Brain, Building2, Compass, GraduationCap, MessageCircle, MousePointerClick, Sparkles, WandSparkles } from "lucide-react";
 import { MobileSiteMenu } from "@/components/mobile-site-menu";
+import { HomepageDecisionDemo } from "@/components/homepage-decision-demo";
 import { getCommercialSettings } from "@/lib/commercial";
 
 export const dynamic = "force-dynamic";
@@ -73,19 +74,7 @@ export default async function Home() {
           </div>
         </div>
 
-        <div className="decision-demo" aria-label="Exemplo prático com O Alienista">
-          <div className="decision-demo-intro">
-            <span className="method-example-label"><span className="method-example-dot" />EXEMPLO · O ALIENISTA</span>
-            <strong>Itaguaí começa a reagir à Casa Verde. Se você estivesse no lugar de Bacamarte, o que faria?</strong>
-          </div>
-          <div className="decision-demo-options">
-            <span>A · Recuar e rever as internações</span>
-            <span>B · Manter os critérios</span>
-            <span>C · Ampliar as internações</span>
-          </div>
-          <div className="decision-demo-result"><strong>Você escolhe primeiro.</strong><span>Depois o Coonto mostra as consequências, revela o caminho de Machado e explica o que essa diferença ajuda a compreender.</span></div>
-          <a href="/obra/o-alienista">Quero experimentar <ArrowRight size={18} aria-hidden="true" /></a>
-        </div>
+        <HomepageDecisionDemo />
       </section>
 
       <section className="clarity-proof" aria-label="O que o Coonto é e o que ele não exige">
