@@ -493,3 +493,12 @@ button,input,textarea,select { font:inherit; }
 .reader-chapter-jump select{width:100%;min-height:40px;border:1px solid #29405f;border-radius:10px;background:#0f203d;color:#e8eef8;padding:0 9px;font-size:.78rem;cursor:pointer}
 @media(max-width:900px){.reader-chapter-jump>span{display:none}.reader-chapter-jump select{width:56px;padding:0 5px;font-size:.68rem}}
 @media(max-width:620px){.reader-chapter-jump{margin:0}.reader-chapter-jump select{width:94px;height:40px;min-height:40px}}
+
+
+/* V1.9.6: alinhamento dos três exemplos e tipografia mais leve */
+@media(min-width:1100px){
+  .literary-heading{min-height:188px;display:grid;grid-template-rows:auto 1.9em auto;align-content:start}
+  .literary-heading h2{height:1.9em;display:flex;align-items:flex-end;margin-top:8px}
+}
+.literary-step{font-size:.58rem;font-weight:750;letter-spacing:.11em}
+.literary-opening>span{font-size:.58rem}
