@@ -59,7 +59,8 @@ export function ExperienceFrame({ userId }: { userId: string }) {
       await navigator.serviceWorker.register("/sw.js");
       await Promise.race([navigator.serviceWorker.ready,new Promise((_,reject)=>setTimeout(()=>reject(new Error("A preparação demorou. Recarregue e tente novamente.")),15000))]);
       const work=await fetch("/api/works/o-alienista");if(!work.ok)throw new Error("Não foi possível baixar a obra.");
-      const cache=await caches.open("coonto-protected-v2");
+      let cache=await caches.open("coonto-protected-v2");
+      for(const file of await cache.keys()){const prior=await cache.match(file);const owner=prior?.headers.get("X-Coonto-User");if(owner&&owner!==userId){await caches.delete("coonto-protected-v2");cache=await caches.open("coonto-protected-v2");break;}}
       const shell=await fetch("/offline/reader.html");const text=await fetch("/offline/texto-o-alienista.html");
       if(!shell.ok||!text.ok)throw new Error("Não foi possível preparar todos os arquivos. Tente novamente.");
       await cache.put("/offline/reader.html",shell);await cache.put("/offline/texto-o-alienista.html",text);
@@ -75,7 +76,7 @@ export function ExperienceFrame({ userId }: { userId: string }) {
       <nav className="reader-rail-actions" aria-label="Ações da leitura">
         <label className="reader-chapter-jump"><span>Ir para capítulo</span><select defaultValue="" onChange={e=>{if(e.target.value)jumpChapter(e.target.value);e.target.value="";}}><option value="" disabled>Selecionar…</option>{["I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII","XIII"].map(n=><option key={n} value={n}>Capítulo {n}</option>)}</select></label>
         <a href="/minha-biblioteca"><Library size={18}/><span>Minha biblioteca</span></a>
-        <button onClick={prepareOffline} disabled={preparing}>{preparing?<RefreshCw size={18}/>:<Download size={18}/>}<span>{preparing?"Preparando…":offlineReady?"Atualizar offline":"Salvar neste aparelho"}</span></button>
+        <button onClick={prepareOffline} disabled={preparing}>{preparing?<RefreshCw size={18}/>:<Download size={18}/>}<span>{preparing?"Preparando…":offlineReady?"Atualizar offline":"Baixar neste aparelho"}</span></button>
         <button onClick={()=>setHelpOpen(true)}><CircleHelp size={18}/><span>Ajuda Coonto</span></button>
         <a href="/texto/o-alienista"><BookOpen size={18}/><span>Texto de Machado</span></a>
       </nav>

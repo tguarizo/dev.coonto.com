@@ -10,7 +10,9 @@ export async function getMember() {
   return user;
 }
 
-export async function ensureAlienistaEntitlement(userId: string) {
-  const result = await query<{ id: string }>("SELECT id FROM entitlements WHERE user_id = $1 AND work_slug = $2 AND status = 'active' AND (expires_at IS NULL OR expires_at > NOW()) LIMIT 1", [userId, ALIENISTA_SLUG]);
+export async function ensureWorkEntitlement(userId: string,slug:string) {
+  const result = await query<{ id: string }>("SELECT id FROM entitlements WHERE user_id = $1 AND work_slug = $2 AND status = 'active' AND (expires_at IS NULL OR expires_at > NOW()) LIMIT 1", [userId, slug]);
   return result.rows[0] ?? null;
 }
+
+export function ensureAlienistaEntitlement(userId:string){return ensureWorkEntitlement(userId,ALIENISTA_SLUG);}

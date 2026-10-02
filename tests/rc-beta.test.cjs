@@ -92,3 +92,33 @@ test('origem pública é validada atrás do proxy sem aceitar outro domínio',()
  assert.equal(origin.sameRequestOrigin(new Request('http://localhost:3000/api/rc',{headers:{...headers,origin:'https://evil.test'}})),false);
  assert.equal(origin.sameRequestOrigin(new Request('http://localhost:3000/api/rc',{headers:{...headers,origin:'null'}})),false);
 });
+
+test('pedido gratuito permite escolher qualquer das três obras, sem duplicar pedidos ou liberar outra conta',async()=>{
+ const works=load('lib/free-works.ts'),events=[];
+ const checkout=load('app/api/checkout/free/route.ts',{'@/lib/auth':auth,'@/lib/db':dbMock,'@/lib/free-works':works,'@/lib/request-origin':origin,'@/lib/crm-events':{recordCrmEvent:async e=>events.push(e)}});
+ user=null;assert.equal((await checkout.POST(request({workSlug:'memorias-de-martha'}))).status,401);
+ user=account('B');assert.equal((await checkout.POST(request({workSlug:'dom-casmurro'}))).status,400);assert.equal((await checkout.POST(request({workSlug:'memorias-de-martha',userId:'A'}))).status,400);assert.equal((await checkout.POST(request({workSlug:'memorias-de-martha'},'https://evil.test'))).status,403);
+ for(const work of works.freeWorks){const response=await checkout.POST(request({workSlug:work.slug}));assert.equal(response.status,200);assert.equal((await response.json()).totalCents,0);assert.equal((await checkout.POST(request({workSlug:work.slug}))).status,200);}
+ assert.equal((await query('SELECT * FROM free_orders WHERE user_id=$1',['B'])).rows.length,3);
+ assert.equal((await query("SELECT * FROM entitlements WHERE user_id='B' AND status='active'")).rows.length,3);
+ assert.equal((await query("SELECT * FROM free_orders WHERE user_id='A'")).rows.length,0);
+});
+test('licença offline usa a obra escolhida, compartilha limite de aparelhos e não contorna revogação',async()=>{
+ const works=load('lib/free-works.ts'),member=load('lib/member.ts',{'@/lib/auth':auth,'@/lib/db':dbMock});
+ const route=load('app/api/offline-license/route.ts',{'@/lib/member':member,'@/lib/free-works':works,'@/lib/request-origin':origin,'@/lib/transaction':{transaction:async callback=>callback({query})}});
+ user=account('A');assert.equal((await route.POST(request({workSlug:'memorias-de-martha',deviceId:'fixture-111'}))).status,403);
+ user=account('B');for(const slug of works.freeWorks.map(w=>w.slug))assert.equal((await route.POST(request({workSlug:slug,deviceId:'fixture-111'}))).status,200);
+ assert.equal((await query("SELECT * FROM offline_licenses WHERE user_id='B'")).rows.length,3);
+ assert.equal((await route.POST(request({workSlug:'memorias-de-martha',deviceId:'fixture-222'}))).status,200);
+ assert.equal((await route.POST(request({workSlug:'memorias-de-martha',deviceId:'fixture-333'}))).status,409);
+ await query("UPDATE member_devices SET revoked=TRUE WHERE user_id='B' AND client_device_id='fixture-111'");
+ assert.equal((await route.POST(request({workSlug:'memorias-de-martha',deviceId:'fixture-333'}))).status,200);
+ assert.equal((await route.POST(request({workSlug:'memorias-de-martha',deviceId:'fixture-111'}))).status,409);
+});
+test('download RC exige acesso da própria conta e preserva as notas somente do proprietário',async()=>{
+ const member=load('lib/member.ts',{'@/lib/auth':auth,'@/lib/db':dbMock}),offline=load('lib/rc-offline.ts');
+ const route=load('app/api/works/rc/[slug]/route.ts',{'@/lib/auth':auth,'@/lib/member':member,'@/lib/rc-content':content,'@/lib/rc-schema':schema,'@/lib/db':dbMock,'@/lib/rc-offline':offline,'@/content/inferno-i-verses.json':require('../content/inferno-i-verses.json')});
+ user=null;assert.equal((await route.GET(new Request('https://coonto.test'),context('memorias-de-martha'))).status,401);
+ user=account('A');assert.equal((await route.GET(new Request('https://coonto.test'),context('memorias-de-martha'))).status,403);
+ user=account('B');const response=await route.GET(new Request('https://coonto.test'),context('memorias-de-martha'));assert.equal(response.status,200);assert.equal(response.headers.get('X-Coonto-User'),'B');assert.equal(response.headers.get('Cache-Control'),'private, no-store');const html=await response.text();assert.ok(html.includes('rc-phone'));assert.equal(html.includes('Nota privada da conta A'),false);
+});

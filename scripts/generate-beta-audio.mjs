@@ -12,6 +12,7 @@ const voice=s=>s==='narrator'?narrator:s==='previous-narrator'?process.env.ELEVE
 const load=async name=>JSON.parse(await readFile('content/'+name+'.json','utf8'));
 const manifestPath=path.join(output,'beta-audio-manifest.json');let manifest={items:{},attempts:[]};try{manifest=JSON.parse(await readFile(manifestPath,'utf8'));}catch{}
 const items=[];
+for(const item of await load('coonto-video-audio'))items.push({key:'videos/'+item.id,segments:[{speaker:'narrator',text:item.text}]});
 for(const item of await load('home-example-audio'))items.push({key:'home-examples/'+item.id,segments:[{speaker:item.speaker||'narrator',text:item.text}]});
 for(const slug of ['memorias-de-martha','divina-comedia-canto-i']){
  let work=await load('rc-'+slug);
@@ -22,7 +23,7 @@ let workAudio=await load('o-alienista-audio');
 if(process.env.DATABASE_URL){const pool=new pg.Pool({connectionString:process.env.DATABASE_URL});try{const result=await pool.query("SELECT scene_id,segments FROM coonto_audio_jobs WHERE work_slug='o-alienista' AND status='published'");const published=new Map(result.rows.map(r=>[r.scene_id,r.segments]));workAudio=workAudio.map(s=>({...s,segments:published.get(s.id)||s.segments}));}finally{await pool.end();}}
 for(const item of workAudio)items.push({key:'o-alienista/'+item.id,segments:item.segments.map(s=>({speaker:s.speaker,text:s.text}))});
 for(const item of items){item.segments=item.segments.map(s=>({...s,voiceId:voice(s.speaker)}));item.hash=createHash('sha256').update(JSON.stringify({model,segments:item.segments})).digest('hex');item.characters=item.segments.reduce((sum,s)=>sum+s.text.length,0);}
-const selectedWork=process.argv.find(arg=>arg.startsWith('--work='))?.slice(7);if(selectedWork&&!['home-examples','o-alienista','memorias-de-martha','divina-comedia-canto-i'].includes(selectedWork))throw new Error('Obra inválida.');
+const selectedWork=process.argv.find(arg=>arg.startsWith('--work='))?.slice(7);if(selectedWork&&!['home-examples','o-alienista','memorias-de-martha','divina-comedia-canto-i','videos'].includes(selectedWork))throw new Error('Obra inválida.');
 const pending=[];for(const item of items.filter(item=>!selectedWork||item.key.startsWith(selectedWork+'/'))){let exists=false;try{await access(path.join(output,item.key+'.mp3'));exists=true;}catch{}if(manifest.items[item.key]?.hash===item.hash&&manifest.items[item.key]?.status==='ready'&&exists)continue;pending.push(item);}
 console.log(`Áudio beta: ${pending.length} arquivos a atualizar, ${pending.reduce((n,i)=>n+i.characters,0)} caracteres. Voz Coonto: ${narrator}.`);
 if(!generate)process.exit(0);
@@ -59,7 +60,7 @@ try{
    try{await copyFile(target,path.join(history,manifest.items[item.key]?.hash||'pre-beta2')+'.mp3');}catch(error){if(error.code!=='ENOENT')throw error;}
    await copyFile(combined,path.join(history,item.hash+'.mp3'));await rename(combined,target);
    let jobId=null;
-   if(client&&!item.key.startsWith('home-examples/')){jobId=randomUUID();await copyFile(target,path.join(output,'drafts',jobId+'.mp3'));const [workSlug,sceneId]=item.key.split('/');await client.query('BEGIN');try{await client.query("UPDATE coonto_audio_jobs SET status='ready',updated_at=NOW() WHERE work_slug=$1 AND scene_id=$2 AND status='published'",[workSlug,sceneId]);await client.query("INSERT INTO coonto_audio_jobs(id,work_slug,scene_id,segments,model,characters,status,generation_source) VALUES($1,$2,$3,$4::jsonb,$5,$6,'published','beta-script')",[jobId,workSlug,sceneId,JSON.stringify(item.segments),model,item.characters]);await client.query('COMMIT');}catch(error){await client.query('ROLLBACK');throw error;}}
+   if(client&&!item.key.startsWith('home-examples/')&&!item.key.startsWith('videos/')){jobId=randomUUID();await copyFile(target,path.join(output,'drafts',jobId+'.mp3'));const [workSlug,sceneId]=item.key.split('/');await client.query('BEGIN');try{await client.query("UPDATE coonto_audio_jobs SET status='ready',updated_at=NOW() WHERE work_slug=$1 AND scene_id=$2 AND status='published'",[workSlug,sceneId]);await client.query("INSERT INTO coonto_audio_jobs(id,work_slug,scene_id,segments,model,characters,status,generation_source) VALUES($1,$2,$3,$4::jsonb,$5,$6,'published','beta-script')",[jobId,workSlug,sceneId,JSON.stringify(item.segments),model,item.characters]);await client.query('COMMIT');}catch(error){await client.query('ROLLBACK');throw error;}}
    manifest.items[item.key]={jobId,hash:item.hash,status:'ready',model,segments:item.segments.map(s=>({speaker:s.speaker,voiceId:s.voiceId})),characters:item.characters,generatedAt:new Date().toISOString()};await saveManifest();console.log(item.key+': atualizado e versionado.');
   }finally{await rm(temporary,{recursive:true,force:true});}
  }

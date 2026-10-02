@@ -69,7 +69,7 @@ jobs:
         run: |
           case "$DEPLOY_PATH" in *[!a-zA-Z0-9_./-]*) echo 'Invalid deployment path'; exit 1;; esac
           PROJECT_NAME="coonto-$(basename "$DEPLOY_PATH")"
-          ssh -o StrictHostKeyChecking=no ${SERVER_USER}@${SERVER_HOST} "cd '$DEPLOY_PATH' && sudo docker compose -p '$PROJECT_NAME' exec -T app node scripts/generate-beta-audio.mjs --generate"
+          ssh -o StrictHostKeyChecking=no ${SERVER_USER}@${SERVER_HOST} "cd '$DEPLOY_PATH' && sudo docker compose -p '$PROJECT_NAME' exec -T app node scripts/generate-beta-audio.mjs --generate && sudo docker compose -p '$PROJECT_NAME' exec -T app node scripts/prepare-beta-video.mjs"
 
       - name: Notify configuration needed
         if: env.SSH_PRIVATE_KEY == ''

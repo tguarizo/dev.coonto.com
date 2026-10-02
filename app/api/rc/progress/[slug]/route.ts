@@ -12,7 +12,7 @@ export async function GET(_request:Request,{params}:Context){
  const slug=rcSlugSchema.safeParse((await params).slug);if(!slug.success)return Response.json({error:'Obra inválida'},{status:404});
  const user=await getCurrentUser();if(!user)return Response.json({error:'Entre para salvar na conta'},{status:401,headers:privateHeaders});
  const rows=await query<{state_json:unknown;revision:number;content_version:string}>("SELECT state_json,revision,content_version FROM rc_learning_progress WHERE user_id=$1 AND work_slug=$2",[user.userId,slug.data]);
- return Response.json({progress:rows.rows[0]?{state:rows.rows[0].state_json,revision:rows.rows[0].revision,contentVersion:rows.rows[0].content_version}:null},{headers:privateHeaders});
+ return Response.json({userId:user.userId,progress:rows.rows[0]?{state:rows.rows[0].state_json,revision:rows.rows[0].revision,contentVersion:rows.rows[0].content_version}:null},{headers:privateHeaders});
 }
 export async function POST(request:Request,{params}:Context){
  const slug=rcSlugSchema.safeParse((await params).slug);if(!slug.success)return Response.json({error:'Obra inválida'},{status:404});

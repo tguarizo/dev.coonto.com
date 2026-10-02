@@ -6,5 +6,5 @@ import {getRcWork} from '@/lib/rc-content';
 export const dynamic='force-dynamic';
 export default async function Page(){
  const [work,user]=await Promise.all([getRcWork('divina-comedia-canto-i'),getCurrentUser()]);
- return <main className="page"><SiteHeader/><div className="content member-page"><RcLiteraryExperience work={work} signedIn={Boolean(user)}/></div><SiteFooter/></main>;
+ return <main className="reader-page"><link rel="stylesheet" href="/rc-reader.css"/><SiteHeader/><RcLiteraryExperience work={work} signedIn={Boolean(user)}/></main>;
 }
