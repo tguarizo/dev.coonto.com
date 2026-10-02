@@ -1,14 +1,62 @@
 [
   {
-    "id": "alienista",
-    "text": "O Alienista. Itaguaí começa a reagir à Casa Verde. Se você estivesse no lugar de Bacamarte, o que faria? Recuaria e reveria as internações? Manteria os critérios? Ou ampliaria as internações?"
+    "id": "alienista-title",
+    "text": "O Alienista.",
+    "speaker": "previous-narrator"
   },
   {
-    "id": "dom-casmurro",
-    "text": "Dom Casmurro. Você começa a desconfiar de alguém que ama, mas não tem uma prova definitiva. O que faz? Confia e segue em frente? Observa em silêncio? Ou confronta imediatamente?"
+    "id": "alienista-opening",
+    "text": "Antes de decidir. O que é: Uma novela de Machado de Assis sobre ciência, normalidade e poder. Onde você está: Itaguaí. Simão Bacamarte criou a Casa Verde e seus critérios começam a alcançar cada vez mais pessoas. Observe: Quem decide o que é normal — e o que acontece quando essa definição ganha poder.",
+    "speaker": "narrator"
   },
   {
-    "id": "divina-comedia",
-    "text": "A Divina Comédia. Você se vê perdido diante de um caminho escuro e desconhecido. Como decide avançar? Recua e procura outro caminho? Segue sozinho? Ou aceita a orientação de um guia?"
+    "id": "alienista-situation",
+    "text": "Itaguaí começa a reagir à Casa Verde. Se você estivesse no lugar de Bacamarte, o que faria? Recuaria e reveria as internações. Manteria os critérios. Ampliaria as internações.",
+    "speaker": "previous-narrator"
+  },
+  {
+    "id": "alienista-comment",
+    "text": "Ao decidir antes de Bacamarte, você percebe com mais força o conflito entre ciência, poder e loucura. É a comparação entre a sua escolha e a de Machado que transforma interpretação em experiência.",
+    "speaker": "narrator"
+  },
+  {
+    "id": "dom-casmurro-title",
+    "text": "Dom Casmurro.",
+    "speaker": "previous-narrator"
+  },
+  {
+    "id": "dom-casmurro-opening",
+    "text": "Antes de decidir. O que é: Um romance de Machado de Assis construído pela memória de Bentinho e pela dúvida. Onde você está: Você entra no ponto central da tensão: existe suspeita, mas não existe prova conclusiva. Observe: Como memória, ciúme e ponto de vista podem transformar dúvida em certeza.",
+    "speaker": "narrator"
+  },
+  {
+    "id": "dom-casmurro-situation",
+    "text": "Você começa a desconfiar de alguém que ama, mas não tem uma prova definitiva. O que faz? Confia e segue em frente. Observa em silêncio. Confronta imediatamente.",
+    "speaker": "previous-narrator"
+  },
+  {
+    "id": "dom-casmurro-comment",
+    "text": "Quando você precisa agir sem certeza, sente na prática o mecanismo central do romance: a ambiguidade. O Coonto não resolve a dúvida por você; faz você experimentar por que ela importa.",
+    "speaker": "narrator"
+  },
+  {
+    "id": "divina-comedia-title",
+    "text": "A Divina Comédia.",
+    "speaker": "previous-narrator"
+  },
+  {
+    "id": "divina-comedia-opening",
+    "text": "Antes de decidir. O que é: A jornada de Dante por Inferno, Purgatório e Paraíso, guiada por encontros e consequências. Onde você está: Dante começa perdido em uma selva escura e precisa decidir como atravessar um mundo que ainda não compreende. Observe: Como a orientação, as escolhas e as consequências dão sentido à travessia.",
+    "speaker": "narrator"
+  },
+  {
+    "id": "divina-comedia-situation",
+    "text": "Você se vê perdido diante de um caminho escuro e desconhecido. Como decide avançar? Recua e procura outro caminho. Segue sozinho. Aceita a orientação de um guia.",
+    "speaker": "previous-narrator"
+  },
+  {
+    "id": "divina-comedia-comment",
+    "text": "Ao escolher como atravessar o desconhecido, uma obra distante deixa de ser apenas um monumento literário. Ela vira uma jornada que você consegue relacionar com uma decisão concreta.",
+    "speaker": "narrator"
   }
 ]

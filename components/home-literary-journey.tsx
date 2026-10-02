@@ -2,13 +2,13 @@
 import {COONTO_VERSION} from "@/lib/version";
 
 import { ArrowDown, ArrowRight, BookOpenCheck, Brain, Compass, Pause, Play, RotateCcw, Sparkles } from "lucide-react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CatalogArt } from "@/components/catalog-art";
 
 type WorkKey = "alienista" | "dom-casmurro" | "divina-comedia";
 type Choice = { id:string; label:string; consequence:string };
 
-const works: Array<{
+export const works: Array<{
   key:WorkKey; eyebrow:string; title:string; author:string; image:number; prompt:string;
   opening:{about:string;where:string;observe:string}; choices:Choice[]; authorPath:string; comment:string; next?:string;
 }> = [
@@ -55,19 +55,25 @@ const works: Array<{
 export function HomeLiteraryJourney(){
   const [answers,setAnswers]=useState<Partial<Record<WorkKey,string>>>({});
   const [active,setActive]=useState<WorkKey>("alienista");
-  const [playing,setPlaying]=useState<WorkKey|null>(null);
+  const [playing,setPlaying]=useState<string|null>(null);
   const audioRef=useRef<HTMLAudioElement|null>(null);
 
   function choose(work:WorkKey,id:string){setAnswers(prev=>({...prev,[work]:id}));}
   function goNext(index:number){const next=works[index+1];if(!next)return;setActive(next.key);requestAnimationFrame(()=>document.getElementById(next.key)?.scrollIntoView({behavior:"smooth",block:"start"}));}
-  function toggleAudio(key:WorkKey){
+  useEffect(()=>()=>{audioRef.current?.pause();},[]);
+  function toggleAudio(key:string){
     if(playing===key){audioRef.current?.pause();audioRef.current=null;setPlaying(null);return;}
     audioRef.current?.pause();
-    const audio=new Audio("/api/audio/home/"+key+"?v="+encodeURIComponent(COONTO_VERSION));
+    const audio=new Audio("/api/audio/home/"+key+"?v="+encodeURIComponent(COONTO_VERSION+"-home-sections-1"));
     audioRef.current=audio;setPlaying(key);
     const done=()=>{if(audioRef.current===audio)audioRef.current=null;setPlaying(current=>current===key?null:current);};
     audio.onended=done;audio.onerror=done;
     void audio.play().catch(done);
+  }
+
+  function audioButton(work:WorkKey,section:string,label:string){
+    const key=work+"-"+section, isPlaying=playing===key;
+    return <button type="button" className="literary-audio" onClick={()=>toggleAudio(key)} aria-label={(isPlaying?"Pausar: ":"Ouvir: ")+label} aria-pressed={isPlaying} title={(isPlaying?"Pausar: ":"Ouvir: ")+label}>{isPlaying?<Pause size={13}/>:<Play size={13}/>}</button>;
   }
 
   return <div className="home-journey">
@@ -86,14 +92,14 @@ export function HomeLiteraryJourney(){
         <div className="literary-screen-shade"/>
         <div className="literary-screen-content">
           <div className="literary-heading">
-            <span>{work.eyebrow}</span>
+            <div className="literary-label-row"><span>{work.eyebrow}</span>{audioButton(work.key,"title",work.title)}</div>
             <h2>{work.title}</h2>
             <p>{work.author}</p>
           </div>
           <div className="literary-play">
-            <div className="literary-opening"><span>ANTES DE DECIDIR</span><p><strong>O que é:</strong> {work.opening.about}</p><p><strong>Onde você está:</strong> {work.opening.where}</p><p><strong>Observe:</strong> {work.opening.observe}</p></div>
-            <span className="literary-step">ENTRE NA SITUAÇÃO</span>
-            <div className="literary-prompt-row"><h3>{work.prompt}</h3><button type="button" className="literary-audio" onClick={()=>toggleAudio(work.key)} aria-label={playing===work.key?"Pausar narração":"Ouvir narração"}>{playing===work.key?<Pause size={17}/>:<Play size={17}/>}<span>{playing===work.key?"Pausar":"Ouvir"}</span></button></div>
+            <div className="literary-opening"><div className="literary-label-row"><span>ANTES DE DECIDIR</span>{audioButton(work.key,"opening","Antes de decidir — "+work.title)}</div><p><strong>O que é:</strong> {work.opening.about}</p><p><strong>Onde você está:</strong> {work.opening.where}</p><p><strong>Observe:</strong> {work.opening.observe}</p></div>
+            <div className="literary-label-row"><span className="literary-step">ENTRE NA SITUAÇÃO</span>{audioButton(work.key,"situation","Entre na situação — "+work.title)}</div>
+            <h3>{work.prompt}</h3>
             {!answer ? <div className="literary-options" role="group" aria-label={`Escolhas em ${work.title}`}>
 
               {work.choices.map(choice=><button key={choice.id} type="button" disabled={!unlocked} onClick={()=>choose(work.key,choice.id)}><b>{choice.id}</b><span>{choice.label}</span></button>)}
@@ -108,7 +114,7 @@ export function HomeLiteraryJourney(){
               </div>
               <div className="literary-comment">
                 <Sparkles size={18}/>
-                <div><small>COMENTÁRIO COONTO</small><p>{work.comment}</p></div>
+                <div><div className="literary-label-row"><small>COMENTÁRIO COONTO</small>{audioButton(work.key,"comment","Comentário Coonto — "+work.title)}</div><p>{work.comment}</p></div>
               </div>
               <div className="literary-actions">
                 <button type="button" className="literary-reset" onClick={()=>setAnswers(prev=>({...prev,[work.key]:undefined}))}><RotateCcw size={16}/>Escolher novamente</button>

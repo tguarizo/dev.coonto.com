@@ -50,3 +50,10 @@ Primeira entrega: **1.9.6-beta.1**. Esta entrega inicia a revisão; o Beta RC co
 ## Validação desta entrega
 
 Executar typecheck, build, reprodução/controle dos dois vídeos, navegação das seis etapas de cada percurso, ajuda e retorno em desktop/mobile. Confirmar versão pública após deploy da branch develop.
+
+## Correção da home após revisão
+
+- Corrigida a altura reservada aos títulos em três colunas; autor aparece abaixo do título sem sobreposição.
+- Plays discretos e acessíveis por trecho, com reprodução exclusiva.
+- Nome da obra e situação usam `ELEVENLABS_NARRATOR_VOICE_ID`, a configuração original. Antes de decidir e comentário usam a última voz Coonto. São 12 trechos, 2.025 caracteres novos; arquivos anteriores preservados. URLs invalidam o cache dos exemplos anteriores.
+- Simulação verifica as duas vozes, os 12 arquivos e a repetição sem consumo.

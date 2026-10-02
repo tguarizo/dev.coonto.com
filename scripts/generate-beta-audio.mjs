@@ -8,11 +8,11 @@ const generate=process.argv.includes('--generate'),retry=process.argv.includes('
 const output=path.resolve(process.env.COONTO_AUDIO_DIR||'audio');
 const model=process.env.ELEVENLABS_MODEL_ID||'eleven_multilingual_v2';
 const narrator=process.env.ELEVENLABS_COONTO_VOICE_ID||'czvzJwIVS2asEKnthV40';
-const voice=s=>s==='narrator'?narrator:process.env.ELEVENLABS_BACAMARTE_VOICE_ID;
+const voice=s=>s==='narrator'?narrator:s==='previous-narrator'?process.env.ELEVENLABS_NARRATOR_VOICE_ID:process.env.ELEVENLABS_BACAMARTE_VOICE_ID;
 const load=async name=>JSON.parse(await readFile('content/'+name+'.json','utf8'));
 const manifestPath=path.join(output,'beta-audio-manifest.json');let manifest={items:{},attempts:[]};try{manifest=JSON.parse(await readFile(manifestPath,'utf8'));}catch{}
 const items=[];
-for(const item of await load('home-example-audio'))items.push({key:'home-examples/'+item.id,segments:[{speaker:'narrator',text:item.text}]});
+for(const item of await load('home-example-audio'))items.push({key:'home-examples/'+item.id,segments:[{speaker:item.speaker||'narrator',text:item.text}]});
 for(const slug of ['memorias-de-martha','divina-comedia-canto-i']){
  let work=await load('rc-'+slug);
  if(process.env.DATABASE_URL){const pool=new pg.Pool({connectionString:process.env.DATABASE_URL});try{const result=await pool.query("SELECT content FROM rc_content_versions WHERE work_slug=$1 AND status='published'",[slug]);if(result.rows[0])work=result.rows[0].content;}finally{await pool.end();}}
@@ -27,6 +27,7 @@ const pending=[];for(const item of items.filter(item=>!selectedWork||item.key.st
 console.log(`Áudio beta: ${pending.length} arquivos a atualizar, ${pending.reduce((n,i)=>n+i.characters,0)} caracteres. Voz Coonto: ${narrator}.`);
 if(!generate)process.exit(0);
 if(!pending.length)process.exit(0);
+if(pending.some(i=>i.segments.some(s=>s.speaker==='previous-narrator'))){if(voice('previous-narrator')===narrator)throw new Error('A voz original e a voz Coonto precisam ser distintas.');console.log('Voz original dos títulos e situações: '+voice('previous-narrator'));}
 if(!process.env.ELEVENLABS_API_KEY||pending.some(i=>i.segments.some(s=>!s.voiceId)))throw new Error('Chave ou voz ausente; nenhuma geração iniciada.');
 if(pending.some(i=>i.segments.length>1)&&spawnSync('ffmpeg',['-version'],{stdio:'ignore'}).status!==0)throw new Error('ffmpeg indisponível; nenhuma geração iniciada.');
 await mkdir(output,{recursive:true});

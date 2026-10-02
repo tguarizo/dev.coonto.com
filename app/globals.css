@@ -495,11 +495,21 @@ button,input,textarea,select { font:inherit; }
 @media(max-width:620px){.reader-chapter-jump{margin:0}.reader-chapter-jump select{width:94px;height:40px;min-height:40px}}
 
 
-/* V1.9.6: alinhamento dos três exemplos e tipografia mais leve */
+/* Home: reserve two title lines using the title's own font size. */
 @media(min-width:1100px){
-  .literary-heading{min-height:188px;display:grid;grid-template-rows:auto 1.9em auto;align-content:start}
-  .literary-heading h2{height:1.9em;display:flex;align-items:flex-end;margin-top:8px}
+  .literary-heading{--literary-title-size:clamp(2.4rem,4.5vw,5.3rem);min-height:0;display:grid;grid-template-rows:28px calc(var(--literary-title-size) * 2.1) 24px;gap:12px;align-content:start}
+  .literary-heading h2{font-size:var(--literary-title-size);height:auto;min-width:0;display:flex;align-items:flex-end;margin:0;line-height:1.02}
+  .literary-heading p{margin:0;align-self:start}
 }
+.literary-label-row{display:flex;align-items:center;justify-content:space-between;gap:10px;min-width:0}
+.literary-heading .literary-label-row>span{font-size:.72rem;font-weight:900;letter-spacing:.13em;color:#8ee7ea}
+.literary-opening .literary-label-row{margin-bottom:8px}
+.literary-opening .literary-label-row>span{color:#83e5e5;font-size:.58rem;font-weight:750;letter-spacing:.11em}
+.literary-comment .literary-label-row small{margin-bottom:0}
+.literary-comment .literary-label-row{margin-bottom:5px}
+.literary-audio{flex:0 0 30px;width:30px;height:30px;min-height:30px;display:inline-flex;justify-content:center;align-items:center;margin:0;padding:0;border:0;border-radius:50%;background:transparent;color:#a6bdc9;cursor:pointer}
+.literary-audio:hover,.literary-audio:focus-visible{color:#83e5e5;background:rgba(131,229,229,.1);outline:1px solid #83e5e5}
+@media(max-width:620px){.literary-audio{margin:0;width:36px;height:36px;flex-basis:36px}}
 .literary-step{font-size:.576rem;font-weight:750;letter-spacing:.11em}
 .literary-opening>span{font-size:.58rem}
 
