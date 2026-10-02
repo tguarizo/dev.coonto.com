@@ -1,6 +1,7 @@
 import { HomeLiteraryJourney } from "@/components/home-literary-journey";
 import { MobileSiteMenu } from "@/components/mobile-site-menu";
 import { COONTO_VERSION } from "@/lib/version";
+import { CoontoVideos } from "@/components/coonto-videos";
 
 export const dynamic = "force-dynamic";
 
@@ -21,6 +22,7 @@ export default function Home(){
       </nav><MobileSiteMenu/>
     </header>
     <HomeLiteraryJourney/>
+    <CoontoVideos/>
     <footer className="home-version-footer">Coonto v{COONTO_VERSION}</footer>
   </main>;
 }

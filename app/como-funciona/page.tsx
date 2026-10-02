@@ -1,6 +1,7 @@
 import {SiteHeader} from '@/components/site-header';
 import {SiteFooter} from '@/components/site-footer';
 import {InstallCoonto} from '@/components/install-coonto';
+import {CoontoVideos} from '@/components/coonto-videos';
 
 export default function ComoFunciona(){
   return <main className="page"><SiteHeader/><div className="content explain-coonto">
@@ -19,6 +20,7 @@ export default function ComoFunciona(){
     <p>Imagine uma situação: Itaguaí começa a reagir às decisões de Bacamarte. O Coonto pergunta o que você faria. Você escolhe. A experiência mostra o que essa decisão poderia provocar. Só então você descobre o caminho seguido por Machado de Assis e recebe contexto para entender a diferença.</p>
     <div className="coonto-use-moments"><article><h3>Antes da leitura</h3><p>Entre no livro com uma pergunta e curiosidade sobre o que acontecerá.</p></article><article><h3>Durante a leitura</h3><p>Compare suas decisões com a obra enquanto acompanha os acontecimentos.</p></article><article><h3>Depois da leitura</h3><p>Revisite conflitos decisivos para compreender e lembrar melhor o que leu.</p></article></div>
     <p><strong>O Coonto não substitui o livro e não exige debate. Ele cria uma razão pessoal para querer descobrir o caminho do autor.</strong></p>
+    <CoontoVideos/>
     <InstallCoonto/><p><a href="/ajuda">Precisa de orientação? Abra a Ajuda Coonto.</a></p>
   </div><SiteFooter/></main>;
 }

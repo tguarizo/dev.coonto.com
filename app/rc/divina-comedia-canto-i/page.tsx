@@ -16,6 +16,6 @@ const steps=[
 
 export default function DivinaCantoIRc(){
   return <main className="page"><SiteHeader/><div className="content member-page">
-    <RcLiteraryExperience title="A Divina Comédia · Inferno, Canto I" author="Dante Alighieri · tradução de José Pedro Xavier Pinheiro" intro="Experiência completa de um canto para testar o Coonto fora da literatura brasileira e fora de Machado de Assis." steps={steps}/>
+    <RcLiteraryExperience title="A Divina Comédia · Inferno, Canto I" author="Dante Alighieri · tradução de José Pedro Xavier Pinheiro" intro="Percurso inicial em revisão editorial. Leia o canto completo pelo link do texto original e teste a experiência com Dante." steps={steps}/>
   </div><SiteFooter/></main>;
 }
