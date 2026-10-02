@@ -10,7 +10,7 @@ export const audioInput=z.object({sceneId:z.string().regex(/^(?:s(?:[0-9]|[1-3][
 export type AudioInput=z.infer<typeof audioInput>;
 export type AudioJob={id:string;scene_id:string;segments:AudioInput['segments'];model:string;characters:number;requested_characters:number;status:string;error_message:string;created_at:string;updated_at:string};
 export class AudioError extends Error {}
-export function voiceId(speaker:'narrator'|'bacamarte') {return speaker==='narrator'?process.env.ELEVENLABS_NARRATOR_VOICE_ID:process.env.ELEVENLABS_BACAMARTE_VOICE_ID;}
+export function voiceId(speaker:'narrator'|'bacamarte') {return speaker==='narrator'?(process.env.ELEVENLABS_COONTO_VOICE_ID||'czvzJwIVS2asEKnthV40'):process.env.ELEVENLABS_BACAMARTE_VOICE_ID;}
 export function draftPath(id:string){if(!z.string().uuid().safeParse(id).success)throw new AudioError('Áudio inválido.');return path.join(audioDirectory(),'drafts',id+'.mp3');}
 export async function audioWritable(){try{await mkdir(audioDirectory(),{recursive:true});await access(audioDirectory(),constants.W_OK);return true;}catch{return false;}}
 function ffmpeg(args:string[]){return new Promise<void>((resolve,reject)=>{const process=spawn('ffmpeg',args,{stdio:'ignore'});const timer=setTimeout(()=>process.kill('SIGKILL'),30000);process.once('error',()=>{clearTimeout(timer);reject(new AudioError('Não foi possível combinar as vozes.'));});process.once('close',code=>{clearTimeout(timer);code===0?resolve():reject(new AudioError('Não foi possível combinar as vozes.'));});});}
