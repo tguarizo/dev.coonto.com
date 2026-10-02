@@ -16,6 +16,7 @@ export default function Home(){
         <a href="/como-funciona">O que é o Coonto?</a>
         <a href="/para-educadores">Educadores</a>
         <a href="/pesquisa">Pesquisa</a>
+        <a href="/ajuda">Ajuda</a>
         <a href="/login?return_to=%2Fminha-biblioteca">Entrar</a>
       </nav><MobileSiteMenu/>
     </header>
