@@ -20,7 +20,7 @@ for(const scene of scenes){
  if(scene.segments.length>1&&spawnSync('ffmpeg',['-version'],{stdio:'ignore'}).status!==0)throw new Error('ffmpeg é necessário para unir trechos de duas vozes.');
  await mkdir(output,{recursive:true});const pieces=[];
  for(let i=0;i<scene.segments.length;i++){
-  const segment=scene.segments[i];const voice=segment.speaker==='bacamarte'?process.env.ELEVENLABS_BACAMARTE_VOICE_ID:segment.speaker==='narrator'?process.env.ELEVENLABS_NARRATOR_VOICE_ID:null;
+  const segment=scene.segments[i];const voice=segment.speaker==='bacamarte'?process.env.ELEVENLABS_BACAMARTE_VOICE_ID:segment.speaker==='narrator'?(process.env.ELEVENLABS_COONTO_VOICE_ID||'czvzJwIVS2asEKnthV40'):null;
   if(!voice)throw new Error(`Configure a voz de ${segment.speaker}.`);
   const response=await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${encodeURIComponent(voice)}?output_format=mp3_44100_128`,{method:'POST',headers:{'xi-api-key':process.env.ELEVENLABS_API_KEY,'Content-Type':'application/json'},body:JSON.stringify({text:segment.text,model_id:model,language_code:'pt',voice_settings:{stability:0.5,similarity_boost:0.75}}),signal:AbortSignal.timeout(60000)});
   if(!response.ok)throw new Error(`ElevenLabs respondeu ${response.status}; geração interrompida.`);
