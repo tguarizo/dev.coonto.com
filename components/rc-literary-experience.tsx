@@ -1,48 +1,40 @@
 "use client";
-import {BookOpen, CheckCircle2, CircleHelp, RotateCcw} from "lucide-react";
-import {useState} from "react";
+import {BookOpen,CircleHelp,Download} from 'lucide-react';
+import {useEffect,useRef,useState} from 'react';
+import {initialRcState,rcStages,rcProgress,rcStateSchema,validRcState,type RcState,type RcWork} from '@/lib/rc-schema';
+import verses from '@/content/inferno-i-verses.json';
 
-export type RcStep={
-  stage:string;
-  title:string;
-  body:string;
-  question?:string;
-  options?:string[];
-  response?:string;
-  sourceHref?:string;
-  sourceLabel?:string;
-};
-
-export function RcLiteraryExperience({title,author,intro,steps}:{title:string;author:string;intro:string;steps:RcStep[]}){
-  const[index,setIndex]=useState(0);
-  const[answers,setAnswers]=useState<Record<number,number>>({});
-  const[notes,setNotes]=useState<Record<number,string>>({});
-  const[helpOpen,setHelpOpen]=useState(false);
-  const step=steps[index];
-  const selected=answers[index];
-  return <section className="rc-experience">
-    <header className="rc-experience-head">
-      <div><span className="section-kicker">EXPERIÊNCIA RC</span><h1>{title}</h1><p>{author}</p></div>
-      <p className="rc-experience-intro">{intro}</p>
-    </header>
-    <nav className="rc-stage-list" aria-label="Etapas da experiência">{steps.map((item,i)=><button key={`${item.stage}-${i}`} type="button" aria-current={i===index?"step":undefined} onClick={()=>{setIndex(i);setHelpOpen(false);}}>{i+1}. {item.stage}</button>)}</nav>
-    <progress value={index+1} max={steps.length} aria-label={`Etapa ${index+1} de ${steps.length}`}/>
-    <div className="rc-step">
-      <div className="rc-stage">AGORA VOCÊ ESTÁ → <strong>{step.stage}</strong></div>
-      <button type="button" className="button button-outline" aria-expanded={helpOpen} aria-controls="rc-stage-help" onClick={()=>setHelpOpen(open=>!open)}><CircleHelp size={17}/>Ajuda nesta etapa</button>
-      {helpOpen&&<aside id="rc-stage-help" className="rc-stage-help"><h3>O que fazer agora</h3><p>{step.question?"Escolha a hipótese ou atitude que você investigaria. Você pode mudar de ideia e comparar as alternativas. A escolha pessoal não recebe nota.":step.sourceHref?"Abra o texto original e procure passagens que sustentem ou compliquem sua interpretação. O link abre em outra aba; sua etapa continua aqui.":"Explique com suas palavras o que você entendeu e depois confira na obra. Registre uma passagem, uma relação ou uma dúvida."}</p><p>Use Anterior, Próximo ou a lista de etapas para explorar o percurso. Ao terminar, volte ao catálogo ou envie sua avaliação.</p></aside>}
-      <h2>{step.title}</h2>
-      <p>{step.body}</p>
-      {step.question&&<><h3>{step.question}</h3><div className="rc-options" role="group" aria-label={step.question}>{step.options?.map((option,i)=><button key={option} type="button" aria-pressed={selected===i} className={selected===i?"selected":""} onClick={()=>setAnswers(a=>({...a,[index]:i}))}><span>{i+1}</span>{option}</button>)}</div></>}
-      {selected!==undefined&&step.response&&<div className="rc-response"><CheckCircle2 size={18}/><p>{step.response}</p></div>}
-      {step.sourceHref&&<a className="button button-outline" href={step.sourceHref} target="_blank" rel="noopener noreferrer"><BookOpen size={17}/>{step.sourceLabel||"Conferir no texto"}</a>}
-      <label className="rc-note" htmlFor="rc-reading-note">Minha hipótese, evidência ou dúvida<textarea id="rc-reading-note" rows={4} maxLength={4000} value={notes[index]||""} onChange={event=>setNotes(current=>({...current,[index]:event.target.value}))} placeholder="Que passagem sustenta sua ideia? O que você revisaria?"/><small>Estas anotações permanecem enquanto esta página estiver aberta. Copie o que quiser guardar antes de sair.</small></label>
-      <div className="rc-nav">
-        <button className="button button-outline" disabled={index===0} onClick={()=>setIndex(i=>Math.max(0,i-1))}>Anterior</button>
-        <span>{index+1}/{steps.length}</span>
-        {index<steps.length-1?<button className="button button-primary" onClick={()=>{setIndex(i=>Math.min(steps.length-1,i+1));setHelpOpen(false);}}>Próximo</button>:<button className="button button-outline" onClick={()=>{setIndex(0);setHelpOpen(false);}}><RotateCcw size={16}/>Revisitar</button>}
-      </div>
-      {index===steps.length-1&&<p>Você chegou ao fim deste percurso. <a href="/catalogo">Escolher outra experiência</a> · <a href="/pesquisa">Avaliar o Coonto</a></p>}
-    </div>
-  </section>;
+export function RcLiteraryExperience({work,signedIn}:{work:RcWork;signedIn:boolean}){
+ const[state,setState]=useState<RcState>(initialRcState),[loaded,setLoaded]=useState(!signedIn),[status,setStatus]=useState(signedIn?'Carregando seu histórico…':'Sem conta: anotações apenas nesta página.'),[help,setHelp]=useState(false),[audioError,setAudioError]=useState(false);
+ const revision=useRef(0),dirty=useRef(false),saving=useRef(false),blocked=useRef(false),stateRef=useRef(state),generation=useRef(0);
+ stateRef.current=state;
+ useEffect(()=>{if(!signedIn)return;let active=true;fetch(`/api/rc/progress/${work.slug}`,{cache:'no-store'}).then(async response=>{const body=await response.json();if(!response.ok)throw new Error(body.error||'Não foi possível carregar seu histórico.');if(!active)return;if(body.progress){const parsed=rcStateSchema.safeParse(body.progress.state);if(!parsed.success||!validRcState(parsed.data,work.units.length))throw new Error('Histórico incompatível.');setState(parsed.data);revision.current=body.progress.revision;}setStatus(body.progress?.contentVersion&&body.progress.contentVersion!==work.version?'Seu histórico foi retomado na edição atual. As posições dos capítulos foram preservadas.':'Histórico carregado.');setLoaded(true);}).catch(error=>{if(active){setStatus(error.message);blocked.current=true;setLoaded(true);}});return()=>{active=false;};},[signedIn,work.slug,work.version,work.units.length]);
+ function change(next:RcState){dirty.current=true;generation.current++;setState(next);setStatus(signedIn?'Alterações ainda não salvas.':'Sem conta: anotações apenas nesta página.');}
+ async function save(){if(!signedIn||!loaded||blocked.current||saving.current||!dirty.current)return;saving.current=true;const sent=generation.current;setStatus('Salvando…');try{const response=await fetch(`/api/rc/progress/${work.slug}`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({state:stateRef.current,revision:revision.current,contentVersion:work.version})});const body=await response.json();if(!response.ok){if(response.status===409||response.status===401)blocked.current=true;throw new Error(body.error||'Não foi possível salvar. Tente novamente.');}revision.current=body.revision;dirty.current=generation.current!==sent;setStatus(dirty.current?'Alterações ainda não salvas.':'Salvo na sua conta.');}catch(error){setStatus(error instanceof Error?error.message:'Não foi possível salvar.');}finally{saving.current=false;}}
+ useEffect(()=>{if(!signedIn||!loaded)return;const timer=setTimeout(()=>{void save();},900);return()=>clearTimeout(timer);},[state,signedIn,loaded]);
+ useEffect(()=>{const timer=setInterval(()=>{if(dirty.current&&!saving.current&&!blocked.current)void save();},5000);const warn=(e:BeforeUnloadEvent)=>{if(signedIn&&dirty.current){e.preventDefault();e.returnValue='';}};window.addEventListener('beforeunload',warn);return()=>{clearInterval(timer);window.removeEventListener('beforeunload',warn);};},[signedIn,loaded]);
+ const unit=work.units[state.unit],key=`${state.unit}:${state.stage}`,selected=state.answers[String(state.unit)],percent=rcProgress(state,work.units.length),last=state.unit===work.units.length-1&&state.stage===7;
+ const body=[unit.context,unit.reading,unit.question,selected===undefined?'Volte à Decisão e escolha uma hipótese para ver seu retorno.':unit.options[selected].consequence,unit.author,unit.evidence,unit.recall,unit.connection][state.stage];
+ const sourceHref=work.source.kind==='pdf'?`${work.source.href}#page=${unit.sourceStart}`:work.source.href;
+ function go(u:number,s:number){setHelp(false);setAudioError(false);change({...state,unit:u,stage:s,visited:[...new Set([...state.visited,`${u}:${s}`])]});}
+ function exportNotes(){const text=[work.title,`Edição: ${work.version}`,...work.units.flatMap((u,i)=>[u.title,...rcStages.map((stage,j)=>`${stage}: ${state.notes[`${i}:${j}`]||'—'}`),`Hipótese: ${state.answers[String(i)]===undefined?'—':u.options[state.answers[String(i)]].label}`])].join('\n\n');const url=URL.createObjectURL(new Blob([text],{type:'text/plain;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download=`${work.slug}-anotacoes.txt`;a.click();URL.revokeObjectURL(url);}
+ return <section className="rc-experience">
+  <header className="rc-experience-head"><div><span className="section-kicker">BETA.2 · EXPERIÊNCIA EM REVISÃO</span><h1>{work.title}</h1><p>{work.author}</p></div><p className="rc-experience-intro">{work.intro}</p></header>
+  <div className="rc-account"><p role="status">{status}</p>{!signedIn&&<a href={`/login?return_to=${encodeURIComponent('/rc/'+work.slug)}`}>Entre antes de começar para salvar na conta</a>}<button type="button" className="button button-outline" onClick={exportNotes}><Download size={16}/>Baixar minhas anotações</button>{signedIn&&<button type="button" className="button button-outline" disabled={!loaded} onClick={()=>void save()}>Salvar agora</button>}</div>
+  <fieldset disabled={!loaded} className="rc-controls"><label htmlFor="rc-unit">{work.source.kind==='pdf'?'Capítulo':'Movimento'}<select id="rc-unit" value={state.unit} onChange={e=>go(Number(e.target.value),0)}>{work.units.map((u,i)=><option key={u.id} value={i}>{i+1}. {u.title}</option>)}</select></label>
+  <nav className="rc-stage-list" aria-label="Etapas da experiência">{rcStages.map((stage,i)=><button type="button" key={stage} aria-current={state.stage===i?'step':undefined} onClick={()=>go(state.unit,i)}>{i+1}. {stage}</button>)}</nav>
+  <progress value={percent} max={100} aria-label={`${percent}% das etapas visitadas`}/><p className="rc-progress-label">{new Set(state.visited).size}/{work.units.length*8} etapas visitadas · {percent}% · visitar uma etapa não comprova aprendizagem.</p>
+  <div className="rc-step"><div className="rc-stage">AGORA VOCÊ ESTÁ → <strong>{rcStages[state.stage]}</strong> · {state.unit+1}/{work.units.length}</div><h2>{unit.title}</h2>
+   <button type="button" className="button button-outline" aria-expanded={help} aria-controls="rc-stage-help" onClick={()=>setHelp(!help)}><CircleHelp size={17}/>Ajuda nesta etapa</button>
+   {help&&<aside id="rc-stage-help" className="rc-stage-help"><h3>O que fazer agora</h3><p>{['Conheça a situação antes de formular uma interpretação.','Leia a síntese e confira o texto integral. As palavras da síntese são do Coonto.','Escolha uma hipótese investigável. Cada opção apresenta um retorno próprio, sem nota ou resposta pessoal obrigatória.','Compare o efeito da hipótese escolhida com outra opção. São sugestões de investigação, não acontecimentos novos da obra.','Observe o caminho narrado na obra. Ele não é um gabarito para sua escolha pessoal.','Registre uma evidência e uma passagem que complique sua interpretação.','Tente recordar sem consultar; depois confira e revise.','Relacione passagens e revise sua hipótese. Não é preciso compartilhar experiências pessoais.'][state.stage]}</p><p>Você pode navegar livremente, voltar aos capítulos e baixar suas notas. {signedIn?'Espere a indicação “Salvo na sua conta” antes de sair.':'Sem conta, as notas serão perdidas ao fechar ou recarregar esta página.'}</p></aside>}
+   <p>{body}</p>
+   {state.stage===1&&work.source.kind==='verses'&&<details open className="rc-source-text"><summary>Texto integral · versos {unit.sourceStart}–{unit.sourceEnd}</summary><ol start={unit.sourceStart}>{verses.slice(unit.sourceStart-1,unit.sourceEnd).map((verse,i)=><li key={i}>{verse}</li>)}</ol></details>}
+   {state.stage===2&&<div className="rc-options" role="group" aria-label={unit.question}>{unit.options.map((option,i)=><button key={i} type="button" aria-pressed={selected===i} className={selected===i?'selected':''} onClick={()=>change({...state,answers:{...state.answers,[String(state.unit)]:i}})}><span>{i+1}</span>{option.label}</button>)}</div>}
+   {(state.stage===1||state.stage===4||state.stage===5)&&<p><a className="button button-outline" href={sourceHref} target="_blank" rel="noopener noreferrer"><BookOpen size={17}/>{work.source.kind==='pdf'?`Ler capítulo integral · PDF ${unit.sourceStart}–${unit.sourceEnd}`:'Conferir edição e notas da tradução'}</a></p>}
+   {state.stage===0&&<div className="rc-audio"><p>Comentário de abertura · voz Coonto</p>{audioError?<p>Áudio ainda indisponível para este capítulo. O texto acima permite continuar.</p>:<audio key={unit.id} controls preload="none" onError={()=>setAudioError(true)} src={`/api/audio/rc/${work.slug}/${unit.id}?edition=${encodeURIComponent(work.version)}`}/>}</div>}
+   <label className="rc-note" htmlFor="rc-reading-note">Minha hipótese, evidência ou dúvida<textarea id="rc-reading-note" rows={4} maxLength={2000} value={state.notes[key]||''} onChange={e=>change({...state,notes:{...state.notes,[key]:e.target.value}})} placeholder="Que passagem sustenta sua ideia? O que você revisaria?"/></label>
+   <div className="rc-nav"><button type="button" className="button button-outline" disabled={state.unit===0&&state.stage===0} onClick={()=>go(state.stage===0?state.unit-1:state.unit,state.stage===0?7:state.stage-1)}>Anterior</button><span>{state.stage+1}/8</span><button type="button" className="button button-primary" onClick={()=>last?go(0,0):go(state.stage===7?state.unit+1:state.unit,state.stage===7?0:state.stage+1)}>{last?'Revisitar':state.stage===7?(work.source.kind==='pdf'?'Próximo capítulo':'Próximo movimento'):'Próximo'}</button></div>
+   {last&&<p>Você chegou à última etapa. Revise suas notas e aguarde o salvamento. <a href="/catalogo">Voltar ao catálogo</a> · <a href="/pesquisa">Avaliar o Coonto</a></p>}
+  </div></fieldset><footer className="rc-source-credit"><p>{work.source.label}</p><small>{work.source.license}</small><p>Edição editorial: {work.version}. Hipóteses não equivalem a fatos narrados ou a diagnósticos.</p></footer>
+ </section>;
 }

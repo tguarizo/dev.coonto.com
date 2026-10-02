@@ -8,7 +8,7 @@ const sections = [
     { href: "/backoffice/crm?area=relacionamentos", label: "Contatos e parceiros" },{ href: "/backoffice/crm?area=alunos", label: "Alunos" },{ href: "/backoffice/crm?area=organizacoes", label: "Escolas e turmas" },{ href: "/backoffice/parcerias", label: "Indicações e oportunidades" },
   ] },
   { heading: "Configurar", links: [
-    { href: "/backoffice/personas", label: "Personas e acessos" },{ href: "/backoffice#ofertas", label: "Ofertas" },{ href: "/backoffice/administradores", label: "Administradores" },{ href: "/backoffice/ajuda", label: "Ajuda Coonto · respostas" },{ href: "/backoffice/audio", label: "Áudio das obras" },
+    { href: "/backoffice/personas", label: "Personas e acessos" },{ href: "/backoffice#ofertas", label: "Ofertas" },{ href: "/backoffice/administradores", label: "Administradores" },{ href: "/backoffice/ajuda", label: "Ajuda Coonto · respostas" },{ href: "/backoffice/audio", label: "Áudio das obras" },{ href: "/curadoria/rc", label: "Conteúdo Beta RC" },
   ] },
 ];
 export function CrmSidebar(){const pathname=usePathname();return <aside className="crm-sidebar"><div className="crm-sidebar-title">Coonto <span>CRM</span></div><nav aria-label="Áreas do CRM">{sections.map(group=><div className="crm-sidebar-group" key={group.heading}><strong>{group.heading}</strong>{group.links.map(link=><a key={link.href} href={link.href} aria-current={!link.href.includes("?")&&pathname===link.href.split("#")[0]?"page":undefined}>{link.label}</a>)}</div>)}</nav></aside>}

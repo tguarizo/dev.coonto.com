@@ -1,0 +1,339 @@
+{
+  "slug": "memorias-de-martha",
+  "title": "Memórias de Martha",
+  "author": "Júlia Lopes de Almeida",
+  "version": "1.9.6-beta.2",
+  "intro": "Percurso beta pelos 12 capítulos do romance. Os textos do Coonto são sínteses editoriais; leia os capítulos integrais na edição de 1899. Revisão humana ainda pendente.",
+  "source": {
+    "label": "Biblioteca Brasiliana Guita e José Mindlin · edição de 1899",
+    "href": "https://digital.bbm.usp.br/bitstream/bbm/7037/1/45000009365_Output.o.pdf",
+    "license": "Obra em domínio público. Fac-símile disponibilizado pela BBM/USP.",
+    "kind": "pdf"
+  },
+  "units": [
+    {
+      "id": "cap-1",
+      "title": "Infância, perda e caridade",
+      "context": "Uma narradora adulta tenta recompor a infância. A memória começa fragmentada; não equivale a um registro neutro de tudo o que aconteceu.",
+      "reading": "A morte do pai e a mudança para um cortiço em São Cristóvão atravessam as lembranças. A mãe sustenta a casa lavando e passando. A família de Lucinda oferece roupas; o vestido vermelho permite a entrada na escola, mas também desperta em Martha um sentimento de superioridade sobre as outras crianças.",
+      "question": "Que relação você investigaria entre o vestido e a escola?",
+      "options": [
+        {
+          "label": "O vestido abre uma possibilidade de formação.",
+          "consequence": "Essa hipótese destaca uma condição material do acesso. Confira quem prepara a roupa e quem torna a frequência escolar possível."
+        },
+        {
+          "label": "O presente produz distinção entre crianças pobres.",
+          "consequence": "Observe a mudança no olhar de Martha para os vizinhos. A ajuda não elimina hierarquias: pode ensiná-la a reproduzi-las."
+        },
+        {
+          "label": "A lembrança expõe a ambivalência da caridade.",
+          "consequence": "Compare o benefício recebido com o constrangimento de depender dele. A narradora adulta consegue olhar para os dois efeitos?"
+        }
+      ],
+      "author": "A narrativa aproxima acesso à escola e orgulho do vestido. Martha não se apresenta desde o começo como alguém imune às diferenças sociais.",
+      "evidence": "Localize a incerteza da primeira lembrança, o trabalho da mãe e a maneira como Martha olha as crianças depois de vestir a roupa. Que voz fala: a criança ou a adulta?",
+      "recall": "Sem olhar: quais três mudanças ligam a perda do pai à chegada à escola? Depois confira a ordem dos acontecimentos.",
+      "connection": "Compare uma condição material de acesso à educação com o sentimento de pertencer. Evite pedir relatos pessoais de humilhação.",
+      "sourceStart": 9,
+      "sourceEnd": 26
+    },
+    {
+      "id": "cap-2",
+      "title": "Mathilde e a memória da injustiça",
+      "context": "A escola também é um espaço de relações e exclusões. A narrativa deve ser lida com atenção às descrições racializadas do século XIX.",
+      "reading": "Mathilde ajuda Martha a aprender as letras. Depois, uma acusação de furto e o isolamento pelas colegas mudam sua situação. Martha se afasta da menina que a ajudou. A narradora adulta reconhece o remorso muito tempo depois.",
+      "question": "Por onde começar a examinar a exclusão de Mathilde?",
+      "options": [
+        {
+          "label": "Pela acusação e pela forma como ela é tratada.",
+          "consequence": "Procure o que é apresentado como indício e o que fica sem apuração. Uma acusação narrada não autoriza transformar suspeita em certeza."
+        },
+        {
+          "label": "Pelo afastamento de Martha.",
+          "consequence": "Compare o aprendizado recebido com a falta de solidariedade. A participação de Martha não se resume a ter ou não iniciado a acusação."
+        },
+        {
+          "label": "Pela diferença entre o olhar infantil e o remorso adulto.",
+          "consequence": "Releia a distância temporal. A condenação retrospectiva revela uma mudança de consciência, mas não apaga a violência anterior."
+        }
+      ],
+      "author": "Mathilde é afastada e deixa a escola; a narradora adulta retoma a própria omissão. As descrições racistas presentes no texto são objeto de análise, não caracterizações que o Coonto endossa.",
+      "evidence": "Encontre uma ação de Mathilde como professora informal e uma passagem de remorso. Separe a descrição da narradora, os atos das colegas e o que pode ser comprovado.",
+      "recall": "Sem reler: quem ensinou Martha e como essa relação mudou? Confira um detalhe que sua lembrança apagou.",
+      "connection": "Relacione gratidão, pertencimento e responsabilidade de quem presencia uma exclusão. Use situações fictícias; ninguém precisa revelar uma experiência pessoal.",
+      "sourceStart": 27,
+      "sourceEnd": 40
+    },
+    {
+      "id": "cap-3",
+      "title": "Doença, desejo e trabalho de cuidado",
+      "context": "O cotidiano do cortiço expõe fragilidades materiais e redes de cuidado. As falas de médicos pertencem ao tempo da obra.",
+      "reading": "Martha adoece e, ao se recuperar, deseja uma boneca. A mãe se sacrifica para comprá-la; a criança se decepciona com o presente. Em paralelo, o adoecimento de Manéco e o trabalho de Carolina revelam necessidades que não têm a visibilidade do desejo de Martha.",
+      "question": "Qual contraste ajuda a ler o desejo da boneca?",
+      "options": [
+        {
+          "label": "O desejo infantil e o esforço da mãe.",
+          "consequence": "Confira o que Martha percebe naquele momento e o que a adulta reconhece depois. A diferença não exige negar a experiência da criança."
+        },
+        {
+          "label": "A saúde das crianças e as condições do cortiço.",
+          "consequence": "Busque sinais do ambiente e do cuidado disponível. Evite reduzir o sofrimento a uma falha individual ou extrair aconselhamento médico da obra."
+        },
+        {
+          "label": "O trabalho de Carolina e o trabalho da mãe.",
+          "consequence": "Compare tarefas, cansaço e reconhecimento. Quem cuida dos outros também precisa de cuidado, mesmo quando o texto não oferece solução."
+        }
+      ],
+      "author": "A boneca não satisfaz a fantasia de Martha. A narração adulta torna visível o custo do presente e aproxima sua história da vulnerabilidade de outras crianças.",
+      "evidence": "Localize a expectativa da boneca e uma ação concreta da mãe ou de Carolina. O que fica fora da percepção imediata de Martha?",
+      "recall": "Recupere duas formas de cuidado e um contraste entre expectativa e realidade. Depois confira no capítulo.",
+      "connection": "Como uma narrativa faz aparecer trabalhos pouco reconhecidos? Discuta evidências da obra, sem transformar doença ou sofrimento em culpa.",
+      "sourceStart": 41,
+      "sourceEnd": 54
+    },
+    {
+      "id": "cap-4",
+      "title": "O nome da avenida e a história do pai",
+      "context": "Uma alteração na aparência do cortiço convive com dificuldades que continuam. A mãe conta a Martha uma história que ela não poderia lembrar integralmente.",
+      "reading": "O proprietário passa a chamar o cortiço de avenida. A história familiar revela a acusação contra o pai depois do desaparecimento de dinheiro do empregador e sua morte por suicídio. Martha sente culpa; esse sentimento da personagem não demonstra que ela tenha causado a morte.",
+      "question": "Que contraste você levaria ao texto?",
+      "options": [
+        {
+          "label": "A mudança de nome e as condições reais da moradia.",
+          "consequence": "Observe o que muda para o proprietário e para os moradores. A nova aparência pode coexistir com dependências materiais antigas."
+        },
+        {
+          "label": "A acusação contra o pai e o julgamento social.",
+          "consequence": "Separe a versão contada pela mãe da interpretação dos credores. A morte não é prova de culpa pelo desaparecimento do dinheiro."
+        },
+        {
+          "label": "A culpa sentida por Martha e os acontecimentos narrados.",
+          "consequence": "Investigue como a criança interpreta o relato. O texto permite examinar a autoincriminação sem adotá-la como explicação causal."
+        }
+      ],
+      "author": "A mãe apresenta o passado da família; Martha incorpora ao presente a vergonha ligada ao nome do pai. A narrativa trabalha com relatos e julgamentos que precisam ser diferenciados.",
+      "evidence": "Marque quem conta cada informação e quem a julga. Compare o nome avenida com a permanência das condições de vida. O capítulo aborda suicídio; a leitura pode ser pausada.",
+      "recall": "Reconte a história do pai indicando a fonte de cada informação. Confira se você confundiu acusação, acontecimento e julgamento.",
+      "connection": "Compare mudanças de reputação com mudanças materiais. A discussão não exige relatos pessoais de luto ou de violência.",
+      "sourceStart": 55,
+      "sourceEnd": 69
+    },
+    {
+      "id": "cap-5",
+      "title": "Salário, mudança e um olhar imaginado",
+      "context": "Um primeiro salário abre uma possibilidade concreta. Isso não elimina os constrangimentos da origem social.",
+      "reading": "Manéco morre; Carolina participa dos cuidados e da despedida. Logo depois, Martha começa a receber ordenado na escola. Ela e a mãe se mudam para um pequeno chalet. Um jovem que aparece no caminho provoca a preocupação de que ele descubra onde Martha mora; a própria narradora depois põe em dúvida a quem o olhar dele se dirigia.",
+      "question": "O que o novo salário transforma?",
+      "options": [
+        {
+          "label": "As condições de moradia.",
+          "consequence": "Acompanhe o que se torna possível com a renda e o que ainda depende do trabalho da mãe. Mudança de casa não significa ausência de vulnerabilidade."
+        },
+        {
+          "label": "A maneira como Martha imagina ser vista.",
+          "consequence": "Relacione o desejo de esconder o cortiço ao jovem. Há informação sobre o olhar dele ou sobretudo uma interpretação de Martha?"
+        },
+        {
+          "label": "A posição de Martha entre aluna e trabalhadora.",
+          "consequence": "Observe a alegria da nomeação e sua responsabilidade pelas discípulas. A educação também aparece como trabalho remunerado."
+        }
+      ],
+      "author": "A notícia do ordenado convive com a morte de Manéco. A mudança é narrada como alegria, mas a dúvida posterior sobre o jovem impede tomar a fantasia de interesse amoroso como fato confirmado.",
+      "evidence": "Procure a notícia do salário, a despedida de Manéco e a dúvida da narradora sobre o jovem. Que contrastes a proximidade dessas cenas cria?",
+      "recall": "Sem olhar, explique uma mudança material e uma dúvida que permanece. Confira os dois pontos no capítulo.",
+      "connection": "Uma conquista pode coexistir com uma perda. Explique como a montagem das cenas evita uma história de ascensão sem conflitos.",
+      "sourceStart": 70,
+      "sourceEnd": 82
+    },
+    {
+      "id": "cap-6",
+      "title": "Ideal de amor e constrangimento social",
+      "context": "A nova casa não resolve a distância entre desejo e experiência. Martha trabalha, estuda e imagina um amor ainda pouco conhecido.",
+      "reading": "A narradora distingue o homem imaginado da própria ideia de ser amada. Numa reunião na casa da professora, sente a comparação com Leonor e o constrangimento do baile. Ao voltar tarde, encontra a mãe à espera; o cuidado contrasta com o reconhecimento que buscava fora de casa.",
+      "question": "Como ler a fantasia amorosa de Martha?",
+      "options": [
+        {
+          "label": "Como desejo de ser reconhecida.",
+          "consequence": "Observe que qualidades do jovem são efetivamente conhecidas. A fantasia pode preencher uma necessidade que o encontro real não confirma."
+        },
+        {
+          "label": "Como experiência atravessada pela diferença social.",
+          "consequence": "Compare roupas, dança, modos e olhares. Nem todo constrangimento é apenas timidez individual."
+        },
+        {
+          "label": "Como contraste com a relação entre mãe e filha.",
+          "consequence": "Acolhimento doméstico e reconhecimento público têm funções distintas. Confira como o retorno para casa muda o tom da cena."
+        }
+      ],
+      "author": "Martha explicita a distância entre amar alguém e amar a hipótese de ser amada. A cena social e o retorno à mãe mantêm esse desejo em tensão com as relações concretas.",
+      "evidence": "Localize a reflexão sobre o Amor e o episódio de levar doces para a mãe. Como a narradora organiza a vergonha e o afeto?",
+      "recall": "Recupere o que Martha sabia sobre o jovem e o que imaginava. Depois confira se atribuiu a ele algo que só estava na fantasia dela.",
+      "connection": "Que diferença existe entre um fato observado e uma expectativa? Use a cena literária para testar essa distinção.",
+      "sourceStart": 83,
+      "sourceEnd": 98
+    },
+    {
+      "id": "cap-7",
+      "title": "Palmeiras e a construção da esperança",
+      "context": "As interpretações médicas da época incluem preconceitos sobre mulheres. A experiência de leitura analisa esse contexto, sem reproduzi-lo como orientação de saúde.",
+      "reading": "Para uma temporada em Palmeiras, a mãe obtém ajuda de Miranda e prepara as roupas de Martha. Na companhia de Annita e Jeronymo, Martha conhece Luiz, estudante de medicina. As conversas e a atenção dele alimentam o projeto de amor, casa e convivência com a mãe.",
+      "question": "Que elemento merece ser testado na esperança de Martha?",
+      "options": [
+        {
+          "label": "As palavras de Luiz e o que elas permitem concluir.",
+          "consequence": "Distingua declarações, atenção momentânea e compromisso. Não trate um desejo de Martha como promessa comprovada de Luiz."
+        },
+        {
+          "label": "O trabalho que torna a viagem possível.",
+          "consequence": "Procure a ajuda financeira e o preparo feito pela mãe. O cenário de descanso depende de esforços que ficam em segundo plano."
+        },
+        {
+          "label": "O projeto de futuro que inclui a mãe.",
+          "consequence": "Observe o lugar da mãe na casa imaginada. Amor e desejo de reparar os sacrifícios maternos não aparecem isolados."
+        }
+      ],
+      "author": "Martha ganha esperança com Luiz. A narradora mostra simultaneamente a construção desse futuro imaginado e as condições de trabalho e ajuda que viabilizaram a temporada.",
+      "evidence": "Compare uma fala de Luiz com uma imagem de futuro de Martha. Localize também o esforço da mãe antes da viagem.",
+      "recall": "Reconte como Martha chega a Palmeiras e quem conhece ali. Confira os nomes e a diferença entre encontro e projeto.",
+      "connection": "Como o ambiente e as expectativas influenciam uma interpretação? Busque uma evidência que sustente e outra que limite sua hipótese.",
+      "sourceStart": 99,
+      "sourceEnd": 116
+    },
+    {
+      "id": "cap-8",
+      "title": "A tempestade e o limite da fantasia",
+      "context": "Uma mudança no comportamento de Luiz confronta o que Martha esperava. O contraste é mostrado em cenas, não apenas explicado pela narradora.",
+      "reading": "Durante uma tempestade, Luiz se aproxima de outra jovem, filha de um americano paralítico. Mais tarde, Martha presencia o abraço, o beijo e uma declaração em inglês. Ela procura saber o sentido das palavras e retorna à mãe com a experiência da desilusão.",
+      "question": "Que indício mais altera a leitura da relação?",
+      "options": [
+        {
+          "label": "A atenção de Luiz durante a tempestade.",
+          "consequence": "A mudança de atenção antecipa o rompimento da expectativa. Confira se Martha já reconhece esse indício ou o reinterpreta depois."
+        },
+        {
+          "label": "O gesto observado e a declaração em inglês.",
+          "consequence": "O acontecimento oferece evidência diferente das projeções anteriores. Distinga o que Martha vê do que precisa perguntar para compreender."
+        },
+        {
+          "label": "O retorno à mãe depois da viagem.",
+          "consequence": "Compare a promessa imaginada de futuro com a relação de cuidado já existente. A volta não desfaz o sofrimento, mas reorganiza o cenário."
+        }
+      ],
+      "author": "Martha vê Luiz com a outra jovem e busca a tradução da declaração. O episódio confronta a fantasia construída por ela; não transforma a outra mulher na única responsável pela desilusão.",
+      "evidence": "Localize a sequência tempestade, aproximação e descoberta. O que a barreira da língua acrescenta ao modo como Martha compreende a cena?",
+      "recall": "Sem olhar: quais observações mudam a hipótese sobre Luiz? Confira a ordem e se havia um compromisso explícito.",
+      "connection": "Discuta como uma evidência nova modifica uma expectativa. A atividade usa a narrativa; não exige expor relações pessoais.",
+      "sourceStart": 117,
+      "sourceEnd": 130
+    },
+    {
+      "id": "cap-9",
+      "title": "Trabalho e concurso após a desilusão",
+      "context": "O sofrimento afeta o cotidiano de Martha e o esforço de sua mãe. A narrativa não apresenta uma recuperação instantânea.",
+      "reading": "Martha falta à escola e sofre descontos no salário, enquanto a mãe trabalha mais para cuidar dela. Miranda traz a notícia de um concurso; Martha volta a estudar. Ela também descobre que Luiz vai se casar com Leonor, informação que altera novamente sua leitura do passado.",
+      "question": "Qual mudança você acompanharia no capítulo?",
+      "options": [
+        {
+          "label": "A preparação para o concurso.",
+          "consequence": "Observe uma ação que amplia a possibilidade de autonomia. O estudo não apaga automaticamente o sofrimento ou a dependência material."
+        },
+        {
+          "label": "O esforço da mãe durante o afastamento de Martha.",
+          "consequence": "Compare o trabalho adicional com os descontos no salário. O sofrimento de uma personagem tem efeitos sobre a outra."
+        },
+        {
+          "label": "A notícia do casamento de Luiz com Leonor.",
+          "consequence": "Leia a reação ambivalente de Martha: a jovem de Palmeiras também não se torna a esposa. Evite transformar a notícia numa lição moral única."
+        }
+      ],
+      "author": "O estudo para o concurso oferece uma direção prática. A notícia sobre Luiz provoca sentimentos contraditórios; o texto preserva essa tensão ao lado da busca de trabalho.",
+      "evidence": "Encontre o anúncio trazido por Miranda e os descontos no ordenado. Como o projeto profissional se relaciona com a situação da mãe?",
+      "recall": "Recupere duas consequências materiais do sofrimento e uma nova iniciativa de Martha. Confira no capítulo.",
+      "connection": "Relacione estudo, renda e possibilidade de escolher. Quais limites continuam mesmo quando surge uma oportunidade?",
+      "sourceStart": 131,
+      "sourceEnd": 144
+    },
+    {
+      "id": "cap-10",
+      "title": "Independência e proposta de casamento",
+      "context": "A aprovação no concurso e a proposta de Miranda colocam projetos diferentes lado a lado. A escolha é atravessada por expectativas sociais.",
+      "reading": "Martha é aprovada e nomeada; a conquista coincide com o casamento de Luiz e Leonor. Miranda pede sua mão por intermédio da mãe. Martha afirma sua posição independente, mas considera a proposta em meio ao temor materno sobre o futuro de uma mulher solteira e aos sentimentos ligados à rejeição.",
+      "question": "Que tensão orientaria sua leitura da proposta?",
+      "options": [
+        {
+          "label": "A renda própria e a possibilidade de decidir.",
+          "consequence": "O emprego altera a posição de Martha. Confira se isso elimina as pressões familiares ou apenas cria outra margem de escolha."
+        },
+        {
+          "label": "A segurança oferecida por Miranda e o afeto.",
+          "consequence": "Separe a consideração pelo cuidado dele de uma paixão que o texto não afirma naquele momento. A proposta tem dimensões materiais e afetivas."
+        },
+        {
+          "label": "As expectativas sobre casamento e a lembrança de Luiz.",
+          "consequence": "Observe as falas da mãe e a reação de Martha. Não reduza a decisão a uma vontade individual livre de pressões ou a pura imposição."
+        }
+      ],
+      "author": "A proposta não vem como desfecho simples da aprovação. Martha considera independência, reputação, segurança e sentimentos; a narração mantém a dificuldade da decisão.",
+      "evidence": "Localize a afirmação de independência e as razões apresentadas pela mãe. Qual passagem complica a ideia de que Martha escolhe apenas por amor?",
+      "recall": "Explique sem reler por que emprego e casamento não são a mesma conquista. Confira uma passagem para cada aspecto.",
+      "connection": "Como uma escolha pode envolver motivos que não coincidem? Compare hipóteses e preserve a ambivalência.",
+      "sourceStart": 145,
+      "sourceEnd": 150
+    },
+    {
+      "id": "cap-11",
+      "title": "Preparativos, aceitação e memória queimada",
+      "context": "A aceitação de Miranda não elimina imediatamente a resistência de Martha. O passado volta durante os preparativos.",
+      "reading": "Miranda acolhe a revelação sobre o pai sem repetir a condenação social. A mãe prepara o casamento com novo esforço. Na véspera, Martha queima cadernos e encontra os versos de Luiz; a releitura a perturba antes de ela lançar os papéis ao fogo.",
+      "question": "O que o gesto de queimar os versos permite investigar?",
+      "options": [
+        {
+          "label": "A tentativa de encerrar uma história.",
+          "consequence": "O gesto material pode indicar uma decisão. Confira se os sentimentos acompanham esse encerramento no mesmo ritmo."
+        },
+        {
+          "label": "A distância entre o que Martha declara e sente.",
+          "consequence": "Compare a afirmação sobre o valor dos versos com a emoção da releitura. Contradição não significa que tudo na narrativa seja falso."
+        },
+        {
+          "label": "A aceitação de Miranda e o julgamento sobre o pai.",
+          "consequence": "A reação de Miranda contrasta com os antigos credores. Observe o que esse acolhimento muda na relação entre eles."
+        }
+      ],
+      "author": "Martha destrói os papéis, mas a releitura revela a força da lembrança. A gentileza de Miranda e o esforço da mãe convivem com a dificuldade de abandonar a fantasia antiga.",
+      "evidence": "Procure a reação de Miranda à história do pai e a sequência da queima dos cadernos. O que o texto mostra antes do gesto final?",
+      "recall": "Recupere dois preparativos e uma contradição de Martha. Depois confira se apagar um objeto significou apagar uma lembrança.",
+      "connection": "Compare uma ação de encerramento com o tempo de uma mudança afetiva. Use evidências; evite diagnosticar a personagem.",
+      "sourceStart": 151,
+      "sourceEnd": 160
+    },
+    {
+      "id": "cap-12",
+      "title": "Casamento, perda e retorno da memória",
+      "context": "O final reúne uma expectativa de reparação e uma perda. Não conclua antecipadamente que a trajetória é uma ascensão sem restos.",
+      "reading": "Martha se casa com Miranda e imagina poder retribuir os esforços da mãe. Poucos dias depois, a mãe morre. A narradora retorna à experiência do luto; a alegria anterior não produz um final que resolva todos os conflitos.",
+      "question": "Como o fim modifica sua hipótese sobre a trajetória?",
+      "options": [
+        {
+          "label": "A conquista profissional continua, mas não repara todas as perdas.",
+          "consequence": "Volte ao concurso e compare com a expectativa de cuidar da mãe. A autonomia é real sem funcionar como compensação total."
+        },
+        {
+          "label": "O trabalho da mãe reorganiza a memória de Martha.",
+          "consequence": "Reveja o vestido, a boneca e a viagem. O final dá outro peso a ações que a criança não compreendia integralmente."
+        },
+        {
+          "label": "O final aproxima a perda inicial de uma nova perda.",
+          "consequence": "Compare o início fragmentado com o luto final. A relação entre os dois pontos pode organizar a forma da narrativa sem torná-los idênticos."
+        }
+      ],
+      "author": "A morte da mãe interrompe a expectativa de retribuição. O casamento não apaga o luto; a memória adulta conserva tensões entre cuidado, culpa, educação e independência.",
+      "evidence": "Compare a expectativa dos primeiros dias de casamento com a cena final. Depois retome a primeira página: o que muda na forma de lembrar? O capítulo aborda morte e luto; você pode pausar.",
+      "recall": "Sem olhar, reconstrua a trajetória em cinco acontecimentos. Confira se deixou de fora Mathilde, o trabalho da mãe ou a autonomia profissional.",
+      "connection": "Revise sua hipótese inicial usando uma passagem do começo, uma do meio e uma do final. Indique o que sua interpretação explica e o que deixa em aberto.",
+      "sourceStart": 161,
+      "sourceEnd": 166
+    }
+  ]
+}

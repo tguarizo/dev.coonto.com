@@ -11,6 +11,6 @@ export async function getMember() {
 }
 
 export async function ensureAlienistaEntitlement(userId: string) {
-  const result = await query<{ id: string }>("SELECT id FROM entitlements WHERE user_id = $1 AND work_slug = $2 AND status = 'active' LIMIT 1", [userId, ALIENISTA_SLUG]);
+  const result = await query<{ id: string }>("SELECT id FROM entitlements WHERE user_id = $1 AND work_slug = $2 AND status = 'active' AND (expires_at IS NULL OR expires_at > NOW()) LIMIT 1", [userId, ALIENISTA_SLUG]);
   return result.rows[0] ?? null;
 }

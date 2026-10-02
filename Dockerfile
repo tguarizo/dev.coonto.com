@@ -21,6 +21,7 @@ COPY --from=builder --chown=nextjs:nodejs /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/content ./content
 COPY --from=builder --chown=nextjs:nodejs /app/scripts/generate-work-audio.mjs ./scripts/generate-work-audio.mjs
 COPY --from=builder --chown=nextjs:nodejs /app/scripts/generate-home-example-audio.mjs ./scripts/generate-home-example-audio.mjs
+COPY --from=builder --chown=nextjs:nodejs /app/scripts/generate-beta-audio.mjs ./scripts/generate-beta-audio.mjs
 USER nextjs
 EXPOSE 3000
 CMD ["node", "server.js"]

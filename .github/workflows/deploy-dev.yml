@@ -11,7 +11,20 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  tests:
+    name: Verify beta routes and permissions
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - run: npm test
+
   deploy:
+    needs: tests
     name: Deploy to dev.coonto.com
     runs-on: ubuntu-latest
 
@@ -44,6 +57,17 @@ jobs:
           cd /tmp && tar -czf "$ARCHIVE" coonto-deployment-kit
           scp -o StrictHostKeyChecking=no "/tmp/$ARCHIVE" ${SERVER_USER}@${SERVER_HOST}:"/tmp/$ARCHIVE"
           ssh -o StrictHostKeyChecking=no ${SERVER_USER}@${SERVER_HOST} "sudo mkdir -p ${DEPLOY_PATH} && sudo tar -xzf /tmp/$ARCHIVE -C ${DEPLOY_PATH} --strip-components=1 && rm /tmp/$ARCHIVE && cd ${DEPLOY_PATH} && sudo bash ./coonto.sh install"
+
+      - name: Generate versioned beta audio
+        if: env.SSH_PRIVATE_KEY != ''
+        continue-on-error: true
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SERVER_USER: ${{ secrets.SERVER_USER }}
+          SERVER_HOST: ${{ secrets.SERVER_HOST }}
+          DEPLOY_PATH: ${{ secrets.DEV_DEPLOY_PATH || '/opt/coonto/dev' }}
+        run: |
+          ssh -o StrictHostKeyChecking=no ${SERVER_USER}@${SERVER_HOST} "cd ${DEPLOY_PATH} && sudo docker compose exec -T app node scripts/generate-beta-audio.mjs --generate"
 
       - name: Notify configuration needed
         if: env.SSH_PRIVATE_KEY == ''

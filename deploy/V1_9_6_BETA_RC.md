@@ -1,4 +1,26 @@
-# v1.9.6 / Beta RC — implementação iniciada
+# v1.9.6 / Beta RC
+
+## Segunda entrega: 1.9.6-beta.2
+
+- Martha: percurso pelos 12 capítulos do romance da edição de 1899, com faixas de páginas do PDF BBM/USP. As sínteses editoriais não substituem o texto integral; os contos anexados ao volume não são apresentados como capítulos do romance.
+- Dante: 136 versos da tradução de Xavier Pinheiro em grafia atualizada, divididos em seis movimentos contínuos. Texto integral, sínteses e hipóteses interpretativas ficam separados. Fonte e licença da transcrição indicadas.
+- Oito etapas por capítulo/movimento: Contexto, Leitura, Decisão, Consequência, Autor, Interpretação, Recuperação e Conexão. Três hipóteses com retornos distintos; evidências, revisão e recuperação. Não se atribui nota a escolhas pessoais.
+- Histórico e anotações na conta autenticada, separados por obra; controle de revisão impede sobrescrita entre abas. Visitantes usam memória temporária. Exportação das próprias notas, aviso de gravação pendente e progresso medido como etapas visitadas, sem alegar aprendizagem comprovada.
+- Biblioteca inclui Martha e Dante. Gestão escolar recebe somente percentuais, com filtro por instituição e turma; notas continuam privadas. Licenças vencidas de O Alienista são recusadas.
+- Curadoria RC cria versões imutáveis; edição, aprovação e publicação têm permissões por obra. Publicação transacional arquiva a edição anterior. Fonte, licença e ordem dos capítulos ficam protegidas.
+- Estúdio do CRM inclui aberturas de Martha e Dante. Texto de áudio RC deve corresponder ao conteúdo publicado; áudio antigo não é publicado como correspondente à edição nova. Corrigida a indicação da voz narradora no painel e os identificadores de cenas finais no banco.
+- Script de atualização de áudio usa a voz Coonto `czvzJwIVS2asEKnthV40`, guarda arquivos anteriores e identifica texto, modelo e vozes por hash. Atualiza 3 exemplos da home, 18 aberturas RC e 48 cenas de O Alienista (prévia inicial: 20.964 caracteres). Preserva textos já publicados no estúdio. Usa bloqueio compartilhado, contabilização de tentativas e limite diário combinado de 25.000 caracteres por padrão, configurável com `COONTO_AUDIO_DAILY_CHAR_LIMIT`. Falhas não são repetidas automaticamente; `--retry` exige revisão da tentativa anterior.
+- O deploy executa testes antes da instalação. O passo de áudio pode falhar sem derrubar a versão textual; sua conclusão precisa ser verificada separadamente. Não confundir sucesso da instalação com sucesso da geração de áudio.
+
+### Validação beta.2
+
+24 testes passam, incluindo migrações aplicadas duas vezes, isolamento entre contas/obras, sessões ausentes, conflito de revisão, escopo de curadoria, aprovação/publicação, preservação da fonte, notas privadas, licença vencida, escolas/turmas e correspondência entre áudio/texto/voz. Teste HTTP integrado com sessões sintéticas passa: login válido/vencido, duas contas, biblioteca, estúdio, aprovação/publicação, conflito de edição e vídeos com Range 206. Typecheck e build passam. O aviso preexistente de tracing de `lib/work-audio.ts` permanece.
+
+### Ainda depende de avaliação humana
+
+Revisão literária da edição beta, audição dos áudios produzidos, compreensão dos vídeos e teste de uso com leitores/alunos reais. A cobertura dos capítulos/versos não equivale à aprovação editorial do RC. O uso offline licenciado de O Alienista permanece; o Beta RC não promete salvamento offline ou licença comercial.
+
+---
 
 Primeira entrega: **1.9.6-beta.1**. Esta entrega inicia a revisão; o Beta RC completo ainda não está aprovado.
 
