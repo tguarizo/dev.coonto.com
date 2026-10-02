@@ -1,13 +1,6 @@
 name: Complete O Alienista Audio
 on:
   workflow_dispatch:
-  push:
-    branches: [develop]
-    paths:
-      - 'content/o-alienista-audio.json'
-      - 'scripts/generate-work-audio.mjs'
-      - 'Dockerfile'
-      - '.github/workflows/complete-alienista-audio.yml'
 permissions:
   contents: read
 concurrency:
@@ -37,9 +30,7 @@ jobs:
         run: |
           case "$DEPLOY_PATH" in *[!a-zA-Z0-9_./-]*) echo 'Invalid deployment path'; exit 1;; esac
           PROJECT_NAME="coonto-$(basename "$DEPLOY_PATH")"
-          for scene in c2 c3 c4 final; do
-            ssh "${SERVER_USER}@${SERVER_HOST}" "cd '$DEPLOY_PATH' && sudo docker compose -p '$PROJECT_NAME' exec -T app node scripts/generate-work-audio.mjs --generate --scene=$scene --force" || exit 1
-          done
+          ssh "${SERVER_USER}@${SERVER_HOST}" "cd '$DEPLOY_PATH' && sudo docker compose -p '$PROJECT_NAME' exec -T app node scripts/generate-beta-audio.mjs --generate --work=o-alienista"
       - name: Confirm 48 Alienista audio files
         env:
           SERVER_USER: ${{ secrets.SERVER_USER }}
