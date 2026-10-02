@@ -1,4 +1,5 @@
 "use client";
+import {COONTO_VERSION} from "@/lib/version";
 
 import { ArrowDown, ArrowRight, BookOpenCheck, Brain, Compass, Pause, Play, RotateCcw, Sparkles } from "lucide-react";
 import { useRef, useState } from "react";
@@ -62,7 +63,7 @@ export function HomeLiteraryJourney(){
   function toggleAudio(key:WorkKey){
     if(playing===key){audioRef.current?.pause();audioRef.current=null;setPlaying(null);return;}
     audioRef.current?.pause();
-    const audio=new Audio("/api/audio/home/"+key);
+    const audio=new Audio("/api/audio/home/"+key+"?v="+encodeURIComponent(COONTO_VERSION));
     audioRef.current=audio;setPlaying(key);
     const done=()=>{if(audioRef.current===audio)audioRef.current=null;setPlaying(current=>current===key?null:current);};
     audio.onended=done;audio.onerror=done;

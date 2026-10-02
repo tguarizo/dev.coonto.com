@@ -8,6 +8,6 @@ export async function GET(_request:Request,{params}:{params:Promise<{id:string}>
   if(!/^(?:alienista|dom-casmurro|divina-comedia)$/.test(id))return new Response("",{status:404});
   try{
     const audio=await readFile(path.join(audioDirectory(),"home-examples",id+".mp3"));
-    return new Response(new Uint8Array(audio),{headers:{"Content-Type":"audio/mpeg","Cache-Control":"public, max-age=86400"}});
+    return new Response(new Uint8Array(audio),{headers:{"Content-Type":"audio/mpeg","Cache-Control":"public, max-age=0, must-revalidate"}});
   }catch{return new Response("",{status:404});}
 }

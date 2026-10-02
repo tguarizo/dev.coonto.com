@@ -10,11 +10,12 @@
 - Curadoria RC cria versões imutáveis; edição, aprovação e publicação têm permissões por obra. Publicação transacional arquiva a edição anterior. Fonte, licença e ordem dos capítulos ficam protegidas.
 - Estúdio do CRM inclui aberturas de Martha e Dante. Texto de áudio RC deve corresponder ao conteúdo publicado; áudio antigo não é publicado como correspondente à edição nova. Corrigida a indicação da voz narradora no painel e os identificadores de cenas finais no banco.
 - Script de atualização de áudio usa a voz Coonto `czvzJwIVS2asEKnthV40`, guarda arquivos anteriores e identifica texto, modelo e vozes por hash. Atualiza 3 exemplos da home, 18 aberturas RC e 48 cenas de O Alienista (prévia inicial: 20.964 caracteres). Preserva textos já publicados no estúdio. Usa bloqueio compartilhado, contabilização de tentativas e limite diário combinado de 25.000 caracteres por padrão, configurável com `COONTO_AUDIO_DAILY_CHAR_LIMIT`. Falhas não são repetidas automaticamente; `--retry` exige revisão da tentativa anterior.
+- Exemplos de áudio da home usam a versão no URL e revalidam os arquivos, evitando reaproveitar a voz antiga do cache.
 - O deploy executa testes antes da instalação. O passo de áudio pode falhar sem derrubar a versão textual; sua conclusão precisa ser verificada separadamente. Não confundir sucesso da instalação com sucesso da geração de áudio.
 
 ### Validação beta.2
 
-24 testes passam, incluindo migrações aplicadas duas vezes, isolamento entre contas/obras, sessões ausentes, conflito de revisão, escopo de curadoria, aprovação/publicação, preservação da fonte, notas privadas, licença vencida, escolas/turmas e correspondência entre áudio/texto/voz. Teste HTTP integrado com sessões sintéticas passa: login válido/vencido, duas contas, biblioteca, estúdio, aprovação/publicação, conflito de edição e vídeos com Range 206. Typecheck e build passam. O aviso preexistente de tracing de `lib/work-audio.ts` permanece.
+24 testes passam, incluindo migrações aplicadas duas vezes, isolamento entre contas/obras, sessões ausentes, conflito de revisão, escopo de curadoria, aprovação/publicação, preservação da fonte, notas privadas, licença vencida, escolas/turmas e correspondência entre áudio/texto/voz. Teste HTTP integrado com sessões sintéticas passa: login válido/vencido, duas contas, biblioteca, estúdio, aprovação/publicação, conflito de edição e vídeos com Range 206. Typecheck e build passam. Uma simulação da produção com fornecedor fictício também passa: 69 arquivos, 66 versões no estúdio, 20.964 caracteres registrados, segunda execução sem geração e preservação dos arquivos antigos após erro 429, sem repetição automática. Nenhum crédito foi consumido nessa simulação. Navegação desktop e os 136 versos foram conferidos na versão pública. A emulação de largura móvel não está disponível neste navegador; permanece teste em aparelho real. O aviso preexistente de tracing de `lib/work-audio.ts` permanece.
 
 ### Ainda depende de avaliação humana
 
@@ -34,7 +35,7 @@ Primeira entrega: **1.9.6-beta.1**. Esta entrega inicia a revisão; o Beta RC co
 - Rótulo “Entre na situação” em 0,576 rem, 20% menor que os 0,72 rem anteriores.
 - Mantidos alinhamento dos exemplos e configuração de voz `czvzJwIVS2asEKnthV40` já existentes na branch.
 
-## Critérios ainda pendentes para declarar o Beta RC completo
+## Pendências registradas na beta.1 (resoluções na beta.2 acima)
 
 - Memórias de Martha completa: o percurso atual de seis etapas é um protótipo editorial, não a obra completa.
 - Inferno, Canto I: o texto completo está vinculado externamente; a cobertura pedagógica do canto inteiro e curadoria ainda precisam ser concluídas. Removida a descrição indevida de experiência completa.
