@@ -29,7 +29,7 @@ jobs:
           printf '%s\n' "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H "$SERVER_HOST" >> ~/.ssh/known_hosts
-      - name: Generate all missing Alienista voices on the private server
+      - name: Generate remaining Alienista voices on the private server
         env:
           SERVER_USER: ${{ secrets.SERVER_USER }}
           SERVER_HOST: ${{ secrets.SERVER_HOST }}
@@ -37,7 +37,9 @@ jobs:
         run: |
           case "$DEPLOY_PATH" in *[!a-zA-Z0-9_./-]*) echo 'Invalid deployment path'; exit 1;; esac
           PROJECT_NAME="coonto-$(basename "$DEPLOY_PATH")"
-          ssh "${SERVER_USER}@${SERVER_HOST}" "cd '$DEPLOY_PATH' && sudo docker compose -p '$PROJECT_NAME' exec -T app node scripts/generate-work-audio.mjs --generate --force"
+          for scene in c2 c3 c4 final; do
+            ssh "${SERVER_USER}@${SERVER_HOST}" "cd '$DEPLOY_PATH' && sudo docker compose -p '$PROJECT_NAME' exec -T app node scripts/generate-work-audio.mjs --generate --scene=$scene --force" || exit 1
+          done
       - name: Confirm 48 Alienista audio files
         env:
           SERVER_USER: ${{ secrets.SERVER_USER }}
