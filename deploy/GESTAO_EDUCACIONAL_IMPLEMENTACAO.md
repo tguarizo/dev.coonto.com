@@ -1,74 +1,93 @@
-# Coonto — implementação da gestão educacional
+# Coonto — gestão educacional beta.3
 
-Checkpoint: 3 de outubro de 2026. Primeira etapa na branch
-`codex/rigor-gestao-educacional`, a partir de `2519128`.
+Checkpoint: 3 de outubro de 2026. Versão `1.9.6-beta.3`.
+Implementação na branch `codex/rigor-gestao-educacional`; destino de publicação:
+`develop` / dev.coonto.com. Produção não é destino desta alteração.
 
-## Escopo acordado
+## O que está implementado
 
-1. Identidade visual comum e menu vertical para Coonto Administração,
-   Professor, Escola e Rede.
-2. Identidade única com entrada por código, seleção de ambiente e instituição,
-   baseada em autorização vigente no servidor.
-3. Professor: preparação, turmas atribuídas, atividades, entregas e devolutivas.
-4. Escola: visão da instituição, turmas, equipes e atividades institucionais.
-5. Rede: escolas vinculadas, gestão de licenças e detalhamento autorizado.
-6. Indicadores com período, denominador e edição; distinguir participação,
-   leitura, entrega e evidência de aprendizagem.
-7. Revogação, auditoria, verificações de isolamento e publicação em dev.
+- Coonto Administração: CRM com menu vertical recolhível, ícones, seleção correta
+  de área e identidade comum aos ambientes educacionais.
+- Entrada por código preservada. `/ambientes` lista as instituições e ambientes
+  autorizados. Preferência de entrada é opcional, vinculada à conta e revalidada
+  a cada uso; ela não concede permissões. “Trocar ambiente” abre a seleção.
+- Coonto Professor e Escola: contexto institucional único, turmas atribuídas,
+  publicação de atividades, entregas dos alunos e devolutivas.
+- `/atividades`: destinatário institucional visível antes do envio. Uma nova
+  entrega substitui a anterior e aguarda nova devolutiva.
+- Caderno e progresso pessoais separados das atividades institucionais. O painel
+  escolar deixou de consultar o histórico da biblioteca do aluno.
+- Coonto Rede: redes/mantenedoras, escolas vinculadas, permissões independentes
+  para licenças, relatórios e detalhamento por escola/professor/turma.
+- CRM `/backoffice/redes`: cadastrar rede, autorizar contas existentes, definir
+  compartilhamento por escola, registrar contratos confirmados e revogá-los.
+  Não há convite ou envio de mensagem automático nesta versão.
+- Contratos por obra com quantidade e vigência. Administrador da rede distribui
+  reservas às escolas sem exceder a capacidade contratada. Gestor escolar ou
+  administrador de licenças atribui vagas a alunos com vínculo vigente.
+- Locks no contrato serializam distribuição e atribuição. Repetir uma atribuição
+  ativa não consome outra vaga; não é permitido reduzir a reserva abaixo das
+  licenças atribuídas. Reserva de capacidade e direito vigente são distintos.
+- Licenças institucionais não substituem os direitos pessoais da conta. Revogar
+  um contrato ou vínculo bloqueia novos acessos online por aquela concessão.
+- Download offline limitado pela validade do direito usado e pelo prazo offline.
+  Revogação remota não interrompe imediatamente uma cópia já autorizada em um
+  aparelho desconectado; ela é revalidada ao conectar/renovar e tem prazo local.
+- Gestores escolares e usuários de rede/licenças confirmam acesso por código
+  a cada novo dia em São Paulo. Sessão da leitura pessoal continua persistente.
+- Alterações de rede, permissões, contratos e licenças geram auditoria. As
+  alterações e seus eventos são persistidos na mesma transação.
 
-## Preparado nesta etapa
+## Relatórios disponíveis e limites
 
-- CRM com ícones, menu recolhível e identidade azul/violeta sobre fundo escuro.
-  Seleção de área considera rota, busca e âncora; menu móvel continua vertical.
-- `/ambientes`: lista apenas ambientes existentes. Cada vínculo institucional
-  aparece separadamente. Leitores sem outros ambientes seguem para a biblioteca.
-- Entrada geral por código encaminha para `/ambientes`; destinos explícitos,
-  como checkout e biblioteca, são preservados. CRM conserva sessão por host.
-- `/gestao-escolar`: exige uma instituição. Um vínculo único pode ser selecionado
-  automaticamente; múltiplos vínculos exigem escolha. Instituição, turma ou
-  atividade não autorizada resulta em 404, sem trocar para dados de outra turma.
-- Professor vê suas turmas atribuídas; gestor vê as turmas da instituição.
-  A persona global, incluindo owner, não substitui o vínculo institucional.
-- `/atividades`: aluno matriculado envia uma resposta institucional e lê sua
-  devolutiva. A interface identifica a instituição destinatária antes do envio.
-- Professor/gestor publica atividades e registra devolutivas. Reenvio do aluno
-  substitui a entrega e limpa a devolutiva anterior; isso é informado na tela.
-- Migração 017: vigência e revogação do vínculo institucional.
-- Migração 018: atividades e entregas em tabelas separadas da leitura pessoal.
-- CRM pode revogar/reativar o acesso institucional; mudança e evento de auditoria
-  são gravados na mesma transação. Reativação reinicia a vigência sem prazo final.
-- Todas as consultas e alterações do novo fluxo verificam instituição ativa,
-  vínculo vigente e turma atribuída/matrícula atual no servidor.
-- O painel escolar anterior deixou de consultar progresso da biblioteca pessoal.
-  Contagens de entregas e devolutivas não são apresentadas como aprendizagem.
+- Período de publicação das atividades; escola, professor e turma autorizados.
+- Alunos únicos e participações aluno–atividade contados separadamente.
+- Entregas/participações elegíveis e devolutivas; denominador explícito.
+- Matrículas vigentes no momento da consulta. Não é uma reconstrução de turma
+  histórica; mudanças de matrícula podem alterar o denominador de períodos antigos.
+- Entrega atual enviada no período, sem histórico de versões nesta beta.
+- Recorte de professor considera suas atribuições atuais na escola e inclui as
+  atividades das turmas compartilhadas; não mede autoria individual ou desempenho.
+- Rede recebe agregados, nunca o corpo das respostas ou o caderno pessoal.
+- Licenças: contratadas, reservadas às escolas, atribuídas sem revogação,
+  ativadas e conteúdo acessado. “Ativada” registra autorização para download ou
+  entrega do conteúdo; “conteúdo acessado” registra conteúdo servido, incluindo
+  download. Não mede leitura integral, participação escolar ou aprendizagem.
+- Não existem notas de aprendizagem nem classificação de docentes nesta versão.
 
-## Validação
+## Verificação
 
-- Suíte automatizada: 40 testes, incluindo banco PostgreSQL em PGlite.
-- Migrações executadas duas vezes para verificar aplicação repetível.
-- Casos: instituição indevida, turma não atribuída, aluno não matriculado,
-  owner sem vínculo, revogação, expiração, instituição pausada e auditoria do CRM.
-- Teste de renderização do painel verifica que leitura pessoal e contatos dos
-  alunos não aparecem e que turma fora do contexto é rejeitada.
-- TypeScript e build de produção aprovados. O aviso preexistente de rastreamento
-  de arquivos em `lib/work-audio.ts` permanece.
-- Ainda falta validação visual e funcional em navegador com contas de cada papel.
+- 47 testes automatizados; banco PostgreSQL em PGlite e migrações aplicadas duas vezes.
+- Tentativas de atravessar instituições/redes, usar turma não atribuída, agir como
+  comprador sem permissão pedagógica, exceder capacidade, reduzir reservas ocupadas,
+  reaproveitar vínculo vencido/revogado e ampliar acesso por preferência de navegação.
+- Preservação de licença pessoal após perda de concessão institucional.
+- Confirmação diária nos limites de data de São Paulo e validação de datas dos filtros.
+- Fluxo no navegador com banco local isolado e contas fictícias: publicar atividade,
+  enviar resposta, dar devolutiva, atribuir licença, detalhar escola/professor, recusar
+  escola externa, navegação do CRM e recolhimento do menu no celular.
+- TypeScript e build de produção aprovados. Aviso preexistente de rastreamento de
+  arquivos em `lib/work-audio.ts` permanece.
+- Dados fictícios e sessões de teste não são enviados ao ambiente remoto.
 
-## Próximas etapas
+## Migrações e publicação
 
-- Coonto Rede, vínculos com escolas e autorização independente para comprador
-  de licenças e gestor pedagógico; detalhamento sem acesso automático a respostas.
-- Licenças contratadas, distribuídas, ativadas e usadas por obra e vigência.
-  O mecanismo legado continua disponível no CRM; não foi refeito nesta etapa.
-- Períodos letivos, vigência por matrícula/atribuição, múltiplas funções no mesmo
-  vínculo, substituição de professor e grupo de professor independente.
-- Prazo/encerramento de atividade, rubricas, histórico de revisões e instrumentos
-  de avaliação; a primeira versão não possui notas ou inferência de aprendizagem.
-- Política de nova autenticação dos gestores, contexto preferido revalidado,
-  relatórios com denominadores, exportações autorizadas e auditoria ampliada.
-- Aplicar migrações 017 e 018 antes de disponibilizar este código, validar contas
-  e navegação em dev, então publicar. Nenhuma migração foi aplicada em ambiente
-  remoto e nenhuma mudança desta etapa foi publicada.
+Aplicar 017, 018 e 019 antes do código. O instalador existente aplica migrações
+com parada em erro e realiza backup antes da atualização. GitHub Actions em
+`develop` executa a suíte de testes antes de chamar o instalador de dev.
 
-A documentação de arquitetura descreve o destino do projeto. Este checkpoint
-identifica apenas o que foi implementado e verificado no código local.
+Aguardar sucesso do workflow e conferir versão e rotas públicas após publicação.
+Sucesso do build local não comprova que o ambiente remoto foi atualizado.
+
+## Próximas inclusões
+
+- Períodos letivos, vigência por matrícula/atribuição, várias funções na mesma
+  instituição, substituições e grupo de professor independente.
+- Histórico de entregas, prazo/encerramento de atividades, rubricas e instrumentos
+  de avaliação aprovados. Preservar histórico sem reaproveitar leitura pessoal.
+- Filtros por obra/edição, denominadores históricos, exportações autorizadas e
+  auditoria de consultas/exportações. Não há exportação nesta primeira versão.
+- Piloto pedagógico e revisão editorial; opinião e participação não comprovam eficácia.
+
+A arquitetura documentada descreve o destino do projeto. Esta beta concretiza os
+fluxos acima e mantém os limites explícitos para as próximas verificações.

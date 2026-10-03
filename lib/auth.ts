@@ -3,7 +3,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { query } from "@/lib/db";
 
-export type CoontoUser = { userId: string; email: string; displayName: string; accountKind:string; role: "member" | "admin" };
+export type CoontoUser = { userId: string; email: string; displayName: string; accountKind:string; role: "member" | "admin"; authenticatedAt?:string };
 const COOKIE_NAME = "coonto_session";
 const DEVICE_COOKIE_NAME = "coonto_device";
 
@@ -12,14 +12,14 @@ export function hashToken(token: string) { return createHash("sha256").update(to
 export async function getCurrentUser(): Promise<CoontoUser | null> {
   const token = (await cookies()).get(COOKIE_NAME)?.value;
   if (!token) return null;
-  const result = await query<{ id: string; email: string; name: string; account_kind:string; role: "member" | "admin" }>(
-    `SELECT u.id, COALESCE(u.email,'') AS email, u.name, u.role, u.account_kind FROM sessions s JOIN users u ON u.id = s.user_id
+  const result = await query<{ id: string; email: string; name: string; account_kind:string; role: "member" | "admin"; authenticated_at:Date }>(
+    `SELECT u.id, COALESCE(u.email,'') AS email, u.name, u.role, u.account_kind,s.created_at AS authenticated_at FROM sessions s JOIN users u ON u.id = s.user_id
       WHERE s.token_hash = $1 AND s.expires_at > NOW() LIMIT 1`, [hashToken(token)]);
   const user = result.rows[0];
   if (!user) return null;
   const deviceToken=(await cookies()).get(DEVICE_COOKIE_NAME)?.value;
   if(deviceToken) void query("UPDATE auth_devices SET last_seen_at=NOW() WHERE user_id=$1 AND token_hash=$2 AND revoked_at IS NULL AND trusted_until>NOW()",[user.id,hashToken(deviceToken)]).catch(()=>{});
-  return { userId: user.id, email: user.email, displayName: user.name, accountKind:user.account_kind, role: user.role };
+  return { userId: user.id, email: user.email, displayName: user.name, accountKind:user.account_kind, role: user.role, authenticatedAt:new Date(user.authenticated_at).toISOString() };
 }
 
 export async function requireUser(returnTo: string) {

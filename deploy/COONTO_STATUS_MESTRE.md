@@ -1,6 +1,6 @@
 # Coonto — Quadro Mestre de Status
 
-Atualizado em 2026-10-01 após a consolidação da linha 1.9.x.
+Atualizado em 2026-10-03 com a implementação da gestão educacional beta.3. Publicação deve ser confirmada pelo workflow de develop e pela versão no site.
 
 ## Legenda
 
@@ -49,7 +49,7 @@ Atualizado em 2026-10-01 após a consolidação da linha 1.9.x.
 - [x] Personas não substituem vínculos institucionais.
 - [x] Escopo comercial explícito por lead/organização.
 - [x] Curadoria por obra com comentar/aprovar/publicar separados.
-- [~] Troca de contexto preferido existe no modelo de dados, mas UX de seleção de contexto ainda precisa ser consolidada.
+- [x] Seleção de ambientes e instituições, com preferência opcional revalidada no servidor.
 - [ ] Fluxo de recuperação/troca de contato secundário com validação do novo contato.
 - [ ] Tela única para o usuário revisar contatos verificados e dispositivos confiáveis.
 
@@ -112,3 +112,19 @@ Atualizado em 2026-10-01 após a consolidação da linha 1.9.x.
 5. Revisar multi-tenant e licenças.
 6. Evoluir pipeline comercial e curadoria.
 7. Só depois ativar comunicação comercial e pagamentos.
+
+
+## Gestão educacional — beta.3
+
+- [x] Coonto Professor e Escola com atividades, entregas e devolutivas institucionais.
+- [x] Caderno pessoal separado dos registros escolares.
+- [x] Coonto Rede com escolas e permissões explícitas de relatórios e licenças.
+- [x] Cadastro de redes, compartilhamento e contratos confirmados no CRM.
+- [x] Reservas de vagas e concessões individuais sem exceder a capacidade contratada.
+- [x] Confirmação diária por código para gestores escolares e usuários de rede/licenças.
+- [x] Relatórios por período, escola, professor e turma com denominador atual explícito.
+- [x] 47 testes automatizados, build e fluxo de navegador com contas locais fictícias.
+- [ ] Períodos letivos e reconstrução histórica das matrículas/atribuições.
+- [ ] Histórico de revisões, rubricas, instrumentos de avaliação e exportações autorizadas.
+
+Detalhes: GESTAO_EDUCACIONAL_IMPLEMENTACAO.md.

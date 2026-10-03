@@ -1,3 +1,5 @@
+import {EducationSidebar} from '@/components/education-sidebar';
+import {requireEducationVerification} from '@/lib/education-session';
 import { notFound,redirect } from 'next/navigation';
 import { requireUser } from '@/lib/auth';
 import { SiteHeader } from '@/components/site-header';
@@ -11,6 +13,7 @@ export default async function GestaoEscolar({searchParams}:{searchParams:Promise
  const user=await requireUser('/gestao-escolar'),params=await searchParams,contexts=await educationContexts(user.userId);
  const context=selectEducationContext(contexts,params.instituicao);
  if(!context){if(params.instituicao!==undefined)notFound();redirect('/ambientes');}
+ if(context.role==='manager')requireEducationVerification(user,'/gestao-escolar?instituicao='+encodeURIComponent(context.id));
  const classes=await contextClassrooms(user.userId,context);
  const requested=params.turma===undefined?undefined:classes.rows.find(c=>c.id===params.turma);
  if(params.turma!==undefined&&!requested)notFound();
@@ -18,7 +21,7 @@ export default async function GestaoEscolar({searchParams}:{searchParams:Promise
  if(params.atividade!==undefined&&!activities.rows.some(a=>a.id===params.atividade))notFound();
  const submissions=params.atividade?await staffSubmissions(user.userId,context.id,params.atividade):{rows:[]};
  const base=`/gestao-escolar?instituicao=${encodeURIComponent(context.id)}`;
- return <div className="crm-workspace"><aside className="crm-sidebar"><div className="crm-sidebar-title">Coonto <span>{context.role==='manager'?'Escola':'Professor'}</span></div><nav aria-label="Gestão educacional"><div className="crm-sidebar-group"><strong>{context.name}</strong><a href={base} aria-current={params.turma||params.atividade?undefined:'page'}>Turmas e atividades</a><a href="/professor">Preparar aula</a><a href="/ambientes">Trocar ambiente</a><a href="/minha-biblioteca">Minha biblioteca</a></div></nav></aside>
+ return <div className="crm-workspace"><EducationSidebar name={context.name} environment={context.role==='manager'?'Escola':'Professor'} home={base} licenses={context.role==='manager'?'/licencas-institucionais?instituicao='+encodeURIComponent(context.id):undefined}/>
  <div className="crm-workspace-main"><main className="page"><SiteHeader/><div className="content member-page"><section className="page-hero"><span className="section-kicker">COONTO {context.role==='manager'?'ESCOLA':'PROFESSOR'}</span><h1>{context.name}{requested?` · ${requested.name}`:''}</h1><p>{context.role==='manager'?'Gestão da instituição':'Suas turmas atribuídas'}. As entregas abaixo são atividades institucionais. A leitura e as anotações pessoais não são consultadas neste painel.</p></section>
  {params.resultado&&<p role="status">{params.resultado==='publicado'?'Atividade publicada.':params.resultado==='devolutiva'?'Devolutiva enviada.':'Não foi possível concluir. Confira o vínculo e os dados informados.'}</p>}
  <section className="dashboard-card"><h2>Turmas autorizadas</h2><div className="status-list">{classes.rows.map(c=><div className="status-item" key={c.id}><div><strong>{c.name}</strong><p>{c.students} matrícula(s) · {c.teachers} professor(es) atribuído(s)</p></div><a href={`${base}&turma=${encodeURIComponent(c.id)}`}>Ver atividades</a></div>)}{!classes.rows.length&&<p>Nenhuma turma atribuída neste contexto.</p>}</div></section>

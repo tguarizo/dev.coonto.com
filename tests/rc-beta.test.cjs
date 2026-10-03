@@ -9,6 +9,8 @@ function load(file,mocks={}){const mod={exports:{}};const source=ts.transpileMod
 const query=(sql,params)=>db.query(sql,params);
 const dbMock={query,getPool:()=>({connect:async()=>({query,release(){}})})};
 const content=load('lib/rc-content.ts',{'@/content/rc-memorias-de-martha.json':defaults['memorias-de-martha'],'@/content/rc-divina-comedia-canto-i.json':defaults['divina-comedia-canto-i'],'@/lib/rc-schema':schema,'@/lib/db':dbMock});
+const network=load('lib/education-network.ts',{'@/lib/db':dbMock});
+const licenseAccess=load('lib/institutional-license-access.ts',{'@/lib/db':dbMock,'@/lib/education-network':network});
 const permissions={curator:[{work_slug:'memorias-de-martha',can_comment:true,can_approve:false,can_publish:false}],approver:[{work_slug:'memorias-de-martha',can_comment:false,can_approve:true,can_publish:false}],publisher:[{work_slug:'memorias-de-martha',can_comment:false,can_approve:false,can_publish:true}]};
 const auth={getCurrentUser:async()=>user};
 const progress=load('app/api/rc/progress/[slug]/route.ts',{'@/lib/request-origin':origin,'@/lib/auth':auth,'@/lib/db':dbMock,'@/lib/rc-schema':schema,'@/lib/rc-content':content});
@@ -16,7 +18,7 @@ const editor=load('app/api/rc/editor/route.ts',{'@/lib/request-origin':origin,'@
 const context=slug=>({params:Promise.resolve({slug})});
 const request=(body,origin='https://coonto.test')=>new Request('https://coonto.test/api/rc',{method:'POST',headers:{'Content-Type':'application/json',origin},body:JSON.stringify(body)});
 const state=()=>({unit:0,stage:1,visited:['0:0','0:1'],answers:{'0':1},notes:{'0:1':'Nota privada da conta A'}});
-const account=id=>({userId:id,role:id==='owner'?'admin':'member'});
+const account=id=>({userId:id,role:id==='owner'?'admin':'member',authenticatedAt:new Date().toISOString()});
 before(async()=>{db=new PGlite();for(let round=0;round<2;round++)for(const file of fs.readdirSync('db/migrations').filter(f=>f.endsWith('.sql')).sort())await db.exec(fs.readFileSync('db/migrations/'+file,'utf8'));for(const id of ['A','B','owner','curator','approver','publisher'])await query('INSERT INTO users(id,email,name) VALUES($1,$2,$1)',[id,id+'@test.invalid']);process.env.DATABASE_URL='test-in-memory';});
 after(async()=>{delete process.env.DATABASE_URL;await db.close();});
 test('fontes cobrem os 12 capítulos e todos os versos sem lacunas; retornos são próprios',()=>{
@@ -62,13 +64,13 @@ test('edição preserva fonte, licença e IDs; notas privadas não saem no CRM',
  user=account('B');assert.equal((await editor.GET()).status,403);
 });
 test('licença expirada é negada e IDs das cenas finais de áudio são aceitos',async()=>{
- const member=load('lib/member.ts',{'@/lib/auth':auth,'@/lib/db':dbMock});await query("INSERT INTO entitlements(id,user_id,work_slug,expires_at) VALUES('expired','A','o-alienista',NOW()-INTERVAL '1 minute')");assert.equal(await member.ensureAlienistaEntitlement('A'),null);await query("UPDATE entitlements SET expires_at=NOW()+INTERVAL '1 day' WHERE id='expired'");assert.equal((await member.ensureAlienistaEntitlement('A')).id,'expired');
+ const member=load('lib/member.ts',{'@/lib/auth':auth,'@/lib/db':dbMock,'@/lib/institutional-license-access':licenseAccess});await query("INSERT INTO entitlements(id,user_id,work_slug,expires_at) VALUES('expired','A','o-alienista',NOW()-INTERVAL '1 minute')");assert.equal(await member.ensureAlienistaEntitlement('A'),null);await query("UPDATE entitlements SET expires_at=NOW()+INTERVAL '1 day' WHERE id='expired'");assert.equal((await member.ensureAlienistaEntitlement('A')).id,'expired');
  for(const scene of ['c1','c4','final'])await query("INSERT INTO coonto_audio_jobs(id,scene_id,segments,model,characters) VALUES($1,$1,'[]','test',1)",[scene]);
 });
 test('gestão exige turma do contexto e preserva leitura pessoal',async()=>{
  await db.exec("INSERT INTO organizations(id,name,kind) VALUES('X','Escola X','school'),('Y','Escola Y','school'); INSERT INTO organization_memberships(organization_id,user_id,role) VALUES('X','curator','manager'),('X','publisher','teacher'),('X','A','student'),('Y','approver','teacher'),('Y','B','student'); INSERT INTO classrooms(id,organization_id,name) VALUES('classX','X','Turma X'),('classY','Y','Turma Y'); INSERT INTO classroom_teachers(organization_id,classroom_id,user_id) VALUES('X','classX','publisher'),('Y','classY','approver'); INSERT INTO classroom_enrollments(organization_id,classroom_id,user_id) VALUES('X','classX','A'),('Y','classY','B');");
  const contexts=load('lib/education-context.ts',{'@/lib/db':dbMock}),activities=load('lib/educational-activities.ts',{'@/lib/db':dbMock});
- const page=load('app/gestao-escolar/page.tsx',{'@/lib/auth':{requireUser:async()=>user},'@/lib/education-context':contexts,'@/lib/educational-activities':activities,'./actions':{publishActivity:async()=>{},sendFeedback:async()=>{}},'../backoffice/crm/styles.css':{},'next/navigation':{notFound:()=>{throw new Error('404')},redirect:()=>{throw new Error('redirect')}},'@/components/site-header':{SiteHeader:()=>null},'@/components/site-footer':{SiteFooter:()=>null}});
+ const page=load('app/gestao-escolar/page.tsx',{'@/lib/auth':{requireUser:async()=>user},'@/lib/education-context':contexts,'@/lib/educational-activities':activities,'@/components/education-sidebar':{EducationSidebar:()=>null},'@/lib/education-session':{requireEducationVerification:()=>{}},'./actions':{publishActivity:async()=>{},sendFeedback:async()=>{}},'../backoffice/crm/styles.css':{},'next/navigation':{notFound:()=>{throw new Error('404')},redirect:()=>{throw new Error('redirect')}},'@/components/site-header':{SiteHeader:()=>null},'@/components/site-footer':{SiteFooter:()=>null}});
  const {renderToStaticMarkup}=require('react-dom/server');
  for(const id of ['curator','publisher']){user=account(id);await assert.rejects(()=>page.default({searchParams:Promise.resolve({instituicao:'X',turma:'classY'})}),/404/);const html=renderToStaticMarkup(await page.default({searchParams:Promise.resolve({instituicao:'X'})}));assert.ok(html.includes('Turma X'));assert.equal(html.includes('Turma Y'),false);assert.equal(html.includes('Nota privada'),false);assert.equal(html.includes('A@test.invalid'),false);assert.equal(html.includes('etapas visitadas'),false);}
  user=account('approver');const other=renderToStaticMarkup(await page.default({searchParams:Promise.resolve({})}));assert.ok(other.includes('Turma Y'));assert.equal(other.includes('Turma X'),false);
@@ -105,7 +107,7 @@ test('pedido gratuito permite escolher qualquer das três obras, sem duplicar pe
  assert.equal((await query("SELECT * FROM free_orders WHERE user_id='A'")).rows.length,0);
 });
 test('licença offline usa a obra escolhida, compartilha limite de aparelhos e não contorna revogação',async()=>{
- const works=load('lib/free-works.ts'),member=load('lib/member.ts',{'@/lib/auth':auth,'@/lib/db':dbMock});
+ const works=load('lib/free-works.ts'),member=load('lib/member.ts',{'@/lib/auth':auth,'@/lib/db':dbMock,'@/lib/institutional-license-access':licenseAccess});
  const route=load('app/api/offline-license/route.ts',{'@/lib/member':member,'@/lib/free-works':works,'@/lib/request-origin':origin,'@/lib/transaction':{transaction:async callback=>callback({query})}});
  user=account('A');assert.equal((await route.POST(request({workSlug:'memorias-de-martha',deviceId:'fixture-111'}))).status,403);
  user=account('B');for(const slug of works.freeWorks.map(w=>w.slug))assert.equal((await route.POST(request({workSlug:slug,deviceId:'fixture-111'}))).status,200);
@@ -117,7 +119,7 @@ test('licença offline usa a obra escolhida, compartilha limite de aparelhos e n
  assert.equal((await route.POST(request({workSlug:'memorias-de-martha',deviceId:'fixture-111'}))).status,409);
 });
 test('download RC exige acesso da própria conta e preserva as notas somente do proprietário',async()=>{
- const member=load('lib/member.ts',{'@/lib/auth':auth,'@/lib/db':dbMock}),offline=load('lib/rc-offline.ts');
+ const member=load('lib/member.ts',{'@/lib/auth':auth,'@/lib/db':dbMock,'@/lib/institutional-license-access':licenseAccess}),offline=load('lib/rc-offline.ts');
  const route=load('app/api/works/rc/[slug]/route.ts',{'@/lib/auth':auth,'@/lib/member':member,'@/lib/rc-content':content,'@/lib/rc-schema':schema,'@/lib/db':dbMock,'@/lib/rc-offline':offline,'@/content/inferno-i-verses.json':require('../content/inferno-i-verses.json')});
  user=null;assert.equal((await route.GET(new Request('https://coonto.test'),context('memorias-de-martha'))).status,401);
  user=account('A');assert.equal((await route.GET(new Request('https://coonto.test'),context('memorias-de-martha'))).status,403);

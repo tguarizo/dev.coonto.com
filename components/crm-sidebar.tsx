@@ -8,7 +8,7 @@ const sections=[
  {heading:'Relacionar',links:[
   {href:'/backoffice/crm?area=relacionamentos',label:'Contatos e parceiros',icon:Users},{href:'/backoffice/crm?area=alunos',label:'Alunos',icon:GraduationCap},{href:'/backoffice/crm?area=organizacoes',label:'Escolas e turmas',icon:School},{href:'/backoffice/parcerias',label:'Indicações e oportunidades',icon:Handshake}]},
  {heading:'Configurar',links:[
-  {href:'/backoffice/personas',label:'Personas e acessos',icon:KeyRound},{href:'/backoffice#ofertas',label:'Ofertas',icon:Tags},{href:'/backoffice/administradores',label:'Administradores',icon:ShieldCheck},{href:'/backoffice/ajuda',label:'Ajuda Coonto',icon:CircleHelp},{href:'/backoffice/audio',label:'Áudio das obras',icon:AudioLines},{href:'/curadoria/rc',label:'Conteúdo Beta RC',icon:BookOpen}]}];
+  {href:'/backoffice/redes',label:'Redes e contratos',icon:School},{href:'/backoffice/personas',label:'Personas e acessos',icon:KeyRound},{href:'/backoffice#ofertas',label:'Ofertas',icon:Tags},{href:'/backoffice/administradores',label:'Administradores',icon:ShieldCheck},{href:'/backoffice/ajuda',label:'Ajuda Coonto',icon:CircleHelp},{href:'/backoffice/audio',label:'Áudio das obras',icon:AudioLines},{href:'/curadoria/rc',label:'Conteúdo Beta RC',icon:BookOpen}]}];
 export function CrmSidebar(){
  const pathname=usePathname(),params=useSearchParams(),[collapsed,setCollapsed]=useState(false),[hash,setHash]=useState('');
  useEffect(()=>{const sync=()=>setHash(window.location.hash);sync();window.addEventListener('hashchange',sync);return()=>window.removeEventListener('hashchange',sync);},[pathname]);

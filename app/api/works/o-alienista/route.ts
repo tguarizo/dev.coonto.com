@@ -9,7 +9,7 @@ export async function GET(request: Request) {
   if (!member) return new Response("Entre na sua conta Coonto.", { status: 401 });
   const teacherMode = new URL(request.url).searchParams.get("mode") === "teacher";
   if(teacherMode){const access=await getAccessProfile(member);if(!access.globalOperation&&!access.personas.includes("educator"))return new Response("Entre pelo espaço do professor.",{status:403});}
-  else if (!await ensureAlienistaEntitlement(member.userId)) return new Response("Acesso indisponível.", { status: 403 });
+  else if (!await ensureAlienistaEntitlement(member.userId,"used")) return new Response("Acesso indisponível.", { status: 403 });
   let html = await readFile(path.join(process.cwd(), "content", "Coonto_O_Alienista.html"), "utf8");
   html = html.replace("const KEY='coonto-alienista-v1-state';", `const KEY=${JSON.stringify(`coonto-alienista-${member.userId}`)};`);
   const init = "window.addEventListener('beforeunload',save);load();render();maybePlaySplash();";

@@ -1,15 +1,15 @@
 # Coonto Educação e preparação das correções da beta
 
-Proposta para revisão de Tony, 3 de outubro de 2026. Esta branch prepara alterações; não é uma publicação nem uma validação pedagógica. A gestão de rede descrita abaixo ainda não está implementada.
+Arquitetura acordada com Tony, 3 de outubro de 2026. A implementação inicial de Professor, Escola, Rede e licenças está detalhada em GESTAO_EDUCACIONAL_IMPLEMENTACAO.md. Esta arquitetura também contém expansões futuras e não é comprovação de eficácia pedagógica.
 
 ## Nomes e separação
 
 - Coonto Administração: operação interna, CRM de relacionamentos, comercial, suporte, catálogo, curadoria, publicação, contratos e auditoria.
 - Coonto Educação: portal institucional único, com a mesma base de experiências e diferentes escopos de acesso.
-- Painel do Professor: preparar atividades, escolher obras e capítulos, definir checkpoints, acompanhar turmas e respostas enviadas para a atividade.
+- Coonto Professor: preparar atividades, escolher obras e capítulos, definir checkpoints, acompanhar turmas e respostas enviadas para a atividade.
 - Minha Turma: lista de alunos, atividades, participação e acompanhamento daquela turma. É uma visão do painel, não outro sistema.
-- Painel da Escola: direção/coordenadores, professores, turmas e licenças da escola.
-- Painel da Rede: secretaria, órgão público ou mantenedora privada; agregados da rede e detalhamento autorizado por escola, turma e professor.
+- Coonto Escola: direção/coordenadores, professores, turmas e licenças da escola.
+- Coonto Rede: secretaria, órgão público ou mantenedora privada; agregados da rede e detalhamento autorizado por escola, turma e professor.
 
 ## Estrutura institucional e de acesso
 
@@ -77,4 +77,4 @@ Critérios de aceite: gestor da rede A não acessa escola B; professor com duas 
 
 ## Estado real
 
-Professor e gestão escolar já existem em versão inicial; não há painel de rede implementado. Esta preparação mantém a estrutura visual familiar. A base é compartilhada, porém leitores de Alienista e RC ainda têm implementações diferentes. A definição de Coonto Learning Engine é visão arquitetural, não garantia de engine unificada pronta.
+Professor, Escola e Rede têm implementação inicial na beta.3; veja o checkpoint para distinguir os fluxos prontos das inclusões futuras. Esta preparação mantém a estrutura visual familiar. A base é compartilhada, porém leitores de Alienista e RC ainda têm implementações diferentes. A definição de Coonto Learning Engine é visão arquitetural, não garantia de engine unificada pronta.

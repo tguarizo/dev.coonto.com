@@ -62,3 +62,11 @@
  .crm-sidebar-collapsed .crm-sidebar-top { justify-content:space-between; margin-bottom:0; }
  .crm-sidebar a { white-space:normal; }
 }
+.crm-workspace-main .page-hero h1 { font-size:clamp(2rem,4.4vw,3.5rem); line-height:1.12; font-weight:600; }
+.crm-workspace-main .dashboard-card { margin-bottom:20px; }
+.crm-workspace-main .dashboard-card h2 { margin:0 0 14px; font-size:1.25rem; font-weight:650; }
+.crm-workspace-main .dashboard-card h3 { margin:24px 0 12px; font-size:1.04rem; font-weight:650; }
+.crm-workspace-main .dashboard-card p { margin:10px 0; line-height:1.6; }
+.crm-checks { display:flex; flex-wrap:wrap; gap:12px 22px; padding:12px 0; border:0; margin:10px 0; }
+.crm-checks legend { font-weight:650; margin-bottom:8px; }
+.crm-checks label { display:flex; align-items:center; gap:8px; }
