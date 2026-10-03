@@ -1,0 +1,8 @@
+'use client';
+import {usePathname} from 'next/navigation';
+import {useState} from 'react';
+import {School,Network,BookOpen,KeyRound,ArrowLeftRight,PanelLeftClose,PanelLeftOpen} from 'lucide-react';
+export function EducationSidebar({name,environment,home,licenses}:{name:string;environment:'Professor'|'Escola'|'Rede';home:string;licenses?:string}){
+ const [collapsed,setCollapsed]=useState(false),pathname=usePathname();
+ return <aside className={`crm-sidebar${collapsed?' crm-sidebar-collapsed':''}`}><div className="crm-sidebar-top"><div className="crm-sidebar-title">Coonto <span>{environment}</span></div><button type="button" className="crm-menu-toggle" onClick={()=>setCollapsed(!collapsed)} aria-expanded={!collapsed} aria-controls="education-navigation" aria-label={collapsed?'Expandir menu':'Recolher menu'}>{collapsed?<PanelLeftOpen size={20}/>:<PanelLeftClose size={20}/>}</button></div><nav id="education-navigation" aria-label={`Coonto ${environment}`}><div className="crm-sidebar-group"><strong>{name}</strong><a href={home} aria-current={pathname===home.split('?')[0]?'page':undefined}>{environment==='Rede'?<Network size={19}/>:<School size={19}/>}<span>{environment==='Rede'?'Rede e escolas':'Turmas e atividades'}</span></a>{licenses&&<a href={licenses} aria-current={pathname===licenses.split('?')[0]?'page':undefined}><KeyRound size={19}/><span>Licenças</span></a>}{environment!=='Rede'&&<a href="/professor"><BookOpen size={19}/><span>Preparar aula</span></a>}<a href="/ambientes?trocar=1"><ArrowLeftRight size={19}/><span>Trocar ambiente</span></a><a href="/minha-biblioteca"><BookOpen size={19}/><span>Minha biblioteca</span></a></div></nav></aside>;
+}

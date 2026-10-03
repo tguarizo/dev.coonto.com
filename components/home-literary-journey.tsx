@@ -26,7 +26,7 @@ export const works: Array<{
     next:"Dom Casmurro"
   },
   {
-    key:"dom-casmurro", eyebrow:"EXPERIÊNCIA 02 · DOM CASMURRO", title:"Dom Casmurro", author:"Machado de Assis", image:1,
+    key:"dom-casmurro", eyebrow:"DEMONSTRAÇÃO · DOM CASMURRO", title:"Dom Casmurro", author:"Machado de Assis", image:1,
     prompt:"Você começa a desconfiar de alguém que ama, mas não tem uma prova definitiva. O que faz?",
     opening:{about:"Um romance de Machado de Assis construído pela memória de Bentinho e pela dúvida.",where:"Você entra no ponto central da tensão: existe suspeita, mas não existe prova conclusiva.",observe:"Como memória, ciúme e ponto de vista podem transformar dúvida em certeza."},
     choices:[
@@ -80,7 +80,7 @@ export function HomeLiteraryJourney(){
     <section className="journey-intro">
       <h1>Entre na história.<br/><em>Decida.</em><br/>Descubra o caminho do autor.</h1>
       <p><strong>Entre na história. Decida. Descubra o caminho do autor.</strong> O Coonto ajuda o leitor a compreender, conectar e lembrar melhor o que leu.</p>
-      <a href="#alienista" className="journey-start">Experimente em três obras <ArrowDown size={18}/></a>
+      <a href="#alienista" className="journey-start">Experimente três demonstrações <ArrowDown size={18}/></a>
     </section>
 
     {works.map((work,index)=>{
@@ -118,12 +118,12 @@ export function HomeLiteraryJourney(){
               </div>
               <div className="literary-actions">
                 <button type="button" className="literary-reset" onClick={()=>setAnswers(prev=>({...prev,[work.key]:undefined}))}><RotateCcw size={16}/>Escolher novamente</button>
-                {work.next ? <button type="button" className="literary-next" onClick={()=>goNext(index)}>Próxima obra: {work.next} <ArrowRight size={17}/></button>:
+                {work.next ? <button type="button" className="literary-next" onClick={()=>goNext(index)}>Próxima demonstração: {work.next} <ArrowRight size={17}/></button>:
                 <a className="literary-next" href="#entenda-o-coonto">Agora entenda o Coonto <ArrowDown size={17}/></a>}
               </div>
             </div>}
           </div>
-          <div className="literary-progress" aria-label="Progresso nas três experiências">
+          <p className="rc-savehint">{work.key==="dom-casmurro"?"Dom Casmurro é uma demonstração nesta home. A experiência completa ainda não está disponível.":work.key==="divina-comedia"?"Experiência disponível: Inferno, Canto I. O restante da Divina Comédia ainda não foi adaptado.":"O Alienista está disponível para validação."}</p><div className="literary-progress" aria-label="Progresso nas três experiências">
             {works.map((item,i)=><span key={item.key} className={answers[item.key]?"done":item.key===work.key?"current":""}>{i+1}</span>)}
           </div>
         </div>

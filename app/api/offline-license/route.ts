@@ -8,9 +8,10 @@ export async function POST(request:Request){
  const member=await getMember();if(!member)return Response.json({error:'Entre para continuar'},{status:401});
  let body:Record<string,unknown>;try{body=await request.json();}catch{return Response.json({error:'Pedido inválido'},{status:400});}
  const slug=String(body.workSlug||'o-alienista');if(!freeWork(slug))return Response.json({error:'Obra inválida'},{status:400});
- if(!await ensureWorkEntitlement(member.userId,slug))return Response.json({error:'Conclua o pedido gratuito desta obra'},{status:403});
+ const entitlement=await ensureWorkEntitlement(member.userId,slug,'activate');
+ if(!entitlement)return Response.json({error:'Conclua o pedido gratuito desta obra'},{status:403});
  const clientDeviceId=String(body.deviceId||'').trim().slice(0,128),label=String(body.label||'Este aparelho').trim().slice(0,80);if(clientDeviceId.length<8)return Response.json({error:'Aparelho inválido'},{status:400});
- const limit=Math.max(1,Math.min(10,Number(process.env.MAX_USER_DEVICES)||2)),days=Math.max(1,Math.min(90,Number(process.env.OFFLINE_LICENSE_DAYS)||30)),expiresAt=new Date(Date.now()+days*86400000).toISOString();
+ const limit=Math.max(1,Math.min(10,Number(process.env.MAX_USER_DEVICES)||2)),days=Math.max(1,Math.min(90,Number(process.env.OFFLINE_LICENSE_DAYS)||30)),expiresAt=new Date(Math.min(Date.now()+days*86400000,entitlement.expires_at?new Date(entitlement.expires_at).getTime():Infinity)).toISOString();
  return transaction(async client=>{
   await client.query('SELECT id FROM users WHERE id=$1 FOR UPDATE',[member.userId]);
   const known=await client.query<{id:string;revoked:boolean}>('SELECT id,revoked FROM member_devices WHERE user_id=$1 AND client_device_id=$2 LIMIT 1',[member.userId,clientDeviceId]);

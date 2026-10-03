@@ -78,6 +78,7 @@ export function ExperienceFrame({ userId }: { userId: string }) {
         <a href="/minha-biblioteca"><Library size={18}/><span>Minha biblioteca</span></a>
         <button onClick={prepareOffline} disabled={preparing}>{preparing?<RefreshCw size={18}/>:<Download size={18}/>}<span>{preparing?"Preparando…":offlineReady?"Atualizar offline":"Baixar neste aparelho"}</span></button>
         <button onClick={()=>setHelpOpen(true)}><CircleHelp size={18}/><span>Ajuda Coonto</span></button>
+        <a href="/catalogo#livros-originais"><Download size={18}/><span>Baixar livro original</span></a>
         <a href="/texto/o-alienista"><BookOpen size={18}/><span>Texto de Machado</span></a>
       </nav>
       <p className="reader-rail-status" role="status">{status}</p>

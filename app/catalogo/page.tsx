@@ -1,3 +1,4 @@
+import { OriginalBooks } from '@/components/original-books';
 import { ArrowRight, LockKeyhole } from "lucide-react";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
@@ -73,7 +74,7 @@ export default async function Catalogo() {
           <p>Escolha uma das três experiências disponíveis gratuitamente nesta beta. Martha e o Canto I de Dante seguem em revisão editorial.</p>
         </section>
         <section className="catalog-grid" id="catalogo-obras" aria-label="Três obras disponíveis gratuitamente">{freeWorks.map((work,index)=><article key={work.slug} className="book-card featured"><CatalogArt index={work.art} className="catalog-card-art"/><span className="book-number">0{index+1}</span><div><span className="tag">GRATUITA NESTA BETA</span><h2>{work.title}</h2><span className="author">{work.author}</span><p>{work.detail}. Entre, decida, descubra, confira e lembre.</p></div><div><a href={'/checkout/'+work.slug} className="button button-light">Adicionar gratuitamente <ArrowRight size={18}/></a><p><a href={work.slug==='o-alienista'?'/obra/o-alienista':work.href} style={{color:'inherit',textDecoration:'underline'}}>Conhecer a experiência</a></p></div></article>)}</section>
-        <section className="catalog-offer" id="ofertas" aria-labelledby="catalog-offer-title">
+        <OriginalBooks/><section className="catalog-offer" id="ofertas" aria-labelledby="catalog-offer-title">
           <span className="section-kicker">FORMAS DE ACESSO · FASE DE VALIDAÇÃO</span>
           <h2 id="catalog-offer-title">Escolha como quer entrar.</h2>
           <p>As três obras desta beta estão gratuitas agora. Os valores de obra individual e Club mostram a proposta para a fase comercial; ainda não há cobrança.</p>
