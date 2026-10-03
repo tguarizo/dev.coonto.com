@@ -123,7 +123,7 @@ Atualizado em 2026-10-03 com a implementação da gestão educacional beta.3. Pu
 - [x] Reservas de vagas e concessões individuais sem exceder a capacidade contratada.
 - [x] Confirmação diária por código para gestores escolares e usuários de rede/licenças.
 - [x] Relatórios por período, escola, professor e turma com denominador atual explícito.
-- [x] 47 testes automatizados, build e fluxo de navegador com contas locais fictícias.
+- [x] 48 testes automatizados, build e fluxo de navegador com contas locais fictícias.
 - [ ] Períodos letivos e reconstrução histórica das matrículas/atribuições.
 - [ ] Histórico de revisões, rubricas, instrumentos de avaliação e exportações autorizadas.
 
