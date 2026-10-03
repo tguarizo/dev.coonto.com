@@ -57,11 +57,13 @@ Implementação na branch `codex/rigor-gestao-educacional`; destino de publicaç
 
 ## Verificação
 
-- 47 testes automatizados; banco PostgreSQL em PGlite e migrações aplicadas duas vezes.
+- 48 testes automatizados; banco PostgreSQL em PGlite e migrações aplicadas duas vezes.
 - Tentativas de atravessar instituições/redes, usar turma não atribuída, agir como
   comprador sem permissão pedagógica, exceder capacidade, reduzir reservas ocupadas,
   reaproveitar vínculo vencido/revogado e ampliar acesso por preferência de navegação.
 - Preservação de licença pessoal após perda de concessão institucional.
+- Download recusado não registra ativação; autorização offline e ativação ficam
+  na mesma transação e o prazo emitido não ultrapassa o fim do contrato.
 - Confirmação diária nos limites de data de São Paulo e validação de datas dos filtros.
 - Fluxo no navegador com banco local isolado e contas fictícias: publicar atividade,
   enviar resposta, dar devolutiva, atribuir licença, detalhar escola/professor, recusar

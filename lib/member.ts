@@ -11,9 +11,9 @@ export async function getMember() {
   return user;
 }
 
-export async function ensureWorkEntitlement(userId: string,slug:string,usage:"activate"|"used"|null=null) {
-  const result = await query<{ id: string;expires_at:Date|null }>("SELECT id,expires_at FROM entitlements WHERE user_id = $1 AND work_slug = $2 AND status = 'active' AND (expires_at IS NULL OR expires_at > NOW()) LIMIT 1", [userId, slug]);
-  return result.rows[0] ?? await institutionalWorkAccess(userId,slug,usage);
+export async function ensureWorkEntitlement(userId: string,slug:string,usage:"activate"|"used"|null=null,execute:typeof query=query) {
+  const result = await execute<{ id: string;expires_at:Date|null }>("SELECT id,expires_at FROM entitlements WHERE user_id = $1 AND work_slug = $2 AND status = 'active' AND (expires_at IS NULL OR expires_at > NOW()) LIMIT 1", [userId, slug]);
+  return result.rows[0] ?? await institutionalWorkAccess(userId,slug,usage,execute);
 }
 
 export function ensureAlienistaEntitlement(userId:string,usage:"activate"|"used"|null=null){return ensureWorkEntitlement(userId,ALIENISTA_SLUG,usage);}

@@ -2,7 +2,7 @@ const {test,before,after}=require('node:test');
 const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm'),ts=require('typescript');
 const {PGlite}=require('@electric-sql/pglite');
 let db,contract;
-function load(file,mocks={}){const mod={exports:{}};vm.runInNewContext(ts.transpileModule(fs.readFileSync(file,'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,jsx:ts.JsxEmit.ReactJSX}}).outputText,{exports:mod.exports,module:mod,require:n=>mocks[n]||require(n),process,console,Date,Intl,URL});return mod.exports;}
+function load(file,mocks={}){const mod={exports:{}};vm.runInNewContext(ts.transpileModule(fs.readFileSync(file,'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,jsx:ts.JsxEmit.ReactJSX}}).outputText,{exports:mod.exports,module:mod,require:n=>mocks[n]||require(n),process,console,Date,Intl,URL,Response,Request,crypto:require("node:crypto").webcrypto});return mod.exports;}
 const query=(sql,params)=>db.query(sql,params);
 const transaction=async work=>{await db.exec('BEGIN');try{const result=await work({query});await db.exec('COMMIT');return result;}catch(e){await db.exec('ROLLBACK');throw e;}};
 const network=load('lib/education-network.ts',{'@/lib/db':{query}});
@@ -78,6 +78,17 @@ test('relatórios contam pessoas únicas e participações, com detalhamento exp
  assert.equal((await reports.networkSchoolClasses('viewer','N','Z','teacher')).rows.length,0);
  assert.equal((await reports.networkReport('viewer','N',window,'X','teacher','cx')).eligible_participations,'2');
  assert.equal(JSON.stringify(all).includes('Private institutional response'),false);
+});
+test('download inválido não ativa licença e emissão offline respeita o fim do contrato',async()=>{
+ const member=load('lib/member.ts',{'@/lib/auth':{getCurrentUser:async()=>({userId:'s2',role:'member'})},'@/lib/db':{query},'@/lib/institutional-license-access':access});
+ const route=load('app/api/offline-license/route.ts',{'@/lib/member':member,'@/lib/free-works':load('lib/free-works.ts'),'@/lib/request-origin':load('lib/request-origin.ts'),'@/lib/transaction':{transaction}});
+ const request=deviceId=>new Request('https://coonto.test/api/offline-license',{method:'POST',headers:{origin:'https://coonto.test','Content-Type':'application/json'},body:JSON.stringify({workSlug:'o-alienista',deviceId})});
+ assert.equal((await route.POST(request('bad'))).status,400);
+ assert.equal((await query("SELECT activated_at FROM education_license_grants WHERE contract_id=$1 AND user_id='s2'",[contract])).rows[0].activated_at,null);
+ const result=await route.POST(request('browser-test-device'));assert.equal(result.status,200);const body=await result.json();
+ const end=(await query('SELECT valid_until FROM education_license_contracts WHERE id=$1',[contract])).rows[0].valid_until;
+ assert.ok(new Date(body.expiresAt)<=new Date(end));
+ assert.ok((await query("SELECT activated_at FROM education_license_grants WHERE contract_id=$1 AND user_id='s2'",[contract])).rows[0].activated_at);
 });
 test('revogação, vigência e contrato interrompem novos acessos, sem alterar licença pessoal',async()=>{
  await query("UPDATE organization_memberships SET status='revoked' WHERE organization_id='X' AND user_id='s2'");assert.equal(await access.institutionalWorkAccess('s2','o-alienista'),null);
