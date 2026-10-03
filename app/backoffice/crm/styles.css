@@ -37,3 +37,28 @@
 @media (max-width:900px) { .crm-workspace { grid-template-columns:1fr; }.crm-sidebar { position:relative; height:auto; padding:14px; }.crm-sidebar-title { margin:0 10px 10px; }.crm-sidebar nav { display:flex; gap:16px; overflow-x:auto; }.crm-sidebar-group { display:flex; flex:0 0 auto; align-items:center; margin:0; }.crm-sidebar-group>strong { display:none; }.crm-sidebar a { white-space:nowrap; }.crm-workspace-main .content { width:min(100% - 28px,1180px); } }
 @media (max-width:900px) { .admin-site-header { overflow-x:auto; gap:18px; }.admin-site-header nav { min-width:max-content; }.admin-site-header nav>a { display:inline-flex; }.admin-site-header nav span { display:none; }.admin-site-header .brand-logo { width:100px; } }
 @media (max-width:850px) { .crm-form-grid { grid-template-columns:1fr; } .crm-page .status-item { align-items:start; flex-direction:column; } }
+/* Shared management identity. Public reader styles remain scoped separately. */
+.crm-sidebar { background:#172033; }
+.crm-sidebar-top { display:flex; align-items:flex-start; gap:8px; margin-bottom:28px; }
+.crm-sidebar-title { margin:0 8px; font-size:1.3rem; }
+.crm-sidebar-title span { display:block; margin-top:5px; color:#c3c9fa; font-size:.73rem; letter-spacing:.02em; }
+.crm-menu-toggle { flex-shrink:0; padding:7px; border:1px solid #47516a; border-radius:8px; background:transparent; color:#fff; cursor:pointer; }
+.crm-sidebar a { display:flex; align-items:center; gap:10px; }
+.crm-sidebar a[aria-current="page"] { background:linear-gradient(115deg,#6553d9,#367bd8); }
+.crm-sidebar a:focus-visible,.crm-menu-toggle:focus-visible { outline:3px solid #b6b3ff; outline-offset:3px; }
+.crm-workspace:has(.crm-sidebar-collapsed) { grid-template-columns:76px minmax(0,1fr); }
+.crm-sidebar-collapsed .crm-sidebar-title,.crm-sidebar-collapsed .crm-sidebar-group>strong,.crm-sidebar-collapsed a span { display:none; }
+.crm-sidebar-collapsed .crm-sidebar-top { justify-content:center; }
+.crm-sidebar-collapsed a { justify-content:center; padding:12px 8px; }
+@media(max-width:900px){
+ .crm-workspace,.crm-workspace:has(.crm-sidebar-collapsed) { grid-template-columns:1fr; }
+ .crm-sidebar,.crm-sidebar-collapsed { height:auto; position:relative; padding:14px; }
+ .crm-sidebar nav { display:grid; overflow:visible; }
+ .crm-sidebar-group { display:grid; }
+ .crm-sidebar-group>strong { display:block; }
+ .crm-sidebar-top { margin-bottom:14px; justify-content:space-between; }
+ .crm-sidebar-collapsed .crm-sidebar-title { display:block; }
+ .crm-sidebar-collapsed nav { display:none; }
+ .crm-sidebar-collapsed .crm-sidebar-top { justify-content:space-between; margin-bottom:0; }
+ .crm-sidebar a { white-space:normal; }
+}

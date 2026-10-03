@@ -39,7 +39,7 @@ export function RcLiteraryExperience({work,signedIn}:{work:RcWork;signedIn:boole
    const cache=await caches.open('coonto-protected-v2');await cache.put('/offline/rc-reader.html',offlineShell);
    for(const item of work.units){const src=`/api/audio/rc/${work.slug}/${item.id}`;const media=await fetch(src);if(media.ok)await cache.put(src,media);}
    await cache.put('/offline/'+work.slug+'.html',new Response(await document.text(),{headers:{'Content-Type':'text/html; charset=utf-8','X-Coonto-User':owner,'X-Coonto-Expires':license.expiresAt}}));
-   localStorage.setItem('coonto-offline-user',owner);localStorage.setItem('coonto-rc-offline-'+work.slug,'ready');setStatus('Experiência baixada. Acesso neste aparelho até '+new Date(license.expiresAt).toLocaleDateString('pt-BR')+'.');
+   localStorage.setItem('coonto-offline-user',owner);localStorage.setItem('coonto-rc-offline-'+work.slug,'ready');setStatus('Experiência Coonto baixada. Acesso neste aparelho até '+new Date(license.expiresAt).toLocaleDateString('pt-BR')+'.');
   }catch(error){setStatus(error instanceof Error?error.message:'Não foi possível baixar.');}finally{setPreparing(false);}
  }
  useEffect(()=>()=>{audio.current?.pause();},[]);
@@ -49,7 +49,8 @@ export function RcLiteraryExperience({work,signedIn}:{work:RcWork;signedIn:boole
    <a href="/minha-biblioteca"><Library size={18}/><span>Minha biblioteca</span></a>
    <button type="button" disabled={preparing||!loaded} onClick={()=>void downloadWork()}><Download size={18}/><span>{preparing?'Baixando…':'Baixar neste aparelho'}</span></button>
    <button type="button" aria-expanded={help} onClick={()=>setHelp(!help)}><CircleHelp size={18}/><span>Ajuda Coonto</span></button>
-   <a href={sourceHref} target="_blank" rel="noopener noreferrer"><BookOpen size={18}/><span>Texto original</span></a>
+   <a href={sourceHref} target="_blank" rel="noopener noreferrer"><BookOpen size={18}/><span>{work.source.kind==='pdf'?'Livro original · PDF externo':'Texto original · Canto I'}</span></a>
+   <a href="/catalogo#livros-originais"><Download size={18}/><span>Baixar livro original completo</span></a>
    <button type="button" onClick={exportNotes}><Download size={18}/><span>Baixar minhas notas</span></button>
    {signedIn&&<button type="button" disabled={!loaded} onClick={()=>void save()}><Save size={18}/><span>Salvar agora</span></button>}
   </nav><p className="reader-rail-status" role="status">{status}</p>{!signedIn&&<a className="rc-rail-status" href={'/checkout/'+work.slug}>Adicionar gratuitamente à biblioteca</a>}</aside>
@@ -68,7 +69,7 @@ export function RcLiteraryExperience({work,signedIn}:{work:RcWork;signedIn:boole
     <details className="rc-notebook" key={key}><summary>✎ Caderno Coonto {state.notes[key]?'· com anotação':''}</summary><label htmlFor="rc-reading-note" className="rc-savehint">Sua hipótese, evidência ou dúvida</label><textarea id="rc-reading-note" rows={4} maxLength={2000} value={state.notes[key]||''} onChange={e=>change({...state,notes:{...state.notes,[key]:e.target.value}})} placeholder="Que passagem sustenta sua ideia?"/></details><p className="rc-savehint" role="status">{status}</p>
    </fieldset></div>
    <nav className="rc-reader-nav" aria-label="Navegação da experiência"><button type="button" disabled={!loaded||(state.unit===0&&state.stage===0)} onClick={()=>go(state.stage===0?state.unit-1:state.unit,state.stage===0?7:state.stage===4?2:state.stage-1)}>Voltar</button><button type="button" className="primary" disabled={!loaded} onClick={()=>last?go(0,0):go(state.stage===7?state.unit+1:state.unit,state.stage===7?0:state.stage===2?4:state.stage+1)}>{last?'Revisitar a obra':state.stage===7?(work.source.kind==='pdf'?'Próximo capítulo':'Próximo movimento'):state.stage===0?'Entrar na situação':'Continuar'}</button></nav>
-   <footer className="rc-reader-footer"><p>{state.unit+1}/{work.units.length} · {phase} · beta em revisão</p>{last&&<p>Você chegou ao fim deste percurso. <a href="/catalogo">Escolher outra obra</a> · <a href="/pesquisa">Avaliar o Coonto</a></p>}<details><summary>Sobre a edição e as fontes</summary><p>{work.intro}</p><p>{work.source.label}</p><p>{work.source.license}</p><p>Edição {work.version}. O progresso indica etapas visitadas.</p></details></footer>
+   <footer className="rc-reader-footer"><p>{state.unit+1}/{work.units.length} · {phase} · beta em revisão</p>{last&&<p>Você chegou ao fim deste percurso. <a href="/catalogo">Escolher outra obra</a> · <a href="/pesquisa">Avaliar o Coonto</a></p>}<details><summary>Sobre a edição e as fontes</summary><p>{work.intro}</p><p>{work.source.kind==='pdf'?'O download da experiência contém as sínteses do Coonto. O PDF do livro original é um arquivo separado.':'O download contém a experiência e os 136 versos do Canto I. Não contém a Divina Comédia completa.'}</p><p>{work.source.label}</p><p>{work.source.license}</p><p>Edição {work.version}. O progresso indica etapas visitadas.</p></details></footer>
   </div></div></div>
  </section>;
 }

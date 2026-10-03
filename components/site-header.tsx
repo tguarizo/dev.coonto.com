@@ -11,6 +11,6 @@ export async function SiteHeader() {
   return <header className="site-header"><Link href="/" aria-label="Voltar para o início"><img src="/images/coonto-logo.png" alt="Coonto" className="brand-logo" /></Link><nav aria-label="Navegação">
     <a href="/catalogo">Catálogo</a><a href="/como-funciona">Como funciona</a><a className="survey-nav-link" href="/pesquisa">Pesquisa</a><a href="/ajuda">Ajuda</a>
     {access?.canUseEducationalCrm&&<a href="/gestao-escolar">Gestão</a>}{access?.personas.includes("educator")&&<a href="/professor">Professor</a>}{access?.canUseCommercialCrm&&<a href="/parceiro-comercial">Parceiro</a>}{access?.canUseCulturalCrm&&<a href="/curadoria">Curadoria</a>}
-    {user ? <><a className="member-nav" href="/minha-biblioteca">Minha biblioteca</a><a className="account-link" href={logoutPath("/")}>Sair</a></> : <a className="button button-coral" href={loginPath("/minha-biblioteca")}>Entrar</a>}
+    {user ? <><a href="/ambientes">Meus ambientes</a><a className="member-nav" href="/minha-biblioteca">Minha biblioteca</a><a className="account-link" href={logoutPath("/")}>Sair</a></> : <a className="button button-coral" href={loginPath("/ambientes")}>Entrar</a>}
   </nav><MobileSiteMenu/></header>;
 }

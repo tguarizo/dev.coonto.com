@@ -17,7 +17,7 @@ export type AccessProfile = {
 export async function getAccessProfile(user:CoontoUser):Promise<AccessProfile>{
   const [personasResult,orgResult]=await Promise.all([
     query<{persona:Persona}>("SELECT persona FROM user_personas WHERE user_id=$1 AND status='active' ORDER BY persona",[user.userId]),
-    query<OrganizationLink>("SELECT m.organization_id AS \"organizationId\",o.name AS \"organizationName\",o.kind AS \"organizationKind\",m.role FROM organization_memberships m JOIN organizations o ON o.id=m.organization_id WHERE m.user_id=$1 AND o.status='active' ORDER BY o.name",[user.userId])
+    query<OrganizationLink>("SELECT m.organization_id AS \"organizationId\",o.name AS \"organizationName\",o.kind AS \"organizationKind\",m.role FROM organization_memberships m JOIN organizations o ON o.id=m.organization_id WHERE m.user_id=$1 AND o.status='active' AND m.status='active' AND m.valid_from<=NOW() AND (m.valid_until IS NULL OR m.valid_until>NOW()) ORDER BY o.name",[user.userId])
   ]);
   const personas=[...new Set<Persona>([
     ...personasResult.rows.map(r=>r.persona),

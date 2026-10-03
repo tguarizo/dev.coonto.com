@@ -13,6 +13,7 @@ async function admin() {
   await requireCrmHost();
   const user = await requireUser("/backoffice/crm");
   if (user.role !== "admin") throw new Error("Acesso negado");
+  return user;
 }
 function field(form: FormData, key: string, limit = 200) {
   return String(form.get(key) || "").trim().slice(0, limit);
@@ -70,7 +71,7 @@ export async function createClassroom(form: FormData) {
 export async function enrollStudent(form: FormData) {
   await admin();
   const organizationId = field(form, "organization_id"), classroomId = field(form, "classroom_id"), userId = field(form, "user_id");
-  const member = await query("SELECT 1 FROM organization_memberships WHERE organization_id=$1 AND user_id=$2 AND role='student'", [organizationId, userId]);
+  const member = await query("SELECT 1 FROM organization_memberships WHERE organization_id=$1 AND user_id=$2 AND role='student' AND status='active' AND valid_from<=NOW() AND (valid_until IS NULL OR valid_until>NOW())", [organizationId, userId]);
   if (!member.rowCount) throw new Error("Aluno não pertence a esta organização");
   await query(`INSERT INTO classroom_enrollments(organization_id,classroom_id,user_id) VALUES($1,$2,$3)
     ON CONFLICT (classroom_id,user_id) DO NOTHING`, [organizationId, classroomId, userId]);
@@ -81,7 +82,7 @@ export async function enrollStudent(form: FormData) {
 export async function assignTeacher(form: FormData) {
   await admin();
   const organizationId = field(form, "organization_id"), classroomId = field(form, "classroom_id"), userId = field(form, "user_id");
-  const member = await query("SELECT 1 FROM organization_memberships WHERE organization_id=$1 AND user_id=$2 AND role='teacher'", [organizationId, userId]);
+  const member = await query("SELECT 1 FROM organization_memberships WHERE organization_id=$1 AND user_id=$2 AND role='teacher' AND status='active' AND valid_from<=NOW() AND (valid_until IS NULL OR valid_until>NOW())", [organizationId, userId]);
   if (!member.rowCount) throw new Error("Professor não pertence a esta organização");
   await query(`INSERT INTO classroom_teachers(organization_id,classroom_id,user_id) VALUES($1,$2,$3)
     ON CONFLICT (classroom_id,user_id) DO NOTHING`, [organizationId, classroomId, userId]);
@@ -121,7 +122,7 @@ export async function assignLicense(form: FormData) {
   await transaction(async client => {
     const pool = await client.query<{ seats: number }>("SELECT seats FROM license_pools WHERE organization_id=$1 AND work_slug=$2 FOR UPDATE", [organizationId, ALIENISTA_SLUG]);
     if (!pool.rows[0]) throw new Error("Defina as vagas da organização primeiro");
-    const member = await client.query("SELECT 1 FROM organization_memberships WHERE organization_id=$1 AND user_id=$2 AND role='student' FOR UPDATE", [organizationId, userId]);
+    const member = await client.query("SELECT 1 FROM organization_memberships WHERE organization_id=$1 AND user_id=$2 AND role='student' AND status='active' AND valid_from<=NOW() AND (valid_until IS NULL OR valid_until>NOW()) FOR UPDATE", [organizationId, userId]);
     if (!member.rowCount) throw new Error("Aluno não pertence a esta organização");
     const existing = await client.query<{ status: string }>("SELECT status FROM license_assignments WHERE organization_id=$1 AND user_id=$2 AND work_slug=$3", [organizationId, userId, ALIENISTA_SLUG]);
     if (existing.rows[0]?.status === "active") return;
@@ -184,4 +185,15 @@ export async function updateOpportunity(form: FormData) {
   await query("UPDATE crm_opportunities SET stage=$1,updated_at=NOW() WHERE id=$2", [stage, id]);
   await recordCrmEvent({ type: "opportunity_stage_changed", relatedType: "opportunity", relatedId: id, metadata: { stage } });
   done("/backoffice/parcerias");
+}
+
+export async function changeMembershipAccess(form:FormData){
+  const actor=await admin(),organizationId=field(form,'organization_id'),userId=field(form,'user_id'),status=field(form,'status');
+  if(!organizationId||!userId||!['active','revoked'].includes(status))throw new Error('Vínculo inválido');
+  await transaction(async client=>{
+    const changed=await client.query("UPDATE organization_memberships SET status=$3,revoked_at=CASE WHEN $3='revoked' THEN NOW() ELSE NULL END,valid_from=CASE WHEN $3='active' THEN NOW() ELSE valid_from END,valid_until=CASE WHEN $3='active' THEN NULL ELSE valid_until END WHERE organization_id=$1 AND user_id=$2 RETURNING role",[organizationId,userId,status]);
+    if(!changed.rows.length)throw new Error('Vínculo não encontrado');
+    await client.query("INSERT INTO crm_events(id,event_type,user_id,organization_id,related_type,related_id,metadata) VALUES($1,'membership_access_changed',$2,$3,'user',$4,$5::jsonb)",[crypto.randomUUID(),actor.userId,organizationId,userId,JSON.stringify({status})]);
+  });
+  done('/backoffice/crm','organizacoes');
 }
