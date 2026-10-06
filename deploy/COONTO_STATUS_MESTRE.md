@@ -1,3 +1,11 @@
+## Atualização de 06/10/2026 — 1.9.6-beta.6
+
+- Carga fictícia educacional identificada e exclusiva de dev: ver `DADOS_FICTICIOS_EDUCACAO.md`.
+- 61 testes automatizados e 26 grupos de testes de navegador aprovados na bancada isolada.
+- CRM distingue licenças diretas de escola dos contratos de rede; os saldos não são somados.
+- Carga transacional, repetível sem redefinir alterações, sem criar sessões, códigos OTP ou contas administrativas.
+- Publicação e carga remotas devem ser confirmadas pelo workflow, contagens do manifesto e `/api/health`.
+
 ## Atualização de 06/10/2026 — 1.9.6-beta.5
 
 - Bancada funcional com contas e instituições fictícias: ver `BANCADA_2026-10-06.md`.

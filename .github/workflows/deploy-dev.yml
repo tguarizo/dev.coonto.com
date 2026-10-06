@@ -5,6 +5,12 @@ on:
     branches:
       - develop
   workflow_dispatch:
+    inputs:
+      education_qa:
+        description: 'Carga fictícia educacional somente em dev (sem redefinir dados)'
+        type: choice
+        default: none
+        options: [none, load]
 
 concurrency:
   group: coonto-dev-deploy
@@ -57,6 +63,18 @@ jobs:
           cd /tmp && tar -czf "$ARCHIVE" coonto-deployment-kit
           scp -o StrictHostKeyChecking=no "/tmp/$ARCHIVE" ${SERVER_USER}@${SERVER_HOST}:"/tmp/$ARCHIVE"
           ssh -o StrictHostKeyChecking=no ${SERVER_USER}@${SERVER_HOST} "sudo mkdir -p ${DEPLOY_PATH} && sudo tar -xzf /tmp/$ARCHIVE -C ${DEPLOY_PATH} --strip-components=1 && rm /tmp/$ARCHIVE && cd ${DEPLOY_PATH} && sudo python3 scripts/configure-bootstrap.py && sudo bash ./coonto.sh install"
+
+      - name: Load requested synthetic education data in dev
+        if: env.SSH_PRIVATE_KEY != '' && (contains(github.event.head_commit.message, '[coonto-qa-load]') || inputs.education_qa == 'load')
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SERVER_USER: ${{ secrets.SERVER_USER }}
+          SERVER_HOST: ${{ secrets.SERVER_HOST }}
+          DEPLOY_PATH: ${{ secrets.DEV_DEPLOY_PATH || '/opt/coonto/dev' }}
+        run: |
+          case "$DEPLOY_PATH" in *[!a-zA-Z0-9_./-]*) echo 'Invalid deployment path'; exit 1;; esac
+          PROJECT_NAME="coonto-$(basename "$DEPLOY_PATH")"
+          ssh -o StrictHostKeyChecking=no ${SERVER_USER}@${SERVER_HOST} "cd '$DEPLOY_PATH' && sudo docker compose -p '$PROJECT_NAME' exec -T app node scripts/qa/education-fixtures.cjs --load && sudo docker compose -p '$PROJECT_NAME' exec -T app node scripts/qa/education-fixtures.cjs --inspect"
 
       - name: Generate versioned beta audio
         if: env.SSH_PRIVATE_KEY != ''
