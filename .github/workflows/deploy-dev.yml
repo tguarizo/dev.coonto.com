@@ -56,7 +56,7 @@ jobs:
           ARCHIVE="Coonto_Deployment_Kit_${GITHUB_RUN_ID}_${GITHUB_RUN_ATTEMPT}.tar.gz"
           cd /tmp && tar -czf "$ARCHIVE" coonto-deployment-kit
           scp -o StrictHostKeyChecking=no "/tmp/$ARCHIVE" ${SERVER_USER}@${SERVER_HOST}:"/tmp/$ARCHIVE"
-          ssh -o StrictHostKeyChecking=no ${SERVER_USER}@${SERVER_HOST} "sudo mkdir -p ${DEPLOY_PATH} && sudo tar -xzf /tmp/$ARCHIVE -C ${DEPLOY_PATH} --strip-components=1 && rm /tmp/$ARCHIVE && cd ${DEPLOY_PATH} && sudo bash ./coonto.sh install"
+          ssh -o StrictHostKeyChecking=no ${SERVER_USER}@${SERVER_HOST} "sudo mkdir -p ${DEPLOY_PATH} && sudo tar -xzf /tmp/$ARCHIVE -C ${DEPLOY_PATH} --strip-components=1 && rm /tmp/$ARCHIVE && cd ${DEPLOY_PATH} && sudo python3 scripts/configure-bootstrap.py && sudo bash ./coonto.sh install"
 
       - name: Generate versioned beta audio
         if: env.SSH_PRIVATE_KEY != ''

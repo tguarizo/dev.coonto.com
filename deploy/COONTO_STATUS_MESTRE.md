@@ -1,3 +1,10 @@
+## Atualização de 06/10/2026 - 1.9.6-beta.4
+
+- Inicialização única de `master@coonto.com` preparada para dev, com recibo persistente e transferência para conta definitiva. Ver `MASTER_INICIAL.md`.
+- 53 testes automatizados aprovados, incluindo rollback de ativação e impedimento de reativação após retirada.
+- A tela de administradores já existia; a indicação anterior de ausência dessa tela estava incorreta. A matriz de atribuições master/admin ainda não existe.
+- OAuth/OIDC permanece proposta, sem provedor selecionado ou integração implementada. Produção não alterada por esta etapa.
+
 # Coonto — Quadro Mestre de Status
 
 Atualizado em 2026-10-03 com a implementação da gestão educacional beta.3. Publicação deve ser confirmada pelo workflow de develop e pela versão no site.
