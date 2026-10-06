@@ -71,6 +71,18 @@ jobs:
           PROJECT_NAME="coonto-$(basename "$DEPLOY_PATH")"
           ssh -o StrictHostKeyChecking=no ${SERVER_USER}@${SERVER_HOST} "cd '$DEPLOY_PATH' && sudo docker compose -p '$PROJECT_NAME' exec -T app node scripts/generate-beta-audio.mjs --generate && sudo docker compose -p '$PROJECT_NAME' exec -T app node scripts/prepare-beta-video.mjs"
 
+      - name: Diagnose proxy when deployment fails
+        if: failure() && env.SSH_PRIVATE_KEY != ''
+        continue-on-error: true
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SERVER_USER: ${{ secrets.SERVER_USER }}
+          SERVER_HOST: ${{ secrets.SERVER_HOST }}
+          DEPLOY_PATH: ${{ secrets.DEV_DEPLOY_PATH || '/opt/coonto/dev' }}
+        run: |
+          case "$DEPLOY_PATH" in *[!a-zA-Z0-9_./-]*) exit 1;; esac
+          ssh ${SERVER_USER}@${SERVER_HOST} "cd '$DEPLOY_PATH' && sudo docker ps -a --format '{{.Names}} {{.Status}}' && sudo docker logs --tail 20 caddy 2>&1" | sed -E 's/(password|secret|token|code)=([^[:space:]]+)/\1=[REDACTED]/Ig'
+
       - name: Notify configuration needed
         if: env.SSH_PRIVATE_KEY == ''
         env:
