@@ -5,9 +5,10 @@ import { requireCrmHost } from "@/lib/admin-host";
 import { requireUser } from "@/lib/auth";
 import { recordCrmEvent } from "@/lib/crm-events";
 import { transaction } from "@/lib/transaction";
+import {guardInitialAdministratorWithdrawal} from '@/lib/administration-bootstrap';
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const serverAdmins = () => String(process.env.ADMIN_EMAILS || "").split(",").map(value => value.trim().toLowerCase()).filter(Boolean);
+const serverAdmins = () => String(process.env.ADMIN_EMAILS || "").split(",").map(value => value.trim().toLowerCase()).filter(value=>value&&value!=='master@coonto.com');
 export type AccessResult = { ok: boolean; message: string };
 
 async function administrator() {
@@ -46,7 +47,10 @@ export async function revokeAdministrator(_previous: AccessResult, form: FormDat
     if (target.rows[0]?.role !== "admin" || serverAdmins().includes(target.rows[0].email)) throw new Error("Acesso fixado no servidor ou conta inválida");
     const count = await client.query<{ total: string }>("SELECT COUNT(*)::text AS total FROM users WHERE role='admin'");
     if (Number(count.rows[0].total) < 2) throw new Error("Mantenha pelo menos um administrador");
+    await guardInitialAdministratorWithdrawal(client,id,actor.userId);
     await client.query("UPDATE users SET role='member' WHERE id=$1", [id]);
+    await client.query("UPDATE user_personas SET status='revoked' WHERE user_id=$1 AND persona='owner'",[id]);
+    await client.query('DELETE FROM sessions WHERE user_id=$1',[id]);
   });
   await recordCrmEvent({ type: "admin_revoked", userId: actor.userId, relatedType: "user", relatedId: id });
   revalidatePath("/backoffice/administradores");

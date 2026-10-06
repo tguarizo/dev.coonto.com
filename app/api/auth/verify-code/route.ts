@@ -6,6 +6,7 @@ import { recordCrmEvent } from '@/lib/crm-events';
 import { consumeLoginCode } from '@/lib/login-code';
 import { loginContact,hashLoginCode,safeReturnTo } from '@/lib/login-contact';
 import { smsConfigured } from '@/lib/message-provider.cjs';
+import { activateInitialAdministrator } from '@/lib/administration-bootstrap';
 
 export async function POST(request:Request) {
   let body;try {body=await request.json();}catch{return Response.json({error:'Dados inválidos.'},{status:400});}
@@ -37,7 +38,11 @@ export async function POST(request:Request) {
       await client.query("INSERT INTO users(id,email,phone,name,account_kind,plan) VALUES($1,$2,$3,$4,'guest','guest')",[userId,contact.channel==='email'?contact.value:null,contact.channel==='sms'?contact.value:null,name]);
     }
     // SMS alone cannot claim an account authorized through somebody else's email.
-    if(contact.channel==='email'&&admins.includes(contact.value))await client.query("UPDATE users SET role='admin' WHERE id=$1",[userId]);
+    if(contact.channel==='email'){
+      // Never let the legacy recurring allowlist resurrect this temporary account.
+      if(contact.value!=='master@coonto.com'&&admins.includes(contact.value))await client.query("UPDATE users SET role='admin' WHERE id=$1",[userId]);
+      await activateInitialAdministrator(client,userId,contact.value,process.env.COONTO_BOOTSTRAP_MASTER_EMAIL||'',process.env.AUTH_MODE||'');
+    }
     await client.query("INSERT INTO sessions(token_hash,user_id,expires_at) VALUES($1,$2,NOW()+INTERVAL '30 days')",[hashToken(token),userId]);
     const deviceHash=hashToken(deviceToken);
     const knownDevice=await client.query("SELECT id FROM auth_devices WHERE user_id=$1 AND token_hash=$2 AND revoked_at IS NULL LIMIT 1",[userId,deviceHash]);
