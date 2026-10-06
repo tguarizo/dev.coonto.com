@@ -1,4 +1,4 @@
-const STATIC_CACHE='coonto-shell-v196b2';
+const STATIC_CACHE='coonto-shell-v196b5';
 const PROTECTED_CACHE='coonto-protected-v2';
 const SHELL=['/offline/reader.html','/offline/library.html','/offline/rc-reader.html','/manifest.webmanifest','/favicon.png','/images/coonto-logo.png'];
 self.addEventListener('install',event=>event.waitUntil(caches.open(STATIC_CACHE).then(cache=>cache.addAll(SHELL)).then(()=>self.skipWaiting())));
@@ -20,7 +20,12 @@ self.addEventListener('fetch',event=>{
  const rcAudio=/^\/api\/audio\/rc\/(memorias-de-martha|divina-comedia-canto-i)\//.exec(url.pathname);
  if(rcAudio){event.respondWith(fetch(event.request).then(response=>response.status>=500?rcOffline(rcAudio[1],url.pathname):response).catch(()=>rcOffline(rcAudio[1],url.pathname)));return;}
  const rcPage=/^\/rc\/(memorias-de-martha|divina-comedia-canto-i)$/.exec(url.pathname);
- if(rcPage&&event.request.mode==='navigate'){event.respondWith(fetch(event.request).then(response=>response.status>=500?rcOffline(rcPage[1],'/offline/rc-reader.html'):response).catch(()=>rcOffline(rcPage[1],'/offline/rc-reader.html')).then(async response=>{if(response.url||!response.ok)return response;const html=await response.text();return new Response(html.replace("new URL(location.href).searchParams.get('work')",JSON.stringify(rcPage[1])),{headers:{'Content-Type':'text/html; charset=utf-8'}});}));return;}
+ if(rcPage&&event.request.mode==='navigate'){
+  // A cached fetch Response retains its URL. Build the offline shell explicitly
+  // instead of using Response.url to distinguish it from a live page.
+  const offlineReader=async()=>{const response=await rcOffline(rcPage[1],'/offline/rc-reader.html');if(!response.ok)return response;const html=await response.text();return new Response(html.replace("new URL(location.href).searchParams.get('work')",JSON.stringify(rcPage[1])),{headers:{'Content-Type':'text/html; charset=utf-8'}});};
+  event.respondWith(fetch(event.request).then(response=>response.status>=500?offlineReader():response).catch(()=>offlineReader()));return;
+ }
  if(url.pathname==='/offline/rc-reader.html'){const slug=url.searchParams.get('work');if(['memorias-de-martha','divina-comedia-canto-i'].includes(slug))event.respondWith(rcOffline(slug,url.pathname));return;}
  if(url.pathname.startsWith('/api/audio/o-alienista/s')){event.respondWith(fetch(event.request).then(response=>response.status>=500?offlineResponse(url.pathname):response).catch(()=>offlineResponse(url.pathname)));return;}
  if(url.pathname==='/offline/o-alienista.html'){event.respondWith(offlineResponse(url.pathname));return;}

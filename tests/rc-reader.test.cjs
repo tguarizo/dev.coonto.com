@@ -20,7 +20,11 @@ test('leitor offline só serve a obra e o áudio com licença vigente; bibliotec
  const handlers={},stored=new Map();const cached={match:async key=>stored.get(typeof key==='string'?key:key.url),addAll:async()=>{},keys:async()=>[]};
  const runtime={self:{location:{origin:'https://coonto.test'},addEventListener:(type,fn)=>handlers[type]=fn},caches:{open:async()=>cached,match:async key=>stored.get(key)},fetch:async()=>{throw new Error('offline');},URL,Response,Date,Promise};vm.createContext(runtime);vm.runInContext(fs.readFileSync('public/sw.js','utf8'),runtime);
  const call=async(path,mode='navigate')=>{let pending;handlers.fetch({request:{url:'https://coonto.test'+path,method:'GET',mode},respondWith:value=>pending=value});return pending;};
- stored.set('/offline/memorias-de-martha.html',new Response('Martha salva',{headers:{'X-Coonto-Expires':new Date(Date.now()+60000).toISOString()}}));stored.set('/offline/rc-reader.html',new Response(fs.readFileSync('public/offline/rc-reader.html','utf8')));stored.set('/offline/library.html',new Response('Biblioteca offline'));
+ stored.set('/offline/memorias-de-martha.html',new Response('Martha salva',{headers:{'X-Coonto-Expires':new Date(Date.now()+60000).toISOString()}}));
+ const shell=new Response(fs.readFileSync('public/offline/rc-reader.html','utf8'));
+ // Real fetch responses keep their URL when placed into Cache Storage.
+ Object.defineProperty(shell,'url',{value:'https://coonto.test/offline/rc-reader.html'});
+ stored.set('/offline/rc-reader.html',shell);stored.set('/offline/library.html',new Response('Biblioteca offline'));
  assert.equal(await (await call('/offline/memorias-de-martha.html')).text(),'Martha salva');
  assert.equal(await (await call('/minha-biblioteca')).text(),'Biblioteca offline');
  const rc=await (await call('/rc/memorias-de-martha')).text();assert.ok(rc.includes('const slug="memorias-de-martha"'));
