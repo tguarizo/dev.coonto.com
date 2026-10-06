@@ -3,6 +3,18 @@ const ts=require('typescript'),fs=require('node:fs'),vm=require('node:vm');
 function load(file,mocks={}){const mod={exports:{}};const source=ts.transpileModule(fs.readFileSync(file,'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText;vm.runInNewContext(source,{exports:mod.exports,module:mod,require:name=>mocks[name]||require(name),process,Buffer,console});return mod.exports;}
 const {loginContact,safeReturnTo}=load('lib/login-contact.ts');
 const {currentLoginArt}=load('lib/login-art.ts');
+test('CRM preserva domínio em redirecionamento interno e recusa outro domínio público',async()=>{
+ const previous=process.env.CRM_DOMAIN;process.env.CRM_DOMAIN='crm.test.invalid';
+ let requestHeaders=new Map();
+ const {isCrmHost}=load('lib/admin-host.ts',{'next/headers':{headers:async()=>({get:name=>requestHeaders.get(name)||null})},'next/navigation':{notFound:()=>{throw Error('404');}}});
+ try{
+  for(const [host,forwarded,allowed] of [
+   ['CRM.TEST.INVALID:3000',null,true],['127.0.0.1:3000','crm.test.invalid',true],['0.0.0.0:3000','crm.test.invalid',true],
+   ['dev.test.invalid','crm.test.invalid',false],['127.0.0.1:3000','dev.test.invalid',false],
+   ['127.0.0.1:3000','crm.test.invalid,evil.invalid',false],['127.0.0.1:3000','crm.test.invalid/evil',false],[null,'crm.test.invalid',false]
+  ]){requestHeaders=new Map([['host',host],['x-forwarded-host',forwarded]]);assert.equal(await isCrmHost(),allowed,host+' / '+forwarded);}
+ }finally{if(previous===undefined)delete process.env.CRM_DOMAIN;else process.env.CRM_DOMAIN=previous;}
+});
 test('normaliza os contatos e separa códigos de email e SMS',()=>{
  assert.equal(loginContact({email:' Person@Example.test '}).key,'person@example.test');
  assert.equal(loginContact({channel:'sms',phone:'(11) 99999-9999'}).key,'sms:5511999999999');

@@ -1,3 +1,10 @@
+## Atualização de 06/10/2026 — 1.9.6-beta.5
+
+- Bancada funcional com contas e instituições fictícias: ver `BANCADA_2026-10-06.md`.
+- Corrigidos o 404 após redirecionamento de formulários do CRM e a tela vazia na reabertura offline dos leitores RC.
+- 54 testes automatizados e build com TypeScript aprovados localmente. Publicação de dev depende da confirmação do workflow e de `/api/health`.
+- Contas reais e produção preservadas; envio real de OTP/SMS, aparelhos reais e validação editorial/pedagógica continuam na varredura humana.
+
 ## Atualização de 06/10/2026 - 1.9.6-beta.4
 
 - Inicialização única de `master@coonto.com` preparada para dev, com recibo persistente e transferência para conta definitiva. Ver `MASTER_INICIAL.md`.
