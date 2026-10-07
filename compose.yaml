@@ -28,7 +28,7 @@ services:
     volumes:
       - ./db/migrations:/migrations:ro
     networks: [coonto_internal]
-    command: ["sh", "-c", "for file in /migrations/*.sql; do echo Applying $$file; psql -v ON_ERROR_STOP=1 -h db -U ${POSTGRES_USER} -d ${POSTGRES_DB} -f $$file; done"]
+    command: ["sh", "-c", "set -e; for file in /migrations/*.sql; do echo Applying $$file; psql -v ON_ERROR_STOP=1 -h db -U ${POSTGRES_USER} -d ${POSTGRES_DB} -f $$file; done"]
 
   app:
     image: coonto-app:current

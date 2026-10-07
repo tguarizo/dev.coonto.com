@@ -34,3 +34,11 @@ Esta é uma candidata em desenvolvimento, não uma publicação de produção. O
 Tony e Fred devem percorrer Dante e Martha; Tiago deve revisar CRM e gestão com os perfis autorizados. Clareza editorial favorável não comprova eficácia pedagógica medida. Dispositivos reais, escuta integral da narração e restauração operacional de backup exigem sua própria verificação antes da decisão de produção.
 
 O parecer integral de Fred e o mapa/roteiro editorial permanecem em `deploy/curadoria/dante-canto-i-v1/`. O checkpoint anterior de curadoria é `1fffb01834f0aa3485ae70a0caf85803f59e25f6` no GitHub; seu conteúdo corresponde ao checkpoint local `998d3ba`.
+
+## Correção da retomada de áudio
+
+O primeiro deploy publicou o roteiro e a aplicação, mas interrompeu a geração ao registrar o primeiro áudio de interação de Dante: a restrição do banco ainda aceitava apenas `mov-1` a `mov-6`. Nenhuma geração adicional foi repetida automaticamente.
+
+A migração 022 aceita os identificadores das interações de Dante; as migrações históricas também foram compatibilizadas porque o instalador as repete. A execução de migrações passa a interromper no primeiro erro. O gerador verifica uma versão MP3 já salva pelo mesmo hash de texto/voz/modelo, valida-a com ffprobe e retoma o registro no banco sem repetir TTS. Foram acrescentados dois testes de regressão (75 testes aprovados ao todo): repetição de todas as migrações com registros publicados e recuperação após falha simulada no banco, com uma única chamada ao fornecedor.
+
+A recuperação aplica a migração e o script a esta aplicação RC1 já publicada em dev, sem reconstruir a interface. O código canônico contém a mesma correção para os próximos deploys. A conclusão dos áudios ainda deve ser verificada.
