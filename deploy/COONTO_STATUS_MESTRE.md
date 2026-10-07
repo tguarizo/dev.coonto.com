@@ -1,3 +1,9 @@
+## RC1 verificada — 7 de outubro de 2026
+
+**1.9.6-rc.1 disponível em dev.** Dante: 14 interações, 42 retornos e 62 áudios conferidos no site. Martha mantém o conteúdo editorial v2 (24 interações). 75 testes automatizados e 25 verificações HTTP de bancada aprovados. A restrição de áudio do banco foi corrigida e o arquivo já gerado foi recuperado sem repetir TTS. Workflow concluído: https://github.com/tguarizo/dev.coonto.com/actions/runs/37691104713 .
+
+CRM de testes: https://crm.dev.coonto.com/login . Permissões por obra corrigidas; perfis e isolamento verificados na bancada. Revisão visual autenticada do CRM real, dispositivos reais e escuta editorial integral continuam como avaliação humana. Detalhes: `deploy/RELEASE_CANDIDATE_1.md` e `deploy/RC1_VERIFICACAO.json`.
+
 ## Atualização de 06/10/2026 — 1.9.6-beta.6
 
 - Carga fictícia educacional identificada e exclusiva de dev: ver `DADOS_FICTICIOS_EDUCACAO.md`.

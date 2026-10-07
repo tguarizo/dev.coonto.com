@@ -25,7 +25,17 @@ Os testes de bancada usam contas e sessões fictícias, sem mensagens reais. Ele
 
 ## Verificação após publicação
 
-A execução do GitHub Actions e as verificações do site e dos arquivos MP3 devem ser registradas após sua conclusão. Este registro não declara antecipadamente que o deploy ou os áudios foram concluídos.
+Verificação concluída em 7 de outubro de 2026:
+
+- Aplicação 1.9.6-rc.1 e banco saudável confirmados no endpoint público.
+- Conteúdo servido de Dante e Martha comparado integralmente aos JSONs do repositório: correspondência exata (14 e 24 interações).
+- 14 interações e 42 retornos de Dante percorridos no navegador público; fonte antes das alternativas, salto de movimento e contador de decisões conferidos. Inspeção visual desktop sem overflow horizontal.
+- 62/62 áudios Dante responderam 206, audio/mpeg e 32 bytes para a faixa solicitada. Amostras do início e do fim baixadas e validadas com ffprobe como MP3, com duração positiva.
+- Áudios do início e do fim de Martha responderam corretamente. Áudios de O Alienista exigem sessão e responderam 401 sem autenticação; a reprodução autenticada de Alienista não foi repetida nesta verificação pública.
+- Progresso privado respondeu 401 sem sessão. CRM, professor, escola e rede redirecionaram para login. Login do CRM dev exibiu a RC1. A revisão administrativa autenticada foi feita na bancada HTTP; não houve inspeção visual remota de uma conta real.
+- GitHub Actions de recuperação concluiu com sucesso: https://github.com/tguarizo/dev.coonto.com/actions/runs/37691104713 . O log confirma a recuperação do primeiro arquivo sem nova chamada ao fornecedor e a conclusão dos demais.
+
+Evidências estruturadas: `deploy/RC1_VERIFICACAO.json`.
 
 ## Limites e próxima avaliação humana
 
@@ -41,4 +51,4 @@ O primeiro deploy publicou o roteiro e a aplicação, mas interrompeu a geraçã
 
 A migração 022 aceita os identificadores das interações de Dante; as migrações históricas também foram compatibilizadas porque o instalador as repete. A execução de migrações passa a interromper no primeiro erro. O gerador verifica uma versão MP3 já salva pelo mesmo hash de texto/voz/modelo, valida-a com ffprobe e retoma o registro no banco sem repetir TTS. Foram acrescentados dois testes de regressão (75 testes aprovados ao todo): repetição de todas as migrações com registros publicados e recuperação após falha simulada no banco, com uma única chamada ao fornecedor.
 
-A recuperação aplica a migração e o script a esta aplicação RC1 já publicada em dev, sem reconstruir a interface. O código canônico contém a mesma correção para os próximos deploys. A conclusão dos áudios ainda deve ser verificada.
+A recuperação aplica a migração e o script a esta aplicação RC1 já publicada em dev, sem reconstruir a interface. O código canônico contém a mesma correção para os próximos deploys. A geração e a disponibilidade dos 62 áudios foram confirmadas após a recuperação. O saldo restante e a cobrança efetiva não foram consultados; os logs indicam 16.802 caracteres pendentes na primeira geração, incluindo o arquivo recuperado sem repetição.

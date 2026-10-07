@@ -1,0 +1,584 @@
+{
+  "checkedAt": "2026-10-07T21:52:05.424044+00:00",
+  "version": "1.9.6-rc.1",
+  "applicationCommit": "7808ae861fcd157f7ba39183df09f2682081bc42",
+  "audioRecoveryCommit": "7ec94fd1dda0128b34a939175ca7cf5a02096510",
+  "successfulWorkflow": "https://github.com/tguarizo/dev.coonto.com/actions/runs/37691104713",
+  "automatedTests": 75,
+  "integratedHttpBenchChecks": 25,
+  "browser": {
+    "danteInteractions": 14,
+    "danteReturns": 42,
+    "mode": "guest, no account changes",
+    "supportVersesBeforeAlternatives": true,
+    "movementJump": true,
+    "desktopHorizontalOverflow": false,
+    "marthaFirstChoiceAndChapterJump": true,
+    "crmLogin": "https://crm.dev.coonto.com/login",
+    "authenticatedRemoteCrmVisualReview": false
+  },
+  "content": {
+    "health": {
+      "ok": true,
+      "service": "coonto",
+      "version": "1.9.6-rc.1",
+      "database": "ready"
+    },
+    "divina-comedia-canto-i": {
+      "version": "dante-editorial-v1-rc1",
+      "interactions": 14
+    },
+    "memorias-de-martha": {
+      "version": "martha-editorial-v2-beta7",
+      "interactions": 24
+    }
+  },
+  "accessWithoutSession": [
+    {
+      "url": "https://dev.coonto.com/api/rc/progress/divina-comedia-canto-i",
+      "status": 401,
+      "location": null
+    },
+    {
+      "url": "https://crm.dev.coonto.com/backoffice",
+      "status": 307,
+      "location": "/login?return_to=%2Fbackoffice"
+    },
+    {
+      "url": "https://dev.coonto.com/professor",
+      "status": 307,
+      "location": "/login?return_to=%2Fprofessor"
+    },
+    {
+      "url": "https://dev.coonto.com/gestao-escolar",
+      "status": 307,
+      "location": "/login?return_to=%2Fgestao-escolar"
+    },
+    {
+      "url": "https://dev.coonto.com/gestao-rede",
+      "status": 307,
+      "location": "/login?return_to=%2Fgestao-rede"
+    }
+  ],
+  "audioRangeChecks": [
+    {
+      "id": "mov-1",
+      "status": 206,
+      "type": "audio/mpeg",
+      "range": "bytes 0-31/211949",
+      "length": 32,
+      "ok": true
+    },
+    {
+      "id": "mov-1-i-1-pre",
+      "status": 206,
+      "type": "audio/mpeg",
+      "range": "bytes 0-31/642447",
+      "length": 32,
+      "ok": true
+    },
+    {
+      "id": "mov-1-i-1-r-0",
+      "status": 206,
+      "type": "audio/mpeg",
+      "range": "bytes 0-31/224906",
+      "length": 32,
+      "ok": true
+    },
+    {
+      "id": "mov-1-i-1-r-1",
+      "status": 206,
+      "type": "audio/mpeg",
+      "range": "bytes 0-31/196484",
+      "length": 32,
+      "ok": true
+    },
+    {
+      "id": "mov-1-i-1-r-2",
+      "status": 206,
+      "type": "audio/mpeg",
+      "range": "bytes 0-31/252073",
+      "length": 32,
+      "ok": true
+    },
+    {
+      "id": "mov-1-i-2-pre",
+      "status": 206,
+      "type": "audio/mpeg",
+      "range": "bytes 0-31/643701",
+      "length": 32,
+      "ok": true
+    },
+    {
+      "id": "mov-1-i-2-r-0",
+      "status": 206,
+      "type": "audio/mpeg",
+      "range": "bytes 0-31/232847",
+      "length": 32,
+      "ok": true
+    },
+    {
+      "id": "mov-1-i-2-r-1",
+      "status": 206,
+      "type": "audio/mpeg",
+      "range": "bytes 0-31/250819",
+      "length": 32,
+      "ok": true
+    },
+    {
+      "id": "mov-1-i-2-r-2",
+      "status": 206,
+      "type": "audio/mpeg",
+      "range": "bytes 0-31/281330",
+      "length": 32,
+      "ok": true
+    },
+    {
+      "id": "mov-1-i-3-pre",
+      "status": 206,
+      "type": "audio/mpeg",
+      "range": "bytes 0-31/656239",
+      "length": 32,
+      "ok": true
+    },
+    {
+      "id": "mov-1-i-3-r-0",
+      "status": 206,
+      "type": "audio/mpeg",
+      "range": "bytes 0-31/287182",
+      "length": 32,
+      "ok": true
+    },
+    {
+      "id": "mov-1-i-3-r-1",
+      "status": 206,
+      "type": "audio/mpeg",
+      "range": "bytes 0-31/324380",
+      "length": 32,
+      "ok": true
+    },
+    {
+      "id": "mov-1-i-3-r-2",
+      "status": 206,
+      "type": "audio/mpeg",
+      "range": "bytes 0-31/276733",
+      "length": 32,
+      "ok": true
+    },
+    {
+      "id": "mov-2",
+      "status": 206,
+      "type": "audio/mpeg",
+      "range": "bytes 0-31/184782",
+      "length": 32,
+      "ok": true
+    },
+    {
+      "id": "mov-2-i-1-pre",
+      "status": 206,
+      "type": "audio/mpeg",
+      "range": "bytes 0-31/686333",
+      "length": 32,
+      "ok": true
+    },
+    {
+      "id": "mov-2-i-1-r-0",
+      "status": 206,
+      "type": "audio/mpeg",
+      "range": "bytes 0-31/248311",
+      "length": 32,
+      "ok": true
+    },
+    {
+      "id": "mov-2-i-1-r-1",
+      "status": 206,
+      "type": "audio/mpeg",
+      "range": "bytes 0-31/233683",
+      "length": 32,
+      "ok": true
+    },
+    {
+      "id": "mov-2-i-1-r-2",
+      "status": 206,
+      "type": "audio/mpeg",
+      "range": "bytes 0-31/279658",
+      "length": 32,
+      "ok": true
+    },
+    {
+      "id": "mov-2-i-2-pre",
+      "status": 206,
+      "type": "audio/mpeg",
+      "range": "bytes 0-31/632834",
+      "length": 32,
+      "ok": true
+    },
+    {
+      "id": "mov-2-i-2-r-0",
+      "status": 206,
+      "type": "audio/mpeg",
+      "range": "bytes 0-31/204008",
+      "length": 32,
+      "ok": true
+    },
+    {
+      "id": "mov-2-i-2-r-1",
+      "status": 206,
+      "type": "audio/mpeg",
+      "range": "bytes 0-31/257506",
+      "length": 32,
+      "ok": true
+    },
+    {
+      "id": "mov-2-i-2-r-2",
+      "status": 206,
+      "type": "audio/mpeg",
+      "range": "bytes 0-31/207769",
+      "length": 32,
+      "ok": true
+    },
+    {
+      "id": "mov-2-i-3-pre",
+      "status": 206,
+      "type": "audio/mpeg",
+      "range": "bytes 0-31/709320",
+      "length": 32,
+      "ok": true
+    },
+    {
+      "id": "mov-2-i-3-r-0",
+      "status": 206,
+      "type": "audio/mpeg",
+      "range": "bytes 0-31/238280",
+      "length": 32,
+      "ok": true
+    },
+    {
+      "id": "mov-2-i-3-r-1",
+      "status": 206,
+      "type": "audio/mpeg",
+      "range": "bytes 0-31/249983",
+      "length": 32,
+      "ok": true
+    },
+    {
+      "id": "mov-2-i-3-r-2",
+      "status": 206,
+      "type": "audio/mpeg",
+      "range": "bytes 0-31/259596",
+      "length": 32,
+      "ok": true
+    },
+    {
+      "id": "mov-3",
+      "status": 206,
+      "type": "audio/mpeg",
+      "range": "bytes 0-31/144657",
+      "length": 32,
+      "ok": true
+    },
+    {
+      "id": "mov-3-i-1-pre",
+      "status": 206,
+      "type": "audio/mpeg",
+      "range": "bytes 0-31/764073",
+      "length": 32,
+      "ok": true
+    },
+    {
+      "id": "mov-3-i-1-r-0",
+      "status": 206,
+      "type": "audio/mpeg",
+      "range": "bytes 0-31/230757",
+      "length": 32,
+      "ok": true
+    },
+    {
+      "id": "mov-3-i-1-r-1",
+      "status": 206,
+      "type": "audio/mpeg",
+      "range": "bytes 0-31/271717",
+      "length": 32,
+      "ok": true
+    },
+    {
+      "id": "mov-3-i-1-r-2",
+      "status": 206,
+      "type": "audio/mpeg",
+      "range": "bytes 0-31/276733",
+      "length": 32,
+      "ok": true
+    },
+    {
+      "id": "mov-3-i-2-pre",
+      "status": 206,
+      "type": "audio/mpeg",
+      "range": "bytes 0-31/638685",
+      "length": 32,
+      "ok": true
+    },
+    {
+      "id": "mov-3-i-2-r-0",
+      "status": 206,
+      "type": "audio/mpeg",
+      "range": "bytes 0-31/271717",
+      "length": 32,
+      "ok": true
+    },
+    {
+      "id": "mov-3-i-2-r-1",
+      "status": 206,
+      "type": "audio/mpeg",
+      "range": "bytes 0-31/287182",
+      "length": 32,
+      "ok": true
+    },
+    {
+      "id": "mov-3-i-2-r-2",
+      "status": 206,
+      "type": "audio/mpeg",
+      "range": "bytes 0-31/252909",
+      "length": 32,
+      "ok": true
+    },
+    {
+      "id": "mov-4",
+      "status": 206,
+      "type": "audio/mpeg",
+      "range": "bytes 0-31/197320",
+      "length": 32,
+      "ok": true
+    },
+    {
+      "id": "mov-4-i-1-pre",
+      "status": 206,
+      "type": "audio/mpeg",
+      "range": "bytes 0-31/652896",
+      "length": 32,
+      "ok": true
+    },
+    {
+      "id": "mov-4-i-1-r-0",
+      "status": 206,
+      "type": "audio/mpeg",
+      "range": "bytes 0-31/236608",
+      "length": 32,
+      "ok": true
+    },
+    {
+      "id": "mov-4-i-1-r-1",
+      "status": 206,
+      "type": "audio/mpeg",
+      "range": "bytes 0-31/184782",
+      "length": 32,
+      "ok": true
+    },
+    {
+      "id": "mov-4-i-1-r-2",
+      "status": 206,
+      "type": "audio/mpeg",
+      "range": "bytes 0-31/204008",
+      "length": 32,
+      "ok": true
+    },
+    {
+      "id": "mov-4-i-2-pre",
+      "status": 206,
+      "type": "audio/mpeg",
+      "range": "bytes 0-31/757386",
+      "length": 32,
+      "ok": true
+    },
+    {
+      "id": "mov-4-i-2-r-0",
+      "status": 206,
+      "type": "audio/mpeg",
+      "range": "bytes 0-31/321454",
+      "length": 32,
+      "ok": true
+    },
+    {
+      "id": "mov-4-i-2-r-1",
+      "status": 206,
+      "type": "audio/mpeg",
+      "range": "bytes 0-31/318528",
+      "length": 32,
+      "ok": true
+    },
+    {
+      "id": "mov-4-i-2-r-2",
+      "status": 206,
+      "type": "audio/mpeg",
+      "range": "bytes 0-31/348622",
+      "length": 32,
+      "ok": true
+    },
+    {
+      "id": "mov-5",
+      "status": 206,
+      "type": "audio/mpeg",
+      "range": "bytes 0-31/180184",
+      "length": 32,
+      "ok": true
+    },
+    {
+      "id": "mov-5-i-1-pre",
+      "status": 206,
+      "type": "audio/mpeg",
+      "range": "bytes 0-31/698871",
+      "length": 32,
+      "ok": true
+    },
+    {
+      "id": "mov-5-i-1-r-0",
+      "status": 206,
+      "type": "audio/mpeg",
+      "range": "bytes 0-31/209023",
+      "length": 32,
+      "ok": true
+    },
+    {
+      "id": "mov-5-i-1-r-1",
+      "status": 206,
+      "type": "audio/mpeg",
+      "range": "bytes 0-31/249147",
+      "length": 32,
+      "ok": true
+    },
+    {
+      "id": "mov-5-i-1-r-2",
+      "status": 206,
+      "type": "audio/mpeg",
+      "range": "bytes 0-31/231593",
+      "length": 32,
+      "ok": true
+    },
+    {
+      "id": "mov-5-i-2-pre",
+      "status": 206,
+      "type": "audio/mpeg",
+      "range": "bytes 0-31/718933",
+      "length": 32,
+      "ok": true
+    },
+    {
+      "id": "mov-5-i-2-r-0",
+      "status": 206,
+      "type": "audio/mpeg",
+      "range": "bytes 0-31/261686",
+      "length": 32,
+      "ok": true
+    },
+    {
+      "id": "mov-5-i-2-r-1",
+      "status": 206,
+      "type": "audio/mpeg",
+      "range": "bytes 0-31/306408",
+      "length": 32,
+      "ok": true
+    },
+    {
+      "id": "mov-5-i-2-r-2",
+      "status": 206,
+      "type": "audio/mpeg",
+      "range": "bytes 0-31/258342",
+      "length": 32,
+      "ok": true
+    },
+    {
+      "id": "mov-6",
+      "status": 206,
+      "type": "audio/mpeg",
+      "range": "bytes 0-31/189797",
+      "length": 32,
+      "ok": true
+    },
+    {
+      "id": "mov-6-i-1-pre",
+      "status": 206,
+      "type": "audio/mpeg",
+      "range": "bytes 0-31/654150",
+      "length": 32,
+      "ok": true
+    },
+    {
+      "id": "mov-6-i-1-r-0",
+      "status": 206,
+      "type": "audio/mpeg",
+      "range": "bytes 0-31/240370",
+      "length": 32,
+      "ok": true
+    },
+    {
+      "id": "mov-6-i-1-r-1",
+      "status": 206,
+      "type": "audio/mpeg",
+      "range": "bytes 0-31/208187",
+      "length": 32,
+      "ok": true
+    },
+    {
+      "id": "mov-6-i-1-r-2",
+      "status": 206,
+      "type": "audio/mpeg",
+      "range": "bytes 0-31/285092",
+      "length": 32,
+      "ok": true
+    },
+    {
+      "id": "mov-6-i-2-pre",
+      "status": 206,
+      "type": "audio/mpeg",
+      "range": "bytes 0-31/723113",
+      "length": 32,
+      "ok": true
+    },
+    {
+      "id": "mov-6-i-2-r-0",
+      "status": 206,
+      "type": "audio/mpeg",
+      "range": "bytes 0-31/341934",
+      "length": 32,
+      "ok": true
+    },
+    {
+      "id": "mov-6-i-2-r-1",
+      "status": 206,
+      "type": "audio/mpeg",
+      "range": "bytes 0-31/320618",
+      "length": 32,
+      "ok": true
+    },
+    {
+      "id": "mov-6-i-2-r-2",
+      "status": 206,
+      "type": "audio/mpeg",
+      "range": "bytes 0-31/329395",
+      "length": 32,
+      "ok": true
+    }
+  ],
+  "audioDecodeSamples": [
+    {
+      "id": "mov-1-i-1-pre",
+      "duration": "40.124082",
+      "codec": "mp3"
+    },
+    {
+      "id": "mov-6-i-2-r-2",
+      "duration": "20.558367",
+      "codec": "mp3"
+    }
+  ],
+  "marthaAudioSamples": {
+    "firstPreparation": 206,
+    "lastReturn": 206
+  },
+  "alienistaAudioWithoutSession": 401,
+  "providerRecovery": {
+    "reusedFirstCompletedFile": true,
+    "duplicateProviderCallForThatFile": false,
+    "pendingTextCharactersAtFirstGeneration": 16802,
+    "independentlyVerifiedRemainingBalance": false
+  }
+}
