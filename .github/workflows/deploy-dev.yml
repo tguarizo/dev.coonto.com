@@ -27,6 +27,8 @@ jobs:
           node-version: '22'
           cache: npm
       - run: npm ci --ignore-scripts
+      - name: Ensure audio validation tools
+        run: command -v ffprobe || (sudo apt-get update && sudo apt-get install -y ffmpeg)
       - run: npm test
       - run: npm run typecheck
 
@@ -51,7 +53,7 @@ jobs:
           ssh-keyscan -H "$SERVER_HOST" >> ~/.ssh/known_hosts
 
       - name: Package and Deploy
-        if: env.SSH_PRIVATE_KEY != ''
+        if: env.SSH_PRIVATE_KEY != '' && !contains(github.event.head_commit.message, '[dante-audio-recovery]')
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           SERVER_USER: ${{ secrets.SERVER_USER }}
@@ -100,6 +102,19 @@ jobs:
           case "$DEPLOY_PATH" in *[!a-zA-Z0-9_./-]*) exit 1;; esac
           PROJECT_NAME="coonto-$(basename "$DEPLOY_PATH")"
           ssh ${SERVER_USER}@${SERVER_HOST} "cd '$DEPLOY_PATH' && sudo docker compose -p '$PROJECT_NAME' exec -T app node scripts/generate-beta-audio.mjs --work=memorias-de-martha && sudo docker compose -p '$PROJECT_NAME' exec -T -e COONTO_AUDIO_DAILY_CHAR_LIMIT=100000 app node scripts/generate-beta-audio.mjs --generate --work=memorias-de-martha"
+
+      - name: Recover Dante audio without rebuilding or repeating provider calls
+        if: env.SSH_PRIVATE_KEY != '' && contains(github.event.head_commit.message, '[dante-audio-recovery]')
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SERVER_USER: ${{ secrets.SERVER_USER }}
+          SERVER_HOST: ${{ secrets.SERVER_HOST }}
+          DEPLOY_PATH: ${{ secrets.DEV_DEPLOY_PATH || '/opt/coonto/dev' }}
+        run: |
+          case "$DEPLOY_PATH" in *[!a-zA-Z0-9_./-]*) exit 1;; esac
+          PROJECT_NAME="coonto-$(basename "$DEPLOY_PATH")"
+          scp db/migrations/022_dante_interaction_audio.sql scripts/recover-dante-audio.mjs scripts/generate-beta-audio.mjs ${SERVER_USER}@${SERVER_HOST}:/tmp/
+          ssh ${SERVER_USER}@${SERVER_HOST} "cd '$DEPLOY_PATH' && sudo docker compose -p '$PROJECT_NAME' cp /tmp/022_dante_interaction_audio.sql app:/app/scripts/022_dante_interaction_audio.sql && sudo docker compose -p '$PROJECT_NAME' cp /tmp/recover-dante-audio.mjs app:/app/scripts/recover-dante-audio.mjs && sudo docker compose -p '$PROJECT_NAME' cp /tmp/generate-beta-audio.mjs app:/app/scripts/generate-beta-audio.mjs && sudo docker compose -p '$PROJECT_NAME' exec -T app node scripts/recover-dante-audio.mjs"
 
       - name: Publish the revised Dante in dev
         if: env.SSH_PRIVATE_KEY != '' && contains(github.event.head_commit.message, '[dante-rc1]')
