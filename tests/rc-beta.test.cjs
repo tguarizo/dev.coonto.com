@@ -5,7 +5,7 @@ let db,user=null;
 const schema=load('lib/rc-schema.ts');
 const origin=load('lib/request-origin.ts');
 const defaults=Object.fromEntries(schema.rcSlugs.map(slug=>[slug,schema.rcWorkSchema.parse(require('../content/rc-'+slug+'.json'))]));
-function load(file,mocks={}){const mod={exports:{}};const source=ts.transpileModule(fs.readFileSync(file,'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,esModuleInterop:true,jsx:ts.JsxEmit.ReactJSX}}).outputText;vm.runInNewContext(source,{exports:mod.exports,module:mod,require:name=>mocks[name]||require(name),process,Buffer,console,Response,Request,URL,crypto});return mod.exports;}
+function load(file,mocks={}){const mod={exports:{}};const source=ts.transpileModule(fs.readFileSync(file,'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,esModuleInterop:true,jsx:ts.JsxEmit.ReactJSX}}).outputText;vm.runInNewContext(source,{exports:mod.exports,module:mod,require:name=>mocks[name]||(name==='@/scripts/rc-audio.cjs'?require('../scripts/rc-audio.cjs'):require(name)),process,Buffer,console,Response,Request,URL,crypto});return mod.exports;}
 const query=(sql,params)=>db.query(sql,params);
 const dbMock={query,getPool:()=>({connect:async()=>({query,release(){}})})};
 const content=load('lib/rc-content.ts',{'@/content/rc-memorias-de-martha.json':defaults['memorias-de-martha'],'@/content/rc-divina-comedia-canto-i.json':defaults['divina-comedia-canto-i'],'@/lib/rc-schema':schema,'@/lib/db':dbMock});
@@ -24,7 +24,7 @@ after(async()=>{delete process.env.DATABASE_URL;await db.close();});
 test('fontes cobrem os 12 capítulos e todos os versos sem lacunas; retornos são próprios',()=>{
  assert.equal(defaults['memorias-de-martha'].units.length,12);assert.equal(defaults['divina-comedia-canto-i'].units.length,6);
  assert.equal(require('../content/inferno-i-verses.json').length,136);
- for(const work of Object.values(defaults)){for(let i=0;i<work.units.length;i++){const u=work.units[i];assert.equal(new Set(u.options.map(o=>o.consequence)).size,3);assert.ok(u.sourceEnd>=u.sourceStart);if(i)assert.equal(u.sourceStart,work.units[i-1].sourceEnd+1);} }
+ for(const work of Object.values(defaults)){for(let i=0;i<work.units.length;i++){const u=work.units[i];assert.equal(new Set(u.options.map(o=>o.consequence)).size,3);assert.ok(u.sourceEnd>=u.sourceStart);if(i&&work.source.kind==='verses')assert.equal(u.sourceStart,work.units[i-1].sourceEnd+1);} }
  assert.equal(defaults['memorias-de-martha'].units.at(-1).sourceEnd,166);
  assert.equal(defaults['divina-comedia-canto-i'].units.at(-1).sourceEnd,136);
 });
@@ -40,7 +40,7 @@ test('progresso retoma por conta, separa obras e impede sobrescrita entre abas',
 test('recusa ID de outra conta, etapas fora da obra, edição antiga e origem externa',async()=>{
  user=account('A');const body={state:state(),revision:2,contentVersion:defaults['memorias-de-martha'].version};
  assert.equal((await progress.POST(request({...body,userId:'B'}),context('memorias-de-martha'))).status,400);
- assert.equal((await progress.POST(request({...body,state:{...state(),unit:9}}),context('divina-comedia-canto-i'))).status,400);
+ assert.equal((await progress.POST(request({...body,contentVersion:defaults['divina-comedia-canto-i'].version,state:{...state(),unit:9}}),context('divina-comedia-canto-i'))).status,400);
  assert.equal((await progress.POST(request({...body,contentVersion:'old'}),context('memorias-de-martha'))).status,409);
  assert.equal((await progress.POST(request(body,'https://external.test'),context('memorias-de-martha'))).status,403);
 });
@@ -125,3 +125,10 @@ test('download RC exige acesso da própria conta e preserva as notas somente do 
  user=account('A');assert.equal((await route.GET(new Request('https://coonto.test'),context('memorias-de-martha'))).status,403);
  user=account('B');const response=await route.GET(new Request('https://coonto.test'),context('memorias-de-martha'));assert.equal(response.status,200);assert.equal(response.headers.get('X-Coonto-User'),'B');assert.equal(response.headers.get('Cache-Control'),'private, no-store');const html=await response.text();assert.ok(html.includes('rc-phone'));assert.equal(html.includes('Nota privada da conta A'),false);
 });
+
+ test('novo percurso salva as 24 interações na própria conta e recusa IDs inexistentes',async()=>{
+ user=account('B');const work=await content.getRcWork('memorias-de-martha'),state=schema.prepareRcState(schema.initialRcState,work);for(const {op} of schema.rcInteractions(work))state.journey.answers[op.id]=1;state.journey.notes['cap-1-i-1']='Nota privada v2';
+ let result=await progress.POST(request({state,revision:0,contentVersion:work.version}),context(work.slug));assert.equal(result.status,200);assert.equal((await result.json()).percent,100);
+ const loaded=await (await progress.GET(new Request('https://coonto.test'),context(work.slug))).json();assert.equal(loaded.progress.state.journey.notes['cap-1-i-1'],'Nota privada v2');assert.equal(Object.keys(loaded.progress.state.journey.answers).length,24);
+ state.journey.answers['cap-6-i-3']=2;assert.equal((await progress.POST(request({state,revision:1,contentVersion:work.version}),context(work.slug))).status,400);
+ });

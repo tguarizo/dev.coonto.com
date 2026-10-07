@@ -4,6 +4,7 @@ import {createHash,randomUUID} from 'node:crypto';
 import {spawnSync} from 'node:child_process';
 import path from 'node:path';
 import pg from 'pg';
+import {rcAudioEntries} from './rc-audio.cjs';
 const generate=process.argv.includes('--generate'),retry=process.argv.includes('--retry');
 const output=path.resolve(process.env.COONTO_AUDIO_DIR||'audio');
 const model=process.env.ELEVENLABS_MODEL_ID||'eleven_multilingual_v2';
@@ -17,7 +18,7 @@ for(const item of await load('home-example-audio'))items.push({key:'home-example
 for(const slug of ['memorias-de-martha','divina-comedia-canto-i']){
  let work=await load('rc-'+slug);
  if(process.env.DATABASE_URL){const pool=new pg.Pool({connectionString:process.env.DATABASE_URL});try{const result=await pool.query("SELECT content FROM rc_content_versions WHERE work_slug=$1 AND status='published'",[slug]);if(result.rows[0])work=result.rows[0].content;}finally{await pool.end();}}
- for(const unit of work.units)items.push({key:slug+'/'+unit.id,segments:[{speaker:'narrator',text:unit.title+'. '+unit.context}]});
+ for(const item of rcAudioEntries(work))items.push({key:slug+'/'+item.id,segments:[{speaker:'narrator',text:item.text}]});
 }
 let workAudio=await load('o-alienista-audio');
 if(process.env.DATABASE_URL){const pool=new pg.Pool({connectionString:process.env.DATABASE_URL});try{const result=await pool.query("SELECT scene_id,segments FROM coonto_audio_jobs WHERE work_slug='o-alienista' AND status='published'");const published=new Map(result.rows.map(r=>[r.scene_id,r.segments]));workAudio=workAudio.map(s=>({...s,segments:published.get(s.id)||s.segments}));}finally{await pool.end();}}
