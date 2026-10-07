@@ -141,7 +141,7 @@ jobs:
           ssh ${SERVER_USER}@${SERVER_HOST} "cd '$DEPLOY_PATH' && sudo docker compose -p '$PROJECT_NAME' exec -T app node scripts/generate-beta-audio.mjs --work=divina-comedia-canto-i && sudo docker compose -p '$PROJECT_NAME' exec -T -e COONTO_AUDIO_DAILY_CHAR_LIMIT=100000 app node scripts/generate-beta-audio.mjs --generate --work=divina-comedia-canto-i"
 
       - name: Generate versioned beta audio
-        if: env.SSH_PRIVATE_KEY != '' && !contains(github.event.head_commit.message, '[martha-v2]') && !contains(github.event.head_commit.message, '[dante-rc1]')
+        if: env.SSH_PRIVATE_KEY != '' && !contains(github.event.head_commit.message, '[martha-v2]') && !contains(github.event.head_commit.message, '[dante-rc1]') && !contains(github.event.head_commit.message, '[sync-only]')
         continue-on-error: true
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
