@@ -24,6 +24,8 @@ COPY --from=builder --chown=nextjs:nodejs /app/scripts/generate-home-example-aud
 COPY --from=builder --chown=nextjs:nodejs /app/scripts/generate-beta-audio.mjs ./scripts/generate-beta-audio.mjs
 COPY --from=builder --chown=nextjs:nodejs /app/scripts/prepare-beta-video.mjs ./scripts/prepare-beta-video.mjs
 COPY --from=builder --chown=nextjs:nodejs /app/scripts/qa ./scripts/qa
+COPY --from=builder --chown=nextjs:nodejs /app/scripts/rc-audio.cjs ./scripts/rc-audio.cjs
+COPY --from=builder --chown=nextjs:nodejs /app/scripts/publish-martha-dev.mjs ./scripts/publish-martha-dev.mjs
 USER nextjs
 EXPOSE 3000
 CMD ["node", "server.js"]

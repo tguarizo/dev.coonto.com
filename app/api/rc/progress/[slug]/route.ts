@@ -22,8 +22,8 @@ export async function POST(request:Request,{params}:Context){
  const raw=await request.text();if(raw.length>250000)return Response.json({error:'Anotações excedem o limite'},{status:413});
  let body;try{body=input.parse(JSON.parse(raw));}catch{return Response.json({error:'Progresso inválido'},{status:400});}
  const work=await getRcWork(slug.data);if(body.contentVersion!==work.version)return Response.json({error:'A edição foi atualizada. Copie suas anotações e recarregue a página.'},{status:409});
- if(!validRcState(body.state,work.units.length))return Response.json({error:'Etapa inválida'},{status:400});
- const percent=rcProgress(body.state,work.units.length);
+ if(!validRcState(body.state,work))return Response.json({error:'Etapa inválida'},{status:400});
+ const percent=rcProgress(body.state,work);
  const rows=await query<{revision:number}>(`INSERT INTO rc_learning_progress(user_id,work_slug,content_version,state_json,percent) SELECT $1,$2,$3,$4::jsonb,$5 WHERE $6=0
  ON CONFLICT(user_id,work_slug) DO UPDATE SET state_json=EXCLUDED.state_json,percent=EXCLUDED.percent,content_version=EXCLUDED.content_version,revision=rc_learning_progress.revision+1,updated_at=NOW() WHERE rc_learning_progress.revision=$6 RETURNING revision`,[user.userId,slug.data,body.contentVersion,JSON.stringify(body.state),percent,body.revision]);
  // Em revisões posteriores o SELECT não insere; atualizar somente a conta autenticada.

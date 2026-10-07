@@ -1,5 +1,5 @@
 const {test}=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm'),ts=require('typescript');
-function load(file,mocks={}){const mod={exports:{}};vm.runInNewContext(ts.transpileModule(fs.readFileSync(file,'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,esModuleInterop:true,jsx:ts.JsxEmit.ReactJSX}}).outputText,{exports:mod.exports,module:mod,require:n=>mocks[n]||require(n),process,Buffer,Response,Request,console});return mod.exports;}
+function load(file,mocks={}){const mod={exports:{}};vm.runInNewContext(ts.transpileModule(fs.readFileSync(file,'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,esModuleInterop:true,jsx:ts.JsxEmit.ReactJSX}}).outputText,{exports:mod.exports,module:mod,require:n=>mocks[n]||(n==='@/scripts/rc-audio.cjs'?require('../scripts/rc-audio.cjs'):require(n)),process,Buffer,Response,Request,console});return mod.exports;}
 const work=require('../content/rc-divina-comedia-canto-i.json'),verses=require('../content/inferno-i-verses.json');
 test('leitor offline mantém sequência, retorno da escolha e notas por etapa sem oito abas',()=>{
  const {rcOfflineHtml}=load('lib/rc-offline.ts');const html=rcOfflineHtml({work,state:{unit:0,stage:0,visited:['0:0'],answers:{},notes:{}},revision:4,userId:'fixture',verses},'');

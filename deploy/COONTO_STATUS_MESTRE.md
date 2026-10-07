@@ -150,3 +150,7 @@ Atualizado em 2026-10-03 com a implementação da gestão educacional beta.3. Pu
 - [ ] Histórico de revisões, rubricas, instrumentos de avaliação e exportações autorizadas.
 
 Detalhes: GESTAO_EDUCACIONAL_IMPLEMENTACAO.md.
+
+## Retomada — Martha editorial v2 (7 de outubro de 2026 UTC)
+
+Tony autorizou a implementação e publicação da versão completa em dev, para avaliação posterior com ele e Fred. Roteiro: 12 capítulos, 24 interações e 72 retornos; roteiro editorial v2.0 e pareceres servem de base. Não há aprovação final da curadoria atribuída. A implementação, histórico, áudio e roteiro de teste estão descritos em `deploy/MARTHA_EDITORIAL_V2.md`. Aplicativo 1.9.6-beta.7; edição `martha-editorial-v2-beta7`. A rodada seguinte deve recolher feedback da experiência completa e depois aplicar o mesmo processo a Dante.
