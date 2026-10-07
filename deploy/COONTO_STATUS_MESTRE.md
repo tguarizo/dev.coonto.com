@@ -163,3 +163,7 @@ Tony autorizou a implementação e publicação da versão completa em dev, para
 - Dante ainda não foi implementado nesta revisão. Próxima etapa: avaliação de Tony, consolidação editorial e definição da montagem completa.
 - Martha permanece em avaliação por leitores; retorno de Tiago sobre CRM aguardado.
 - Checkpoint documental: não modifica plataforma nem banco remoto.
+
+## RC1 — Dante, CRM e bancada (7 de outubro de 2026)
+
+Versão preparada: **1.9.6-rc.1**. Dante contém seis movimentos, 14 decisões e 42 retornos; texto de apoio por versos e glossário antes da escolha, notas preservadas e pacote offline atualizado. CRM apresenta permissões reais por obra para Alienista, Martha e Dante. Verificações: 73 testes, TypeScript, build e 25 verificações HTTP integradas aprovados. Publicação em dev e geração de 62 áudios são etapas seguintes, sem declaração antecipada de sucesso. Escopo, evidências e limites: `deploy/RELEASE_CANDIDATE_1.md`.

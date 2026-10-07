@@ -36,7 +36,7 @@ export async function setPersona(form:FormData){
 }
 export async function setCuratorWork(form:FormData){
  await owner();const userId=String(form.get("user_id")||""),work=String(form.get("work_slug")||"").trim();
- if(!userId||!work)throw new Error("Dados inválidos");
+ if(!userId||!["o-alienista","memorias-de-martha","divina-comedia-canto-i"].includes(work))throw new Error("Dados inválidos");
  const comment=form.get("can_comment")==="on",approve=form.get("can_approve")==="on",publish=form.get("can_publish")==="on";
  await query("INSERT INTO curator_work_permissions(user_id,work_slug,can_comment,can_approve,can_publish) VALUES($1,$2,$3,$4,$5) ON CONFLICT(user_id,work_slug) DO UPDATE SET can_comment=EXCLUDED.can_comment,can_approve=EXCLUDED.can_approve,can_publish=EXCLUDED.can_publish",[userId,work,comment,approve,publish]);
  revalidatePath("/backoffice/personas");

@@ -8,7 +8,7 @@ import {rcAudioEntries} from '@/scripts/rc-audio.cjs';
 import {getRcWork} from '@/lib/rc-content';
 export const dynamic='force-dynamic';
 export async function GET(request:Request,{params}:{params:Promise<{slug:string;unit:string}>}){
- const {slug,unit}=await params;if(!rcSlugSchema.safeParse(slug).success||! /^(?:mov-\d{1,2}|cap-\d{1,2}(?:-i-[1-3]-(?:pre|r-[0-2]))?)$/.test(unit))return new Response('',{status:404});
+ const {slug,unit}=await params;if(!rcSlugSchema.safeParse(slug).success||! /^(?:(?:mov-[1-6]|cap-(?:[1-9]|1[0-2]))(?:-i-[1-3]-(?:pre|r-[0-2]))?)$/.test(unit))return new Response('',{status:404});
  const work=await getRcWork(slug),chapter=rcAudioEntries(work).find(u=>u.id===unit);if(!chapter)return new Response('',{status:404});
  const model=process.env.ELEVENLABS_MODEL_ID||'eleven_multilingual_v2',segments=[{speaker:'narrator',text:chapter.text,voiceId:voiceId('narrator')}];
  const expected=createHash('sha256').update(JSON.stringify({model,segments})).digest('hex');
