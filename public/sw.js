@@ -1,4 +1,4 @@
-const STATIC_CACHE='coonto-shell-v196b5';
+const STATIC_CACHE='coonto-shell-v196rc1';
 const PROTECTED_CACHE='coonto-protected-v2';
 const SHELL=['/offline/reader.html','/offline/library.html','/offline/rc-reader.html','/manifest.webmanifest','/favicon.png','/images/coonto-logo.png'];
 self.addEventListener('install',event=>event.waitUntil(caches.open(STATIC_CACHE).then(cache=>cache.addAll(SHELL)).then(()=>self.skipWaiting())));

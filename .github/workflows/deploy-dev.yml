@@ -101,8 +101,32 @@ jobs:
           PROJECT_NAME="coonto-$(basename "$DEPLOY_PATH")"
           ssh ${SERVER_USER}@${SERVER_HOST} "cd '$DEPLOY_PATH' && sudo docker compose -p '$PROJECT_NAME' exec -T app node scripts/generate-beta-audio.mjs --work=memorias-de-martha && sudo docker compose -p '$PROJECT_NAME' exec -T -e COONTO_AUDIO_DAILY_CHAR_LIMIT=100000 app node scripts/generate-beta-audio.mjs --generate --work=memorias-de-martha"
 
+      - name: Publish the revised Dante in dev
+        if: env.SSH_PRIVATE_KEY != '' && contains(github.event.head_commit.message, '[dante-rc1]')
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SERVER_USER: ${{ secrets.SERVER_USER }}
+          SERVER_HOST: ${{ secrets.SERVER_HOST }}
+          DEPLOY_PATH: ${{ secrets.DEV_DEPLOY_PATH || '/opt/coonto/dev' }}
+        run: |
+          case "$DEPLOY_PATH" in *[!a-zA-Z0-9_./-]*) exit 1;; esac
+          PROJECT_NAME="coonto-$(basename "$DEPLOY_PATH")"
+          ssh ${SERVER_USER}@${SERVER_HOST} "cd '$DEPLOY_PATH' && sudo docker compose -p '$PROJECT_NAME' exec -T app node scripts/publish-dante-dev.mjs --publish-dev"
+
+      - name: Produce full Dante audio for RC1
+        if: env.SSH_PRIVATE_KEY != '' && contains(github.event.head_commit.message, '[dante-rc1]')
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SERVER_USER: ${{ secrets.SERVER_USER }}
+          SERVER_HOST: ${{ secrets.SERVER_HOST }}
+          DEPLOY_PATH: ${{ secrets.DEV_DEPLOY_PATH || '/opt/coonto/dev' }}
+        run: |
+          case "$DEPLOY_PATH" in *[!a-zA-Z0-9_./-]*) exit 1;; esac
+          PROJECT_NAME="coonto-$(basename "$DEPLOY_PATH")"
+          ssh ${SERVER_USER}@${SERVER_HOST} "cd '$DEPLOY_PATH' && sudo docker compose -p '$PROJECT_NAME' exec -T app node scripts/generate-beta-audio.mjs --work=divina-comedia-canto-i && sudo docker compose -p '$PROJECT_NAME' exec -T -e COONTO_AUDIO_DAILY_CHAR_LIMIT=100000 app node scripts/generate-beta-audio.mjs --generate --work=divina-comedia-canto-i"
+
       - name: Generate versioned beta audio
-        if: env.SSH_PRIVATE_KEY != '' && !contains(github.event.head_commit.message, '[martha-v2]')
+        if: env.SSH_PRIVATE_KEY != '' && !contains(github.event.head_commit.message, '[martha-v2]') && !contains(github.event.head_commit.message, '[dante-rc1]')
         continue-on-error: true
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}

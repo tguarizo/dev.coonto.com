@@ -2,8 +2,8 @@
   "slug": "divina-comedia-canto-i",
   "title": "A Divina Comédia · Inferno, Canto I",
   "author": "Dante Alighieri · tradução de José Pedro Xavier Pinheiro",
-  "version": "1.9.6-beta.2",
-  "intro": "Percurso beta por todos os 136 versos do Canto I, em seis movimentos. Texto integral e sínteses editoriais aparecem separados. Revisão humana ainda pendente.",
+  "version": "dante-editorial-v1-rc1",
+  "intro": "Inferno, Canto I: 136 versos, seis movimentos e 14 interações. Texto integral, sínteses e interpretações do Coonto aparecem separados. Parecer editorial favorável de Fred Sommer recebido em 7 de outubro de 2026; a avaliação da experiência na plataforma continua. O indicador conta decisões registradas, não mede compreensão nem atribui nota.",
   "source": {
     "label": "Wikisource · Xavier Pinheiro · grafia atualizada",
     "href": "https://pt.wikisource.org/wiki/A_Divina_Com%C3%A9dia_(Xavier_Pinheiro)/grafia_atualizada/Inferno/I",
@@ -36,7 +36,112 @@
       "recall": "Sem olhar, reconstrua o deslocamento da selva até a tentativa de subida. Confira os detalhes.",
       "connection": "Como o texto diferencia perceber uma saída e conseguir segui-la? Use uma imagem dos versos.",
       "sourceStart": 1,
-      "sourceEnd": 30
+      "sourceEnd": 30,
+      "interactions": [
+        {
+          "id": "mov-1-i-1",
+          "title": "A luz muda o medo",
+          "kind": "Comparar antes e depois",
+          "preparation": "Dante conta que perdeu a estrada e se encontrou numa selva que ainda teme recordar. Ao chegar ao pé de uma colina, vê luz no alto. A narrativa diz que seu assombro se aquieta um tanto.",
+          "question": "Qual mudança essas passagens permitem reconhecer?",
+          "options": [
+            {
+              "label": "A luz esclarece a Dante como ele tinha entrado na selva.",
+              "consequence": "A passagem continua sem explicar a entrada na selva. A mudança diz respeito ao medo presente, não à recuperação dessa lembrança."
+            },
+            {
+              "label": "A visão da colina mostra que Dante já alcançou um lugar seguro.",
+              "consequence": "Ele está ao pé da colina. O alívio não confirma chegada ao alto nem ausência de obstáculos."
+            },
+            {
+              "label": "A luz permite a Dante retomar a confiança e considerar uma saída.",
+              "consequence": "O medo diminui parcialmente e surge uma direção possível. Isso prepara uma tentativa; ainda não demonstra que a saída esteja livre."
+            }
+          ],
+          "reveal": "",
+          "discovery": "Perceber uma direção possível pode reduzir o medo antes de haver segurança.",
+          "recall": "O que mudou no sentimento? O que permanece desconhecido?",
+          "connection": "O medo desaparece quando alguém sai de um perigo?",
+          "sourceLabel": "Versos 1–21",
+          "sourcePages": [],
+          "sourceRanges": [
+            {
+              "start": 1,
+              "end": 21
+            }
+          ]
+        },
+        {
+          "id": "mov-1-i-2",
+          "title": "Olhar de novo para o perigo",
+          "kind": "Ler uma comparação",
+          "preparation": "O texto compara Dante a alguém que escapou do mar e, ainda sem fôlego e com medo, olha para as águas perigosas. Dante também volta o olhar para o espaço de onde saiu. Depois descansa e retoma a marcha.",
+          "question": "O que a comparação ajuda a perceber nesta cena?",
+          "options": [
+            {
+              "label": "Dante passou por um naufrágio antes de chegar à colina.",
+              "consequence": "O mar pertence à comparação. A cena de Dante é a selva; não há relato de um naufrágio vivido por ele."
+            },
+            {
+              "label": "Dante pretende voltar à selva porque a colina lhe parece pior.",
+              "consequence": "Olhar para trás não equivale a decidir regressar. A sequência mostra descanso e avanço, não preferência pela selva."
+            },
+            {
+              "label": "Dante continua ligado ao perigo pelo medo, mesmo depois do deslocamento.",
+              "consequence": "A comparação aproxima as reações: o corpo sai, mas o olhar e o medo voltam ao perigo. O descanso antecede a retomada da marcha."
+            }
+          ],
+          "reveal": "",
+          "discovery": "A imagem acrescenta uma reação ao acontecimento sem transformar a comparação em outro episódio.",
+          "recall": "Separe o acontecimento de Dante da imagem usada para compreendê-lo.",
+          "connection": "Quem vive o medo e quem organiza essa lembrança para nós?",
+          "sourceLabel": "Versos 22–30",
+          "sourcePages": [],
+          "sourceRanges": [
+            {
+              "start": 22,
+              "end": 30
+            }
+          ]
+        },
+        {
+          "id": "mov-1-i-3",
+          "title": "A voz que recorda",
+          "kind": "Distinguir perspectivas",
+          "preparation": "A voz que conta o episódio fala da dificuldade de lembrar a selva e anuncia que narrará um bem encontrado. Na cena inicial, Dante está desorientado, sente medo e procura uma direção.",
+          "question": "Como essas duas posições participam da leitura?",
+          "options": [
+            {
+              "label": "O anúncio do narrador mostra que o personagem já domina a rota naquele momento.",
+              "consequence": "A informação dirigida ao leitor não apaga a desorientação da cena. É preciso distinguir a posição de quem conta da posição de quem age."
+            },
+            {
+              "label": "O narrador conhece uma sequência que o personagem inicial ainda está vivendo.",
+              "consequence": "Narrar depois permite selecionar e relacionar acontecimentos. O anúncio de um bem orienta nossa expectativa, sem dar ao personagem inicial esse domínio."
+            },
+            {
+              "label": "A dificuldade de lembrar demonstra que a voz está inventando a entrada na selva.",
+              "consequence": "Uma lacuna de memória não basta para concluir invenção. O texto declara um limite do relato e ainda descreve medo, lugar e movimento."
+            }
+          ],
+          "reveal": "",
+          "discovery": "A perspectiva da narração pode orientar o leitor enquanto o personagem permanece sem orientação.",
+          "recall": "Indique algo que a voz narrativa antecipa e algo que o personagem ainda procura.",
+          "connection": "Agora acompanhe a tentativa, sem supor que a esperança garantirá passagem.",
+          "sourceLabel": "Versos 1–12 e 19–30",
+          "sourcePages": [],
+          "sourceRanges": [
+            {
+              "start": 1,
+              "end": 12
+            },
+            {
+              "start": 19,
+              "end": 30
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "mov-2",
@@ -63,7 +168,116 @@
       "recall": "Recupere a ordem das feras e seus efeitos. Confira se confundiu a presença do leão com a da loba.",
       "connection": "Compare obstáculo externo e reação da personagem sem apagar nenhum dos dois.",
       "sourceStart": 31,
-      "sourceEnd": 60
+      "sourceEnd": 60,
+      "interactions": [
+        {
+          "id": "mov-2-i-1",
+          "title": "Os obstáculos têm efeitos diferentes",
+          "kind": "Ordenar e comparar",
+          "preparation": "Na subida, uma pantera ocupa o caminho e faz Dante considerar voltar. A manhã e a estação sustentam sua esperança. O leão reacende o pavor. Com a loba, a confiança na subida cede e Dante é empurrado para a região sem luz.",
+          "question": "Que sequência explica melhor a mudança de sua tentativa?",
+          "options": [
+            {
+              "label": "A manhã afasta o temor das feras e permite atravessar a subida.",
+              "consequence": "A esperança ligada à manhã não se mantém diante das novas presenças. O canto descreve recuo, não travessia bem-sucedida."
+            },
+            {
+              "label": "As feras são vistas de longe e Dante decide adiar a subida por cansaço.",
+              "consequence": "O descanso já aconteceu antes da subida. Aqui são o impedimento, o pavor e a pressão da loba que conduzem ao recuo."
+            },
+            {
+              "label": "Os impedimentos se acumulam e a loba torna decisivo o recuo.",
+              "consequence": "A pantera já bloqueia; o leão amplia o medo; a loba faz a tentativa perder sustentação. A sequência dá peso específico a cada presença."
+            }
+          ],
+          "reveal": "",
+          "discovery": "As feras não são obstáculos intercambiáveis: seus efeitos organizam a perda de esperança.",
+          "recall": "Reconstrua a ordem e associe um efeito a cada fera.",
+          "connection": "Por que a luz que antes ajudava não basta agora?",
+          "sourceLabel": "Versos 31–60",
+          "sourcePages": [],
+          "sourceRanges": [
+            {
+              "start": 31,
+              "end": 60
+            }
+          ]
+        },
+        {
+          "id": "mov-2-i-2",
+          "title": "Uma esperança pode ser revista",
+          "kind": "Relacionar mudança e causa",
+          "preparation": "A hora amena e a estação dão esperança a Dante durante a tentativa. Mais adiante, o terror da loba e sua pressão o levam de volta à região em que a luz falta.",
+          "question": "Como relacionar a esperança inicial e o recuo?",
+          "options": [
+            {
+              "label": "A perda de esperança indica que a luz da manhã foi uma aparência enganosa.",
+              "consequence": "A mudança de sentimento não prova que a luz fosse irreal. O que muda são os obstáculos e a reação de Dante."
+            },
+            {
+              "label": "A esperança era um estado de Dante que os acontecimentos seguintes modificaram.",
+              "consequence": "A esperança existiu e tinha apoios na cena. Os novos obstáculos mudam a possibilidade de avançar; o recuo não torna falso o sentimento anterior."
+            },
+            {
+              "label": "A esperança faz Dante decidir enfrentar as feras com êxito crescente.",
+              "consequence": "A sequência termina em impedimento e recuo. A confiança inicial não se converte em vitória sobre as feras."
+            }
+          ],
+          "reveal": "",
+          "discovery": "Uma expectativa pode ser compreensível e depois precisar de revisão.",
+          "recall": "Que informação nova torna insuficiente a confiança anterior?",
+          "connection": "A fome da loba explica apenas um animal ou também permite uma leitura simbólica?",
+          "sourceLabel": "Versos 37–43 e 49–60",
+          "sourcePages": [],
+          "sourceRanges": [
+            {
+              "start": 37,
+              "end": 43
+            },
+            {
+              "start": 49,
+              "end": 60
+            }
+          ]
+        },
+        {
+          "id": "mov-2-i-3",
+          "title": "O que sustenta uma hipótese simbólica",
+          "kind": "Justificar uma interpretação",
+          "preparation": "A loba é magra, aparece cheia de ambições e produz terror. Virgílio dirá depois que ela não sacia os apetites e fica com mais fome ao se alimentar. Esse trecho posterior será apresentado como comparação entre passagens.",
+          "question": "Qual hipótese se apoia nessa combinação de descrições?",
+          "options": [
+            {
+              "label": "As três feras devem representar a mesma ameaça porque bloqueiam uma subida.",
+              "consequence": "Compartilhar uma função de obstáculo não torna iguais atributos e efeitos. Essa leitura apaga diferenças que o canto construiu."
+            },
+            {
+              "label": "A magreza indica que alimentar a loba resolveria o impedimento.",
+              "consequence": "A explicação posterior afirma justamente que alimentar não sacia seus apetites. A hipótese precisa responder a essa informação."
+            },
+            {
+              "label": "A loba pode representar um desejo que cresce em vez de encontrar medida.",
+              "consequence": "Ambições e fome crescente sustentam essa leitura. Ela não esgota a imagem nem identifica, sozinha, uma pessoa ou instituição histórica."
+            }
+          ],
+          "reveal": "",
+          "discovery": "Uma interpretação simbólica ganha apoio quando explica palavras e relações do texto.",
+          "recall": "Que duas pistas apoiam sua leitura? Que identificação elas ainda não permitem?",
+          "connection": "O recuo prepara um encontro, mas a confiança no guia ainda precisa se formar.",
+          "sourceLabel": "Versos 49–60 com conferência posterior em 91–99",
+          "sourcePages": [],
+          "sourceRanges": [
+            {
+              "start": 49,
+              "end": 60
+            },
+            {
+              "start": 91,
+              "end": 99
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "mov-3",
@@ -90,7 +304,75 @@
       "recall": "Sem reler, explique como Dante reconhece Virgílio. Confira pelo menos duas referências.",
       "connection": "Que evidências sustentam a confiança num guia dentro desta cena? A admiração é suficiente para compreender a proposta?",
       "sourceStart": 61,
-      "sourceEnd": 90
+      "sourceEnd": 87,
+      "interactions": [
+        {
+          "id": "mov-3-i-1",
+          "title": "O reconhecimento de Virgílio",
+          "kind": "Relacionar apresentação e resposta",
+          "preparation": "Dante pede compaixão a uma figura, sem saber ainda quem ela é. Ela fala de seus pais de Mântua, da vida em Roma sob Augusto e de sua poesia sobre o filho de Anquíses. Dante a reconhece como Virgílio e menciona o estudo e o amor por seu livro.",
+          "question": "O que explica o peso que essa figura adquire para Dante?",
+          "options": [
+            {
+              "label": "Dante passa a confiar porque a figura promete ausência de perigo na viagem.",
+              "consequence": "Não foi oferecida uma viagem sem perigo. A confiança nessa passagem se apoia no reconhecimento e na admiração."
+            },
+            {
+              "label": "A origem em Mântua basta para Dante compreender toda a proposta de condução.",
+              "consequence": "A origem é uma referência entre outras. A proposta da rota será explicada depois e não decorre, por si só, do lugar de nascimento."
+            },
+            {
+              "label": "A relação prévia com a poesia dá significado às referências da apresentação.",
+              "consequence": "A apresentação encontra um leitor que já admira essa obra. O reconhecimento liga identidade, experiência de leitura e pedido de auxílio."
+            }
+          ],
+          "reveal": "",
+          "discovery": "O encontro ganha força por uma relação literária anterior, antes de haver explicação do percurso.",
+          "recall": "O que Dante conhece sobre Virgílio e o que ainda precisa saber?",
+          "connection": "Reconhecer um mestre já resolve o obstáculo?",
+          "sourceLabel": "Versos 61–84",
+          "sourcePages": [],
+          "sourceRanges": [
+            {
+              "start": 61,
+              "end": 84
+            }
+          ]
+        },
+        {
+          "id": "mov-3-i-2",
+          "title": "Admiração e necessidade de ajuda",
+          "kind": "Separar relação e situação",
+          "preparation": "Dante chama Virgílio de mestre e modelo de estilo. Logo depois aponta a fera que impediu sua passagem, pede auxílio e diz que continua tremendo.",
+          "question": "Que relação o pedido estabelece entre admiração e medo?",
+          "options": [
+            {
+              "label": "O encontro com o poeta substitui o problema da subida por uma disputa de estilo.",
+              "consequence": "O estilo explica a admiração, mas a fala seguinte retorna ao impedimento concreto e ao tremor. Não há disputa entre os poetas."
+            },
+            {
+              "label": "A admiração permite pedir ajuda enquanto o medo e o impedimento continuam.",
+              "consequence": "O reconhecimento dá uma base ao pedido; não elimina aquilo que tornou o pedido necessário. As falas aproximam formação literária e situação de vulnerabilidade."
+            },
+            {
+              "label": "Reconhecer o mestre mostra que Dante já superou a dificuldade diante da fera.",
+              "consequence": "O próprio pedido menciona a passagem vedada e o medo presente. A confiança se forma antes da resolução da dificuldade."
+            }
+          ],
+          "reveal": "",
+          "discovery": "Confiar em alguém pode permitir pedir orientação sem significar que o problema já foi resolvido.",
+          "recall": "Que pista mostra admiração? Que pista mostra necessidade ainda presente?",
+          "connection": "Vamos separar a solução proposta agora do anúncio de uma derrota futura da loba.",
+          "sourceLabel": "Versos 79–87",
+          "sourcePages": [],
+          "sourceRanges": [
+            {
+              "start": 79,
+              "end": 87
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "mov-4",
@@ -116,8 +398,76 @@
       "evidence": "Busque a explicação da fome da loba e os atributos do Lebréu. Qual parte é conselho presente e qual parte é anúncio futuro?",
       "recall": "Recupere o motivo da outra rota e três atributos do Lebréu. Confira os versos.",
       "connection": "Como distinguir uma hipótese interpretativa de uma identificação comprovada? Aplique a distinção à profecia.",
-      "sourceStart": 91,
-      "sourceEnd": 111
+      "sourceStart": 88,
+      "sourceEnd": 111,
+      "interactions": [
+        {
+          "id": "mov-4-i-1",
+          "title": "Conselho presente e profecia",
+          "kind": "Distinguir tempos e funções",
+          "preparation": "Virgílio afirma que Dante precisa de outra rota. Explica que a loba impede a passagem e não sacia seus apetites. Anuncia também um Lebréu que virá e a derrotará.",
+          "question": "Como essas falas respondem à situação de Dante?",
+          "options": [
+            {
+              "label": "A outra rota orienta a ação presente; a derrota da loba pertence ao anúncio futuro.",
+              "consequence": "A fala opera em dois tempos. Ela oferece uma direção a Dante e amplia o horizonte com uma derrota ainda esperada."
+            },
+            {
+              "label": "A chegada anunciada do Lebréu libera a subida que Dante tenta naquele momento.",
+              "consequence": "A derrota é anunciada para um futuro. Não é narrada como acontecimento que já liberou a subida."
+            },
+            {
+              "label": "A profecia pede que Dante permaneça no vale esperando o Lebréu.",
+              "consequence": "O conselho é mudar de rota. A profecia não é formulada como ordem para Dante esperar parado no vale."
+            }
+          ],
+          "reveal": "",
+          "discovery": "O anúncio de um futuro diferente não equivale a uma solução já disponível na cena.",
+          "recall": "Separe uma orientação imediata de um acontecimento anunciado.",
+          "connection": "Que alcance podemos atribuir a essa profecia sem identificar seu referente à força?",
+          "sourceLabel": "Versos 88–111",
+          "sourcePages": [],
+          "sourceRanges": [
+            {
+              "start": 88,
+              "end": 111
+            }
+          ]
+        },
+        {
+          "id": "mov-4-i-2",
+          "title": "Duas leituras da mesma profecia",
+          "kind": "Interpretar com apoio e limite",
+          "preparation": "A loba tem apetites que não se saciam. O Lebréu anunciado terá saber, virtude e amor por norte, não será movido por ouro ou poder e será amparo da Itália. A passagem não declara seu nome civil.",
+          "question": "Qual hipótese você sustentaria para discutir a profecia, e qual limite precisa reconhecer?",
+          "options": [
+            {
+              "label": "A referência à Itália permite discutir uma expectativa de renovação coletiva.",
+              "consequence": "O amparo da Itália permite essa discussão. Isso não identifica uma pessoa histórica específica nem dispensa o contraste de valores."
+            },
+            {
+              "label": "O Lebréu deve ser o nome da figura que já está guiando Dante nesta cena.",
+              "consequence": "Virgílio fala de alguém anunciado para o futuro; sua própria função presente é orientar Dante. A passagem não estabelece essa identidade."
+            },
+            {
+              "label": "O contraste pode expressar uma oposição entre cobiça e outros valores.",
+              "consequence": "A oposição entre apetites e valores apoia a leitura moral. Ela precisa explicar também o alcance coletivo mencionado, sem apagar essa dimensão."
+            }
+          ],
+          "reveal": "",
+          "discovery": "As leituras moral e coletiva têm apoios diferentes e podem coexistir; a identificação de um indivíduo exige evidência adicional.",
+          "recall": "Escolha uma palavra ou relação que apoie sua hipótese e uma conclusão que você evita.",
+          "connection": "A proposta que vem a seguir também exige distinguir destinos e alcance do guia.",
+          "sourceLabel": "Versos 94–111",
+          "sourcePages": [],
+          "sourceRanges": [
+            {
+              "start": 94,
+              "end": 111
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "mov-5",
@@ -144,7 +494,75 @@
       "recall": "Sem olhar, explique o que Virgílio pode conduzir e onde termina sua função. Confira o motivo apresentado.",
       "connection": "Como reconhecer o alcance de uma orientação sem exigir que ela resolva tudo? Sustente a resposta na fala de Virgílio.",
       "sourceStart": 112,
-      "sourceEnd": 129
+      "sourceEnd": 129,
+      "interactions": [
+        {
+          "id": "mov-5-i-1",
+          "title": "Destinos anunciados não são iguais",
+          "kind": "Comparar grupos e expectativas",
+          "preparation": "Virgílio anuncia almas em sofrimento eterno. Em seguida descreve outras que atravessam uma prova dura, mas esperam alcançar a felicidade divina. Dante ainda não entrou nesses lugares neste canto.",
+          "question": "Qual diferença organiza a proposta de percurso?",
+          "options": [
+            {
+              "label": "Virgílio descreve pessoas que Dante já encontrou durante a subida da colina.",
+              "consequence": "São etapas anunciadas para a condução. Esses encontros ainda não aconteceram na ação do Canto I."
+            },
+            {
+              "label": "Os dois grupos vivem sofrimento, mas a expectativa de felicidade distingue o segundo.",
+              "consequence": "O sofrimento não recebe o mesmo horizonte nos dois grupos. A esperança de alcançar o destino superior é declarada para o segundo."
+            },
+            {
+              "label": "As almas do primeiro grupo já esperam alcançar a mesma felicidade do segundo.",
+              "consequence": "A fala distingue tormento eterno e uma prova associada à esperança. A equivalência apaga essa diferença."
+            }
+          ],
+          "reveal": "",
+          "discovery": "Uma semelhança aparente pode esconder uma diferença decisiva no destino esperado.",
+          "recall": "O que aproxima os grupos e o que os distingue?",
+          "connection": "Quem pode conduzir Dante até cada etapa?",
+          "sourceLabel": "Versos 112–120",
+          "sourcePages": [],
+          "sourceRanges": [
+            {
+              "start": 112,
+              "end": 120
+            }
+          ]
+        },
+        {
+          "id": "mov-5-i-2",
+          "title": "O próprio guia declara um limite",
+          "kind": "Examinar alcance de uma orientação",
+          "preparation": "Virgílio afirma que outro espírito, mais digno, deverá conduzir Dante à etapa superior. Relaciona seu próprio limite à autoridade divina. Neste trecho, esse espírito não recebe nome.",
+          "question": "O que essa declaração permite concluir sobre a proposta?",
+          "options": [
+            {
+              "label": "Virgílio oferece uma condução com alcance definido e prevê a continuidade por outro guia.",
+              "consequence": "O limite é assumido dentro de uma oferta de ajuda. A etapa superior terá outra condução; o canto ainda não nomeia quem a exercerá."
+            },
+            {
+              "label": "A referência ao espírito mais digno já permite obter seu nome a partir destes versos.",
+              "consequence": "A função é anunciada, mas o nome não aparece nos versos citados. Uma identificação posterior deve ser apresentada como informação externa a este trecho."
+            },
+            {
+              "label": "A limitação significa que Virgílio não pode conduzir nenhuma parte do percurso.",
+              "consequence": "O guia já ofereceu uma condução. O limite para a etapa superior não cancela sua atuação nas etapas anteriores."
+            }
+          ],
+          "reveal": "",
+          "discovery": "Reconhecer um limite não invalida a orientação; esclarece onde outra condução será necessária.",
+          "recall": "O que está anunciado? O que esta passagem deixa sem nome?",
+          "connection": "Dante aceitará uma direção que ainda não percorreu?",
+          "sourceLabel": "Versos 121–129",
+          "sourcePages": [],
+          "sourceRanges": [
+            {
+              "start": 121,
+              "end": 129
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "mov-6",
@@ -171,7 +589,93 @@
       "recall": "Recupere o canto em cinco movimentos: desorientação, tentativa, obstáculo, encontro e aceitação. Confira o que ficou de fora.",
       "connection": "Revise uma hipótese usando três passagens do canto. Indique o que é acontecimento narrado, imagem simbólica e interpretação sua.",
       "sourceStart": 130,
-      "sourceEnd": 136
+      "sourceEnd": 136,
+      "interactions": [
+        {
+          "id": "mov-6-i-1",
+          "title": "Aceitar antes de conhecer o percurso",
+          "kind": "Relacionar pedido e proposta",
+          "preparation": "Dante pede que Virgílio o conduza aos lugares anunciados para se afastar da condição em que está. Virgílio começa a andar e Dante o segue. É esse gesto que encerra o canto.",
+          "question": "O que o final muda em relação à tentativa solitária da subida?",
+          "options": [
+            {
+              "label": "O ato de seguir mostra que Dante já alcançou os lugares anunciados.",
+              "consequence": "Seguir o guia é começar a travessia. Os lugares foram descritos como destinos a alcançar, não como chegadas já narradas."
+            },
+            {
+              "label": "O pedido faz Virgílio vencer a loba e reabrir a mesma subida inicial.",
+              "consequence": "A proposta era outra rota. O final não narra uma vitória sobre a loba nem a liberação da subida anterior."
+            },
+            {
+              "label": "Dante inicia um percurso com um guia sem que a travessia esteja realizada.",
+              "consequence": "A aceitação transforma a orientação em início de movimento. O canto encerra esse começo; os encontros do percurso pertencem à continuação."
+            }
+          ],
+          "reveal": "",
+          "discovery": "A decisão modifica a direção e a relação com o guia, sem encerrar a jornada.",
+          "recall": "Qual ação encerra o canto? Qual chegada ele ainda não apresenta?",
+          "connection": "Retome a colina, o impedimento e a orientação para formular sua leitura do conjunto.",
+          "sourceLabel": "Versos 130–136",
+          "sourcePages": [],
+          "sourceRanges": [
+            {
+              "start": 130,
+              "end": 136
+            }
+          ]
+        },
+        {
+          "id": "mov-6-i-2",
+          "title": "Uma síntese apoiada no canto",
+          "kind": "Construir e delimitar uma interpretação",
+          "preparation": "No começo, Dante está desorientado. A luz permite tentar a subida, mas os obstáculos o fazem recuar. Ele reconhece Virgílio, escuta uma proposta com etapas e limites e passa a segui-lo.",
+          "question": "Qual leitura do percurso você defenderia com essas mudanças?",
+          "options": [
+            {
+              "label": "A orientação se constrói pela revisão da tentativa e pela aceitação de ajuda.",
+              "consequence": "O recuo, o diálogo e o gesto final apoiam a leitura. Ela deve reconhecer também a dimensão simbólica das imagens, que a sequência de ações não esgota."
+            },
+            {
+              "label": "O canto aproxima medo e aprendizagem: a direção começa enquanto o percurso permanece por conhecer.",
+              "consequence": "O medo e a confiança acompanham a mudança de direção. A leitura precisa permanecer ligada ao pedido, à proposta e ao início da caminhada."
+            },
+            {
+              "label": "A esperança inicial era um erro; a aceitação final demonstra que a dificuldade já terminou.",
+              "consequence": "A esperança tinha apoios na cena, embora não garantisse passagem. O gesto final abre uma travessia difícil; não demonstra o fim das dificuldades."
+            }
+          ],
+          "reveal": "",
+          "discovery": "Duas sínteses podem ter apoio no mesmo percurso; ambas precisam explicar acontecimentos e reconhecer o que ainda não foi realizado.",
+          "recall": "Escreva sua própria síntese e apoie-a em três passagens. Separe acontecimento, imagem e interpretação.",
+          "connection": "Agora volte ao Canto I integral e confronte sua leitura com o poema.",
+          "sourceLabel": "Versos 1–30 e 49–60 e 79–136",
+          "sourcePages": [],
+          "sourceRanges": [
+            {
+              "start": 1,
+              "end": 30
+            },
+            {
+              "start": 49,
+              "end": 60
+            },
+            {
+              "start": 79,
+              "end": 136
+            }
+          ]
+        }
+      ]
     }
-  ]
+  ],
+  "glossary": {
+    "Vate": "Poeta. Virgílio apresenta sua obra ao se identificar.",
+    "Anélito": "Respiração ofegante; na comparação, a pessoa ainda recupera o fôlego.",
+    "Conspecto": "Presença ou visão diante de alguém.",
+    "Empíreo": "Na cosmologia cristã evocada pelo poema, a morada celeste de Deus e dos bem-aventurados.",
+    "Mântua": "Cidade italiana ligada à origem de Virgílio.",
+    "Anquíses": "Pai de Eneias, personagem da Eneida de Virgílio.",
+    "Lebréu": "Cão de caça usado na imagem da profecia; a passagem não declara uma identidade histórica única.",
+    "Camila, Turno, Euríalo e Niso": "Figuras da tradição narrada na Eneida, evocadas na fala sobre a Itália. As referências podem ser consultadas; não são requisito de erudição para seguir a cena."
+  }
 }
