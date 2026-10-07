@@ -154,3 +154,12 @@ Detalhes: GESTAO_EDUCACIONAL_IMPLEMENTACAO.md.
 ## Retomada — Martha editorial v2 (7 de outubro de 2026 UTC)
 
 Tony autorizou a implementação e publicação da versão completa em dev, para avaliação posterior com ele e Fred. Roteiro: 12 capítulos, 24 interações e 72 retornos; roteiro editorial v2.0 e pareceres servem de base. Não há aprovação final da curadoria atribuída. A implementação, histórico, áudio e roteiro de teste estão descritos em `deploy/MARTHA_EDITORIAL_V2.md`. Aplicativo 1.9.6-beta.7; edição `martha-editorial-v2-beta7`. A rodada seguinte deve recolher feedback da experiência completa e depois aplicar o mesmo processo a Dante.
+
+## Checkpoint — curadoria de Dante e parecer de Fred (7 de outubro de 2026)
+
+- Base de develop preservada: `7395c81036cca345628b35238df5789c00b5f49f`, implementação completa de Martha v2.
+- Proposta de revisão do Inferno, Canto I: seis movimentos, 14 interações e 42 retornos simulados. Documento, mapa e roteiro estão em `deploy/curadoria/dante-canto-i-v1/`.
+- Tony confirmou que o parecer recebido sobre o avanço de Dante e Martha é de Fred Sommer. Transcrição integral em `FRED_SOMMER_PARECER.md` nesse diretório. Parecer editorial favorável; não equivale a autorização de publicação.
+- Dante ainda não foi implementado nesta revisão. Próxima etapa: avaliação de Tony, consolidação editorial e definição da montagem completa.
+- Martha permanece em avaliação por leitores; retorno de Tiago sobre CRM aguardado.
+- Checkpoint documental: não modifica plataforma nem banco remoto.
