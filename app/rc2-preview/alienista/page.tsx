@@ -13,7 +13,22 @@ const scenes:Scene[]=[
 {label:"Até a vida pessoal pode ser tratada por critérios científicos.",feedback:"Há indícios disso na decisão do médico. Machado deixa espaço para perceber o contraste entre sentimentos e cálculos."},
 {label:"Ele pretende impressionar a cidade com uma cerimônia.",feedback:"O episódio não sustenta essa como a principal razão. Observe os critérios usados por ele."},
 {label:"Ele deixou a medicina para se dedicar à família.",feedback:"Pelo contrário: seu raciocínio científico aparece até na escolha da esposa."}
-],discovery:"Uma escolha aparentemente privada mostra como o método de Bacamarte atravessa diferentes aspectos da vida.",source:"Capítulo I"}
+],discovery:"Uma escolha aparentemente privada mostra como o método de Bacamarte atravessa diferentes aspectos da vida.",source:"Capítulo I"},
+{id:"casa-verde",title:"Uma casa para estudar a mente",context:"Bacamarte propõe criar em Itaguaí um lugar para recolher e observar pessoas que considera necessitadas de tratamento. A ideia recebe o nome de Casa Verde.",question:"O que você gostaria de saber antes de apoiar esse projeto?",choices:[
+{label:"Quem decide quais pessoas serão levadas para lá?",feedback:"Boa pergunta. O poder de estabelecer critérios pode mudar o destino de muita gente."},
+{label:"Como as pessoas serão tratadas e quem poderá questionar decisões?",feedback:"Essa dúvida olha para as consequências humanas do projeto. O que a cidade poderá fazer quando discordar?"},
+{label:"Que evidências o médico usará para justificar o que faz?",feedback:"Investigar os critérios de Bacamarte será uma parte importante dessa história."}
+],discovery:"Uma proposta apresentada como científica levanta perguntas sobre critérios, responsabilidade e poder. Você ainda não precisa julgar o médico.",source:"Capítulo I"},
+{id:"caridade",title:"Cuidar ou investigar?",context:"Ao defender a Casa Verde, Bacamarte fala do estudo da loucura e do tratamento das pessoas. Para os moradores, a proposta pode soar ao mesmo tempo generosa e surpreendente.",question:"Qual tensão você percebe nessa proposta?",choices:[
+{label:"O desejo de ajudar e o desejo de pesquisar podem coexistir.",feedback:"Sim, é possível encontrar as duas motivações na proposta. Isso torna o personagem mais interessante do que um herói ou vilão imediato."},
+{label:"Um projeto de cuidado também precisa de limites claros.",feedback:"Essa é uma preocupação plausível: boas intenções não eliminam perguntas sobre quem decide e como."},
+{label:"Uma descoberta científica não resolve sozinha questões humanas.",feedback:"Você está percebendo a diferença entre conhecer um problema e decidir o que fazer com as pessoas envolvidas."}
+],discovery:"O projeto ainda está no começo. O Coonto não pede uma sentença: convida você a acompanhar como a ideia funciona na prática.",source:"Capítulo II"},
+{id:"evarista",title:"Uma viagem e novas perguntas",context:"Enquanto Bacamarte se dedica às suas pesquisas, D. Evarista vive os efeitos dessa dedicação na rotina familiar. O universo do médico vai além dos muros de sua casa.",question:"Que detalhe vale acompanhar daqui para a frente?",choices:[
+{label:"Como o projeto afeta as pessoas próximas ao médico.",feedback:"Uma grande ideia também altera relações pessoais. Vale observar o que a narrativa mostra sobre D. Evarista."},
+{label:"Como a cidade reage às decisões de Bacamarte.",feedback:"A opinião dos moradores ajuda a entender o lugar que o médico ocupa em Itaguaí."},
+{label:"Como os critérios do médico podem mudar com o tempo.",feedback:"Acompanhar o método e suas mudanças é uma boa forma de ler essa história."}
+],discovery:"Você conheceu o cenário, o protagonista e as perguntas que a Casa Verde desperta. Agora pode seguir para a obra completa e conferir as passagens originais.",source:"Capítulo III"}
 ];
 export default function AlienistaRc2(){
  const [index,setIndex]=useState(0),[choice,setChoice]=useState<number|null>(null),[help,setHelp]=useState(false),[notes,setNotes]=useState<Record<string,string>>({}),[showDiscovery,setShowDiscovery]=useState(false);
@@ -45,7 +60,7 @@ export default function AlienistaRc2(){
       {scene.choices.map((option,i)=><button key={i} type="button" onClick={()=>{setChoice(i);setShowDiscovery(false);}} aria-pressed={choice===i} style={{padding:15,textAlign:"left",fontSize:16,cursor:"pointer",background:choice===i?"#ede8ff":"#fafbfd",border:choice===i?"2px solid #5d48a5":"1px solid #cdd6e4",borderRadius:10}}>{option.label}</button>)}
      </div>
      {choice!==null&&<div style={{background:"#eff2fc",padding:20,marginTop:18,borderRadius:12}} role="status"><strong>Vamos olhar sua ideia</strong><p style={{lineHeight:1.7}}>{scene.choices[choice].feedback}</p><button type="button" onClick={()=>setShowDiscovery(true)} style={{background:"#172033",color:"#fff",border:0,borderRadius:8,padding:"12px 16px",cursor:"pointer"}}>Ver o que descobrimos</button></div>}
-     {showDiscovery&&<div style={{padding:18,borderLeft:"4px solid #6b59b4",marginTop:20}}><strong>Uma descoberta</strong><p>{scene.discovery}</p>{!done?<button type="button" onClick={next} style={{background:"#172033",color:"#fff",border:0,borderRadius:8,padding:"12px 16px",cursor:"pointer"}}>Continuar a história →</button>:<p><strong>Fim deste protótipo da abertura.</strong> O restante da obra continua preservado na versão atual.</p>}</div>}
+     {showDiscovery&&<div style={{padding:18,borderLeft:"4px solid #6b59b4",marginTop:20}}><strong>Uma descoberta</strong><p>{scene.discovery}</p>{!done?<button type="button" onClick={next} style={{background:"#172033",color:"#fff",border:0,borderRadius:8,padding:"12px 16px",cursor:"pointer"}}>Continuar a história →</button>:<p><strong>Fim da Fase 1 experimental.</strong> As outras fases permanecem disponíveis na experiência atual. Consulte o texto original para comparar as cenas.</p>}</div>}
      <label htmlFor="rc2-note" style={{display:"block",fontWeight:700,marginTop:30}}>Minha descoberta ou dúvida (opcional)</label>
      <textarea id="rc2-note" value={notes[scene.id]||""} onChange={e=>setNotes(p=>({...p,[scene.id]:e.target.value}))} rows={3} placeholder="Escreva com suas palavras…" style={{display:"block",width:"100%",boxSizing:"border-box",padding:12,marginTop:8,border:"1px solid #b9c5dc",borderRadius:8}}/>
      <p style={{fontSize:12,color:"#5f6d8a"}}>Protótipo isolado. Anotações não são enviadas ao servidor e serão perdidas ao sair.</p>
