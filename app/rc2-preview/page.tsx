@@ -16,7 +16,7 @@ export default function Rc2Preview() {
       <div style={{maxWidth:960,margin:"0 auto",padding:"24px"}}>
         <header style={{display:"flex",justifyContent:"space-between",gap:16,alignItems:"center",flexWrap:"wrap"}}>
           <Link href="/" style={{color:"#172033",fontWeight:800,textDecoration:"none",fontSize:24}}>coonto</Link>
-          <span style={{fontSize:12,background:"#e8e9f2",padding:"8px 12px",borderRadius:99}}>Protótipo RC2 · uso interno · não publicado</span>
+          <nav aria-label="Menu principal" style={{display:"flex",gap:12,flexWrap:"wrap",fontSize:14}}><Link href="/catalogo">Catálogo</Link><Link href="/como-funciona">Como funciona</Link><Link href="/ajuda">Ajuda</Link><Link href="/login">Entrar</Link></nav>
         </header>
         <section style={{padding:"70px 0 50px",maxWidth:740}}>
           <p style={{letterSpacing:2,fontWeight:700,color:"#5f6d8a"}}>LITERATURA PARA DESCOBRIR</p>
@@ -50,7 +50,7 @@ export default function Rc2Preview() {
             )}
           </div>
         </section>
-        <footer style={{padding:"24px 0",color:"#5f6d8a",fontSize:13}}>Coonto RC2 · prévia isolada. O site em produção e o ambiente dev continuam inalterados.</footer>
+        <footer style={{padding:"24px 0",color:"#5f6d8a",fontSize:13}}>Coonto RC2 · Desenvolvimento e validação com pequenos grupos.</footer>
       </div>
     </main>
   );
