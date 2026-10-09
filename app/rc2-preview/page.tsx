@@ -36,7 +36,7 @@ export default function Rc2Preview() {
             <strong>Uma ideia para acompanhar</strong>
             <p style={{lineHeight:1.6}}>{options[choice].response}</p>
             <p>Quer descobrir o que Machado de Assis escreveu?</p>
-            <Link href="/catalogo" style={{color:"#39318f",fontWeight:700}}>Conheça as obras →</Link>
+            <Link href="/rc2-preview/alienista" style={{color:"#39318f",fontWeight:700}}>Entre na primeira fase de O Alienista →</Link>
           </div>}
           <p style={{fontSize:12,color:"#5f6d8a",marginTop:20}}>Demonstração ilustrativa para validação editorial, não uma reprodução definitiva do enredo. Não salva respostas.</p>
         </section>
