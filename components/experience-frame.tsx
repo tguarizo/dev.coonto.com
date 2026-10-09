@@ -72,16 +72,16 @@ export function ExperienceFrame({ userId }: { userId: string }) {
   }
   return <section className="reader-workspace">
     <aside className="reader-rail">
-      <div className="reader-rail-title"><span>SUA EXPERIÊNCIA</span><strong>O Alienista</strong></div>
+      <div className="reader-rail-title"><span>SUA LEITURA</span><strong>O Alienista</strong></div>
       <nav className="reader-rail-actions" aria-label="Ações da leitura">
-        <label className="reader-chapter-jump"><span>Ir para capítulo</span><select defaultValue="" onChange={e=>{if(e.target.value)jumpChapter(e.target.value);e.target.value="";}}><option value="" disabled>Selecionar…</option>{["I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII","XIII"].map(n=><option key={n} value={n}>Capítulo {n}</option>)}</select></label>
-        <a href="/minha-biblioteca"><Library size={18}/><span>Minha biblioteca</span></a>
-        <button onClick={prepareOffline} disabled={preparing}>{preparing?<RefreshCw size={18}/>:<Download size={18}/>}<span>{preparing?"Preparando…":offlineReady?"Atualizar offline":"Baixar neste aparelho"}</span></button>
-        <button onClick={()=>setHelpOpen(true)}><CircleHelp size={18}/><span>Ajuda Coonto</span></button>
-        <a href="/catalogo#livros-originais"><Download size={18}/><span>Baixar livro original</span></a>
-        <a href="/texto/o-alienista"><BookOpen size={18}/><span>Texto de Machado</span></a>
+        <p className="reader-rail-status" role="status">{status}</p>
+        <label className="reader-chapter-jump"><span>Escolher fase ou capítulo</span><select defaultValue="" onChange={e=>{if(e.target.value)jumpChapter(e.target.value);e.target.value="";}}><option value="" disabled>Selecionar…</option>{["I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII","XIII"].map(n=><option key={n} value={n}>Capítulo {n}</option>)}</select></label>
+        <a href="/minha-biblioteca"><Library size={18}/><span>Continuar minha leitura</span></a>
+        <button onClick={prepareOffline} disabled={preparing}>{preparing?<RefreshCw size={18}/>:<Download size={18}/>}<span>{preparing?"Preparando…":offlineReady?"Atualizar leitura offline":"Ler sem internet"}</span></button>
+        <button onClick={()=>setHelpOpen(true)}><CircleHelp size={18}/><span>Precisa de ajuda?</span></button>
+        <a href="/catalogo#livros-originais"><Download size={18}/><span>Baixar o livro</span></a>
+        <a href="/texto/o-alienista"><BookOpen size={18}/><span>Ler o texto original</span></a>
       </nav>
-      <p className="reader-rail-status" role="status">{status}</p>
     </aside>
 
     <div className="reader-canvas">
