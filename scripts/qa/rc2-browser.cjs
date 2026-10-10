@@ -15,7 +15,8 @@ async function noOverflow(page,label){const widths=await page.evaluate(()=>({pag
    assert.match(await page.locator('body').innerText(),/Plataforma de aprendizagem interativa/);
    await noOverflow(page,'home '+name);
    assert.equal(await page.locator('.original-book').count(),3);
-   await page.locator('#livros-originais').screenshot({path:path.join(out,'books-'+name+'.png')});
+   await page.evaluate(()=>window.scrollTo(0,document.querySelector('#livros-originais').getBoundingClientRect().top+scrollY-90));
+   await page.screenshot({path:path.join(out,'books-'+name+'.png')});
    await page.reload({waitUntil:'networkidle'});assert.equal(await page.locator('dialog[open]').count(),0);
    for(const slug of ['memorias-de-martha','divina-comedia-canto-i']){
     const work=JSON.parse(fs.readFileSync('content/rc-'+slug+'.json','utf8'));
@@ -26,11 +27,16 @@ async function noOverflow(page,label){const widths=await page.evaluate(()=>({pag
       assert.equal(await page.locator('.rc-feedback').count(),0);
       if(op.illustration){const img=page.locator('.rc-narrative-art img');await img.waitFor();assert.equal(await img.getAttribute('src'),op.illustration.src);await img.evaluate(el=>el.decode());assert.equal(await img.evaluate(el=>el.naturalWidth),1536);}
       await noOverflow(page,slug+' '+name+' '+op.id);
+      if(op===unit.interactions[0]){
+       await page.evaluate(()=>{window.scrollTo(0,0);document.querySelector('.rc-reader-canvas').scrollTop=0;});
+       if(op.illustration)await page.locator('.rc-narrative-art').scrollIntoViewIfNeeded();
+       await page.screenshot({path:path.join(out,slug+'-'+unit.id+'-'+name+'.png')});
+      }
       for(let choice=0;choice<op.options.length;choice++){
        await page.getByRole('group',{name:op.question,exact:true}).getByRole('button',{name:op.options[choice].label,exact:true}).click();
        assert.ok((await page.locator('.rc-feedback').innerText()).includes(op.options[choice].consequence));
       }
-      if(op===unit.interactions[0])await page.locator('.rc-phone').screenshot({path:path.join(out,slug+'-'+unit.id+'-'+name+'.png')});
+      
       if(op!==work.units.at(-1).interactions.at(-1))await page.locator('.rc-reader-nav .primary').click();
      }
     }
@@ -42,12 +48,15 @@ async function noOverflow(page,label){const widths=await page.evaluate(()=>({pag
    // The exact protected document is rendered as a local QA fixture, without changing production access.
    await page.route(base+'/__qa/alienista',r=>r.fulfill({contentType:'text/html',body:fs.readFileSync('content/Coonto_O_Alienista.html','utf8')}));
    await page.goto(base+'/__qa/alienista',{waitUntil:'networkidle'});
+   await page.locator('#skipSplash').click();
+   await page.locator('#splash').waitFor({state:'hidden'});
    const art=JSON.parse(fs.readFileSync('content/alienista-illustrations.json','utf8'));
    for(const [id,item] of Object.entries(art)){
     await page.evaluate(idx=>{state.idx=idx;render();},Number(id.slice(1)));
     const img=page.locator('img[src="'+item.src+'"]');await img.waitFor();await img.evaluate(el=>el.decode());
     assert.equal(await img.evaluate(el=>el.naturalWidth),1536);await noOverflow(page,'alienista '+name+' '+id);
-    await page.screenshot({path:path.join(out,'alienista-'+id+'-'+name+'.png'),fullPage:true});
+    await img.scrollIntoViewIfNeeded();
+    await page.screenshot({path:path.join(out,'alienista-'+id+'-'+name+'.png')});
    }
    assert.deepEqual(errors,[],'Browser runtime errors');
    checks.push({viewport:name,work:'o-alienista',images:6,document:'local protected-document fixture'});
