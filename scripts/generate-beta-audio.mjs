@@ -27,6 +27,21 @@ for(const item of items){item.segments=item.segments.map(s=>({...s,voiceId:voice
 const selectedWork=process.argv.find(arg=>arg.startsWith('--work='))?.slice(7);if(selectedWork&&!['home-examples','o-alienista','memorias-de-martha','divina-comedia-canto-i','videos'].includes(selectedWork))throw new Error('Obra inválida.');
 const selectedItem=process.argv.find(arg=>arg.startsWith('--item='))?.slice(7);if(selectedItem&&!items.some(item=>item.key===selectedItem))throw new Error('Trecho de áudio inválido.');
 const pending=[];for(const item of items.filter(item=>(!selectedWork||item.key.startsWith(selectedWork+'/'))&&(!selectedItem||item.key===selectedItem))){let exists=false;try{await access(path.join(output,item.key+'.mp3'));exists=true;}catch{}if(manifest.items[item.key]?.hash===item.hash&&manifest.items[item.key]?.status==='ready'&&exists)continue;pending.push(item);}
+const selected=items.filter(item=>(!selectedWork||item.key.startsWith(selectedWork+'/'))&&(!selectedItem||item.key===selectedItem));
+if(process.argv.includes('--report')){console.log(JSON.stringify({model,total:selected.length,pending:pending.length,pendingCharacters:pending.reduce((n,i)=>n+i.characters,0)}));process.exit(0);}
+if(process.argv.includes('--audit')){
+ const failures=[];let duration=0;
+ const auditPool=process.env.DATABASE_URL?new pg.Pool({connectionString:process.env.DATABASE_URL}):null;
+ try{for(const item of selected){
+  const ready=manifest.items[item.key];
+  const probe=spawnSync('ffprobe',['-v','error','-show_entries','format=duration','-of','csv=p=0',path.join(output,item.key+'.mp3')],{encoding:'utf8',timeout:10000});
+  if(!ready||ready.hash!==item.hash||ready.status!=='ready'||probe.status!==0||!(Number(probe.stdout.trim())>0)){failures.push(item.key);continue;}
+  duration+=Number(probe.stdout.trim());
+  if(auditPool){const result=await auditPool.query("SELECT id FROM coonto_audio_jobs WHERE id=$1 AND status='published'",[ready.jobId]);if(!result.rowCount)failures.push(item.key+':unpublished');}
+ }}finally{await auditPool?.end();}
+ console.log(JSON.stringify({work:selectedWork,total:selected.length,valid:selected.length-failures.length,durationSeconds:Math.round(duration),failures}));
+ if(failures.length)process.exit(1);process.exit(0);
+}
 console.log(`Áudio beta: ${pending.length} arquivos a atualizar, ${pending.reduce((n,i)=>n+i.characters,0)} caracteres. Voz Coonto: ${narrator}.`);
 if(!generate)process.exit(0);
 if(!pending.length)process.exit(0);

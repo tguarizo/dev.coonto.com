@@ -2,7 +2,7 @@
   "slug": "divina-comedia-canto-i",
   "title": "A Divina Comédia · Inferno, Canto I",
   "author": "Dante Alighieri · tradução de José Pedro Xavier Pinheiro",
-  "version": "dante-editorial-v2-rc2.2",
+  "version": "dante-editorial-v2-rc2.2-illustrated",
   "intro": "Entre nas situações, faça suas escolhas e descubra o que elas ajudam a perceber. Você pode voltar, mudar de ideia e consultar o texto original. Este percurso acompanha os 136 versos do Canto I do Inferno. As explicações do Coonto aparecem separadas do original. O progresso registra escolhas, sem atribuir nota. Revisão editorial para avaliação dos leitores.",
   "source": {
     "label": "Wikisource · Xavier Pinheiro · grafia atualizada",
@@ -72,7 +72,7 @@
           ],
           "illustration": {
             "src": "/images/stories/dante-selva.png",
-            "alt": "Ilustração: Dante à saída da selva, diante de uma paisagem iluminada pela manhã."
+            "alt": "Ilustração da passagem Selva, memória e colina de A Divina Comédia · Inferno, Canto I."
           }
         },
         {
@@ -205,7 +205,11 @@
               "start": 31,
               "end": 60
             }
-          ]
+          ],
+          "illustration": {
+            "src": "/images/stories/dante-feras.png",
+            "alt": "Ilustração da passagem Três feras e o recuo de A Divina Comédia · Inferno, Canto I."
+          }
         },
         {
           "id": "mov-2-i-2",
@@ -341,7 +345,11 @@
               "start": 61,
               "end": 84
             }
-          ]
+          ],
+          "illustration": {
+            "src": "/images/stories/dante-virgilio.png",
+            "alt": "Ilustração da passagem Uma voz e uma identidade de A Divina Comédia · Inferno, Canto I."
+          }
         },
         {
           "id": "mov-3-i-2",
@@ -436,7 +444,11 @@
               "start": 88,
               "end": 111
             }
-          ]
+          ],
+          "illustration": {
+            "src": "/images/stories/dante-outra-rota.png",
+            "alt": "Ilustração da passagem Outra rota e a profecia de A Divina Comédia · Inferno, Canto I."
+          }
         },
         {
           "id": "mov-4-i-2",
@@ -531,7 +543,11 @@
               "start": 112,
               "end": 120
             }
-          ]
+          ],
+          "illustration": {
+            "src": "/images/stories/dante-limites.png",
+            "alt": "Ilustração da passagem Limites e alcance do guia de A Divina Comédia · Inferno, Canto I."
+          }
         },
         {
           "id": "mov-5-i-2",
@@ -626,7 +642,11 @@
               "start": 130,
               "end": 136
             }
-          ]
+          ],
+          "illustration": {
+            "src": "/images/stories/dante-travessia.png",
+            "alt": "Ilustração da passagem Aceitação e início da travessia de A Divina Comédia · Inferno, Canto I."
+          }
         },
         {
           "id": "mov-6-i-2",

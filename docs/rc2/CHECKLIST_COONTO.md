@@ -1,12 +1,14 @@
 # Coonto — checklist de pendências
 
-Atualizado em 09/10/2026. Versão em preparação: **1.9.6-rc.2.2**.
+Atualizado em 10/10/2026. Versão publicada para avaliação: **1.9.6-rc.2.2**.
 
 Comando acordado: `/checklist` apresenta a lista do projeto ativo, organizada por prioridade, concluídos, pendências e bloqueios. Para Coonto, este documento é a referência; Tuuvo terá seu próprio checklist. Atualizar os estados somente com evidências de conclusão.
 
 ## Situação atual
 
-A RC2.2 está preparada e compilada localmente, mas ainda não foi publicada em dev.coonto.com. A última versão confirmada pelo usuário no servidor é 1.9.6-rc.2.1. Preparação no código, publicação e aprovação dos avaliadores são etapas diferentes.
+A RC2.2 foi publicada em dev.coonto.com em 10/10/2026. Commit remoto: 7ba1822d9e4d345e0cb97dcd3122b43efb44f201. Workflow 38092337504: testes, TypeScript, implantação e publicação das duas edições concluídos com sucesso. O endpoint de saúde confirma RC2.2 e banco disponível. Home e páginas públicas de Martha e Dante responderam 200, com os novos textos e referências às imagens; os três arquivos de imagem conferem com os locais. Publicação não equivale a fechamento da RC: a complementação visual e o áudio estão em fechamento técnico, com avaliação geral ainda pendente.
+
+Prioridade acordada em 10/10: fechar publicação, imagens/áudio e avaliação geral antes das demais frentes. A revisão visual ao vivo ficou bloqueada por falha do navegador de teste; não foi declarada concluída.
 
 ## 1. Preparação concluída
 
@@ -24,27 +26,27 @@ A RC2.2 está preparada e compilada localmente, mas ainda não foi publicada em 
 
 ## 2. Publicar para avaliação — prioridade imediata
 
-- [ ] Obter autorização explícita para enviar os commits à branch develop do repositório público tguarizo/dev.coonto.com. O envio anterior foi bloqueado pela revisão automática.
-- [ ] Enviar os commits e acompanhar o workflow de implantação em dev.coonto.com.
-- [ ] Confirmar a versão 1.9.6-rc.2.2 no rodapé e no container.
-- [ ] Confirmar que as novas edições de Martha e Dante foram publicadas no banco.
-- [ ] Conferir no ambiente publicado o slogan, a abertura e as três imagens.
+- [x] Obter autorização explícita para enviar ao repositório público tguarizo/dev.coonto.com, branch develop; recebida em 10/10.
+- [x] Enviar as alterações e acompanhar o workflow de implantação em dev.coonto.com. Envio pela integração GitHub, consolidado em um commit com árvore idêntica à local.
+- [x] Confirmar a versão 1.9.6-rc.2.2 no HTML da home e no endpoint de saúde do aplicativo.
+- [x] Confirmar a publicação das edições de Martha e Dante: etapa de banco aprovada no workflow e versões presentes nas páginas públicas.
+- [x] Conferir a presença do slogan e da abertura no HTML publicado e a integridade dos três arquivos de imagem. A avaliação visual e o comportamento da abertura no navegador permanecem pendentes.
 
-Nesta rodada, a revisão editorial pode ocorrer sem a nova locução, conforme a orientação do usuário. Os áudios antigos incompatíveis com os textos revisados não devem ser apresentados.
+A solicitação atual autoriza concluir o áudio da RC2.2. O fechamento inclui consulta de créditos, geração apenas dos trechos faltantes e auditoria obrigatória; arquivos incompatíveis continuam bloqueados.
 
 ## 3. Fechar Martha, Dante e a dimensão visual
 
 - [ ] Percorrer Martha e Dante no ambiente publicado e verificar clareza, continuidade e qualidade dos retornos.
 - [ ] Fazer avaliação visual no celular, tablet e computador; a conferência visual em tablet ainda não foi concluída.
 - [ ] Conferir a seção de livros originais e os três downloads.
-- [ ] Definir quais passagens precisam de imagens além da abertura e aprovar seu escopo.
-- [ ] Produzir e integrar as imagens dessas passagens, com identidade consistente e sem antecipar descobertas.
+- [x] Definir cobertura por capítulo de Martha, movimento de Dante e fase de O Alienista.
+- [x] Produzir e integrar 24 ilustrações, com identidade consistente e sem antecipar descobertas.
 - [ ] Conferir legibilidade, proporções, textos alternativos e carregamento das imagens.
 - [ ] Testar retomada, navegação entre capítulos e leitura offline com as alterações.
 
-As três imagens atuais são de abertura. A ilustração das demais passagens permanece pendente.
+São 12 imagens em Martha, 6 em Dante e 6 em O Alienista. A integração online e offline está implementada; confirmar na publicação complementar.
 
-## 4. Áudio — depois da validação editorial
+## 4. Áudio — fechamento técnico da RC2.2
 
 - [ ] Identificar as palavras e os trechos com pronúncia inadequada no relato da avaliadora.
 - [ ] Esclarecer o comentário sobre o tablet: imagem, disposição da pergunta ou divergência com a locução.
@@ -54,7 +56,7 @@ As três imagens atuais são de abertura. A ilustração das demais passagens pe
 - [ ] Ouvir amostras das três obras, conferindo as vozes acordadas para situação, preparação e comentário.
 - [ ] Verificar os controles de reprodução e o funcionamento offline.
 
-Não foram consumidos créditos da ElevenLabs nesta preparação.
+A geração complementar consulta o saldo antes de iniciar e exige margem de 500 créditos; não autoriza excedente pago. A validação técnica de texto/arquivo não substitui a escuta da pronúncia.
 
 ## 5. Nova avaliação geral
 

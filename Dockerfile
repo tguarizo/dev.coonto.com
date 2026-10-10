@@ -27,6 +27,10 @@ COPY --from=builder --chown=nextjs:nodejs /app/scripts/qa ./scripts/qa
 COPY --from=builder --chown=nextjs:nodejs /app/scripts/rc-audio.cjs ./scripts/rc-audio.cjs
 COPY --from=builder --chown=nextjs:nodejs /app/scripts/publish-martha-dev.mjs ./scripts/publish-martha-dev.mjs
 COPY --from=builder --chown=nextjs:nodejs /app/scripts/publish-dante-dev.mjs ./scripts/publish-dante-dev.mjs
+COPY --from=builder --chown=nextjs:nodejs /app/scripts/publish-rc2-dev.mjs ./scripts/publish-rc2-dev.mjs
+COPY --from=builder --chown=nextjs:nodejs /app/scripts/close-rc2-audio.mjs ./scripts/close-rc2-audio.mjs
+COPY --from=builder --chown=nextjs:nodejs /app/scripts/audio-budget.cjs ./scripts/audio-budget.cjs
+COPY --from=builder --chown=nextjs:nodejs /app/deploy/rc2.2 ./deploy/rc2.2
 USER nextjs
 EXPOSE 3000
 CMD ["node", "server.js"]

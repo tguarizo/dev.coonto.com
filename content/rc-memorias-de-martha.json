@@ -2,7 +2,7 @@
   "slug": "memorias-de-martha",
   "title": "Memórias de Martha",
   "author": "Júlia Lopes de Almeida",
-  "version": "martha-editorial-v3-rc2.2",
+  "version": "martha-editorial-v3-rc2.2-illustrated",
   "intro": "Entre nas situações, faça suas escolhas e descubra o que elas ajudam a perceber. Você pode voltar, mudar de ideia e consultar o texto original. Este percurso acompanha 12 capítulos de Memórias de Martha. As explicações do Coonto aparecem separadas do original. O progresso registra escolhas, sem atribuir nota. Revisão editorial para avaliação dos leitores.",
   "source": {
     "label": "Biblioteca Brasiliana Guita e José Mindlin · edição de 1899",
@@ -71,7 +71,7 @@
           ],
           "illustration": {
             "src": "/images/stories/martha-cortico.png",
-            "alt": "Ilustração: Martha e sua mãe no pátio de uma moradia modesta, junto às roupas do trabalho."
+            "alt": "Ilustração da passagem Capítulo I · Ajuda e distinção social de Memórias de Martha."
           }
         },
         {
@@ -162,7 +162,11 @@
           "sourcePages": [
             28,
             30
-          ]
+          ],
+          "illustration": {
+            "src": "/images/stories/martha-escola.png",
+            "alt": "Ilustração da passagem Capítulo II · Gratidão conduta e remorso de Memórias de Martha."
+          }
         },
         {
           "id": "cap-2-i-2",
@@ -250,7 +254,11 @@
           "sourcePages": [
             41,
             44
-          ]
+          ],
+          "illustration": {
+            "src": "/images/stories/martha-boneca.png",
+            "alt": "Ilustração da passagem Capítulo III · Cuidado e projeto profissional de Memórias de Martha."
+          }
         },
         {
           "id": "cap-3-i-2",
@@ -339,7 +347,11 @@
           "sourcePages": [
             55,
             56
-          ]
+          ],
+          "illustration": {
+            "src": "/images/stories/martha-avenida.png",
+            "alt": "Ilustração da passagem Capítulo IV · Moradia e reputação de Memórias de Martha."
+          }
         },
         {
           "id": "cap-4-i-2",
@@ -428,7 +440,11 @@
           "sourcePages": [
             75,
             82
-          ]
+          ],
+          "illustration": {
+            "src": "/images/stories/martha-chalet.png",
+            "alt": "Ilustração da passagem Capítulo V · Renda vergonha e revisão da lembrança de Memórias de Martha."
+          }
         },
         {
           "id": "cap-5-i-2",
@@ -520,7 +536,11 @@
             85,
             90,
             97
-          ]
+          ],
+          "illustration": {
+            "src": "/images/stories/martha-espera.png",
+            "alt": "Ilustração da passagem Capítulo VI · Reconhecimento desejado e cuidado real de Memórias de Martha."
+          }
         }
       ]
     },
@@ -579,7 +599,11 @@
           "sourcePages": [
             99,
             101
-          ]
+          ],
+          "illustration": {
+            "src": "/images/stories/martha-viagem.png",
+            "alt": "Ilustração da passagem Capítulo VII · Atenção e futuro imaginado de Memórias de Martha."
+          }
         },
         {
           "id": "cap-7-i-2",
@@ -668,7 +692,11 @@
           "sourcePages": [
             123,
             125
-          ]
+          ],
+          "illustration": {
+            "src": "/images/stories/martha-jardim.png",
+            "alt": "Ilustração da passagem Capítulo VIII · Novas evidências e limites da conclusão de Memórias de Martha."
+          }
         },
         {
           "id": "cap-8-i-2",
@@ -757,7 +785,11 @@
           "sourcePages": [
             136,
             141
-          ]
+          ],
+          "illustration": {
+            "src": "/images/stories/martha-clara.png",
+            "alt": "Ilustração da passagem Capítulo IX · Clara notícia e trabalho de Memórias de Martha."
+          }
         },
         {
           "id": "cap-9-i-2",
@@ -877,7 +909,11 @@
           "sourcePages": [
             145,
             146
-          ]
+          ],
+          "illustration": {
+            "src": "/images/stories/martha-nomeacao.png",
+            "alt": "Ilustração da passagem Capítulo X · Conquista e razões para casar de Memórias de Martha."
+          }
         },
         {
           "id": "cap-10-i-2",
@@ -966,7 +1002,11 @@
           "sourcePages": [
             151,
             157
-          ]
+          ],
+          "illustration": {
+            "src": "/images/stories/martha-miranda.png",
+            "alt": "Ilustração da passagem Capítulo XI · Relação concreta e tentativa de encerramento de Memórias de Martha."
+          }
         },
         {
           "id": "cap-11-i-2",
@@ -1055,7 +1095,11 @@
           "sourcePages": [
             161,
             165
-          ]
+          ],
+          "illustration": {
+            "src": "/images/stories/martha-cuidado.png",
+            "alt": "Ilustração da passagem Capítulo XII · Cuidado perda e releitura do percurso de Memórias de Martha."
+          }
         },
         {
           "id": "cap-12-i-2",

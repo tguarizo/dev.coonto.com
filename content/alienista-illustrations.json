@@ -1,0 +1,26 @@
+{
+  "s0": {
+    "src": "/images/stories/alienista-itaguai.png",
+    "alt": "Bacamarte observa uma rua de Itaguaí."
+  },
+  "s1": {
+    "src": "/images/stories/alienista-casa-verde.png",
+    "alt": "A Casa Verde, com suas janelas verdes, recebe a atenção dos moradores."
+  },
+  "s8": {
+    "src": "/images/stories/alienista-limite.png",
+    "alt": "Bacamarte conversa com o padre sobre os limites do diagnóstico."
+  },
+  "s17": {
+    "src": "/images/stories/alienista-revolta.png",
+    "alt": "O barbeiro dirige-se aos moradores reunidos na praça."
+  },
+  "s27": {
+    "src": "/images/stories/alienista-poder.png",
+    "alt": "O barbeiro e Bacamarte conversam diante de uma mesa de trabalho."
+  },
+  "s34": {
+    "src": "/images/stories/alienista-inversao.png",
+    "alt": "Bacamarte revisa seus registros no gabinete."
+  }
+}
