@@ -64,6 +64,7 @@ export function ExperienceFrame({ userId }: { userId: string }) {
       const shell=await fetch("/offline/reader.html");const text=await fetch("/offline/texto-o-alienista.html");
       if(!shell.ok||!text.ok)throw new Error("Não foi possível preparar todos os arquivos. Tente novamente.");
       await cache.put("/offline/reader.html",shell);await cache.put("/offline/texto-o-alienista.html",text);
+      const sceneImage=await fetch("/images/stories/alienista-itaguai.png");if(!sceneImage.ok)throw new Error("Não foi possível baixar a imagem da experiência.");await cache.put("/images/stories/alienista-itaguai.png",sceneImage);
       const audioList=await fetch("/api/audio/o-alienista");if(audioList.ok){const available=await audioList.json() as {scenes:string[]};for(const id of available.scenes){const audio=await fetch(`/api/audio/o-alienista/${id}`);if(!audio.ok)throw new Error("Não foi possível salvar todos os áudios. Tente novamente.");await cache.put(`/api/audio/o-alienista/${id}`,audio);}}
       await cache.put("/offline/o-alienista.html",new Response(await work.text(),{headers:{"Content-Type":"text/html; charset=utf-8","X-Coonto-User":userId,"X-Coonto-Expires":license.expiresAt}}));
       localStorage.setItem("coonto-offline-user",userId);localStorage.setItem("coonto-alienista-offline","ready");localStorage.setItem("coonto-alienista-license-expires",license.expiresAt);

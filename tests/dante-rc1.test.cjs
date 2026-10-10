@@ -1,10 +1,10 @@
 const {test}=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm'),ts=require('typescript');
 function load(file){const mod={exports:{}};vm.runInNewContext(ts.transpileModule(fs.readFileSync(file,'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,esModuleInterop:true}}).outputText,{exports:mod.exports,module:mod,require,process});return mod.exports;}
 const schema=load('lib/rc-schema.ts'),work=schema.rcWorkSchema.parse(require('../content/rc-divina-comedia-canto-i.json')),entries=schema.rcInteractions(work),verses=require('../content/inferno-i-verses.json');
-test('Dante cobre 136 versos sem lacunas, 14 interações e preserva os 42 retornos da curadoria',()=>{
- const proposal=require('../deploy/curadoria/dante-canto-i-v1/proposta-editorial.json');assert.equal(entries.length,14);let next=1;
+test('Dante cobre 136 versos sem lacunas, 14 interações e preserva as referências da edição anterior',()=>{
+ const previous=require('../deploy/rc2.2/previous-divina-comedia-canto-i.json').units.flatMap(u=>u.interactions);assert.equal(entries.length,14);let next=1;
  work.units.forEach(u=>{assert.equal(u.sourceStart,next);next=u.sourceEnd+1;});assert.equal(next,137);assert.equal(work.units[2].sourceEnd,87);assert.equal(work.units[3].sourceStart,88);
- entries.forEach(({op},i)=>{assert.equal(op.preparation,proposal.interactions[i].before);assert.equal(op.question,proposal.interactions[i].q);assert.deepEqual(Array.from(op.options,o=>o.consequence),proposal.interactions[i].feedback);assert.ok(op.sourceRanges.every(r=>r.start<=r.end&&verses.slice(r.start-1,r.end).length===r.end-r.start+1));});
+ entries.forEach(({op},i)=>{assert.equal(op.id,previous[i].id);assert.deepEqual(JSON.parse(JSON.stringify(op.sourceRanges)),previous[i].sourceRanges);assert.equal(op.options.length,3);assert.ok(op.sourceRanges.every(r=>r.start<=r.end&&verses.slice(r.start-1,r.end).length===r.end-r.start+1));});
  const wrong=structuredClone(work);wrong.units[0].interactions[0].id='cap-1-i-1';assert.equal(schema.rcWorkSchema.safeParse(wrong).success,false);
  const refs=structuredClone(work);refs.units[0].interactions[0].sourceRanges=[{start:10,end:2}];assert.equal(schema.rcWorkSchema.safeParse(refs).success,false);
 });

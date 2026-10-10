@@ -2,8 +2,8 @@
   "slug": "memorias-de-martha",
   "title": "Memórias de Martha",
   "author": "Júlia Lopes de Almeida",
-  "version": "martha-editorial-v2-beta7",
-  "intro": "Percurso editorial v2.0: 12 capítulos e 24 interações. Sínteses e interpretações do Coonto, com referências ao PDF original de Júlia Lopes de Almeida. Edição de desenvolvimento autorizada para testes; a avaliação dos leitores e da curadoria continua. O indicador acompanha decisões registradas, não mede compreensão nem atribui nota.",
+  "version": "martha-editorial-v3-rc2.2",
+  "intro": "Entre nas situações, faça suas escolhas e descubra o que elas ajudam a perceber. Você pode voltar, mudar de ideia e consultar o texto original. Este percurso acompanha 12 capítulos de Memórias de Martha. As explicações do Coonto aparecem separadas do original. O progresso registra escolhas, sem atribuir nota. Revisão editorial para avaliação dos leitores.",
   "source": {
     "label": "Biblioteca Brasiliana Guita e José Mindlin · edição de 1899",
     "href": "https://digital.bbm.usp.br/bitstream/bbm/7037/1/45000009365_Output.o.pdf",
@@ -16,14 +16,14 @@
       "title": "Capítulo I · Ajuda e distinção social",
       "context": "Comparar ajuda material, humilhação e reprodução de uma hierarquia.",
       "reading": "Depois da morte do pai, Martha vive com a mãe num cortiço. A mãe trabalha engomando roupas. Na casa de uma cliente, Lucinda leva Martha ao espelho. Martha se vê malvestida e se sente humilhada pela comparação. A família oferece um vestido; Lucinda ri enquanto o experimentam. Depois, outras roupas recebidas permitem que a mãe considere mandar Martha à escola.",
-      "question": "Que leitura consegue explicar tanto o efeito prático do presente quanto a experiência de recebê-lo?",
+      "question": "Martha ganha um vestido, mas também se sente humilhada. Como as duas coisas cabem no mesmo presente?",
       "options": [
         {
           "label": "O presente ajuda e pode vir acompanhado de humilhação.",
           "consequence": "A roupa facilita a entrada na escola. A comparação e a risada mostram que receber ajuda também pode expor Martha a uma relação desigual."
         },
         {
-          "label": "O efeito principal é aproximar Martha da posição social de Lucinda.",
+          "label": "O vestido coloca Martha na mesma condição social de Lucinda.",
           "consequence": "A utilidade da roupa não elimina a comparação diante do espelho nem a risada durante a prova do vestido."
         },
         {
@@ -43,14 +43,14 @@
           "title": "Um presente pode ter dois efeitos",
           "kind": "Comparar cenas",
           "preparation": "Depois da morte do pai, Martha vive com a mãe num cortiço. A mãe trabalha engomando roupas. Na casa de uma cliente, Lucinda leva Martha ao espelho. Martha se vê malvestida e se sente humilhada pela comparação. A família oferece um vestido; Lucinda ri enquanto o experimentam. Depois, outras roupas recebidas permitem que a mãe considere mandar Martha à escola.",
-          "question": "Que leitura consegue explicar tanto o efeito prático do presente quanto a experiência de recebê-lo?",
+          "question": "Martha ganha um vestido, mas também se sente humilhada. Como as duas coisas cabem no mesmo presente?",
           "options": [
             {
               "label": "O presente ajuda e pode vir acompanhado de humilhação.",
               "consequence": "A roupa facilita a entrada na escola. A comparação e a risada mostram que receber ajuda também pode expor Martha a uma relação desigual."
             },
             {
-              "label": "O efeito principal é aproximar Martha da posição social de Lucinda.",
+              "label": "O vestido coloca Martha na mesma condição social de Lucinda.",
               "consequence": "A utilidade da roupa não elimina a comparação diante do espelho nem a risada durante a prova do vestido."
             },
             {
@@ -68,14 +68,18 @@
             14,
             21,
             24
-          ]
+          ],
+          "illustration": {
+            "src": "/images/stories/martha-cortico.png",
+            "alt": "Ilustração: Martha e sua mãe no pátio de uma moradia modesta, junto às roupas do trabalho."
+          }
         },
         {
           "id": "cap-1-i-2",
           "title": "O vestido muda o olhar",
           "kind": "Relacionar cenas",
           "preparation": "Diante do espelho, Martha sofreu com a superioridade exibida por Lucinda. Na ida à escola, usando o vestido recebido, Martha olha suas companheiras com orgulho. A narradora aproxima seu sorriso do sorriso anterior de Lucinda.",
-          "question": "Qual relação entre as duas cenas tem apoio nessa aproximação?",
+          "question": "Agora é Martha quem olha as colegas de cima. O que você percebe entre essa cena e a do espelho?",
           "options": [
             {
               "label": "Martha busca acolher as colegas por reconhecer a humilhação que sofreu.",
@@ -108,7 +112,7 @@
       "title": "Capítulo II · Gratidão conduta e remorso",
       "context": "Testar uma previsão e separar ação infantil de avaliação adulta.",
       "reading": "Mathilde ajuda Martha a aprender as lições. Uma colega acusa Mathilde de furtos; ela nega. Sapatinhos desaparecidos são encontrados em sua caixa, e a professora a castiga diante da turma. Acompanhe agora a reação de Martha.",
-      "question": "Que reação de Martha você prevê? Escolha uma hipótese e indique a pista que usou.",
+      "question": "Mathilde ajudou Martha. Quando as colegas se afastam dela, o que Martha faz?",
       "options": [
         {
           "label": "Ela mantém a proximidade por gratidão.",
@@ -135,7 +139,7 @@
           "title": "Gratidão diante do grupo",
           "kind": "Prever e testar",
           "preparation": "Mathilde ajuda Martha a aprender as lições. Uma colega acusa Mathilde de furtos; ela nega. Sapatinhos desaparecidos são encontrados em sua caixa, e a professora a castiga diante da turma. Acompanhe agora a reação de Martha.",
-          "question": "Que reação de Martha você prevê? Escolha uma hipótese e indique a pista que usou.",
+          "question": "Mathilde ajudou Martha. Quando as colegas se afastam dela, o que Martha faz?",
           "options": [
             {
               "label": "Ela mantém a proximidade por gratidão.",
@@ -165,7 +169,7 @@
           "title": "A adulta relê sua conduta",
           "kind": "Reinterpretar",
           "preparation": "A criança acompanhou o afastamento de Mathilde. Ao narrar o episódio mais de trinta anos depois, Martha lembra quanto devia à colega e descreve sua própria omissão como uma marca que permanece na consciência.",
-          "question": "O que essa avaliação posterior acrescenta à lembrança?",
+          "question": "Mais de trinta anos depois, Martha volta a essa lembrança. O que ela vê agora que não viu quando criança?",
           "options": [
             {
               "label": "A adulta explica o afastamento pela pressão do grupo e reduz sua responsabilidade.",
@@ -176,12 +180,12 @@
               "consequence": "Essa passagem avalia a omissão de Martha. Ela não fornece uma prova independente sobre a autoria dos furtos."
             },
             {
-              "label": "A adulta reconhece responsabilidade que a criança não assumiu.",
+              "label": "A Martha adulta reconhece a responsabilidade que não assumiu quando criança.",
               "consequence": "O fato lembrado permanece, mas sua avaliação muda: a narradora reconhece uma dívida e uma responsabilidade que não orientaram sua ação infantil."
             }
           ],
           "reveal": "",
-          "discovery": "Uma lembrança reúne a ação passada e um julgamento posterior, que precisam ser distinguidos.",
+          "discovery": "A Martha adulta não apenas lembra: ela olha de novo para a responsabilidade que não assumiu quando criança.",
           "recall": "Sobre qual conduta o remorso oferece evidência? O que ele não resolve?",
           "connection": "Essa diferença entre perceber na infância e reconhecer depois também aparece no cuidado materno.",
           "sourceLabel": "PDF · páginas 30",
@@ -196,7 +200,7 @@
       "title": "Capítulo III · Cuidado e projeto profissional",
       "context": "Relacionar cuidado recebido e formação de um projeto com motivos mistos.",
       "reading": "Martha adoece; a mãe a acompanha e busca atendimento. Na recuperação, a menina exige a boneca de Lucinda. A mãe compra outra. Martha mostra decepção, percebe essa expressão refletida no rosto da mãe e depois recolhe a boneca para dormir com ela.",
-      "question": "Que contraste o episódio permite observar?",
+      "question": "A mãe cuida de Martha e compra uma boneca. Por que o presente ainda a decepciona?",
       "options": [
         {
           "label": "O cuidado da mãe é amplo, mas Martha mede o presente pelo desejo da boneca específica.",
@@ -223,7 +227,7 @@
           "title": "A boneca e o cuidado",
           "kind": "Comparar gestos",
           "preparation": "Martha adoece; a mãe a acompanha e busca atendimento. Na recuperação, a menina exige a boneca de Lucinda. A mãe compra outra. Martha mostra decepção, percebe essa expressão refletida no rosto da mãe e depois recolhe a boneca para dormir com ela.",
-          "question": "Que contraste o episódio permite observar?",
+          "question": "A mãe cuida de Martha e compra uma boneca. Por que o presente ainda a decepciona?",
           "options": [
             {
               "label": "O cuidado da mãe é amplo, mas Martha mede o presente pelo desejo da boneca específica.",
@@ -253,7 +257,7 @@
           "title": "Por que ser professora",
           "kind": "Comparar motivos",
           "preparation": "Martha ajuda a professora com as menores. A mãe fala da necessidade de sustentar-se no futuro. Na escola, Martha ouve uma adjunta dizer que o emprego lhe dá conforto e reduz a dependência do irmão. Naquela noite, sonha ser professora numa casa com jardim.",
-          "question": "Como o sonho de Martha ajuda a compreender o início do projeto de ser professora?",
+          "question": "Martha começa a sonhar em ser professora. O que parece alimentar esse sonho?",
           "options": [
             {
               "label": "O desejo de trabalhar nasce principalmente da intenção de retribuir à mãe.",
@@ -285,22 +289,22 @@
       "title": "Capítulo IV · Moradia e reputação",
       "context": "Distinguir mudanças observáveis e interpretações atribuídas a fontes diferentes.",
       "reading": "O proprietário passa a chamar o cortiço de avenida. Também caia as casas e constrói tanques, sem aumentar os aluguéis. Martha e a mãe decidem permanecer; têm pouco dinheiro e saúde frágil para procurar outra moradia.",
-      "question": "Qual conclusão reúne as mudanças observadas e os limites da família?",
+      "question": "O cortiço ganhou melhorias e até outro nome. O que mudou de verdade para Martha e sua mãe?",
       "options": [
         {
-          "label": "A reforma e o novo nome indicam que a condição social da família melhorou.",
+          "label": "A reforma e o novo nome mostram que a família deixou de ser pobre.",
           "consequence": "Não há aumento de renda descrito. A dificuldade de mudar permanece mesmo depois do novo nome e das melhorias."
         },
         {
-          "label": "O novo nome procura compensar uma mudança de moradia apenas aparente.",
+          "label": "Só o nome mudou; as melhorias não fazem diferença.",
           "consequence": "O relato menciona obras e pintura. Negar qualquer mudança material descarta informações expressas no trecho."
         },
         {
-          "label": "Houve melhorias, mas elas não eliminaram a falta de alternativas.",
+          "label": "A moradia melhorou, mas a família ainda tem poucas opções.",
           "consequence": "As obras ajudam a explicar a permanência. O pouco dinheiro e a saúde frágil mostram que a possibilidade de escolha continuava limitada."
         }
       ],
-      "author": "Melhoria material, mudança de nome e liberdade de escolha são coisas distintas.",
+      "author": "A moradia melhorou, mas trocar o nome não dá à família o dinheiro e a saúde necessários para escolher outro lugar.",
       "evidence": "PDF · páginas 55–56",
       "recall": "Indique uma melhoria concreta e uma limitação que continuou.",
       "connection": "A história do pai mostrará outro efeito de nomes e julgamentos sobre a posição social.",
@@ -312,23 +316,23 @@
           "title": "O novo nome da moradia",
           "kind": "Examinar evidências",
           "preparation": "O proprietário passa a chamar o cortiço de avenida. Também caia as casas e constrói tanques, sem aumentar os aluguéis. Martha e a mãe decidem permanecer; têm pouco dinheiro e saúde frágil para procurar outra moradia.",
-          "question": "Qual conclusão reúne as mudanças observadas e os limites da família?",
+          "question": "O cortiço ganhou melhorias e até outro nome. O que mudou de verdade para Martha e sua mãe?",
           "options": [
             {
-              "label": "A reforma e o novo nome indicam que a condição social da família melhorou.",
+              "label": "A reforma e o novo nome mostram que a família deixou de ser pobre.",
               "consequence": "Não há aumento de renda descrito. A dificuldade de mudar permanece mesmo depois do novo nome e das melhorias."
             },
             {
-              "label": "O novo nome procura compensar uma mudança de moradia apenas aparente.",
+              "label": "Só o nome mudou; as melhorias não fazem diferença.",
               "consequence": "O relato menciona obras e pintura. Negar qualquer mudança material descarta informações expressas no trecho."
             },
             {
-              "label": "Houve melhorias, mas elas não eliminaram a falta de alternativas.",
+              "label": "A moradia melhorou, mas a família ainda tem poucas opções.",
               "consequence": "As obras ajudam a explicar a permanência. O pouco dinheiro e a saúde frágil mostram que a possibilidade de escolha continuava limitada."
             }
           ],
           "reveal": "",
-          "discovery": "Melhoria material, mudança de nome e liberdade de escolha são coisas distintas.",
+          "discovery": "A moradia melhorou, mas trocar o nome não dá à família o dinheiro e a saúde necessários para escolher outro lugar.",
           "recall": "Indique uma melhoria concreta e uma limitação que continuou.",
           "connection": "A história do pai mostrará outro efeito de nomes e julgamentos sobre a posição social.",
           "sourceLabel": "PDF · páginas 55–56",
@@ -342,7 +346,7 @@
           "title": "Quem interpreta a morte do pai",
           "kind": "Distinguir fontes",
           "preparation": "A mãe conta que o pai transportava dinheiro dos patrões, sofreu um roubo e, desacreditado, morreu por suicídio. Também relata que os patrões receberam a morte como confirmação de culpa. Martha ouve essa história e passa a desejar pagar a quantia perdida.",
-          "question": "Como devemos tratar as duas explicações para a morte?",
+          "question": "A mãe e os patrões contam histórias diferentes sobre o pai. Em que você pode acreditar com segurança neste trecho?",
           "options": [
             {
               "label": "Como interpretações de fontes diferentes; a morte não comprova sozinha nenhuma delas.",
@@ -358,7 +362,7 @@
             }
           ],
           "reveal": "",
-          "discovery": "Um julgamento pode ter consequências sociais mesmo quando o trecho não resolve sua verdade.",
+          "discovery": "Uma suspeita pode mudar a vida de alguém mesmo quando a história ainda não permite saber se ela é verdadeira.",
           "recall": "Quem fornece cada versão? Como o relato muda o desejo de Martha?",
           "connection": "O trabalho e a renda passam a carregar também a esperança de reparar uma desonra percebida.",
           "sourceLabel": "PDF · páginas 64–70",
@@ -374,7 +378,7 @@
       "title": "Capítulo V · Renda vergonha e revisão da lembrança",
       "context": "Comparar viabilidade material com desejo social e revisar uma inferência antiga.",
       "reading": "Martha começa a receber salário. Ela e a mãe encontram um chalet, mas o aluguel consome todo o ordenado e adiam a decisão. Depois, um rapaz visto na escola segue pelo mesmo caminho; Martha teme que ele a veja entrar no cortiço.",
-      "question": "Diante desse novo episódio, qual decisão você prevê e por quê?",
+      "question": "O aluguel custa todo o salário. Depois de ser seguida pelo rapaz, o que você acha que Martha vai decidir?",
       "options": [
         {
           "label": "Ela desistirá da mudança por causa do custo.",
@@ -401,7 +405,7 @@
           "title": "Alugar apesar do custo",
           "kind": "Prever uma decisão",
           "preparation": "Martha começa a receber salário. Ela e a mãe encontram um chalet, mas o aluguel consome todo o ordenado e adiam a decisão. Depois, um rapaz visto na escola segue pelo mesmo caminho; Martha teme que ele a veja entrar no cortiço.",
-          "question": "Diante desse novo episódio, qual decisão você prevê e por quê?",
+          "question": "O aluguel custa todo o salário. Depois de ser seguida pelo rapaz, o que você acha que Martha vai decidir?",
           "options": [
             {
               "label": "Ela desistirá da mudança por causa do custo.",
@@ -431,7 +435,7 @@
           "title": "Ele seguia quem",
           "kind": "Revisar uma inferência",
           "preparation": "O rapaz olha na direção de Martha e depois percorre o mesmo caminho que ela e a professora. Martha associa o desaparecimento dele à vergonha de sua moradia. Ela não sabe seu nome nem volta a encontrá-lo.",
-          "question": "Que grau de certeza esses fatos permitem sobre o interesse do rapaz?",
+          "question": "O rapaz passa pelo mesmo caminho. Isso basta para saber quem ele estava seguindo?",
           "options": [
             {
               "label": "A coincidência do trajeto reforça que Martha era o motivo da aproximação.",
@@ -464,22 +468,22 @@
       "title": "Capítulo VI · Reconhecimento desejado e cuidado real",
       "context": "Integrar desejo de ser amada comparação social e cuidado materno.",
       "reading": "No chalet, a luz e a limpeza melhoram; a mãe continua trabalhando. Martha pensa no rapaz que nunca mais viu e deseja ser amada. Na festa, volta a se comparar diante do espelho e sofre com a dança. Às duas da manhã, encontra a mãe esperando, embora tivesse combinado sair às onze.",
-      "question": "Que relação entre moradia, desejo e cuidado essas cenas permitem construir?",
+      "question": "A casa melhorou e a mãe continua cuidando dela. O que Martha ainda procura?",
       "options": [
         {
           "label": "A melhora da moradia oferece a Martha o reconhecimento que ela procurava.",
           "consequence": "A moradia melhora, mas permanecem o trabalho materno, a insegurança e o desejo de reconhecimento. O resultado material não encerra o conflito."
         },
         {
-          "label": "Martha busca uma forma de reconhecimento enquanto já recebe cuidado que não substitui esse desejo.",
+          "label": "Martha recebe o cuidado da mãe, mas também quer ser amada de outro jeito.",
           "consequence": "A espera da mãe mostra cuidado. A insegurança na festa e a fantasia amorosa mostram outra necessidade, que não desaparece com a mudança."
         },
         {
-          "label": "O cuidado materno responde à mesma necessidade que Martha projeta no amor.",
+          "label": "O cuidado da mãe deveria bastar para o que Martha espera do amor.",
           "consequence": "A espera mostra afeto e cuidado. Isso não equivale à reciprocidade amorosa que Martha deseja; reconhecer essa diferença não diminui a relação com a mãe."
         }
       ],
-      "author": "Melhoria de moradia, cuidado recebido e reconhecimento desejado não são equivalentes.",
+      "author": "Uma casa melhor e o cuidado da mãe importam. Ainda assim, não preenchem o desejo de Martha de ser amada.",
       "evidence": "PDF · páginas 83–85 e 90–97",
       "recall": "Por que o cuidado da mãe importa sem ser uma resposta completa ao desejo de Martha?",
       "connection": "Na viagem, a atenção de Luiz parecerá aproximar Martha justamente do reconhecimento que procura.",
@@ -491,23 +495,23 @@
           "title": "O que a mudança não resolve",
           "kind": "Integrar cenas",
           "preparation": "No chalet, a luz e a limpeza melhoram; a mãe continua trabalhando. Martha pensa no rapaz que nunca mais viu e deseja ser amada. Na festa, volta a se comparar diante do espelho e sofre com a dança. Às duas da manhã, encontra a mãe esperando, embora tivesse combinado sair às onze.",
-          "question": "Que relação entre moradia, desejo e cuidado essas cenas permitem construir?",
+          "question": "A casa melhorou e a mãe continua cuidando dela. O que Martha ainda procura?",
           "options": [
             {
               "label": "A melhora da moradia oferece a Martha o reconhecimento que ela procurava.",
               "consequence": "A moradia melhora, mas permanecem o trabalho materno, a insegurança e o desejo de reconhecimento. O resultado material não encerra o conflito."
             },
             {
-              "label": "Martha busca uma forma de reconhecimento enquanto já recebe cuidado que não substitui esse desejo.",
+              "label": "Martha recebe o cuidado da mãe, mas também quer ser amada de outro jeito.",
               "consequence": "A espera da mãe mostra cuidado. A insegurança na festa e a fantasia amorosa mostram outra necessidade, que não desaparece com a mudança."
             },
             {
-              "label": "O cuidado materno responde à mesma necessidade que Martha projeta no amor.",
+              "label": "O cuidado da mãe deveria bastar para o que Martha espera do amor.",
               "consequence": "A espera mostra afeto e cuidado. Isso não equivale à reciprocidade amorosa que Martha deseja; reconhecer essa diferença não diminui a relação com a mãe."
             }
           ],
           "reveal": "Ao refletir sobre o rapaz, a narradora distingue amar aquela pessoa de amar a possibilidade de ser amada. A mãe ouve o relato da festa e a ajuda a despir-se.",
-          "discovery": "Melhoria de moradia, cuidado recebido e reconhecimento desejado não são equivalentes.",
+          "discovery": "Uma casa melhor e o cuidado da mãe importam. Ainda assim, não preenchem o desejo de Martha de ser amada.",
           "recall": "Por que o cuidado da mãe importa sem ser uma resposta completa ao desejo de Martha?",
           "connection": "Na viagem, a atenção de Luiz parecerá aproximar Martha justamente do reconhecimento que procura.",
           "sourceLabel": "PDF · páginas 83–85 e 90–97",
@@ -525,7 +529,7 @@
       "title": "Capítulo VII · Atenção e futuro imaginado",
       "context": "Relacionar apoio material e distinguir sinais de interesse de compromisso.",
       "reading": "Martha está adoecida. O médico sugere casamento e depois viagem e ar puro. A professora vai passar um mês no campo. A mãe combina a ida da filha, pede dinheiro adiantado a Miranda, prepara roupas e compra a passagem.",
-      "question": "Qual explicação da viagem se apoia nas ações narradas?",
+      "question": "O médico recomenda uma viagem. Quem e o que fazem essa viagem acontecer?",
       "options": [
         {
           "label": "A recomendação médica foi o fator decisivo que viabilizou a viagem.",
@@ -536,7 +540,7 @@
           "consequence": "O trecho destaca o adiantamento pedido pela mãe e os preparativos feitos por ela. Não descreve essa independência financeira para a viagem."
         },
         {
-          "label": "Uma oportunidade oferecida pela professora se realiza pelo esforço e pelos recursos mobilizados pela mãe.",
+          "label": "A professora oferece a oportunidade; a mãe consegue dinheiro e prepara a viagem.",
           "consequence": "A professora fornece a ocasião; a mãe busca o dinheiro e prepara a partida. Essas ações ligam a recomendação à viagem efetiva."
         }
       ],
@@ -552,7 +556,7 @@
           "title": "O que torna a viagem possível",
           "kind": "Relacionar ações e condições",
           "preparation": "Martha está adoecida. O médico sugere casamento e depois viagem e ar puro. A professora vai passar um mês no campo. A mãe combina a ida da filha, pede dinheiro adiantado a Miranda, prepara roupas e compra a passagem.",
-          "question": "Qual explicação da viagem se apoia nas ações narradas?",
+          "question": "O médico recomenda uma viagem. Quem e o que fazem essa viagem acontecer?",
           "options": [
             {
               "label": "A recomendação médica foi o fator decisivo que viabilizou a viagem.",
@@ -563,7 +567,7 @@
               "consequence": "O trecho destaca o adiantamento pedido pela mãe e os preparativos feitos por ela. Não descreve essa independência financeira para a viagem."
             },
             {
-              "label": "Uma oportunidade oferecida pela professora se realiza pelo esforço e pelos recursos mobilizados pela mãe.",
+              "label": "A professora oferece a oportunidade; a mãe consegue dinheiro e prepara a viagem.",
               "consequence": "A professora fornece a ocasião; a mãe busca o dinheiro e prepara a partida. Essas ações ligam a recomendação à viagem efetiva."
             }
           ],
@@ -582,7 +586,7 @@
           "title": "Sinal de interesse ou promessa",
           "kind": "Delimitar uma hipótese",
           "preparation": "Martha se encanta com Luiz. A professora conta aventuras e características dele. Num passeio, Luiz oferece o braço e fala de seu ideal: um lar e uma esposa honesta. Ele olha para Martha e lhe dedica atenção.",
-          "question": "Qual hipótese é sustentada pelos gestos e falas sem ultrapassar o que foi apresentado?",
+          "question": "Luiz oferece o braço e fala de casamento. Até onde esses sinais permitem imaginar um futuro com Martha?",
           "options": [
             {
               "label": "Há sinais de interesse, mas ainda não foi estabelecido um compromisso com Martha.",
@@ -614,14 +618,14 @@
       "title": "Capítulo VIII · Novas evidências e limites da conclusão",
       "context": "Rever a hipótese anterior e distinguir gesto palavras e tradução.",
       "reading": "Martha sai esperando encontrar Luiz e ouvir uma declaração. Ao chegar ao jardim, vê Luiz com outra jovem. Ele envolve a cintura dela com o braço; os dois conversam intimamente. Martha ouve palavras em inglês que não compreende por inteiro.",
-      "question": "Como essa observação afeta a hipótese de que os sinais anteriores garantiam um compromisso com Martha?",
+      "question": "Martha vê Luiz abraçado a outra jovem. Como essa cena muda o que ela esperava?",
       "options": [
         {
           "label": "A intimidade observada indica que a jovem será a futura esposa de Luiz.",
           "consequence": "A intimidade torna necessário rever a expectativa de Martha, mas não determina com quem Luiz se casará."
         },
         {
-          "label": "Enfraquece a ideia de compromisso garantido com Martha, embora não esclareça todo o vínculo com a jovem.",
+          "label": "A cena abala a esperança de Martha, mas ainda não explica toda a relação entre os dois.",
           "consequence": "O gesto é uma evidência nova relevante. Ele confronta a certeza anterior sem fornecer todas as respostas sobre intenção e futuro."
         },
         {
@@ -641,14 +645,14 @@
           "title": "O que muda com a cena do jardim",
           "kind": "Confrontar uma hipótese",
           "preparation": "Martha sai esperando encontrar Luiz e ouvir uma declaração. Ao chegar ao jardim, vê Luiz com outra jovem. Ele envolve a cintura dela com o braço; os dois conversam intimamente. Martha ouve palavras em inglês que não compreende por inteiro.",
-          "question": "Como essa observação afeta a hipótese de que os sinais anteriores garantiam um compromisso com Martha?",
+          "question": "Martha vê Luiz abraçado a outra jovem. Como essa cena muda o que ela esperava?",
           "options": [
             {
               "label": "A intimidade observada indica que a jovem será a futura esposa de Luiz.",
               "consequence": "A intimidade torna necessário rever a expectativa de Martha, mas não determina com quem Luiz se casará."
             },
             {
-              "label": "Enfraquece a ideia de compromisso garantido com Martha, embora não esclareça todo o vínculo com a jovem.",
+              "label": "A cena abala a esperança de Martha, mas ainda não explica toda a relação entre os dois.",
               "consequence": "O gesto é uma evidência nova relevante. Ele confronta a certeza anterior sem fornecer todas as respostas sobre intenção e futuro."
             },
             {
@@ -671,7 +675,7 @@
           "title": "O alcance da tradução",
           "kind": "Examinar evidências",
           "preparation": "Martha conserva duas frases: a pergunta de Luiz sobre ser amado e a resposta afirmativa da jovem. Pergunta seu significado à professora, sem identificar as pessoas. A tradução confirma que ele perguntou se ela o amava e que ela respondeu que sim, de todo o coração.",
-          "question": "O que a tradução acrescenta, e qual conclusão ainda fica sem prova?",
+          "question": "A professora traduz as palavras ouvidas no jardim. O que Martha descobre — e o que ainda não sabe?",
           "options": [
             {
               "label": "A tradução sugere que Martha atribuiu um sentido amoroso excessivo ao gesto.",
@@ -682,7 +686,7 @@
               "consequence": "A pergunta e a resposta não registram data, pedido ou promessa de casamento. A tradução não autoriza esse acréscimo."
             },
             {
-              "label": "Ela confirma o conteúdo amoroso da conversa, mas não estabelece um compromisso de casamento.",
+              "label": "Confirma que os dois falam de amor, mas não prova que vão se casar.",
               "consequence": "A pergunta de Luiz e a resposta da jovem são evidências distintas. Juntas com o gesto, esclarecem o contexto sem definir o futuro da relação."
             }
           ],
@@ -703,14 +707,14 @@
       "title": "Capítulo IX · Clara notícia e trabalho",
       "context": "Comparar aparência e experiência revisar uma previsão e ligar estudo ao futuro.",
       "reading": "Martha reencontra Clara, agora com joias e roupas vistosas. Sente inveja e vontade de aproximar-se. Clara conta sua preocupação com uma criança, aperta as mãos de Martha e se emociona. Diz não merecer sua amizade. Depois, Martha ouve suas risadas com um grupo de rapazes.",
-      "question": "Que conclusão respeita os sinais diferentes desse encontro?",
+      "question": "Clara aparece bem-vestida, mas se emociona ao falar. O que você consegue perceber sobre a vida dela?",
       "options": [
         {
           "label": "O luxo sugere que Clara superou os conflitos que conhecemos na escola.",
           "consequence": "O luxo é visível, mas a emoção e a fala de desmerecimento impedem tomá-lo como prova de felicidade completa."
         },
         {
-          "label": "A aparência não basta para explicar a vida de Clara; o encontro revela emoções cuja causa não está toda esclarecida.",
+          "label": "As roupas não contam tudo. Clara mostra sentimentos que ainda não sabemos explicar.",
           "consequence": "As joias, a emoção, a amizade e a risada pertencem à mesma cena. Precisamos reconhecer essa coexistência sem inventar uma história que a resolva."
         },
         {
@@ -718,7 +722,7 @@
           "consequence": "Ela conta um episódio e expressa sentimentos. O trecho não fornece a trajetória completa nem explica cada causa de sua situação."
         }
       ],
-      "author": "Sinais de brilho social e de sofrimento podem coexistir sem permitir um diagnóstico completo da vida alheia.",
+      "author": "O brilho das roupas não conta a vida inteira de Clara. Há sentimentos no encontro que ainda não conseguimos explicar.",
       "evidence": "PDF · páginas 136–141",
       "recall": "Aponte duas pistas em tensão e uma informação que falta.",
       "connection": "O limite de interpretar uma cena também importa para a próxima notícia sobre Luiz.",
@@ -730,14 +734,14 @@
           "title": "O reencontro com Clara",
           "kind": "Comparar sinais em tensão",
           "preparation": "Martha reencontra Clara, agora com joias e roupas vistosas. Sente inveja e vontade de aproximar-se. Clara conta sua preocupação com uma criança, aperta as mãos de Martha e se emociona. Diz não merecer sua amizade. Depois, Martha ouve suas risadas com um grupo de rapazes.",
-          "question": "Que conclusão respeita os sinais diferentes desse encontro?",
+          "question": "Clara aparece bem-vestida, mas se emociona ao falar. O que você consegue perceber sobre a vida dela?",
           "options": [
             {
               "label": "O luxo sugere que Clara superou os conflitos que conhecemos na escola.",
               "consequence": "O luxo é visível, mas a emoção e a fala de desmerecimento impedem tomá-lo como prova de felicidade completa."
             },
             {
-              "label": "A aparência não basta para explicar a vida de Clara; o encontro revela emoções cuja causa não está toda esclarecida.",
+              "label": "As roupas não contam tudo. Clara mostra sentimentos que ainda não sabemos explicar.",
               "consequence": "As joias, a emoção, a amizade e a risada pertencem à mesma cena. Precisamos reconhecer essa coexistência sem inventar uma história que a resolva."
             },
             {
@@ -746,7 +750,7 @@
             }
           ],
           "reveal": "",
-          "discovery": "Sinais de brilho social e de sofrimento podem coexistir sem permitir um diagnóstico completo da vida alheia.",
+          "discovery": "O brilho das roupas não conta a vida inteira de Clara. Há sentimentos no encontro que ainda não conseguimos explicar.",
           "recall": "Aponte duas pistas em tensão e uma informação que falta.",
           "connection": "O limite de interpretar uma cena também importa para a próxima notícia sobre Luiz.",
           "sourceLabel": "PDF · páginas 136–141",
@@ -760,7 +764,7 @@
           "title": "Com quem Luiz vai se casar",
           "kind": "Registrar e rever uma previsão",
           "preparation": "A professora anuncia que Luiz vai se casar e convida Martha a adivinhar com quem. Vimos a jovem do jardim; outra jovem, Leonor, também foi apresentada a Martha no baile. Ainda não foi revelado o nome da noiva.",
-          "question": "Qual posição você registra antes de ouvir a resposta? Explique seu grau de certeza.",
+          "question": "Luiz vai se casar. Antes de ouvir o nome, quem você imagina que seja a noiva?",
           "options": [
             {
               "label": "Prevejo a jovem do jardim, pela intimidade observada.",
@@ -789,10 +793,10 @@
           "title": "O concurso não começa do zero",
           "kind": "Conectar um projeto ao presente",
           "preparation": "Martha já vinha estudando para os exames. Depois da notícia sobre Luiz, a mãe lhe mostra o aviso do concurso, trazido por Miranda. Martha lê e continua a preparação. A imagem de Leonor ainda aparece em seus pensamentos.",
-          "question": "Como o concurso se liga ao percurso que acompanhamos?",
+          "question": "O concurso aparece enquanto Martha ainda pensa em Luiz. Esse projeto começou agora?",
           "options": [
             {
-              "label": "Ele oferece uma direção concreta a um projeto antigo, enquanto o conflito afetivo continua.",
+              "label": "É uma oportunidade para um projeto que Martha já tinha. A dor por Luiz continua.",
               "consequence": "O desejo de lecionar antecede Luiz e o concurso. A imagem de Leonor mostra que concentrar-se no estudo não significa eliminar imediatamente o conflito."
             },
             {
@@ -823,7 +827,7 @@
       "title": "Capítulo X · Conquista e razões para casar",
       "context": "Comparar avaliações do mesmo evento e integrar motivos distintos.",
       "reading": "Miranda anuncia à mãe o bom desempenho de Martha no concurso. A nomeação chega no dia do casamento de Luiz. A mãe a abraça, feliz, e se surpreende com sua tristeza; Martha pensa em Leonor, no passeio e nas lembranças de Luiz, e se recolhe ao quarto.",
-      "question": "O que explica a diferença entre as reações sem negar a conquista?",
+      "question": "A nomeação chega no dia do casamento de Luiz. Por que mãe e filha recebem a notícia de modos tão diferentes?",
       "options": [
         {
           "label": "A tristeza indica que Martha perdeu o interesse na carreira que desejava.",
@@ -834,7 +838,7 @@
           "consequence": "A mãe se surpreende com a tristeza. Sua alegria celebra o emprego; não comprova que compreendeu ou resolveu o conflito afetivo da filha."
         },
         {
-          "label": "A nomeação é uma conquista real vivida junto de uma perda afetiva.",
+          "label": "Martha conquistou algo importante, mas ainda sofre por Luiz.",
           "consequence": "A alegria materna e a tristeza de Martha respondem a aspectos diferentes do mesmo momento. Não precisamos descartar um para reconhecer o outro."
         }
       ],
@@ -850,7 +854,7 @@
           "title": "Uma notícia dois sentidos",
           "kind": "Comparar perspectivas",
           "preparation": "Miranda anuncia à mãe o bom desempenho de Martha no concurso. A nomeação chega no dia do casamento de Luiz. A mãe a abraça, feliz, e se surpreende com sua tristeza; Martha pensa em Leonor, no passeio e nas lembranças de Luiz, e se recolhe ao quarto.",
-          "question": "O que explica a diferença entre as reações sem negar a conquista?",
+          "question": "A nomeação chega no dia do casamento de Luiz. Por que mãe e filha recebem a notícia de modos tão diferentes?",
           "options": [
             {
               "label": "A tristeza indica que Martha perdeu o interesse na carreira que desejava.",
@@ -861,7 +865,7 @@
               "consequence": "A mãe se surpreende com a tristeza. Sua alegria celebra o emprego; não comprova que compreendeu ou resolveu o conflito afetivo da filha."
             },
             {
-              "label": "A nomeação é uma conquista real vivida junto de uma perda afetiva.",
+              "label": "Martha conquistou algo importante, mas ainda sofre por Luiz.",
               "consequence": "A alegria materna e a tristeza de Martha respondem a aspectos diferentes do mesmo momento. Não precisamos descartar um para reconhecer o outro."
             }
           ],
@@ -880,10 +884,10 @@
           "title": "Independência não encerra a decisão",
           "kind": "Comparar razões e limites",
           "preparation": "A mãe apresenta o pedido de Miranda e sua confiança na seriedade dele. Martha responde que já tem posição independente e não precisa de apoio. Depois pensa na solidão, na reputação, na falta de reconhecimento e no casamento como resposta às humilhações que sente ter recebido.",
-          "question": "Que leitura integra a declaração de independência às razões posteriores?",
+          "question": "Martha diz que já é independente. Por que ainda pensa em se casar?",
           "options": [
             {
-              "label": "A renda modifica a necessidade de apoio, mas a decisão envolve também expectativas sociais e afetivas.",
+              "label": "O salário dá independência, mas companhia e reconhecimento também pesam na decisão.",
               "consequence": "O emprego sustenta a declaração de independência. As reflexões seguintes mostram outras questões que a renda não resolve por si só."
             },
             {
@@ -896,7 +900,7 @@
             }
           ],
           "reveal": "",
-          "discovery": "Precisar de renda, desejar reconhecimento e considerar uma relação são dimensões diferentes de uma decisão.",
+          "discovery": "Ter renda muda as opções de Martha. Seu desejo de companhia e de reconhecimento também entra na decisão.",
           "recall": "Identifique uma razão que o emprego modifica e outra que permanece.",
           "connection": "Depois de aceitar, Martha terá de confrontar suas expectativas com a pessoa de Miranda.",
           "sourceLabel": "PDF · páginas 146–150",
@@ -912,14 +916,14 @@
       "title": "Capítulo XI · Relação concreta e tentativa de encerramento",
       "context": "Avaliar limites de um ideal de proteção e distinguir gesto de estado emocional.",
       "reading": "Miranda recebe Martha com bondade e não a reduz à história do pai quando a mãe a conta. Martha percebe confiança em seus gestos. Mais tarde, a antiga vizinha relata que Carolina se casou, mas o marido explora seu trabalho e a agride.",
-      "question": "Como essas duas situações afetam a ideia de que estar casada garante proteção?",
+      "question": "Miranda é gentil; o marido de Carolina a agride. O que essas histórias fazem você pensar sobre casamento e proteção?",
       "options": [
         {
           "label": "A gentileza de Miranda indica que o casamento oferece proteção a Martha.",
           "consequence": "A situação de Carolina contradiz a garantia. A bondade de Miranda descreve uma relação concreta, não todos os casamentos."
         },
         {
-          "label": "Obrigam a examinar a conduta em cada relação, em vez de tomar o casamento como garantia.",
+          "label": "É preciso olhar como cada pessoa trata a outra. O casamento, sozinho, não garante proteção.",
           "consequence": "A atenção de Miranda e a violência relatada contra Carolina mostram situações diferentes. O estado civil não substitui a observação da conduta."
         },
         {
@@ -927,7 +931,7 @@
           "consequence": "O caso de Carolina revela um limite da generalização. Não permite atribuir a Miranda ações que o relato não lhe atribui."
         }
       ],
-      "author": "Uma instituição social não garante sozinha o cuidado; a conduta das pessoas precisa ser examinada.",
+      "author": "Estar casada não garante cuidado. O que as pessoas fazem dentro da relação é que precisa ser observado.",
       "evidence": "PDF · páginas 151–157",
       "recall": "Compare uma ação atribuída a Miranda com uma atribuída ao marido de Carolina.",
       "connection": "Mesmo ao reconhecer a bondade de Miranda, Martha ainda carrega lembranças que tenta encerrar.",
@@ -939,14 +943,14 @@
           "title": "Casar garante proteção",
           "kind": "Confrontar uma generalização",
           "preparation": "Miranda recebe Martha com bondade e não a reduz à história do pai quando a mãe a conta. Martha percebe confiança em seus gestos. Mais tarde, a antiga vizinha relata que Carolina se casou, mas o marido explora seu trabalho e a agride.",
-          "question": "Como essas duas situações afetam a ideia de que estar casada garante proteção?",
+          "question": "Miranda é gentil; o marido de Carolina a agride. O que essas histórias fazem você pensar sobre casamento e proteção?",
           "options": [
             {
               "label": "A gentileza de Miranda indica que o casamento oferece proteção a Martha.",
               "consequence": "A situação de Carolina contradiz a garantia. A bondade de Miranda descreve uma relação concreta, não todos os casamentos."
             },
             {
-              "label": "Obrigam a examinar a conduta em cada relação, em vez de tomar o casamento como garantia.",
+              "label": "É preciso olhar como cada pessoa trata a outra. O casamento, sozinho, não garante proteção.",
               "consequence": "A atenção de Miranda e a violência relatada contra Carolina mostram situações diferentes. O estado civil não substitui a observação da conduta."
             },
             {
@@ -955,7 +959,7 @@
             }
           ],
           "reveal": "",
-          "discovery": "Uma instituição social não garante sozinha o cuidado; a conduta das pessoas precisa ser examinada.",
+          "discovery": "Estar casada não garante cuidado. O que as pessoas fazem dentro da relação é que precisa ser observado.",
           "recall": "Compare uma ação atribuída a Miranda com uma atribuída ao marido de Carolina.",
           "connection": "Mesmo ao reconhecer a bondade de Miranda, Martha ainda carrega lembranças que tenta encerrar.",
           "sourceLabel": "PDF · páginas 151–157",
@@ -969,7 +973,7 @@
           "title": "Queimar os versos apaga o sentimento",
           "kind": "Relacionar gesto e emoção",
           "preparation": "Na véspera do casamento, Martha separa papéis para queimá-los. Encontra versos de Luiz. Lê e relê, fica nervosa, sente falta de ar e vai à janela. Depois queima os papéis, incluindo os versos, e diz que eles não prestavam para nada.",
-          "question": "Qual leitura considera tanto a reação quanto o gesto final?",
+          "question": "Martha queima os versos de Luiz. Isso significa que deixou de sentir algo por ele?",
           "options": [
             {
               "label": "A frase final sugere que Martha reconsiderou a importância daqueles versos.",
@@ -980,7 +984,7 @@
               "consequence": "O gesto destrói papéis. Não há, nesse trecho, uma decisão de cancelar o casamento; seria necessário outro apoio para essa conclusão."
             },
             {
-              "label": "A queima pode ser um gesto de encerramento, mas não comprova que a emoção desapareceu.",
+              "label": "Queimar os versos pode ser uma tentativa de seguir em frente. Não prova que o sentimento acabou.",
               "consequence": "A ação material é certa; sua eficácia emocional não é demonstrada. O contraste entre a reação e a frase sustenta essa distinção."
             }
           ],
@@ -1001,7 +1005,7 @@
       "title": "Capítulo XII · Cuidado perda e releitura do percurso",
       "context": "Distinguir expectativa causa e cronologia e integrar descobertas sem encerrar a obra numa tese única.",
       "reading": "Martha descreve uma primeira semana de casamento tranquila e deseja dar à mãe uma vida de repouso. No oitavo dia, a mãe adoece. O médico relata uma antiga lesão cardíaca. As crises se sucedem e, posteriormente, a mãe morre; o trecho não precisa o intervalo entre adoecimento e morte.",
-      "question": "Qual conclusão respeita a esperança de Martha e as informações sobre a doença?",
+      "question": "Martha quer dar descanso à mãe, mas ela adoece. O que o relato permite entender sobre esse futuro interrompido?",
       "options": [
         {
           "label": "O desejo de retribuir o cuidado era real, mas a doença impediu sua realização como Martha esperava.",
@@ -1016,7 +1020,7 @@
           "consequence": "Esse é o dia do adoecimento. A morte é narrada depois, sem um intervalo exato que autorize confundir os dois momentos."
         }
       ],
-      "author": "Uma sequência temporal não basta para explicar a causa, e uma conquista não garante realizar todo o futuro planejado.",
+      "author": "Martha queria retribuir o cuidado da mãe. A doença interrompe esse plano; a ordem dos acontecimentos, sozinha, não explica sua causa.",
       "evidence": "PDF · páginas 161–165",
       "recall": "Separe desejo de Martha, dia do adoecimento e explicação do médico.",
       "connection": "Agora retome o percurso: o que trabalho e casamento modificaram, e o que não puderam garantir?",
@@ -1028,7 +1032,7 @@
           "title": "O futuro preparado para a mãe",
           "kind": "Distinguir expectativa e explicação",
           "preparation": "Martha descreve uma primeira semana de casamento tranquila e deseja dar à mãe uma vida de repouso. No oitavo dia, a mãe adoece. O médico relata uma antiga lesão cardíaca. As crises se sucedem e, posteriormente, a mãe morre; o trecho não precisa o intervalo entre adoecimento e morte.",
-          "question": "Qual conclusão respeita a esperança de Martha e as informações sobre a doença?",
+          "question": "Martha quer dar descanso à mãe, mas ela adoece. O que o relato permite entender sobre esse futuro interrompido?",
           "options": [
             {
               "label": "O desejo de retribuir o cuidado era real, mas a doença impediu sua realização como Martha esperava.",
@@ -1044,7 +1048,7 @@
             }
           ],
           "reveal": "",
-          "discovery": "Uma sequência temporal não basta para explicar a causa, e uma conquista não garante realizar todo o futuro planejado.",
+          "discovery": "Martha queria retribuir o cuidado da mãe. A doença interrompe esse plano; a ordem dos acontecimentos, sozinha, não explica sua causa.",
           "recall": "Separe desejo de Martha, dia do adoecimento e explicação do médico.",
           "connection": "Agora retome o percurso: o que trabalho e casamento modificaram, e o que não puderam garantir?",
           "sourceLabel": "PDF · páginas 161–165",
@@ -1058,14 +1062,14 @@
           "title": "O que as conquistas mudam",
           "kind": "Sintetizar e delimitar uma interpretação",
           "preparation": "Retome quatro momentos: Martha deseja ser professora; o salário permite mudar de moradia; a nomeação lhe dá uma posição que chama de independente; ao casar, prepara um futuro tranquilo para a mãe, mas a perde. Em cada momento, uma conquista convive com outros desejos ou limites.",
-          "question": "Que síntese articula esses acontecimentos e deixa espaço para outras leituras da obra?",
+          "question": "Martha conquista trabalho, uma casa melhor e independência. O que essas conquistas mudam — e o que não resolvem?",
           "options": [
             {
               "label": "As perdas diminuem o alcance das conquistas a ponto de torná-las pouco relevantes.",
               "consequence": "O salário e a nomeação mudaram condições concretas. Reconhecer perdas não exige apagar essas mudanças."
             },
             {
-              "label": "As conquistas ampliam possibilidades, mas não garantem reconhecimento, encerramento afetivo ou reparação completa.",
+              "label": "As conquistas abrem caminhos, mas não apagam todas as dores nem realizam todos os desejos.",
               "consequence": "Moradia e posição profissional são ganhos. As descobertas sobre desejo, memória e cuidado mostram limites que esses ganhos não eliminam."
             },
             {
@@ -1074,7 +1078,7 @@
             }
           ],
           "reveal": "",
-          "discovery": "Podemos ligar ganhos e limites sem reduzir a obra a uma lição única nem apagar suas ambiguidades.",
+          "discovery": "As conquistas abrem caminhos, mas não resolvem todos os desejos e perdas. A história de Martha permite continuar pensando, sem uma moral pronta.",
           "recall": "Escolha duas descobertas do percurso, cite seus episódios e explique como uma ajuda a compreender a outra.",
           "connection": "Retorne ao original: procure uma passagem que complemente ou limite esta síntese. A leitura pode ampliar o mapa.",
           "sourceLabel": "PDF · páginas 48–49, 77–82, 145–150 e 161–166",

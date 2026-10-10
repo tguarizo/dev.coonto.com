@@ -25,7 +25,8 @@ if(process.env.DATABASE_URL){const pool=new pg.Pool({connectionString:process.en
 for(const item of workAudio)items.push({key:'o-alienista/'+item.id,segments:item.segments.map(s=>({speaker:s.speaker,text:s.text}))});
 for(const item of items){item.segments=item.segments.map(s=>({...s,voiceId:voice(s.speaker)}));item.hash=createHash('sha256').update(JSON.stringify({model,segments:item.segments})).digest('hex');item.characters=item.segments.reduce((sum,s)=>sum+s.text.length,0);}
 const selectedWork=process.argv.find(arg=>arg.startsWith('--work='))?.slice(7);if(selectedWork&&!['home-examples','o-alienista','memorias-de-martha','divina-comedia-canto-i','videos'].includes(selectedWork))throw new Error('Obra inválida.');
-const pending=[];for(const item of items.filter(item=>!selectedWork||item.key.startsWith(selectedWork+'/'))){let exists=false;try{await access(path.join(output,item.key+'.mp3'));exists=true;}catch{}if(manifest.items[item.key]?.hash===item.hash&&manifest.items[item.key]?.status==='ready'&&exists)continue;pending.push(item);}
+const selectedItem=process.argv.find(arg=>arg.startsWith('--item='))?.slice(7);if(selectedItem&&!items.some(item=>item.key===selectedItem))throw new Error('Trecho de áudio inválido.');
+const pending=[];for(const item of items.filter(item=>(!selectedWork||item.key.startsWith(selectedWork+'/'))&&(!selectedItem||item.key===selectedItem))){let exists=false;try{await access(path.join(output,item.key+'.mp3'));exists=true;}catch{}if(manifest.items[item.key]?.hash===item.hash&&manifest.items[item.key]?.status==='ready'&&exists)continue;pending.push(item);}
 console.log(`Áudio beta: ${pending.length} arquivos a atualizar, ${pending.reduce((n,i)=>n+i.characters,0)} caracteres. Voz Coonto: ${narrator}.`);
 if(!generate)process.exit(0);
 if(!pending.length)process.exit(0);
