@@ -4,6 +4,7 @@ const works=['memorias-de-martha','divina-comedia-canto-i','o-alienista'];
 function run(args,capture=false){const r=spawnSync(process.execPath,['scripts/generate-beta-audio.mjs',...args],{encoding:'utf8',stdio:capture?'pipe':'inherit'});if(r.status!==0)throw new Error(capture?r.stderr:'Etapa de áudio falhou.');return capture?JSON.parse(r.stdout):null;}
 const reports=works.map(w=>run(['--work='+w,'--report'],true));
 console.log('RC2.2 audio inventory: '+JSON.stringify(reports.map((r,i)=>({work:works[i],...r}))));
+if(process.argv.includes('--check-only')){for(const work of works){const r=spawnSync(process.execPath,['scripts/generate-beta-audio.mjs','--audit','--work='+work],{encoding:'utf8'});if(!r.stdout.trim())throw new Error(r.stderr||'Auditoria sem resultado.');const audit=JSON.parse(r.stdout);console.log('RC2.2 existing audio audit: '+JSON.stringify({work,total:audit.total,valid:audit.valid,durationSeconds:audit.durationSeconds,failures:audit.failures.length}));}}
 const characters=reports.reduce((n,r)=>n+r.pendingCharacters,0);
 if(characters){
  if(!process.env.ELEVENLABS_API_KEY)throw new Error('Chave do fornecedor ausente.');
