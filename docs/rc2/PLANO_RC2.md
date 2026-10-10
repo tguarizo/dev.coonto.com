@@ -1,3 +1,19 @@
+# Plano ativo — fechamento Coonto RC2.2
+
+Atualizado em 10/10/2026. A solicitação atual substitui os limites da prototipagem inicial reproduzida abaixo: o usuário autorizou revisar Martha e Dante, completar as imagens, concluir o áudio e publicar os commits em tguarizo/dev.coonto.com, branch develop, acionando dev.coonto.com.
+
+Prioridade: terminar texto, dimensão visual e verificação da experiência antes de pagamento, CRM, guias, manual e marketing.
+
+Implementado: revisão de Martha/Dante, 24 ilustrações com suporte offline, livros originais, assinatura da marca, abertura da home. 77 testes, TypeScript, build e navegação em três larguras aprovados.
+
+Bloqueio atual: ElevenLabs HTTP 401 `missing_permissions`, ausência de `user_read`. São 107 arquivos faltantes, 38.848 caracteres; geração não iniciada nesta tentativa. Consultar o saldo e concluir áudio/auditoria antes de declarar a RC encerrada.
+
+Estado detalhado e evidências: `CHECKLIST_COONTO.md` e `AVALIACAO_RC2_2.md`. A avaliação externa de Fred Sommer permanece separada da verificação técnica.
+
+---
+
+## Registro histórico — prototipagem de 08/10, anterior ao escopo atual
+
 # Coonto RC2 — CLE e Site (protótipo de validação)
 Data: 2026-10-08
 Base: develop @ a22e721108f40ffb8dafefb897faa1d464f93fb3

@@ -6,9 +6,9 @@ Comando acordado: `/checklist` apresenta a lista do projeto ativo, organizada po
 
 ## Situação atual
 
-A RC2.2 foi publicada em dev.coonto.com em 10/10/2026. Commit remoto: 7ba1822d9e4d345e0cb97dcd3122b43efb44f201. Workflow 38092337504: testes, TypeScript, implantação e publicação das duas edições concluídos com sucesso. O endpoint de saúde confirma RC2.2 e banco disponível. Home e páginas públicas de Martha e Dante responderam 200, com os novos textos e referências às imagens; os três arquivos de imagem conferem com os locais. Publicação não equivale a fechamento da RC: a complementação visual e o áudio estão em fechamento técnico, com avaliação geral ainda pendente.
+Textos e 24 ilustrações publicados em dev.coonto.com. 77 testes, TypeScript, build e navegação em três larguras aprovados. Todos os PNGs publicados conferem com os locais. Livros originais verificados. O fechamento completo da RC2.2 está bloqueado pelo áudio: a chave ElevenLabs não tem a permissão `user_read` para consulta de saldo. 111 arquivos existentes foram validados; faltam 107 arquivos, 38.848 caracteres; nenhum crédito foi consumido na tentativa de finalização. Habilitar User → Read na chave existente e concluir geração/auditoria antes de declarar a RC encerrada.
 
-Prioridade acordada em 10/10: fechar publicação, imagens/áudio e avaliação geral antes das demais frentes. A revisão visual ao vivo ficou bloqueada por falha do navegador de teste; não foi declarada concluída.
+Detalhes e limites da verificação em `AVALIACAO_RC2_2.md`. Parecer de Fred Sommer, escuta de pronúncia e sessão autenticada real não foram atribuídos aos testes automatizados.
 
 ## 1. Preparação concluída
 
@@ -36,13 +36,15 @@ A solicitação atual autoriza concluir o áudio da RC2.2. O fechamento inclui c
 
 ## 3. Fechar Martha, Dante e a dimensão visual
 
-- [ ] Percorrer Martha e Dante no ambiente publicado e verificar clareza, continuidade e qualidade dos retornos.
-- [ ] Fazer avaliação visual no celular, tablet e computador; a conferência visual em tablet ainda não foi concluída.
-- [ ] Conferir a seção de livros originais e os três downloads.
+- [x] Percorrer todas as alternativas de Martha e Dante no navegador da revisão e conferir os retornos com o conteúdo.
+- [ ] Obter avaliação editorial externa de clareza e interesse no ambiente publicado.
+- [x] Verificar visual em larguras de celular, tablet e computador, com capturas reais de Chromium. Teste em aparelho físico permanece parte da avaliação humana.
+- [x] Conferir os cartões de livros originais e os três links; TXT/PDF locais baixados integralmente e comparados.
 - [x] Definir cobertura por capítulo de Martha, movimento de Dante e fase de O Alienista.
 - [x] Produzir e integrar 24 ilustrações, com identidade consistente e sem antecipar descobertas.
-- [ ] Conferir legibilidade, proporções, textos alternativos e carregamento das imagens.
-- [ ] Testar retomada, navegação entre capítulos e leitura offline com as alterações.
+- [x] Conferir legibilidade, proporções, textos alternativos e carregamento das 24 imagens; melhorar contraste das legendas.
+- [x] Testar navegação no navegador e retomada/isolamento/licença offline nos testes automatizados.
+- [ ] Validar sessão autenticada e download offline completos no ambiente publicado, com áudio atualizado.
 
 São 12 imagens em Martha, 6 em Dante e 6 em O Alienista. A integração online e offline está implementada; confirmar na publicação complementar.
 
@@ -50,8 +52,10 @@ São 12 imagens em Martha, 6 em Dante e 6 em O Alienista. A integração online 
 
 - [ ] Identificar as palavras e os trechos com pronúncia inadequada no relato da avaliadora.
 - [ ] Esclarecer o comentário sobre o tablet: imagem, disposição da pergunta ou divergência com a locução.
-- [ ] Conferir saldo atual da ElevenLabs e estimar apenas os arquivos faltantes no servidor.
-- [ ] Gerar locução correspondente aos textos aprovados de Martha e Dante.
+- [x] Inventariar os arquivos faltantes no servidor: Martha 51, Dante 56, O Alienista 0; 38.848 caracteres.
+- [ ] Habilitar `user_read` na chave ElevenLabs e consultar saldo atual; bloqueio externo confirmado por HTTP 401 missing_permissions.
+- [x] Auditar os áudios existentes: Martha 57 válidos, Dante 6 válidos, O Alienista 48/48 válidos, com hash, duração e publicação conferidos.
+- [ ] Gerar os 107 arquivos faltantes de Martha e Dante e repetir a auditoria completa.
 - [ ] Corrigir isoladamente as pronúncias confirmadas.
 - [ ] Ouvir amostras das três obras, conferindo as vozes acordadas para situação, preparação e comentário.
 - [ ] Verificar os controles de reprodução e o funcionamento offline.
