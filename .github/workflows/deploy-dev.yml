@@ -53,7 +53,7 @@ jobs:
           ssh-keyscan -H "$SERVER_HOST" >> ~/.ssh/known_hosts
 
       - name: Package and Deploy
-        if: env.SSH_PRIVATE_KEY != '' && !contains(github.event.head_commit.message, '[dante-audio-recovery]')
+        if: env.SSH_PRIVATE_KEY != '' && !contains(github.event.head_commit.message, '[dante-audio-recovery]') && !contains(github.event.head_commit.message, '[rc2-audio-check]')
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           SERVER_USER: ${{ secrets.SERVER_USER }}
