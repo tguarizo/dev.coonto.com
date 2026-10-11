@@ -70,7 +70,7 @@ try{
    if(recovered){await copyFile(cachedVersion,combined);console.log(item.key+': retomando arquivo validado, sem nova chamada ao fornecedor.');}
    else {for(let index=0;index<item.segments.length;index++){
     const segment=item.segments[index];manifest.attempts.push({key:item.key,hash:item.hash,characters:segment.text.length,at:Date.now()});used+=segment.text.length;await saveManifest();
-    const response=await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${encodeURIComponent(segment.voiceId)}?output_format=mp3_44100_128`,{method:'POST',headers:{'xi-api-key':process.env.ELEVENLABS_API_KEY,'Content-Type':'application/json'},body:JSON.stringify({text:segment.text,model_id:model,language_code:'pt',voice_settings:{stability:.5,similarity_boost:.75}}),signal:AbortSignal.timeout(60000)});
+    const response=await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${encodeURIComponent(segment.voiceId)}?output_format=mp3_44100_128`,{method:'POST',headers:{'xi-api-key':process.env.ELEVENLABS_API_KEY,'Content-Type':'application/json'},body:JSON.stringify({text:segment.text,model_id:model,language_code:'pt',voice_settings:{stability:.5,similarity_boost:.75}}),signal:AbortSignal.timeout(180000)});
     if(!response.ok)throw new Error('ElevenLabs respondeu '+response.status+' para '+item.key+'; sem repetição automática.');
     const buffer=Buffer.from(await response.arrayBuffer());if(!response.headers.get('content-type')?.includes('audio')||!buffer.length||buffer.length>30*1024*1024)throw new Error('Arquivo inválido para '+item.key);
     const piece=path.join(temporary,index+'.mp3');await writeFile(piece,buffer);pieces.push(piece);
