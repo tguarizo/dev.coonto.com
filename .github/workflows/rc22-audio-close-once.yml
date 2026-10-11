@@ -1,0 +1,37 @@
+name: Close RC2.2 audio (one-shot)
+on:
+  push:
+    branches: [develop]
+    paths:
+      - .github/workflows/rc22-audio-close-once.yml
+permissions:
+  contents: read
+concurrency:
+  group: coonto-rc22-audio-close
+  cancel-in-progress: false
+jobs:
+  generate-and-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - name: Prepare SSH
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SERVER_HOST: ${{ secrets.SERVER_HOST }}
+        run: |
+          test -n "$SSH_PRIVATE_KEY" && test -n "$SERVER_HOST"
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H "$SERVER_HOST" >> ~/.ssh/known_hosts
+      - name: Complete RC2.2 audio with existing server key
+        env:
+          SERVER_USER: ${{ secrets.SERVER_USER }}
+          SERVER_HOST: ${{ secrets.SERVER_HOST }}
+          DEPLOY_PATH: ${{ secrets.DEV_DEPLOY_PATH || '/opt/coonto/dev' }}
+        run: |
+          case "$DEPLOY_PATH" in *[!a-zA-Z0-9_./-]*) echo "Invalid deployment path"; exit 1;; esac
+          PROJECT_NAME="coonto-$(basename "$DEPLOY_PATH")"
+          scp scripts/close-rc2-audio.mjs "${SERVER_USER}@${SERVER_HOST}:/tmp/close-rc2-audio.mjs"
+          ssh "${SERVER_USER}@${SERVER_HOST}" "cd '$DEPLOY_PATH' && sudo docker compose -p '$PROJECT_NAME' cp /tmp/close-rc2-audio.mjs app:/app/scripts/close-rc2-audio.mjs && sudo docker compose -p '$PROJECT_NAME' exec -T app node scripts/close-rc2-audio.mjs"
