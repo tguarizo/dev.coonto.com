@@ -13,5 +13,5 @@ if(characters){
  console.log('RC2.2 audio budget: '+JSON.stringify(checkBudget(await response.json(),characters,reports[0].model)));
 }
 if(process.argv.includes('--check-only'))process.exit(0);
-for(const work of works){run(['--generate','--work='+work]);run(['--audit','--work='+work]);}
+for(const work of works){run(['--generate','--retry','--work='+work]);run(['--audit','--work='+work]);}
 console.log('RC2.2: todos os áudios correspondem ao texto atual, estão publicados e têm duração válida.');
