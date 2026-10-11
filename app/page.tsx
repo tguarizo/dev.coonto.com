@@ -1,5 +1,4 @@
 import { SiteHeader } from "@/components/site-header";
-import { SiteOpening } from "@/components/site-opening";
 import { SiteFooter } from "@/components/site-footer";
 import { CoontoVideos } from "@/components/coonto-videos";
 import { InstallCoonto } from "@/components/install-coonto";
@@ -11,7 +10,6 @@ import styles from "./home.module.css";
 export const dynamic = "force-dynamic";
 export default function Home() {
   return <main className={styles.home}>
-    <SiteOpening />
     <SiteHeader />
     <div className={styles.wrap}>
       <section className={styles.hero}>
