@@ -31,6 +31,8 @@ jobs:
         run: command -v ffprobe || (sudo apt-get update && sudo apt-get install -y ffmpeg)
       - run: npm test
       - run: npm run typecheck
+      - name: Verify administrator recovery safeguards
+        run: python3 -m unittest discover -s tests -p 'test_recover_admin_access.py'
 
   deploy:
     needs: tests
@@ -53,7 +55,7 @@ jobs:
           ssh-keyscan -H "$SERVER_HOST" >> ~/.ssh/known_hosts
 
       - name: Package and Deploy
-        if: env.SSH_PRIVATE_KEY != '' && !contains(github.event.head_commit.message, '[dante-audio-recovery]') && !contains(github.event.head_commit.message, '[rc2-audio-check]')
+        if: env.SSH_PRIVATE_KEY != '' && !contains(github.event.head_commit.message, '[dante-audio-recovery]') && !contains(github.event.head_commit.message, '[rc2-audio-check]') && !contains(github.event.head_commit.message, '[coonto-admin-recovery]')
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           SERVER_USER: ${{ secrets.SERVER_USER }}
@@ -66,6 +68,51 @@ jobs:
           cd /tmp && tar -czf "$ARCHIVE" coonto-deployment-kit
           scp -o StrictHostKeyChecking=no "/tmp/$ARCHIVE" ${SERVER_USER}@${SERVER_HOST}:"/tmp/$ARCHIVE"
           ssh -o StrictHostKeyChecking=no ${SERVER_USER}@${SERVER_HOST} "sudo mkdir -p ${DEPLOY_PATH} && sudo tar -xzf /tmp/$ARCHIVE -C ${DEPLOY_PATH} --strip-components=1 && rm /tmp/$ARCHIVE && cd ${DEPLOY_PATH} && sudo python3 scripts/configure-bootstrap.py && sudo bash ./coonto.sh install"
+
+      - name: Recover approved owner email in dev
+        if: contains(github.event.head_commit.message, '[coonto-admin-recovery]')
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SERVER_USER: ${{ secrets.SERVER_USER }}
+          SERVER_HOST: ${{ secrets.SERVER_HOST }}
+          DEPLOY_PATH: ${{ secrets.DEV_DEPLOY_PATH || '/opt/coonto/dev' }}
+          RECOVERY_EMAIL: tony.guarizo@coonto.com
+        run: |
+          set -euo pipefail
+          test -n "$SSH_PRIVATE_KEY" && test -n "$SERVER_USER" && test -n "$SERVER_HOST" || { echo 'Recovery requires the configured deployment connection.'; exit 1; }
+          case "$DEPLOY_PATH" in *[!a-zA-Z0-9_./-]*) echo 'Invalid deployment path'; exit 1;; esac
+          REMOTE_SCRIPT="/tmp/coonto-admin-recovery-${GITHUB_RUN_ID}.py"
+          scp -o BatchMode=yes scripts/recover-admin-access.py "${SERVER_USER}@${SERVER_HOST}:$REMOTE_SCRIPT"
+          ssh -o BatchMode=yes "${SERVER_USER}@${SERVER_HOST}" "sudo -n bash -s -- '$DEPLOY_PATH' '$REMOTE_SCRIPT' '$RECOVERY_EMAIL'" <<'RECOVERY'
+          set -euo pipefail
+          cd "$1"
+          script="$2"
+          email="$3"
+          project="coonto-$(basename "$PWD")"
+          test -f .env
+          umask 077
+          snapshot="$(mktemp .env.before-admin-recovery.XXXXXXXX)"
+          cat .env > "$snapshot"
+          rollback() {
+            trap - ERR
+            echo 'Recovery failed; restoring the previous application configuration.'
+            cat "$snapshot" > .env
+            docker compose -p "$project" up -d --no-deps --no-build --force-recreate app || true
+            exit 1
+          }
+          trap rollback ERR
+          python3 "$script" --email "$email" --apply
+          docker compose -p "$project" up -d --no-deps --no-build --force-recreate app
+          ready=false
+          for attempt in $(seq 1 30); do
+            if docker compose -p "$project" exec -T app node -e "fetch('http://127.0.0.1:3000/api/health').then(r=>{if(!r.ok)process.exit(1)}).catch(()=>process.exit(1))" >/dev/null 2>&1; then ready=true; break; fi
+            sleep 3
+          done
+          test "$ready" = true
+          docker compose -p "$project" exec -T app node -e 'const email=process.argv[1];const admins=(process.env.ADMIN_EMAILS||"").split(",").map(x=>x.trim().toLowerCase());if(process.env.AUTH_MODE!=="email"||!admins.includes(email))process.exit(1);console.log("ADMIN_RECOVERY_CONFIGURED: new administrator requires fresh email OTP.");' "$email"
+          trap - ERR
+          rm -f "$script"
+          RECOVERY
 
       - name: Load requested synthetic education data in dev
         if: env.SSH_PRIVATE_KEY != '' && (contains(github.event.head_commit.message, '[coonto-qa-load]') || inputs.education_qa == 'load')
@@ -195,3 +242,4 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         run: |
           echo "::warning ::SSH_PRIVATE_KEY secret não configurado no GitHub. O deploy automático será habilitado assim que os Secrets do repositório forem preenchidos."
+
