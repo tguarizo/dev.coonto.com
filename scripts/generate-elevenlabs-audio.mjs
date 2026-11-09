@@ -9,11 +9,11 @@ const voiceId = process.env.ELEVENLABS_VOICE_ID || 'czvzJwIVS2asEKnthV40';
 if (!apiKey) throw new Error('Missing ELEVENLABS_API_KEY GitHub Actions secret.');
 
 const clips = [
-  ['office-three-days.mp3', 'Três dias depois.'],
-  ['office-door.mp3', 'Alguém bate à porta.'],
-  ['answer-transition.mp3', 'Bacamarte pensa um instante antes de responder.'],
-  ['consequence-transition.mp3', 'Agora, conheça as consequências dessa escolha em Itaguaí.'],
-  ['author-transition.mp3', 'Depois das consequências, conheça o caminho de Machado de Assis.']
+  ['consequence-purpose.mp3', 'O plano vai além do acolhimento: Bacamarte pretende observar e classificar seus moradores. Quem será tratado passa a depender do critério de um único médico.'],
+  ['consequence-limits.mp3', 'Bacamarte invoca o método, mas não aponta quem fiscaliza suas conclusões. Sem contestação, os moradores ficam sujeitos à classificação do próprio médico.'],
+  ['consequence-city.mp3', 'Ele pede que a vila observe os resultados, mas também será ele quem escolherá o que conta como resultado. A população não tem como verificar as conclusões.'],
+  ['consequence-green.mp3', 'A curiosidade pela cor leva à pergunta sobre quem será observado ali dentro. A Casa Verde passa de edifício curioso a instituição que pode classificar pessoas.'],
+  ['consequence-people.mp3', 'Se Bacamarte decide quem se afastou da razão, sua definição determina quem será acolhido, observado ou privado da liberdade dentro da Casa Verde.']
 ];
 
 const ffmpeg = spawnSync('ffmpeg', ['-version'], { encoding: 'utf8' });
@@ -33,15 +33,15 @@ for (const [filename, text] of clips) {
       },
       body: JSON.stringify({
         text,
-        model_id: 'eleven_v4',
-        language_code: 'pt'
+        model_id: 'eleven_multilingual_v2',
+        language_code: 'pt',
+        voice_settings: { stability: 0.5, similarity_boost: 0.75 }
       })
     }
   );
 
   if (!response.ok) {
-    const detail = (await response.text()).slice(0, 300);
-    throw new Error(`ElevenLabs rejected ${filename} (${response.status}): ${detail}`);
+    throw new Error(`ElevenLabs rejected ${filename} (${response.status}).`);
   }
 
   const rawAudio = Buffer.from(await response.arrayBuffer());
@@ -58,7 +58,7 @@ for (const [filename, text] of clips) {
   );
 
   if (normalized.error || normalized.status !== 0) {
-    throw new Error(`Could not normalize ${filename}: ${normalized.stderr?.toString() || normalized.error?.message}`);
+    throw new Error(`Could not normalize ${filename}.`);
   }
 
   console.log(`Generated and normalized: ${filename}`);
