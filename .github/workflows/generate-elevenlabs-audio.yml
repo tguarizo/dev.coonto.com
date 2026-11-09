@@ -1,0 +1,42 @@
+name: Generate Coonto narration with ElevenLabs
+
+on:
+  push:
+    branches:
+      - codex/elevenlabs-audio-pipeline
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+      ELEVENLABS_VOICE_ID: czvzJwIVS2asEKnthV40
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install audio normalizer
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+
+      - name: Generate and normalize narration files
+        run: node scripts/generate-elevenlabs-audio.mjs
+
+      - name: Upload generated audio
+        uses: actions/upload-artifact@v4
+        with:
+          name: coonto-alienista-audio
+          path: generated-audio/*.mp3
+          if-no-files-found: error
+          retention-days: 7
