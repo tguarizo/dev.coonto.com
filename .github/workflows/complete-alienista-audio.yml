@@ -80,7 +80,6 @@ jobs:
       - name: Normalize clip loudness
         run: |
           sudo apt-get update
-          sudo apt-get update
           sudo apt-get install -y ffmpeg
           for source in "$RUNNER_TEMP"/scene7-audio/raw/*.mp3; do
             target="$RUNNER_TEMP/scene7-audio/normalized/$(basename "$source")"
