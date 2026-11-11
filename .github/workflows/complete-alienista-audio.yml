@@ -131,16 +131,19 @@ jobs:
           mkdir -p "$RUNNER_TEMP/chapter2-audio/raw" "$RUNNER_TEMP/chapter2-audio/normalized"
           scp "${SERVER_USER}@${SERVER_HOST}:/tmp/coonto-alienista-chapter2-audio.tar.gz" "$RUNNER_TEMP/chapter2-audio/"
           tar -xzf "$RUNNER_TEMP/chapter2-audio/coonto-alienista-chapter2-audio.tar.gz" -C "$RUNNER_TEMP/chapter2-audio/raw"
-          test "$(find "$RUNNER_TEMP/chapter2-audio/raw" -maxdepth 1 -name 'ch02_*.mp3' | wc -l)" -eq 43
+          find "$RUNNER_TEMP/chapter2-audio/raw" -type f -name '*.mp3' -print
+          AUDIO_COUNT="$(find "$RUNNER_TEMP/chapter2-audio/raw" -type f -name '*.mp3' | wc -l)"
+          echo "Recovered Chapter II clips: $AUDIO_COUNT"
+          test "$AUDIO_COUNT" -eq 43
       - name: Normalize clip loudness
         run: |
           sudo apt-get update
           sudo apt-get install -y ffmpeg
-          for source in "$RUNNER_TEMP"/chapter2-audio/raw/*.mp3; do
+          find "$RUNNER_TEMP/chapter2-audio/raw" -type f -name '*.mp3' -print0 | while IFS= read -r -d '' source; do
             target="$RUNNER_TEMP/chapter2-audio/normalized/$(basename "$source")"
             ffmpeg -hide_banner -loglevel error -y -i "$source" -af 'loudnorm=I=-16:TP=-2:LRA=5' -ar 44100 -ac 1 -codec:a libmp3lame -b:a 128k "$target"
           done
-          test "$(find "$RUNNER_TEMP/chapter2-audio/normalized" -maxdepth 1 -name 'ch02_*.mp3' | wc -l)" -eq 43
+          test "$(find "$RUNNER_TEMP/chapter2-audio/normalized" -type f -name '*.mp3' | wc -l)" -eq 43
       - name: Upload Chapter II audio for review
         uses: actions/upload-artifact@v4
         with:
