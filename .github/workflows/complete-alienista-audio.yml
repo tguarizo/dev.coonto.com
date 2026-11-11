@@ -4,8 +4,12 @@ on:
   push:
     branches:
       - develop
+      - audio/chapter2-generation
     paths:
       - scripts/generate-alienista-scene7-demo.mjs
+      - scripts/generate-alienista-chapter2-audio.mjs
+      - content/alienista-chapter2-voice-lines.json
+      - .github/workflows/complete-alienista-audio.yml
 permissions:
   contents: read
 concurrency:
@@ -46,7 +50,7 @@ jobs:
           PROJECT_NAME="coonto-$(basename "$DEPLOY_PATH")"
           ssh "${SERVER_USER}@${SERVER_HOST}" "cd '$DEPLOY_PATH' && count=\$(sudo find audio/o-alienista -maxdepth 1 -type f -name '*.mp3' | wc -l); echo \"Alienista audio files: \$count\"; test \"\$count\" -ge 48"
   scene7-demo:
-    if: github.event_name == 'push'
+    if: github.event_name == 'push' && github.ref_name == 'develop'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -89,3 +93,55 @@ jobs:
           path: ${{ runner.temp }}/scene7-audio/normalized/*.mp3
           if-no-files-found: error
           retention-days: 7
+  chapter2-audio:
+    if: github.event_name == 'push' && github.ref_name == 'audio/chapter2-generation'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Prepare SSH
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SERVER_HOST: ${{ secrets.SERVER_HOST }}
+        run: |
+          test -n "$SSH_PRIVATE_KEY" && test -n "$SERVER_HOST"
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H "$SERVER_HOST" >> ~/.ssh/known_hosts
+      - name: Copy approved script and lines to the private server
+        env:
+          SERVER_USER: ${{ secrets.SERVER_USER }}
+          SERVER_HOST: ${{ secrets.SERVER_HOST }}
+          DEPLOY_PATH: ${{ secrets.DEV_DEPLOY_PATH || '/opt/coonto/dev' }}
+        run: |
+          case "$DEPLOY_PATH" in *[!a-zA-Z0-9_./-]*) echo 'Invalid deployment path'; exit 1;; esac
+          scp scripts/generate-alienista-chapter2-audio.mjs "${SERVER_USER}@${SERVER_HOST}:${DEPLOY_PATH}/scripts/"
+          scp content/alienista-chapter2-voice-lines.json "${SERVER_USER}@${SERVER_HOST}:${DEPLOY_PATH}/content/"
+      - name: Generate Chapter II clips through the server ElevenLabs key
+        env:
+          SERVER_USER: ${{ secrets.SERVER_USER }}
+          SERVER_HOST: ${{ secrets.SERVER_HOST }}
+          DEPLOY_PATH: ${{ secrets.DEV_DEPLOY_PATH || '/opt/coonto/dev' }}
+        run: |
+          PROJECT_NAME="coonto-$(basename "$DEPLOY_PATH")"
+          ssh "${SERVER_USER}@${SERVER_HOST}" "cd '$DEPLOY_PATH' && sudo docker compose -p '$PROJECT_NAME' exec -T app node scripts/generate-alienista-chapter2-audio.mjs --generate"
+          mkdir -p "$RUNNER_TEMP/chapter2-audio/raw" "$RUNNER_TEMP/chapter2-audio/normalized"
+          scp "${SERVER_USER}@${SERVER_HOST}:${DEPLOY_PATH}/audio/o-alienista-chapter2/ch02_*.mp3" "$RUNNER_TEMP/chapter2-audio/raw/"
+          test "$(find "$RUNNER_TEMP/chapter2-audio/raw" -maxdepth 1 -name 'ch02_*.mp3' | wc -l)" -eq 43
+      - name: Normalize clip loudness
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+          for source in "$RUNNER_TEMP"/chapter2-audio/raw/*.mp3; do
+            target="$RUNNER_TEMP/chapter2-audio/normalized/$(basename "$source")"
+            ffmpeg -hide_banner -loglevel error -y -i "$source" -af 'loudnorm=I=-16:TP=-2:LRA=5' -ar 44100 -ac 1 -codec:a libmp3lame -b:a 128k "$target"
+          done
+          test "$(find "$RUNNER_TEMP/chapter2-audio/normalized" -maxdepth 1 -name 'ch02_*.mp3' | wc -l)" -eq 43
+      - name: Upload Chapter II audio for review
+        uses: actions/upload-artifact@v4
+        with:
+          name: coonto-alienista-chapter2-audio
+          path: ${{ runner.temp }}/chapter2-audio/normalized/*.mp3
+          if-no-files-found: error
+          retention-days: 14
