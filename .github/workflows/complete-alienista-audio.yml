@@ -79,6 +79,7 @@ jobs:
           scp "${SERVER_USER}@${SERVER_HOST}:${DEPLOY_PATH}/audio/o-alienista-scene7-demo/*.mp3" "$RUNNER_TEMP/scene7-audio/raw/"
       - name: Normalize clip loudness
         run: |
+          sudo apt-get update
           sudo apt-get install -y ffmpeg
           for source in "$RUNNER_TEMP"/scene7-audio/raw/*.mp3; do
             target="$RUNNER_TEMP/scene7-audio/normalized/$(basename "$source")"
