@@ -1,0 +1,222 @@
+[
+  {
+    "id": "ch02_s00_intro",
+    "speaker": "narrator",
+    "text": "Capítulo II: Torrentes de loucos. Três dias depois de abrir a Casa Verde, Bacamarte conta a Crispim Soares qual é o centro de seu projeto."
+  },
+  {
+    "id": "ch02_s01_narrator",
+    "speaker": "narrator",
+    "text": "Bacamarte reconhece a caridade, mas explica que seu principal objetivo é estudar a loucura, classificar seus casos e procurar um remédio universal."
+  },
+  {
+    "id": "ch02_s01_bacamarte_01",
+    "speaker": "bacamarte",
+    "text": "A caridade entra no meu procedimento como tempero. O principal é estudar profundamente a loucura, classificar seus casos e descobrir um remédio universal."
+  },
+  {
+    "id": "ch02_s01_crispim",
+    "speaker": "crispim",
+    "text": "Um excelente serviço."
+  },
+  {
+    "id": "ch02_s01_bacamarte_02",
+    "speaker": "bacamarte",
+    "text": "Sem este asilo, eu teria um campo muito menor para os meus estudos."
+  },
+  {
+    "id": "ch02_s01_question",
+    "speaker": "narrator",
+    "text": "O que está no centro do projeto de Bacamarte?"
+  },
+  {
+    "id": "ch02_s01_consequence_a",
+    "speaker": "narrator",
+    "text": "Você percebeu a intenção de ajudar. Mas Bacamarte chama a caridade de tempero e diz que seu principal objetivo é estudar."
+  },
+  {
+    "id": "ch02_s01_consequence_b",
+    "speaker": "narrator",
+    "text": "Essa leitura acompanha a fala de Bacamarte: a Casa Verde pode prestar um serviço, mas também amplia seu campo de pesquisa."
+  },
+  {
+    "id": "ch02_s01_consequence_c",
+    "speaker": "narrator",
+    "text": "A conversa ainda não mostra um projeto de governo. O que Bacamarte declara é uma ambição científica."
+  },
+  {
+    "id": "ch02_s01_machado",
+    "speaker": "narrator",
+    "text": "Bacamarte explica que quer estudar os diferentes graus da loucura, classificar os casos e procurar uma causa e um remédio. A caridade está presente, mas não é apresentada como seu objetivo principal."
+  },
+  {
+    "id": "ch02_s02_growth_01",
+    "speaker": "narrator",
+    "text": "Pessoas de vilas e arraiais próximos começam a chegar. Em quatro meses, a Casa Verde já parece uma povoação."
+  },
+  {
+    "id": "ch02_s02_growth_02",
+    "speaker": "narrator",
+    "text": "Os primeiros cubículos não bastam. Bacamarte manda acrescentar uma galeria com mais trinta e sete espaços."
+  },
+  {
+    "id": "ch02_s02_question",
+    "speaker": "narrator",
+    "text": "O que muda quando a Casa Verde deixa de atender apenas Itaguaí e passa a receber pessoas de toda a região?"
+  },
+  {
+    "id": "ch02_s03_narrator",
+    "speaker": "narrator",
+    "text": "O Padre Lopes se espanta ao reencontrar um rapaz que, pouco antes, brincava na rua e agora faz discursos acadêmicos todos os dias."
+  },
+  {
+    "id": "ch02_s03_padre_01",
+    "speaker": "padre",
+    "text": "Só pode ser a confusão das línguas da Torre de Babel."
+  },
+  {
+    "id": "ch02_s03_bacamarte",
+    "speaker": "bacamarte",
+    "text": "Essa pode ser uma explicação divina. Mas talvez exista também uma razão humana e científica. É disso que trato."
+  },
+  {
+    "id": "ch02_s03_padre_02",
+    "speaker": "padre",
+    "text": "Vá que seja. Fico ansioso."
+  },
+  {
+    "id": "ch02_s03_question",
+    "speaker": "narrator",
+    "text": "O que a conversa coloca em contraste?"
+  },
+  {
+    "id": "ch02_s03_consequence_a",
+    "speaker": "narrator",
+    "text": "Isso mesmo: Padre Lopes propõe uma explicação religiosa; Bacamarte admite essa possibilidade, mas também quer investigar uma causa científica."
+  },
+  {
+    "id": "ch02_s03_consequence_b",
+    "speaker": "narrator",
+    "text": "A Câmara não participa dessa conversa. O contraste aqui acontece entre as explicações do Padre e do médico."
+  },
+  {
+    "id": "ch02_s03_consequence_c",
+    "speaker": "narrator",
+    "text": "O trecho não diz que o rapaz está fingindo. A surpresa dos personagens vem justamente da mudança que observam nele."
+  },
+  {
+    "id": "ch02_s03_machado",
+    "speaker": "narrator",
+    "text": "Padre Lopes recorre à Torre de Babel. Bacamarte não descarta de imediato a explicação divina, mas mantém aberta uma explicação humana e científica. O episódio mistura espanto, humor e investigação."
+  },
+  {
+    "id": "ch02_s04_falcao",
+    "speaker": "narrator",
+    "text": "Falcão, de vinte e cinco anos, acredita ser a estrela-d’alva. Abre os braços como se fossem raios e espera o sol nascer para se recolher."
+  },
+  {
+    "id": "ch02_s04_corridor",
+    "speaker": "narrator",
+    "text": "Outro homem percorre salas, pátio e corredores à procura do fim do mundo. Depois de matar o casal que fugiu, ele continua preso à própria busca."
+  },
+  {
+    "id": "ch02_s05_genealogy_intro",
+    "speaker": "narrator",
+    "text": "Um paciente conta sua genealogia às paredes. A história atravessa reis e nobres até terminar nele próprio."
+  },
+  {
+    "id": "ch02_s05_genealogy_quote",
+    "speaker": "patient",
+    "text": "Deus engendrou um ovo, o ovo engendrou a espada, a espada engendrou Davi, Davi engendrou a púrpura, a púrpura engendrou o duque, o duque engendrou o marquês, o marquês engendrou o conde, que sou eu."
+  },
+  {
+    "id": "ch02_s05_montage",
+    "speaker": "narrator",
+    "text": "O capítulo apresenta outros casos: um escrivão que se imagina mordomo do rei, um boiadeiro que distribui rebanhos, João de Deus que se diz Deus e Garcia, que teme que sua voz faça as estrelas caírem."
+  },
+  {
+    "id": "ch02_s06_admin",
+    "speaker": "narrator",
+    "text": "Para dedicar mais tempo aos estudos, Bacamarte organiza a administração da Casa Verde e deixa outras pessoas cuidarem das tarefas diárias."
+  },
+  {
+    "id": "ch02_s06_bacamarte",
+    "speaker": "bacamarte",
+    "text": "A Casa Verde é agora uma espécie de mundo, em que há governo temporal e governo espiritual."
+  },
+  {
+    "id": "ch02_s06_padre",
+    "speaker": "padre",
+    "text": "Deixe estar. Hei de mandá-lo denunciar ao papa."
+  },
+  {
+    "id": "ch02_s06_classification",
+    "speaker": "narrator",
+    "text": "Depois, Bacamarte divide os internos primeiro entre furiosos e mansos. Em seguida, cria outras classes: monomanias, delírios e alucinações."
+  },
+  {
+    "id": "ch02_s06_question",
+    "speaker": "narrator",
+    "text": "O que a classificação faz nesta história?"
+  },
+  {
+    "id": "ch02_s06_consequence_a",
+    "speaker": "narrator",
+    "text": "A organização prática está presente, mas o texto destaca também o estudo e a classificação dos internos."
+  },
+  {
+    "id": "ch02_s06_consequence_b",
+    "speaker": "narrator",
+    "text": "Essa leitura reúne os dois efeitos: Bacamarte cria uma forma de estudar os casos e passa a definir as categorias em que as pessoas entram."
+  },
+  {
+    "id": "ch02_s06_consequence_c",
+    "speaker": "narrator",
+    "text": "Padre Lopes comenta e questiona, mas quem organiza e classifica os internos é Bacamarte."
+  },
+  {
+    "id": "ch02_s06_machado",
+    "speaker": "narrator",
+    "text": "Bacamarte delega tarefas administrativas para cuidar da pesquisa. Em seguida, estabelece categorias para observar e classificar os internos."
+  },
+  {
+    "id": "ch02_s07_study_01",
+    "speaker": "narrator",
+    "text": "Bacamarte observa hábitos, horários, aversões, simpatias, palavras e gestos. Investiga a vida dos internos e procura tratamentos."
+  },
+  {
+    "id": "ch02_s07_study_02",
+    "speaker": "narrator",
+    "text": "O trabalho toma quase todo o seu tempo. Mesmo durante o jantar com D. Evarista, ele continua preso aos livros e às próprias questões."
+  },
+  {
+    "id": "ch02_s07_question",
+    "speaker": "narrator",
+    "text": "O que esse final revela sobre a dedicação de Bacamarte?"
+  },
+  {
+    "id": "ch02_s07_consequence_a",
+    "speaker": "narrator",
+    "text": "O final aponta para o contrário: Bacamarte continua trabalhando mesmo durante o jantar."
+  },
+  {
+    "id": "ch02_s07_consequence_b",
+    "speaker": "narrator",
+    "text": "Essa leitura é sustentada pelo texto: ele mal dorme, mal come e muitas vezes não conversa com D. Evarista."
+  },
+  {
+    "id": "ch02_s07_consequence_c",
+    "speaker": "narrator",
+    "text": "A internação de D. Evarista não acontece neste capítulo. Aqui, o texto mostra a distância crescente entre os dois."
+  },
+  {
+    "id": "ch02_s07_machado",
+    "speaker": "narrator",
+    "text": "O estudo de Bacamarte não fica restrito à Casa Verde. Ele invade sua rotina e sua relação com D. Evarista. O capítulo seguinte começa mostrando as consequências dessa distância."
+  },
+  {
+    "id": "ch02_s08_closing",
+    "speaker": "narrator",
+    "text": "A Casa Verde cresceu, os casos foram classificados e o estudo passou a ocupar a vida de Bacamarte. Mas, enquanto ele observa os outros, quem percebe o que está acontecendo dentro de sua própria casa?"
+  }
+]
