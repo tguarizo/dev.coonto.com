@@ -13,7 +13,7 @@ on:
 permissions:
   contents: read
 concurrency:
-  group: coonto-alienista-audio
+  group: coonto-alienista-chapter2-audio
   cancel-in-progress: false
 jobs:
   generate:
