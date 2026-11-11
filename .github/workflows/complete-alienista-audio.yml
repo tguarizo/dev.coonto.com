@@ -79,8 +79,7 @@ jobs:
           scp "${SERVER_USER}@${SERVER_HOST}:${DEPLOY_PATH}/audio/o-alienista-scene7-demo/*.mp3" "$RUNNER_TEMP/scene7-audio/raw/"
       - name: Normalize clip loudness
         run: |
-          sudo apt-get update
-          sudo apt-get install -y ffmpeg
+          ffmpeg -version >/dev/null
           for source in "$RUNNER_TEMP"/scene7-audio/raw/*.mp3; do
             target="$RUNNER_TEMP/scene7-audio/normalized/$(basename "$source")"
             ffmpeg -hide_banner -loglevel error -y -i "$source" -af 'loudnorm=I=-16:TP=-2:LRA=5' -ar 44100 -ac 1 -codec:a libmp3lame -b:a 128k "$target"
