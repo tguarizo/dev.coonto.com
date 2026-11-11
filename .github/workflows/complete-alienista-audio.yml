@@ -80,6 +80,7 @@ jobs:
       - name: Normalize clip loudness
         run: |
           sudo apt-get update
+          sudo apt-get update
           sudo apt-get install -y ffmpeg
           for source in "$RUNNER_TEMP"/scene7-audio/raw/*.mp3; do
             target="$RUNNER_TEMP/scene7-audio/normalized/$(basename "$source")"
@@ -139,7 +140,7 @@ jobs:
           echo "All 44 approved Chapter II clips recovered."
       - name: Normalize clip loudness
         run: |
-          ffmpeg -version >/dev/null
+          sudo apt-get install -y ffmpeg
           while IFS= read -r name; do
             source="$(find "$RUNNER_TEMP/chapter2-audio/raw" -type f -name "$name" -print -quit)"
             target="$RUNNER_TEMP/chapter2-audio/normalized/$name"
