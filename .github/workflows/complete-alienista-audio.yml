@@ -9,7 +9,6 @@ on:
       - scripts/generate-alienista-scene7-demo.mjs
       - scripts/generate-alienista-chapter2-audio.mjs
       - content/alienista-chapter2-voice-lines.json
-      - scripts/list-elevenlabs-premade-voices.mjs
       - .github/workflows/complete-alienista-audio.yml
 permissions:
   contents: read
@@ -95,7 +94,7 @@ jobs:
           if-no-files-found: error
           retention-days: 7
   chapter2-audio:
-    if: github.event_name == 'push' && github.ref_name == 'audio/chapter2-generation' && (contains(join(github.event.commits.*.modified, ','), 'scripts/generate-alienista-chapter2-audio.mjs') || contains(join(github.event.commits.*.modified, ','), 'content/alienista-chapter2-voice-lines.json'))
+    if: github.event_name == 'push' && github.ref_name == 'audio/chapter2-generation'
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
@@ -153,23 +152,3 @@ jobs:
           if-no-files-found: error
           retention-days: 14
 
-  voice-catalog:
-    if: github.event_name == 'push' && github.ref_name == 'audio/chapter2-generation'
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    steps:
-      - uses: actions/checkout@v4
-      - name: Read premade voices from ElevenLabs
-        env:
-          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
-        run: |
-          test -n "$ELEVENLABS_API_KEY"
-          node scripts/list-elevenlabs-premade-voices.mjs > "$RUNNER_TEMP/voices.json"
-          node -e "for(const v of JSON.parse(require('fs').readFileSync(process.argv[1],'utf8'))) console.log(v.name+' | '+v.voice_id+' | '+JSON.stringify(v.labels))" "$RUNNER_TEMP/voices.json"
-      - name: Save private review catalog
-        uses: actions/upload-artifact@v4
-        with:
-          name: alienista-elevenlabs-premade-voices
-          path: ${{ runner.temp }}/voices.json
-          if-no-files-found: error
-          retention-days: 3
