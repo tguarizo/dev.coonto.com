@@ -166,7 +166,7 @@ jobs:
         run: |
           test -n "$SSH_PRIVATE_KEY" && test -n "$SERVER_HOST"
           mkdir -p ~/.ssh
-          printf '%s\\n' "$SSH_PRIVATE_KEY" | tr -d '\\r' > ~/.ssh/id_rsa
+          printf '%s\n' "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H "$SERVER_HOST" >> ~/.ssh/known_hosts
       - name: Read available premade voices through the private server
