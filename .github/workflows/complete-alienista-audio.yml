@@ -95,7 +95,7 @@ jobs:
           if-no-files-found: error
           retention-days: 7
   chapter2-audio:
-    if: github.event_name == 'push' && github.ref_name == 'audio/chapter2-generation'
+    if: github.event_name == 'push' && github.ref_name == 'audio/chapter2-generation' && (contains(join(github.event.commits.*.modified, ','), 'scripts/generate-alienista-chapter2-audio.mjs') || contains(join(github.event.commits.*.modified, ','), 'content/alienista-chapter2-voice-lines.json'))
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
@@ -156,31 +156,17 @@ jobs:
   voice-catalog:
     if: github.event_name == 'push' && github.ref_name == 'audio/chapter2-generation'
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
-      - name: Prepare SSH
+      - name: Read premade voices from ElevenLabs
         env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          SERVER_HOST: ${{ secrets.SERVER_HOST }}
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
         run: |
-          test -n "$SSH_PRIVATE_KEY" && test -n "$SERVER_HOST"
-          mkdir -p ~/.ssh
-          printf '%s\n' "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H "$SERVER_HOST" >> ~/.ssh/known_hosts
-      - name: Read available premade voices through the private server
-        env:
-          SERVER_USER: ${{ secrets.SERVER_USER }}
-          SERVER_HOST: ${{ secrets.SERVER_HOST }}
-          DEPLOY_PATH: ${{ secrets.DEV_DEPLOY_PATH || '/opt/coonto/dev' }}
-        run: |
-          case "$DEPLOY_PATH" in *[!a-zA-Z0-9_./-]*) echo 'Invalid deployment path'; exit 1;; esac
-          PROJECT_NAME="coonto-$(basename "$DEPLOY_PATH")"
-          scp scripts/list-elevenlabs-premade-voices.mjs "${SERVER_USER}@${SERVER_HOST}:${DEPLOY_PATH}/scripts/"
-          ssh "${SERVER_USER}@${SERVER_HOST}" "cd '$DEPLOY_PATH' && sudo docker compose -p '$PROJECT_NAME' cp scripts/list-elevenlabs-premade-voices.mjs app:/app/scripts/ && sudo docker compose -p '$PROJECT_NAME' exec -T app node scripts/list-elevenlabs-premade-voices.mjs" > "$RUNNER_TEMP/voices.json"
+          test -n "$ELEVENLABS_API_KEY"
+          node scripts/list-elevenlabs-premade-voices.mjs > "$RUNNER_TEMP/voices.json"
           node -e "for(const v of JSON.parse(require('fs').readFileSync(process.argv[1],'utf8'))) console.log(v.name+' | '+v.voice_id+' | '+JSON.stringify(v.labels))" "$RUNNER_TEMP/voices.json"
-      - name: Keep voice catalog for this private review
+      - name: Save private review catalog
         uses: actions/upload-artifact@v4
         with:
           name: alienista-elevenlabs-premade-voices
