@@ -6,6 +6,19 @@ Este checkpoint parte do commit `e84d56c538057c3d714e1d3c669188239f84418a` da br
 
 **Estado editorial de O Alienista informado pelo responsável do projeto:** o livro estava praticamente pronto; faltavam algumas vozes. A retomada deve continuar a montagem existente e acrescentar somente as vozes pendentes. Não reconstruir capítulos nem substituir cenas, áudios ou imagens já aprovados.
 
+## Versão de O Alienista disponível para análise
+
+O Site `Coonto — O Alienista Vivo` tem a versão 54 publicada com sucesso em:
+https://coonto-alienista-vivo.tguarizo302808.chatgpt.site
+
+- Versão: 54
+- Commit de origem: `7a46470a53b11b4ccccd8b011c9fcab7e43aa8c2`
+- Pacote publicado: 247 arquivos
+- Estado da publicação: sucesso
+- Atualização da versão 54: 16/11/2026, aproximadamente 16h11 (horário de Brasília)
+
+Os áudios `consequence-*.mp3` listados abaixo foram salvos depois da publicação da versão 54. Sua inclusão nessa versão ainda não foi confirmada.
+
 ## Referências de materiais recentes na Biblioteca
 
 Os arquivos abaixo permanecem na Biblioteca com seus identificadores estáveis. Esta lista documenta onde recuperar os materiais; ela não copia os bytes dos arquivos para este repositório.
@@ -40,7 +53,7 @@ Os arquivos abaixo permanecem na Biblioteca com seus identificadores estáveis. 
 - `Barbeiro diante do conselho imperial.png` — `libfile_491a7eef23b48191b4315da84fee99a5`
 - `Bacamarte explica na Casa Verde.png` — `libfile_05e3b920cbb48191af6e55279ff85fea`
 - `Porfírio desafia os dragões imperiais.png` — `libfile_3c3e2c8c00948191ad5dc6a19ccbb4f9`
-- `Bacamarte anuncia a reversão de sua teoria.png` — `libfile_44591bb6d7f081919e37995d736fc1b5`
+- `Bacamarte anuncia a reversão de sua teoria.png` — `libfile_44591bb6d7f08191e37995d736fc1b5`
 - `Conversa cautelosa na Casa Verde.png` — `libfile_0f569f284cf481919b8086003b921c5b`
 
 ## Limite deste checkpoint
