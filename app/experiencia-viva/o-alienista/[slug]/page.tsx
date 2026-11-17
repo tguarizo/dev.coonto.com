@@ -7,12 +7,13 @@ const chapters = [
   { slug: "capitulo-v", roman: "V" },
   { slug: "capitulo-vi", roman: "VI" },
   { slug: "capitulo-vii", roman: "VII" },
-  { slug: "capitulo-viii", roman: "VIII" },
-  { slug: "capitulo-ix", roman: "IX" },
-  { slug: "capitulo-x", roman: "X" },
-  { slug: "capitulo-xi", roman: "XI" },
-  { slug: "capitulo-xii", roman: "XII" },
-  { slug: "capitulo-xiii", roman: "XIII" },
+  // Old chapter URLs remain valid and resolve to their new combined part.
+  { slug: "capitulo-viii", roman: "V" },
+  { slug: "capitulo-ix", roman: "VI" },
+  { slug: "capitulo-x", roman: "VI" },
+  { slug: "capitulo-xi", roman: "VII" },
+  { slug: "capitulo-xii", roman: "VII" },
+  { slug: "capitulo-xiii", roman: "VII" },
 ];
 
 export function generateStaticParams() {
@@ -22,7 +23,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const chapter = chapters.find((item) => item.slug === slug);
-  return { title: chapter ? `O Alienista — Capítulo ${chapter.roman} | Coonto` : "Capítulo não encontrado | Coonto" };
+  return { title: chapter ? `O Alienista — Parte ${chapter.roman} | Coonto` : "Parte não encontrada | Coonto" };
 }
 
 export default async function AlienistaChapterRoute({ params }: { params: Promise<{ slug: string }> }) {
