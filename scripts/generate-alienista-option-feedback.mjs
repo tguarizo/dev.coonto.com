@@ -38,6 +38,7 @@ for (const [filename, text] of clips) {
 
   const response = await fetch(
     `https://api.elevenlabs.io/v1/text-to-speech/${encodeURIComponent(voiceId)}?output_format=mp3_44100_128`,
+// v58: generate five scene checkpoints with three Murilo feedback choices each.
     {
       method: 'POST',
       headers: {
