@@ -32,7 +32,7 @@ export function ChapterFrame({ roman }: { roman: string }) {
       if (event.origin !== expectedOrigin || event.source !== iframeRef.current?.contentWindow) return;
       const data = event.data;
       if (!data || data.type !== "coonto:alienista-progress") return;
-      if (data.roman !== chapter.roman) return;
+      if (!alienistaChapters.some((item) => item.roman === data.roman)) return;
       setActiveRoman(data.roman);
       if (Number.isFinite(data.scene) && Number.isFinite(data.total)) {
         setProgress({ scene: data.scene, total: data.total });
