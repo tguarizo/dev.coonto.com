@@ -1,10 +1,10 @@
 import { ChapterFrame } from "./ChapterFrame";
 
 export const metadata = {
-  title: "O Alienista — Experiência audiovisual | Coonto",
-  description: "Explore os capítulos de O Alienista em uma experiência audiovisual interativa do Coonto.",
+  title: "O Alienista — Capítulo Zero | Coonto",
+  description: "Conheça Itaguaí e seus personagens antes de começar O Alienista no Coonto.",
 };
 
 export default function ExperienciaAudiovisualAlienista() {
-  return <ChapterFrame roman="I" />;
+  return <ChapterFrame roman="0" />;
 }
