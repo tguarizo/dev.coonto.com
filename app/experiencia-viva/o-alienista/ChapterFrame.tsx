@@ -49,7 +49,7 @@ export function ChapterFrame({ roman }: { roman: string }) {
       <header style={{ minHeight: 48, display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 8, padding: "6px 16px", background: "#071018", borderBottom: "1px solid #25313a" }}>
         <a href="/obra/o-alienista" style={{ color: "inherit", textDecoration: "none", fontWeight: 700 }}>← O Alienista</a>
         <p aria-live="polite" style={{ margin: 0, fontSize: 15, fontWeight: 700, fontVariantNumeric: "tabular-nums", color: "#f5f0e6" }}>
-          Capítulo {chapterLabel(activeRoman)}{progress ? ` · Cena ${progress.scene} / ${progress.total}` : ""}
+          Capítulo {chapterLabel(activeRoman)}{activeRoman !== "0" && progress ? ` · Cena ${progress.scene} / ${progress.total}` : ""}
         </p>
       </header>
       <iframe
