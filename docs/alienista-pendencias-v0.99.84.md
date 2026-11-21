@@ -1,13 +1,16 @@
-# O Alienista — pendências para a v0.99.84
+# O Alienista — pendências e plano da v0.99.84
 
-Esta lista reúne os pontos de voz e encerramento que ficaram fora da v0.99.83, publicada no dev para revisão. A v0.99.83 permanece como referência estável enquanto a revisão acontece.
+Esta lista orienta a próxima versão enquanto o usuário revisa a v0.99.83. A versão publicada permanece como referência estável.
 
-## Pendências
+## Correções solicitadas
 
-- [ ] **Legendar falas sem texto visível — capítulos III a VII.** Obter ou conferir a transcrição literal de cada vídeo/áudio e sincronizar a legenda com a fala. Não criar texto por inferência.
-- [ ] **Corrigir a pronúncia de Dona Evarista.** Atualizar o áudio que diz “D. Evarista” para “Dona Evarista”, preservando a voz correspondente ao trecho.
-- [ ] **Completar as narrações de encerramento.** Em cada capítulo, narrar um resumo do capítulo em pauta e, em seguida, anunciar “No próximo capítulo...”. Usar a comparação entre o percurso do leitor e o olhar de Machado quando fizer sentido para aquele capítulo.
+- [ ] **Legendas uniformes em todas as cenas.** Repetir exatamente o padrão da apresentação: fonte regular, sem negrito, sem moldura nem fundo; branca em fundo escuro e amarela em fundo claro; mesma posição padrão. Mover apenas quando a legenda atrapalhar a cena ou outro texto e nunca sobrepor palavras da imagem.
+- [ ] **Falas sem texto correspondente.** Cadastrar legenda sincronizada com a fala, após obter e conferir a transcrição literal do áudio/vídeo. Não usar texto de apoio como se fosse transcrição.
+- [ ] **Casa Verde — continuidade arquitetônica.** Conferir as imagens da construção e da Casa Verde pronta. Manter igual o número de janelas visíveis, além da posição geral dos vãos.
+- [ ] **Áudio: Dona Evarista.** Corrigir a pronúncia que diz “D. Evarista” para “Dona Evarista”, preservando a voz usada no trecho.
+- [ ] **Encerramentos dos capítulos.** Narrar o resumo do capítulo em pauta, seguido de “No próximo capítulo...”. Incluir o comparativo entre o percurso do leitor e o olhar de Machado quando fizer sentido.
+- [ ] **Bloco de controle.** Aplicar, em todas as cenas e capítulos, os sete comandos: ouvir/reiniciar cena, pausar, cena anterior, cena posterior, início do capítulo, capítulo anterior e próximo capítulo. A prévia visual será aprovada pelo usuário antes de aplicar o bloco.
 
 ## Critério de fechamento
 
-Conferir cada trecho no contexto da cena, verificar sincronismo entre voz e legenda e manter a identidade vocal já aprovada. Integrar e publicar essas mudanças como uma nova versão numerada, sem alterar a v0.99.83 durante a revisão do usuário.
+Manter a v0.99.83 sem alterações durante a revisão. Integrar as correções aprovadas em uma nova versão numerada. Conferir a posição e contraste das legendas sobre cenas claras e escuras, a continuidade de janelas entre as duas imagens da Casa Verde e a navegação por cenas/capítulos. Preservar as vozes já aprovadas e validar cada legenda contra a fala real.
