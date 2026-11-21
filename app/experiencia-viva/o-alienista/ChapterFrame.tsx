@@ -1,7 +1,5 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-
 const base = "https://coonto-alienista-vivo.tguarizo302808.chatgpt.site";
 
 export const alienistaChapters = [
@@ -17,49 +15,17 @@ export const alienistaChapters = [
 
 export function ChapterFrame({ roman }: { roman: string }) {
   const chapter = alienistaChapters.find((item) => item.roman === roman) ?? alienistaChapters[0];
-  const [activeRoman, setActiveRoman] = useState(chapter.roman);
-  const [progress, setProgress] = useState<{ scene: number; total: number } | null>(null);
-  const iframeRef = useRef<HTMLIFrameElement>(null);
-  const experienceUrl = new URL(chapter.page, base).toString();
-  const chapterLabel = (value: string) => value === "0" ? "Zero" : value;
-
-  useEffect(() => {
-    setActiveRoman(chapter.roman);
-    setProgress(null);
-  }, [chapter.roman]);
-
-  useEffect(() => {
-    const expectedOrigin = new URL(base).origin;
-    const onMessage = (event: MessageEvent) => {
-      if (event.origin !== expectedOrigin || event.source !== iframeRef.current?.contentWindow) return;
-      const data = event.data;
-      if (!data || data.type !== "coonto:alienista-progress") return;
-      if (!alienistaChapters.some((item) => item.roman === data.roman)) return;
-      setActiveRoman(data.roman);
-      if (Number.isFinite(data.scene) && Number.isFinite(data.total)) {
-        setProgress({ scene: data.scene, total: data.total });
-      }
-    };
-    window.addEventListener("message", onMessage);
-    return () => window.removeEventListener("message", onMessage);
-  }, [chapter.roman]);
+  const chapterLabel = chapter.roman === "0" ? "Zero" : chapter.roman;
 
   return (
-    <main style={{ position: "fixed", inset: 0, display: "flex", flexDirection: "column", background: "#071018", color: "#f5f0e6", zIndex: 50 }}>
-      <header style={{ minHeight: 48, display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 8, padding: "6px 16px", background: "#071018", borderBottom: "1px solid #25313a" }}>
-        <a href="/obra/o-alienista" style={{ color: "inherit", textDecoration: "none", fontWeight: 700 }}>← O Alienista</a>
-        <p aria-live="polite" style={{ margin: 0, fontSize: 15, fontWeight: 700, fontVariantNumeric: "tabular-nums", color: "#f5f0e6" }}>
-          Capítulo {chapterLabel(activeRoman)}{activeRoman !== "0" && progress ? ` · Cena ${progress.scene} / ${progress.total}` : ""}
-        </p>
-      </header>
+    <main style={{ position: "fixed", inset: 0, background: "#071018", zIndex: 50 }}>
       <iframe
-        ref={iframeRef}
-        title={`Experiência audiovisual de O Alienista — Capítulo ${chapterLabel(chapter.roman)}`}
-        src={experienceUrl}
+        title={`Experiência audiovisual de O Alienista — Capítulo ${chapterLabel}`}
+        src={new URL(chapter.page, base).toString()}
         allow="autoplay; fullscreen"
         allowFullScreen
         referrerPolicy="origin"
-        style={{ display: "block", flex: 1, width: "100%", minHeight: 0, border: 0 }}
+        style={{ display: "block", width: "100%", height: "100%", border: 0 }}
       />
     </main>
   );
