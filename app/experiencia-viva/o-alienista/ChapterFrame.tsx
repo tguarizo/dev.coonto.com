@@ -16,12 +16,14 @@ export const alienistaChapters = [
 export function ChapterFrame({ roman }: { roman: string }) {
   const chapter = alienistaChapters.find((item) => item.roman === roman) ?? alienistaChapters[0];
   const chapterLabel = chapter.roman === "0" ? "Zero" : chapter.roman;
+  const chapterUrl = new URL(chapter.page, base);
+  if (chapter.roman === "II") chapterUrl.searchParams.set("build", "0.99.100");
 
   return (
     <main style={{ position: "fixed", inset: 0, background: "#071018", zIndex: 50 }}>
       <iframe
         title={`Experiência audiovisual de O Alienista — Capítulo ${chapterLabel}`}
-        src={new URL(chapter.page, base).toString()}
+        src={chapterUrl.toString()}
         allow="autoplay; fullscreen"
         allowFullScreen
         referrerPolicy="origin"
