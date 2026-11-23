@@ -17,7 +17,7 @@ export function ChapterFrame({ roman }: { roman: string }) {
   const chapter = alienistaChapters.find((item) => item.roman === roman) ?? alienistaChapters[0];
   const chapterLabel = chapter.roman === "0" ? "Zero" : chapter.roman;
   const chapterUrl = new URL(chapter.page, base);
-  if (["II", "III", "VI"].includes(chapter.roman)) chapterUrl.searchParams.set("build", "0.99.102");
+  if (["I", "II", "III", "IV", "V", "VI", "VII"].includes(chapter.roman)) chapterUrl.searchParams.set("build", "0.99.103");
 
   return (
     <main style={{ position: "fixed", inset: 0, background: "#071018", zIndex: 50 }}>
